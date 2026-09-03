@@ -3,8 +3,8 @@
   "project_id": "tomaid",
   "mode": "new",
   "baseline": {
-    "commit": "unversioned",
-    "status": "unversioned"
+    "commit": "7896ccbebf89ceae4dc7ce45ed03b36fceb6d03e",
+    "status": "frozen"
   },
   "paths": {
     "semantic_map": "architecture/traceability/semantic-map.json",
