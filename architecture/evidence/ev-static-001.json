@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-001",
+  "work_package_id": "wp-001",
+  "commit": "e9a4cf5",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "bash scripts/build.sh (swiftc 6.3.3, arm64-apple-macosx26.0)",
+  "result_summary": "Swift/AppKit 源码编译通过，产出 build/Tomaid.app 可执行应用包。",
+  "limitations": [
+    "仅证明代码可编译，不证明运行时行为正确。",
+    "仅 CommandLineTools（无完整 Xcode），未做 xcodebuild/签名。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-001",
+  "work_package_id": "wp-001",
+  "commit": "e9a4cf5",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh (Tests/TestRunner.swift)",
+  "result_summary": "15 个断言全部通过：文件系统枚举/排序/隐藏文件标记、isExistingDirectory、RootPathStore 持久化、ClipboardService 读写。",
+  "limitations": [
+    "仅覆盖可自动化的核心逻辑（FileSystemService / RootPathStore / ClipboardService），不覆盖 GUI 交互。",
+    "MenuBuilder 的菜单树构建与 StatusItemController 的左右键分发未纳入单元测试。"
+  ]
+}
