@@ -4,53 +4,142 @@
     {
       "id": "l0-root",
       "name": "根文件夹",
-      "status": "candidate",
+      "status": "approved",
       "statement": "系统始终维护一个唯一的「根文件夹」路径作为目录浏览起点；首次启动时若无根文件夹则弹出系统文件夹选择器让用户选择，之后可在菜单中修改。",
       "source_refs": ["user-requirement:2026-09-03"]
     },
     {
       "id": "l0-navigate",
       "name": "右键浏览目录",
-      "status": "candidate",
+      "status": "approved",
       "statement": "右键点击菜单栏图标时，弹出菜单并显示根文件夹下的第一层文件与文件夹。",
       "source_refs": ["user-requirement:2026-09-03"]
     },
     {
       "id": "l0-recurse",
       "name": "递归展开子文件夹",
-      "status": "candidate",
+      "status": "approved",
       "statement": "任意层级的子文件夹都可以继续向下展开，显示其下级的文件与文件夹（可无限递归）。",
       "source_refs": ["user-requirement:2026-09-03"]
     },
     {
       "id": "l0-copy-path",
       "name": "点击复制路径",
-      "status": "candidate",
+      "status": "approved",
       "statement": "点击任一文件或文件夹条目时，将该条目的绝对路径（POSIX 格式）复制到系统剪贴板。",
       "source_refs": ["user-requirement:2026-09-03"]
     },
     {
       "id": "l0-hover-expand",
       "name": "悬停展开文件夹",
-      "status": "candidate",
+      "status": "approved",
       "statement": "鼠标悬停文件夹条目时展开显示其下级内容，且不触发路径复制；文件夹条目的路径复制由点击动作触发。",
       "source_refs": ["user-requirement:2026-09-03"]
     },
     {
       "id": "l0-set-root-clipboard",
       "name": "左键粘贴设根",
-      "status": "candidate",
+      "status": "approved",
       "statement": "左键单击菜单栏图标时，若当前系统剪贴板的文本是一个真实存在的文件夹路径，则将该路径设为新的根文件夹；否则不改变根文件夹。",
       "source_refs": ["user-requirement:2026-09-03"]
     },
     {
       "id": "l0-show-hidden",
       "name": "显示隐藏文件",
-      "status": "candidate",
+      "status": "approved",
       "statement": "目录列表包含以点（.）开头的隐藏文件与隐藏文件夹（如 .DS_Store、.git）。",
       "source_refs": ["user-requirement:2026-09-03"]
     }
   ],
-  "l1_responsibilities": [],
-  "l2_components": []
+  "l1_responsibilities": [
+    {
+      "id": "l1-root-state",
+      "name": "根文件夹状态",
+      "status": "candidate",
+      "responsibility": "维护根文件夹路径的持久化存储、读取与修改（首次设置、菜单修改、左键剪贴板设置）。",
+      "l0_refs": ["l0-root", "l0-set-root-clipboard"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-menu-navigation",
+      "name": "目录菜单渲染",
+      "status": "candidate",
+      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开，并包含隐藏文件。",
+      "l0_refs": ["l0-navigate", "l0-recurse", "l0-show-hidden"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-copy-interaction",
+      "name": "复制与悬停交互",
+      "status": "candidate",
+      "responsibility": "实现悬停文件夹展开、点击条目复制绝对路径到系统剪贴板。",
+      "l0_refs": ["l0-copy-path", "l0-hover-expand"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-status-bar",
+      "name": "菜单栏图标与事件",
+      "status": "candidate",
+      "responsibility": "承载菜单栏图标，分发左键与右键点击事件。",
+      "l0_refs": ["l0-navigate", "l0-set-root-clipboard"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-filesystem",
+      "name": "文件系统访问",
+      "status": "candidate",
+      "responsibility": "枚举目录内容、判断条目是文件还是文件夹、判断路径是否存在、读取隐藏文件。",
+      "l0_refs": ["l0-recurse", "l0-show-hidden", "l0-set-root-clipboard"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    }
+  ],
+  "l2_components": [
+    {
+      "id": "l2-app-entry",
+      "name": "应用入口",
+      "status": "candidate",
+      "l1_refs": ["l1-status-bar"],
+      "selectors": ["TomaidApp.swift", "AppDelegate.swift"]
+    },
+    {
+      "id": "l2-status-item-controller",
+      "name": "菜单栏图标控制器",
+      "status": "candidate",
+      "l1_refs": ["l1-status-bar"],
+      "selectors": ["StatusItemController.swift"]
+    },
+    {
+      "id": "l2-menu-builder",
+      "name": "菜单树构建器",
+      "status": "candidate",
+      "l1_refs": ["l1-menu-navigation"],
+      "selectors": ["MenuBuilder.swift"]
+    },
+    {
+      "id": "l2-filesystem-service",
+      "name": "文件系统服务",
+      "status": "candidate",
+      "l1_refs": ["l1-filesystem"],
+      "selectors": ["FileSystemService.swift"]
+    },
+    {
+      "id": "l2-clipboard-service",
+      "name": "剪贴板服务",
+      "status": "candidate",
+      "l1_refs": ["l1-copy-interaction"],
+      "selectors": ["ClipboardService.swift"]
+    },
+    {
+      "id": "l2-root-path-store",
+      "name": "根文件夹存储",
+      "status": "candidate",
+      "l1_refs": ["l1-root-state"],
+      "selectors": ["RootPathStore.swift"]
+    }
+  ]
 }
