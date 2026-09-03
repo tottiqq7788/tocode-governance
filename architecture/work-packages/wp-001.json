@@ -1,0 +1,19 @@
+{
+  "id": "wp-001",
+  "title": "macOS 菜单栏文件管理器（首个可用版本）",
+  "baseline_commit": "58c2a9bd1284335e5e6fee4ad191fb2851daaa75",
+  "goal": "实现一个 macOS 菜单栏文件管理器：右键图标弹出根文件夹目录树，子文件夹递归展开，悬停文件夹展开下级、点击条目复制绝对路径，左键单击图标时若剪贴板是真实存在的文件夹路径则设为新根文件夹，目录列表包含隐藏文件。",
+  "scope": [
+    "app/（Swift/AppKit 应用代码，独立 git 仓库）"
+  ],
+  "stop_conditions": [
+    "实际改动超出 app/ 目录或超出声明的 L0 语义时停止并回到架构准入。",
+    "若 macOS 原生 NSMenu 无法可靠实现「悬停展开 + 点击复制」，且自定义菜单项响应方案风险过高，停止并回架构准入重新设计交互。"
+  ],
+  "acceptance_evidence": [
+    "static：swiftc 编译通过。",
+    "unit：FileSystemService / ClipboardService / RootPathStore 的单元测试通过。",
+    "runtime_e2e：实际运行应用，手动验证右键浏览、递归展开、悬停展开、点击复制、左键设根、隐藏文件显示。"
+  ],
+  "status": "approved"
+}

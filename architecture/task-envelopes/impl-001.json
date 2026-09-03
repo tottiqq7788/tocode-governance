@@ -1,0 +1,45 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-001",
+  "role": "implementation_owner",
+  "baseline_commit": "58c2a9bd1284335e5e6fee4ad191fb2851daaa75",
+  "work_package_id": "wp-001",
+  "allowed_scope": [
+    "app/"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-root",
+    "l0-navigate",
+    "l0-recurse",
+    "l0-copy-path",
+    "l0-hover-expand",
+    "l0-set-root-clipboard",
+    "l0-show-hidden"
+  ],
+  "must_preserve": [
+    "根文件夹是唯一的目录浏览起点。",
+    "点击条目只复制绝对路径，不打开、不修改文件系统内容。",
+    "悬停文件夹只展开下级，不触发路径复制。",
+    "左键设根只接受真实存在的文件夹路径。",
+    "目录列表包含隐藏文件（点开头）。"
+  ],
+  "must_reject": [
+    "复制路径时误触发文件打开或内容修改。",
+    "左键设根时接受不存在的路径或普通文件路径。",
+    "过滤隐藏文件。",
+    "悬停展开时触发路径复制。",
+    "在范围外改动 governance 目录或其他目录。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际改动超出 app/ 目录或超出声明 L0 语义时立即停止并报告。",
+    "原生 NSMenu 无法可靠实现悬停展开 + 点击复制，且自定义方案风险过高时停止并回架构准入。",
+    "任何 L0 规则被证明不可实现或相互冲突时停止。"
+  ],
+  "notes": "首个可用版本。GUI 交互（菜单栏点击、悬停展开）以 runtime_e2e 手动验证为主，可自动化的逻辑（文件系统枚举、剪贴板读写、根路径持久化）以 unit 测试为主。"
+}
