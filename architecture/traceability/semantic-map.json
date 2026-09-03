@@ -26,14 +26,14 @@
       "id": "l0-copy-path",
       "name": "复制路径",
       "status": "approved",
-      "statement": "点击文件条目时，将该文件的绝对路径以「路径」格式（全角括号包裹）复制到系统剪贴板；文件夹的路径复制通过其子菜单中的「复制路径」项触发，同样以「路径」格式。",
+      "statement": "点击任一文件或文件夹条目时，将该条目的绝对路径以「路径」格式（全角括号包裹）复制到系统剪贴板。",
       "source_refs": ["user-requirement:2026-09-03", "user-feedback:2026-09-03"]
     },
     {
       "id": "l0-hover-expand",
       "name": "悬停展开文件夹",
       "status": "approved",
-      "statement": "鼠标悬停文件夹条目时通过原生子菜单展开显示其下级内容，悬停本身不触发路径复制；文件夹条目点击时不再复制路径。",
+      "statement": "鼠标悬停文件夹条目时通过原生子菜单展开显示其下级内容；点击文件夹条目时复制其路径（悬停展开、点击复制）。",
       "source_refs": ["user-requirement:2026-09-03", "user-feedback:2026-09-03"]
     },
     {
@@ -74,7 +74,7 @@
       "id": "l1-copy-interaction",
       "name": "复制与悬停交互",
       "status": "candidate",
-      "responsibility": "实现悬停文件夹展开、文件点击复制、文件夹子菜单复制路径，均以「路径」格式写入剪贴板。",
+      "responsibility": "实现悬停文件夹展开、点击文件或文件夹复制路径，均以「路径」格式写入剪贴板。",
       "l0_refs": ["l0-copy-path", "l0-hover-expand"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
