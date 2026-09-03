@@ -1,6 +1,56 @@
 {
   "schema_version": "semantic-map:v0.1",
-  "l0_rules": [],
+  "l0_rules": [
+    {
+      "id": "l0-root",
+      "name": "根文件夹",
+      "status": "candidate",
+      "statement": "系统始终维护一个唯一的「根文件夹」路径作为目录浏览起点；首次启动时若无根文件夹则弹出系统文件夹选择器让用户选择，之后可在菜单中修改。",
+      "source_refs": ["user-requirement:2026-09-03"]
+    },
+    {
+      "id": "l0-navigate",
+      "name": "右键浏览目录",
+      "status": "candidate",
+      "statement": "右键点击菜单栏图标时，弹出菜单并显示根文件夹下的第一层文件与文件夹。",
+      "source_refs": ["user-requirement:2026-09-03"]
+    },
+    {
+      "id": "l0-recurse",
+      "name": "递归展开子文件夹",
+      "status": "candidate",
+      "statement": "任意层级的子文件夹都可以继续向下展开，显示其下级的文件与文件夹（可无限递归）。",
+      "source_refs": ["user-requirement:2026-09-03"]
+    },
+    {
+      "id": "l0-copy-path",
+      "name": "点击复制路径",
+      "status": "candidate",
+      "statement": "点击任一文件或文件夹条目时，将该条目的绝对路径（POSIX 格式）复制到系统剪贴板。",
+      "source_refs": ["user-requirement:2026-09-03"]
+    },
+    {
+      "id": "l0-hover-expand",
+      "name": "悬停展开文件夹",
+      "status": "candidate",
+      "statement": "鼠标悬停文件夹条目时展开显示其下级内容，且不触发路径复制；文件夹条目的路径复制由点击动作触发。",
+      "source_refs": ["user-requirement:2026-09-03"]
+    },
+    {
+      "id": "l0-set-root-clipboard",
+      "name": "左键粘贴设根",
+      "status": "candidate",
+      "statement": "左键单击菜单栏图标时，若当前系统剪贴板的文本是一个真实存在的文件夹路径，则将该路径设为新的根文件夹；否则不改变根文件夹。",
+      "source_refs": ["user-requirement:2026-09-03"]
+    },
+    {
+      "id": "l0-show-hidden",
+      "name": "显示隐藏文件",
+      "status": "candidate",
+      "statement": "目录列表包含以点（.）开头的隐藏文件与隐藏文件夹（如 .DS_Store、.git）。",
+      "source_refs": ["user-requirement:2026-09-03"]
+    }
+  ],
   "l1_responsibilities": [],
   "l2_components": []
 }
