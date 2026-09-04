@@ -1,6 +1,6 @@
-# tomaid · 治理控制面（governance）
+# tocode · 治理控制面（governance）
 
-本目录是 `tomaid` 项目的治理控制面（文件型），由 Agent 持续分析、管理、更新，并按其中流程与用户沟通。
+本目录是 `tocode` 项目的治理控制面（文件型），由 Agent 持续分析、管理、更新，并按其中流程与用户沟通。
 
 ## 目录定位
 
@@ -15,7 +15,7 @@
 
 ## 当前状态
 
-- project_id：`tomaid`
+- project_id：`tocode`
 - mode：`new`（全新项目，先定义语义再开发）
 - baseline：冻结于脚手架提交（见 `architecture/governance.json`）
 

@@ -111,7 +111,7 @@
       "name": "应用入口",
       "status": "candidate",
       "l1_refs": ["l1-status-bar"],
-      "selectors": ["TomaidApp.swift", "AppDelegate.swift"]
+      "selectors": ["TocodeApp.swift", "AppDelegate.swift"]
     },
     {
       "id": "l2-status-item-controller",
