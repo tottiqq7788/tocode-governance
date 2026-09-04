@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-002",
+  "work_package_id": "wp-002",
+  "commit": "20960a0f802b2d4efc5c5c98b93cd9120df8c6ab",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh (Tests/TestRunner.swift)",
+  "result_summary": "21 个断言全部通过：新增 RootPathStore.resolveRoot（已保存存在优先、不存在/未保存回退默认目录）与 reset（设回默认目录）的覆盖。",
+  "limitations": [
+    "仅覆盖 RootPathStore 的默认目录解析与重置逻辑，不覆盖 GUI 交互（右键菜单项点击、系统通知）。",
+    "runtime_e2e 仍需手动运行验证。"
+  ]
+}

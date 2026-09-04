@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-002",
+  "work_package_id": "wp-002",
+  "commit": "20960a0f802b2d4efc5c5c98b93cd9120df8c6ab",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "bash scripts/build.sh (swiftc 6.3.3, arm64-apple-macosx26.0)",
+  "result_summary": "新增默认初始目录 + 右键「重置初始目录」后 Swift/AppKit 源码编译通过，产出 build/Tocode.app。",
+  "limitations": [
+    "仅证明代码可编译，不证明运行时行为正确。",
+    "仅 CommandLineTools（无完整 Xcode），未做 xcodebuild/签名。"
+  ]
+}
