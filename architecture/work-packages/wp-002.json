@@ -1,0 +1,19 @@
+{
+  "id": "wp-002",
+  "title": "默认初始目录 + 右键「重置初始目录」",
+  "baseline_commit": "660df99bc3546c5a21eb83d0d9d1557a0bcacc59",
+  "goal": "新增默认初始目录行为：首次启动（无根文件夹）时默认使用 /Users/admin/Documents（不弹选择器）；右键功能菜单新增「重置初始目录」项，选中后把根文件夹设回 /Users/admin/Documents 并弹系统通知。",
+  "scope": [
+    "app/（Swift/AppKit 应用代码，独立 git 仓库）"
+  ],
+  "stop_conditions": [
+    "实际改动超出 app/ 目录或超出声明的 L0 语义时停止并回到架构准入。",
+    "默认目录 /Users/admin/Documents 无法定位（路径无效）时停止并回架构准入重新确认默认值。"
+  ],
+  "acceptance_evidence": [
+    "static：swiftc 编译通过。",
+    "unit：RootPathStore 默认目录解析逻辑的单元测试通过。",
+    "runtime_e2e：实际运行应用，手动验证首次默认、右键重置设回默认目录并弹通知。"
+  ],
+  "status": "approved"
+}

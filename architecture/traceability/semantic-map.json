@@ -5,8 +5,8 @@
       "id": "l0-root",
       "name": "根文件夹",
       "status": "approved",
-      "statement": "系统始终维护一个唯一的「根文件夹」路径作为目录浏览起点；首次启动时若无根文件夹则弹出系统文件夹选择器让用户选择，之后可在菜单中修改。",
-      "source_refs": ["user-requirement:2026-09-03"]
+      "statement": "系统始终维护一个唯一的「根文件夹」路径作为目录浏览起点；首次启动时若无根文件夹则默认使用「/Users/admin/Documents」作为根文件夹（不弹选择器），之后可在菜单中修改或重置。",
+      "source_refs": ["user-requirement:2026-09-03", "user-requirement:2026-09-04"]
     },
     {
       "id": "l0-navigate",
@@ -40,8 +40,8 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出功能菜单，包含「读取剪贴板」「更改目录」「退出」三项，每项左侧带图标。",
-      "source_refs": ["user-feedback:2026-09-03"]
+      "statement": "右键单击菜单栏图标时，弹出功能菜单，包含「读取剪贴板」「更改目录」「重置初始目录」「退出」四项，每项左侧带图标。",
+      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04"]
     },
     {
       "id": "l0-set-root-clipboard",
@@ -56,6 +56,13 @@
       "status": "approved",
       "statement": "目录列表包含以点（.）开头的隐藏文件与隐藏文件夹（如 .DS_Store、.git）。",
       "source_refs": ["user-requirement:2026-09-03"]
+    },
+    {
+      "id": "l0-reset-root",
+      "name": "重置初始目录",
+      "status": "approved",
+      "statement": "右键功能菜单中的「重置初始目录」被选中时，将根文件夹设为默认目录「/Users/admin/Documents」，并弹出一条系统通知。",
+      "source_refs": ["user-requirement:2026-09-04"]
     }
   ],
   "l1_responsibilities": [
@@ -63,8 +70,8 @@
       "id": "l1-root-state",
       "name": "根文件夹状态",
       "status": "candidate",
-      "responsibility": "维护根文件夹路径的持久化存储、读取与修改（首次设置、菜单修改、左键剪贴板设置）。",
-      "l0_refs": ["l0-root", "l0-set-root-clipboard"],
+      "responsibility": "维护根文件夹路径的持久化存储、读取与修改（首次默认、菜单修改、剪贴板设置、重置为默认目录）。",
+      "l0_refs": ["l0-root", "l0-set-root-clipboard", "l0-reset-root"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
     },
@@ -90,8 +97,8 @@
       "id": "l1-status-bar",
       "name": "菜单栏图标与事件",
       "status": "candidate",
-      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，并在设根成功后发送系统通知。",
-      "l0_refs": ["l0-navigate", "l0-action-menu", "l0-set-root-clipboard"],
+      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，并在设根或重置成功后发送系统通知。",
+      "l0_refs": ["l0-navigate", "l0-action-menu", "l0-set-root-clipboard", "l0-reset-root"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
     },

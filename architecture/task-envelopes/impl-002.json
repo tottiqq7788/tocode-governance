@@ -1,0 +1,42 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-002",
+  "role": "implementation_owner",
+  "baseline_commit": "660df99bc3546c5a21eb83d0d9d1557a0bcacc59",
+  "work_package_id": "wp-002",
+  "allowed_scope": [
+    "app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-root",
+    "l0-action-menu",
+    "l0-reset-root"
+  ],
+  "must_preserve": [
+    "根文件夹是唯一的目录浏览起点。",
+    "首次启动无根文件夹时默认使用 /Users/admin/Documents，不弹选择器。",
+    "「重置初始目录」把根文件夹设回 /Users/admin/Documents 并弹系统通知。",
+    "「更改目录」仍通过选择器改根，「读取剪贴板」仍只接受不带「」的、真实存在的文件夹路径。",
+    "点击条目只复制绝对路径，不打开、不修改文件系统内容。",
+    "目录列表包含隐藏文件（点开头）。"
+  ],
+  "must_reject": [
+    "首次启动时仍弹出系统文件夹选择器。",
+    "重置时把根文件夹设为默认目录之外的任何值。",
+    "重置或设根成功后不发系统通知。",
+    "重置接受不存在路径或普通文件路径。",
+    "在范围外改动 governance 目录或其他目录。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际改动超出 app/ 目录或超出声明 L0 语义时立即停止并报告。",
+    "默认目录 /Users/admin/Documents 无法定位时停止并回架构准入。",
+    "任何 L0 规则被证明不可实现或相互冲突时停止。"
+  ],
+  "notes": "在 wp-001 首个可用版本之上新增默认初始目录与重置能力。GUI 交互（右键重置）以 runtime_e2e 手动验证为主；可自动化的默认目录解析逻辑以 unit 测试为主。"
+}
