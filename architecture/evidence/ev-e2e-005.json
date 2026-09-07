@@ -5,10 +5,10 @@
   "commit": "aac618aafcb9f33cef4094bc6539d41c780921b2",
   "type": "runtime_e2e",
   "status": "passed",
-  "command_or_source": "真机探针 /tmp/finder_hide_probe.swift + /tmp/finder_hide_probe2.swift（swiftc 编译运行，非仓库文件）",
-  "result_summary": "复现并确证 hide() 中间态：AppleScript close every window 成功返回后立即调用 NSRunningApplication.hide()，系统返回 false，但 Finder 随后仍成功隐藏——单轮探针 +1s 后 isHidden=true；5 轮循环中每轮 close=true、hide()=false、isHidden@300ms=true、isHidden@1s=true（5/5 稳定）。修复（aac618a）后 hide() 瞬时 false 不再被解读为隐藏失败，不再误弹「无法关闭访达窗口/关闭窗口失败」；真机双开场景人工双击 ⌘Q 的完整交互验证尚未执行，待独立评审补跑后回填。",
+  "command_or_source": "真机探针 /tmp/finder_hide_probe.swift + /tmp/finder_hide_probe2.swift（swiftc 编译运行，非仓库文件）；修复后 app 人工交互验证（双开场景按住 ⌘ 双击 Q 强关访达）",
+  "result_summary": "复现并确证 hide() 中间态：AppleScript close every window 成功返回后立即调用 NSRunningApplication.hide()，系统返回 false，但 Finder 随后仍成功隐藏——单轮探针 +1s 后 isHidden=true；5 轮循环中每轮 close=true、hide()=false、isHidden@300ms=true、isHidden@1s=true（5/5 稳定）。修复（aac618a）后 hide() 瞬时 false 不再被解读为隐藏失败；人工在真机双开场景（双击⌘Q 与 ⌘Q强关访达同时开启）按住 ⌘ 双击 Q 验证：访达窗口关闭并隐藏、不再误弹「无法关闭访达窗口/关闭窗口失败，访达保持原状」，人工测试通过。",
   "limitations": [
-    "探针直接调用系统 API 复现中间态并确认修复语义，本证据即探针真机日志；完整用户交互（按住 ⌘ 双击 Q 触发关窗隐藏通知）依赖辅助功能授权与前台状态，未在本会话执行，后续补跑时更新本证据。",
+    "探针直接调用系统 API 复现中间态并确认修复语义；人工交互验证为单一环境单次确认，不同 macOS 版本/授权状态下如有复现需重新登记。",
     "探针位于 /tmp 不随仓库提交，仅作为本证据的复现日志。"
   ]
 }
