@@ -1,0 +1,35 @@
+{
+  "id": "wp-007",
+  "title": "Codex 项目夹自动跟随（codex 子菜单 + 同步项目夹）",
+  "baseline_commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "goal": "在 Tocode 右键菜单新增「codex」子菜单：展示 Codex 当前选中的本地项目名称与根目录，并提供勾选开关「同步项目夹」（默认关闭）。开关开启后，左键目录树每次弹出时跟随 Codex 当前项目根目录，同时右键「读取剪贴板 / 更改目录 / 重置初始目录 / 访达目录初始化」全部置灰；关闭后恢复手动根目录与上述功能。全程只读 Codex 本机状态，绝不写回。",
+  "scope": [
+    "app/Sources/CodexProjectService.swift",
+    "app/Sources/CodexSyncSettingsStore.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/codex-project-sync-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-007.json",
+    "governance/architecture/task-envelopes/impl-007.json",
+    "governance/architecture/evidence/ev-*-007.json"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope 或触及未声明的 L0 语义时立即停止并回架构准入。",
+    "解析 Codex 项目必须读取 SQLite 之外的 Codex 内部文件或依赖 IPC/AppleScript 才能工作时停止。",
+    "无法保证只读不写 ~/.codex，或同步失败会覆盖手动根目录时停止实现。"
+  ],
+  "acceptance_evidence": [
+    "static：治理结构审计通过，app 的 swiftc 构建和 ad-hoc 签名通过。",
+    "contract：codex-project-sync-v1.json 合法，单元测试用真实示例 JSON 断言解析链与合同一致。",
+    "unit：app/scripts/test.sh 全量通过，覆盖成功解析与全部失败分支、开关默认值与关闭恢复。",
+    "runtime_e2e：手动验证开启跟随、切换项目跟随、关闭恢复、状态文件缺失回退。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-07",
+    "scope": "The user explicitly requested execution of the complete wp-007 plan; this approves the declared business scope before application source changes."
+  }
+}

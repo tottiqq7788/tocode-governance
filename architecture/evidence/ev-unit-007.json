@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-007",
+  "work_package_id": "wp-007",
+  "commit": "b3246fbb3c8cec7e6a9085620f28bfd38345b19e",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh（Tests/TestRunner.swift）",
+  "result_summary": "全量 385 条 PASS、0 条 FAIL（含既有 373 条回归断言 + 新增 12 条）。新增覆盖：Codex 成功解析项目名与根目录并标准化；文件缺失、JSON 损坏、无 selected-project、type != local、项目 ID 未注册、rootPaths 为空、根目录不存在均返回 nil；CodexSyncSettingsStore 默认 false、写入读取、关闭后恢复。",
+  "limitations": [
+    "解析测试使用注入内存 JSON fixture，未读取生产 ~/.codex 文件；生产文件路径与只读属性由静态编译与实现审查保证。",
+    "assertions 以 expect() 记录 PASS/FAIL，计数为 expect() 调用总数。"
+  ]
+}

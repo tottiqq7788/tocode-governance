@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-007",
+  "work_package_id": "wp-007",
+  "commit": "b3246fbb3c8cec7e6a9085620f28bfd38345b19e",
+  "type": "runtime_e2e",
+  "status": "pending",
+  "command_or_source": "尚未执行的人工验收清单：1) Codex 打开 tocode 项目，开启同步后左键显示 tocode 根目录、右键四项置灰；2) 切换 Codex 到另一项目后再次左键自动跟随；3) 关闭同步后左键恢复手动根目录、四项恢复可点击；4) 临时移走/改名 ~/.codex/.codex-global-state.json 后左键回退手动根目录、不崩溃、开关仍可操作。",
+  "result_summary": "runtime_e2e 依赖真实 GUI 交互，尚未由用户在本机执行；登记为 pending，待人工验收后回填真实结果与 app commit。",
+  "limitations": [
+    "未执行任何 GUI 人工步骤，不虚构通过结论。",
+    "证据已绑定 app 实现提交 b3246fb；待用户在真实环境完成后回填 result_summary 与 status。"
+  ]
+}

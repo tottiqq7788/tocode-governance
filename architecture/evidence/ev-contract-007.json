@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-CONTRACT-007",
+  "work_package_id": "wp-007",
+  "commit": "b3246fbb3c8cec7e6a9085620f28bfd38345b19e",
+  "type": "contract",
+  "status": "passed",
+  "command_or_source": "architecture/contracts/codex-project-sync-v1.json 通过 python3 json.load 校验；bash scripts/test.sh 中 testCodexProjectService 用真实结构示例 JSON（selected-project.type=local、projectId、local-projects[id].rootPaths[0]）断言解析链。",
+  "result_summary": "合同 JSON 合法，权威数据源 ~/.codex/.codex-global-state.json、只读不写、selected-project.projectId → local-projects[id].rootPaths[0] 解析链与失败回退均与单元测试一致。",
+  "limitations": [
+    "合同为只读解析约定；运行时真实验证归 runtime_e2e。",
+    "仅验证 JSON 结构合法与解析链，不验证 Codex 未来可能的状态文件字段变化。"
+  ]
+}

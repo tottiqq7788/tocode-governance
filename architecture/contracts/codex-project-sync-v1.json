@@ -1,0 +1,29 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "codex-project-sync-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-codex-project-sync",
+    "l0-action-menu"
+  ],
+  "authority": {
+    "data_source": "~/.codex/.codex-global-state.json",
+    "selected_project_key": "selected-project",
+    "local_projects_key": "local-projects",
+    "parse_chain": "selected-project.projectId → local-projects[id].rootPaths[0]"
+  },
+  "invariants": [
+    "The global state file is opened read-only and Tocode never writes, modifies, or creates any file under ~/.codex.",
+    "A project is valid only when selected-project.type == \"local\", the projectId is registered in local-projects, rootPaths[0] exists, and the path resolves to an existing directory.",
+    "Any missing or malformed JSON, wrong type, unregistered id, empty rootPaths, or non-directory root returns \"not detected\" and falls back to the manual root.",
+    "The sync switch is persisted under the UserDefaults key tocode.codexProjectSyncEnabled and defaults to false.",
+    "When sync is on, the four manual-root menu actions (读取剪贴板 / 更改目录 / 重置初始目录 / 访达目录初始化) are disabled regardless of whether Codex state can be read."
+  ],
+  "prohibited_results": [
+    "Writing or modifying any Codex state under ~/.codex.",
+    "Reading Codex internal files other than ~/.codex/.codex-global-state.json, or relying on IPC/AppleScript to discover the project.",
+    "Treating a thread working directory as the project root.",
+    "Overwriting the manual root when Codex state is unreadable while sync is on.",
+    "Keeping the four manual-root actions clickable while sync is on."
+  ]
+}

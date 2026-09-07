@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-007",
+  "work_package_id": "wp-007",
+  "commit": "b3246fbb3c8cec7e6a9085620f28bfd38345b19e",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "app 仓库：bash scripts/build.sh；swiftc -typecheck Sources/*.swift（含 AppKit/ApplicationServices/CoreGraphics/CoreImage/Security/UserNotifications/ServiceManagement）；codesign --verify --deep --strict build/Tocode.app。governance 仓库：python3 architecture/tools/audit_project.py --target .；git diff --check（仅本次变更文件）。",
+  "result_summary": "新增 CodexProjectService.swift 与 CodexSyncSettingsStore.swift 被 Sources/*.swift glob 纳入构建，Swift/AppKit 应用编译通过并产出 build/Tocode.app，ad-hoc 签名成功；全量 swiftc -typecheck 无警告；治理结构与引用审计通过；本次变更文件无空白错误。",
+  "limitations": [
+    "构建使用本机 Command Line Tools 与稳定 ad-hoc designated requirement，不是 Apple Developer ID 发布签名。",
+    "audit_project.py 只验证结构与引用一致性，不代替协议、运行时行为验证。"
+  ]
+}

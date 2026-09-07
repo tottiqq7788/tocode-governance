@@ -1,0 +1,51 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-007",
+  "role": "implementation_owner",
+  "baseline_commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "work_package_id": "wp-007",
+  "allowed_scope": [
+    "app/Sources/CodexProjectService.swift",
+    "app/Sources/CodexSyncSettingsStore.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/codex-project-sync-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-007.json",
+    "governance/architecture/task-envelopes/impl-007.json",
+    "governance/architecture/evidence/ev-*-007.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-codex-project-sync",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "左键复制路径、悬停展开、隐藏文件同步、访达初始化、微信归档、快捷键/滚轮/开机自启均不变。",
+    "同步关闭时行为与现状完全一致。",
+    "关闭开关后手动根目录完整恢复。",
+    "同步开启时若 Codex 状态不可读或无有效项目，左键回退手动根目录且不崩溃。",
+    "开关与置灰状态始终以「同步项目夹」开关为准。"
+  ],
+  "must_reject": [
+    "写入或修改 ~/.codex 下任何 Codex 状态。",
+    "同步开启时手动设根功能仍可点击。",
+    "同步失败时覆盖手动根目录。",
+    "把「项目根目录」误当成「线程 cwd」。",
+    "读取 SQLite 之外的 Codex 内部文件或依赖 IPC/AppleScript。"
+  ],
+  "required_evidence": [
+    "static",
+    "contract",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-007 scope 或 l0-codex-project-sync/l0-action-menu 时立即停止并重新准入。",
+    "解析 Codex 项目必须读取 SQLite 之外的 Codex 内部文件或依赖 IPC/AppleScript 才能工作时停止。",
+    "无法通过可注入读取闭包自动覆盖全部失败分支时停止并调整架构合同。"
+  ],
+  "notes": "权威数据源固定为 ~/.codex/.codex-global-state.json，只读不写；解析链 selected-project.projectId → local-projects[id].rootPaths[0]。同步开关键为 tocode.codexProjectSyncEnabled，默认 false。"
+}

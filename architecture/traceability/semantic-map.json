@@ -40,8 +40,8 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单，其下固定提供「绑定微信」和「文件位置」。",
-      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d"]
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）与「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，并提供「同步项目夹」开关）。",
+      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d", "user-approved-plan:2026-09-07"]
     },
     {
       "id": "l0-wechat-archive",
@@ -105,6 +105,13 @@
       "status": "approved",
       "statement": "设置提供「对调垂直滚轮 / 对调横向滚轮」开关（默认关闭），只反转物理鼠标离散滚轮对应轴向，不改触控板与连续滚动（含 Magic Mouse 表面），不改变系统「自然滚动」偏好；滚轮钩子与快捷键钩子相互独立，滚动钩子故障不影响 ⌘Q/⌘X。",
       "source_refs": ["app-commit:28db8e1", "user-requirement:2026-09-07"]
+    },
+    {
+      "id": "l0-codex-project-sync",
+      "name": "Codex 项目夹同步",
+      "status": "approved",
+      "statement": "右键功能菜单新增「codex」子菜单，显示当前 Codex 选中的本地项目名称与根目录，其下方提供勾选开关「同步项目夹」（默认关闭）。开关开启时，左键目录树改用 Codex 当前选中本地项目的根目录并在每次弹出时实时跟随；「读取剪贴板」「更改目录」「重置初始目录」「访达目录初始化」置灰不可点击；关闭时恢复手动根目录与上述功能。Codex 状态不可读或无有效项目时，自动跟随回退到手动根目录，但开关与置灰状态仍以开关为准。",
+      "source_refs": ["user-approved-plan:2026-09-07"]
     }
   ],
   "l1_responsibilities": [
@@ -215,6 +222,15 @@
       "l0_refs": ["l0-mouse-wheel-reverse"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-codex-project-sync",
+      "name": "Codex 项目夹同步",
+      "status": "candidate",
+      "responsibility": "只读解析 Codex 全局状态文件并解析当前选中的本地项目根目录，提供「同步项目夹」开关的持久化，读取失败时安全回退手动根目录，绝不写入 Codex 状态。",
+      "l0_refs": ["l0-codex-project-sync", "l0-action-menu"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
     }
   ],
   "l2_components": [
@@ -229,7 +245,7 @@
       "id": "l2-status-item-controller",
       "name": "菜单栏图标控制器",
       "status": "candidate",
-      "l1_refs": ["l1-status-bar", "l1-wechat-association"],
+      "l1_refs": ["l1-status-bar", "l1-wechat-association", "l1-codex-project-sync"],
       "selectors": ["StatusItemController.swift"]
     },
     {
@@ -322,6 +338,13 @@
       "status": "candidate",
       "l1_refs": ["l1-mouse-wheel-reverse"],
       "selectors": ["MouseWheelReverseService.swift", "MouseWheelReverseStore.swift"]
+    },
+    {
+      "id": "l2-codex-project-service",
+      "name": "Codex 项目解析与同步开关服务",
+      "status": "candidate",
+      "l1_refs": ["l1-codex-project-sync"],
+      "selectors": ["CodexProjectService.swift", "CodexSyncSettingsStore.swift"]
     }
   ]
 }
