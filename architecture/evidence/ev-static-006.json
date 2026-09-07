@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-006",
+  "work_package_id": "wp-006",
+  "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "bash scripts/build.sh；swiftc -warnings-as-errors -typecheck Sources/*.swift（含所需系统 framework）；codesign --verify --deep --strict --verbose=2 build/Tocode.app；git diff --check；python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "Swift/AppKit 应用编译通过并产出 build/Tocode.app；Security、CoreImage、CommonCrypto 依赖可用；严格告警检查为零；应用深度签名验证通过，designated requirement 为 identifier com.tocode.app；任务范围无空白错误，治理结构与引用审计通过。",
+  "limitations": [
+    "构建使用本机 Command Line Tools 与 ad-hoc 稳定 designated requirement，不是 Apple Developer ID 发布签名。",
+    "治理审计器只验证结构与引用一致性，不代替协议、运行时和真实账号验证。"
+  ]
+}

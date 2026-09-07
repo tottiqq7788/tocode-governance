@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-006",
+  "work_package_id": "wp-006",
+  "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh（testWeChatAssociationAndFaults、testWeChatArchive 失败分支、testWeChatProtocolContract 错误响应）",
+  "result_summary": "覆盖二维码过期、confirmed 空 Token、不受信任 base URL、Keychain 写入失败、状态重置失败并回滚旧绑定、离线、HTTP 5xx、HTTP 401/403 认证分类、5/10 秒指数退避、重复消息、持久游标恢复、媒体下载/解密失败、Markdown 写入失败、状态文件写入失败、附件回滚及应用退出取消长轮询。暂时故障保留绑定；认证拒绝清凭据；归档或状态失败均不推进游标/去重集合。",
+  "limitations": [
+    "自动退避断言覆盖初始 5/10 秒增长与实现中的 120 秒上限代码路径，没有等待真实 120 秒。",
+    "Keychain 删除本身发生系统级故障的极端路径只保留通知降级，无法在无破坏测试中强制 Security framework 失败。"
+  ]
+}

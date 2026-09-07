@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-INTEGRATION-006",
+  "work_package_id": "wp-006",
+  "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "type": "integration",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh（Tests/TestRunner.swift::testWeChatBindingToArchiveIntegration）",
+  "result_summary": "注入式本地 iLink mock 完成获取二维码、confirmed、新凭据存储、重置旧状态、自动启动长轮询、文字、语音转写、语音原件、图片、普通文件、视频、日期目录、每日 Markdown、媒体文件、去重键与游标提交全链路；绑定页面打开/成功状态和本地通知边界均通过。",
+  "limitations": [
+    "媒体 mock 返回已解密固定字节；真实 AES 解密由独立固定向量测试覆盖。",
+    "该证据不等同于微信服务端或个人账号真实扫码验收。"
+  ]
+}

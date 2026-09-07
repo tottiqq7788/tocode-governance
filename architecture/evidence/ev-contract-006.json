@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-CONTRACT-006",
+  "work_package_id": "wp-006",
+  "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "type": "contract",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh（Tests/TestRunner.swift::testWeChatProtocolContract、testWeChatModelsCryptoAndState）",
+  "result_summary": "注入 URLProtocol 验证 QR 与扫码状态 GET、bot_type=3、qrcode 查询、getupdates POST JSON、channel_version=2.0.1、游标、AuthorizationType、随机数字 Base64 X-WECHAT-UIN、受信任域 Bearer，以及类型 1 至 5 和语音 ASR 解析；HTTP 401 与 5xx 分类通过；非 HTTPS、伪装后缀域和任意外部 API 地址在发请求前被拒绝。",
+  "limitations": [
+    "协议合同基于 QwenPaw 当前 iLink 字段与本地 URLProtocol 响应；微信服务端未来字段或认证模型变化需要重新准入。",
+    "没有向真实 iLink 服务发送 Bearer Token，也没有验证真实账号资格。"
+  ]
+}

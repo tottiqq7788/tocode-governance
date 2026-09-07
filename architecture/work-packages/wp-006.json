@@ -33,6 +33,7 @@
     "runtime_e2e：真实 iLink 内测账号验证扫码、重启、菜单、Finder 和收件归档；账号无资格时必须登记 unavailable。"
   ],
   "status": "approved",
+  "implementation_commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
   "approval": {
     "source": "user-approved-plan:2026-09-07",
     "scope": "The user explicitly requested implementation of the complete plan; this is approval of the declared business scope before application source changes."

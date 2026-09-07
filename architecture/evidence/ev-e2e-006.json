@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-006",
+  "work_package_id": "wp-006",
+  "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "type": "runtime_e2e",
+  "status": "unavailable",
+  "command_or_source": "真实个人微信 iLink Bot 账号扫码与收件人工验证；本次环境未提供可由代理完成的微信扫码确认。尝试读取运行中 Tocode 的菜单栏辅助界面两次，UI 捕获服务均 timeoutReached。",
+  "result_summary": "未执行真实账号的扫码、重启恢复、文字/图片/文件/视频/语音收件、离线恢复和无自动回复人工验证。当前账号是否具备 iLink 内测资格无法确认，因此按工作包要求登记 unavailable；没有用 mock 结果替代真实微信验收。",
+  "limitations": [
+    "需要用户本人使用具备 iLink 资格的个人微信完成扫码确认并发送测试消息。",
+    "菜单栏应用无普通窗口，本次 UI 捕获服务无法读取其右键菜单；菜单结构由源码接线、编译和回归测试支撑，但未登记为人工 GUI E2E 通过。",
+    "固定生产归档目录 /Users/admin/Documents/wechat 在自动测试后无测试残留。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-006",
+  "work_package_id": "wp-006",
+  "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh (Tests/TestRunner.swift + Tests/WeChatTestSupport.swift)",
+  "result_summary": "全量 373 条 PASS、0 条 FAIL（包含既有 270 条回归断言）。新增覆盖 Asia/Shanghai 日期与跨日切换、260907/wechat260907.md、单时间 Markdown、多行引用、群聊与发送者、语音转写、引用消息、附件链接、文件名清理/限长/无扩展名/冲突、既有文件追加、浏览器状态页、Keychain 边界、SHA-256 去重键、2000 键上限和持久游标。AES-ECB/PKCS7 固定向量覆盖十六进制、Base64 原始密钥、Base64 十六进制密钥、错误密钥与损坏密文。",
+  "limitations": [
+    "测试运行于单一本机 macOS/Swift 工具链；没有覆盖所有 macOS 版本与文件系统实现。",
+    "Keychain 单元路径使用可注入内存存储，生产 Security API 通过静态编译与实现审查验证。"
+  ]
+}

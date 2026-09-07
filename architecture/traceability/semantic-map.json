@@ -41,14 +41,14 @@
       "name": "右键功能菜单",
       "status": "approved",
       "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单，其下固定提供「绑定微信」和「文件位置」。",
-      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07"]
+      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d"]
     },
     {
       "id": "l0-wechat-archive",
       "name": "微信关联与本地归档",
       "status": "approved",
       "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入 macOS Keychain，绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息且不回复。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。",
-      "source_refs": ["user-requirement:2026-09-07", "user-approved-plan:2026-09-07"]
+      "source_refs": ["user-requirement:2026-09-07", "user-approved-plan:2026-09-07", "app-commit:2e98f9d"]
     },
     {
       "id": "l0-set-root-clipboard",
