@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-003",
+  "work_package_id": "wp-003",
+  "commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "手动运行 app 交互验证（菜单栏、访达联动、登录项、快捷键/滚轮钩子）",
+  "result_summary": "本次治理滞后回填仅登记语义与映射，不重复人工 E2E 验证；4 个功能（143373f/024d319/7efb134/28db8e1）在发布前的迭代中已实际运行验证过，登记为 skipped 待后续独立评审补跑。",
+  "limitations": [
+    "未在本回填提交上重新执行完整人工 E2E。",
+    "访达重启联动、登录项登记、快捷键拦截与滚轮反转依赖系统授权与前台状态，难以自动化，只能手动验证。"
+  ]
+}

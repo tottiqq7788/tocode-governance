@@ -1,0 +1,24 @@
+{
+  "id": "wp-003",
+  "title": "治理滞后回填：访达联动、快捷键、开机自启与鼠标滚轮对调",
+  "baseline_commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "goal": "滞后回填治理控制面：将 app 已实现并迭代验证的 4 个功能提交（143373f 隐藏文件与访达同步 + 单选项初始化根目录、024d319 访达移动 + 双击⌘Q + ⌘Q强关访达、7efb134 开机自启、28db8e1 鼠标滚轮对调）对应的语义与组件映射登记到治理层，并把治理基线推进到 app HEAD 28db8e1。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/",
+    "governance/architecture/task-envelopes/",
+    "governance/architecture/evidence/",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "实际改动超出 governance/ 目录（尤其不改动 app/ 源码）时停止。",
+    "回填仅登记既有已实现语义，不从代码反推未经验证的产品语义；语义超出 app README/已批准规则可佐证范围时停止并回架构准入。"
+  ],
+  "acceptance_evidence": [
+    "static：governance JSON 工件语法与引用一致性通过 audit_project.py。",
+    "static：app 在 28db8e1 上 bash scripts/build.sh 编译通过。",
+    "unit：app 在 28db8e1 上 bash scripts/test.sh 全量断言（257/257）通过。",
+    "runtime_e2e：功能均在发布前的运行迭代中手动验证过；本次回填不重复人工 E2E，登记为 skipped。"
+  ],
+  "status": "approved"
+}

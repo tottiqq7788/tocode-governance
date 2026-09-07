@@ -1,0 +1,41 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-003",
+  "role": "implementation_owner",
+  "baseline_commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "work_package_id": "wp-003",
+  "allowed_scope": [
+    "governance/"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-finder-hidden-sync",
+    "l0-finder-selection-init",
+    "l0-shortcuts",
+    "l0-launch-at-login",
+    "l0-mouse-wheel-reverse"
+  ],
+  "must_preserve": [
+    "不修改 app/ 源码；本任务仅作用于治理控制面。",
+    "语义登记以 app README 与实际行为为准，不从代码反推未经验证的产品语义。",
+    "既有 9 条 L0 中除 l0-show-hidden 因被 l0-finder-hidden-sync 取代而标记 deprecated 外，其余均保持 approved 不变。",
+    "所有新增 L0/L1/L2 与既有 L1/L2 保持一致的对象形态与引用完整性，通过 audit_project.py。",
+    "证据只登记真实运行结果；runtime_e2e 本次回填不重复人工验证，如实标 skipped。"
+  ],
+  "must_reject": [
+    "改动 app/ 目录任何源码或测试。",
+    "把未经验证/未实现的语义标记为已批准。",
+    "在回填中声称未实际运行的 runtime_e2e 通过。",
+    "破坏 semantic-map 中既有 approved L0 规则或引用完整性。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际改动超出 governance/ 目录或超出声明范围时立即停止并报告。",
+    "任何 L0 规则无法由既有实现/README 佐证或与既有规则冲突时停止并回架构准入。"
+  ],
+  "notes": "治理滞后回填：把 app 28db8e1 上 4 个功能提交的语义（访达隐藏同步、访达目录初始化、x/v+⌘Q 快捷键、开机自启、鼠标滚轮对调）登记进 semantic-map 并建立 wp-003/IMPL-003 与证据。governance.json 基线同步推进到 28db8e1。"
+}

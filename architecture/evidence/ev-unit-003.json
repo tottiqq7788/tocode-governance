@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-003",
+  "work_package_id": "wp-003",
+  "commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh (Tests/TestRunner.swift)",
+  "result_summary": "18 个测试函数、257 个断言全部通过，覆盖新增功能：访达隐藏文件同步（写入失败/访达重启失败回滚）、访达选中项解析（单选中文件夹/文件父级、多选/无选中拒绝）、快捷键设置存储与状态机（x/v 移动、双击⌘Q、⌘Q强关访达、目标解析、⌘Q 抑制放行、钩子故障恢复）、开机自启开关状态、鼠标滚轮对调（离散轴反转、故障放行）。",
+  "limitations": [
+    "仅为无 GUI 的可自动化逻辑测试；菜单交互、访达 AppleScript 真实调用、系统登录项真实登记、CGEventTap 实机钩子依赖授权，需 runtime_e2e 手动验证。",
+    "assertions 以 expect() 记录 PASS/FAIL，无独立断言计数框架；数量为 expect() 调用总数。"
+  ]
+}

@@ -53,7 +53,7 @@
     {
       "id": "l0-show-hidden",
       "name": "显示隐藏文件",
-      "status": "approved",
+      "status": "deprecated",
       "statement": "目录列表包含以点（.）开头的隐藏文件与隐藏文件夹（如 .DS_Store、.git）。",
       "source_refs": ["user-requirement:2026-09-03"]
     },
@@ -63,6 +63,41 @@
       "status": "approved",
       "statement": "右键功能菜单中的「重置初始目录」被选中时，将根文件夹设为默认目录「/Users/admin/Documents」，并弹出一条系统通知。",
       "source_refs": ["user-requirement:2026-09-04"]
+    },
+    {
+      "id": "l0-finder-hidden-sync",
+      "name": "隐藏文件与访达同步",
+      "status": "approved",
+      "statement": "目录是否显示隐藏项（点开头条目或带 Finder hidden 属性的条目）以系统访达偏好 AppleShowAllFiles 为唯一权威：从 Tocode 切换会写回访达偏好并重启访达使显示立即生效；从访达（如 ⌘⇧.）切换后，Tocode 菜单下次打开跟随新状态；写入或重启失败时恢复原状态。",
+      "source_refs": ["app-commit:143373f", "user-feedback:2026-09-06"]
+    },
+    {
+      "id": "l0-finder-selection-init",
+      "name": "访达目录初始化",
+      "status": "approved",
+      "statement": "当访达中恰好选中一个条目时，功能菜单条件显示「访达目录初始化」：选中文件夹则将其设为左键根目录，选中文件则设为其父级文件夹；无选中、多选、权限失败或路径失效时不显示或点击不改根目录。",
+      "source_refs": ["app-commit:143373f", "user-requirement:2026-09-06"]
+    },
+    {
+      "id": "l0-shortcuts",
+      "name": "访达 x/v 移动与 ⌘Q 快捷键",
+      "status": "approved",
+      "statement": "设置提供三项默认关闭的快捷键开关，全部关闭时不安装键盘事件钩子：x/v移动文件（仅访达前台时接管 ⌘X/⌘V，⌘X 触发访达复制后下一次 ⌘V 改写为 ⌥⌘V 移动到访达当前窗口目标目录，文本编辑与其它应用不受影响）；双击⌘Q（普通 ⌘Q 第一次被吞并提示，2 秒内再次按同一进程才放行，自动重复与 ⌘⇧Q/⌥⌘Esc/菜单退出不受拦截）；⌘Q强关访达（访达为普通前台或 Command-Tab 选中时 ⌘Q 关闭全部访达窗口并隐藏、不退出进程）。钩子创建失败或无法恢复时开关保持关闭且所有按键原样放行。",
+      "source_refs": ["app-commit:024d319", "user-requirement:2026-09-06"]
+    },
+    {
+      "id": "l0-launch-at-login",
+      "name": "开机自启",
+      "status": "approved",
+      "statement": "设置提供「开机自启」开关（默认关闭），以系统登录项 SMAppService.mainApp 为唯一权威：菜单只显示系统实际状态，登记失败或需要批准时不会显示为已开启，在系统设置里手动改动后菜单下次打开跟随。",
+      "source_refs": ["app-commit:7efb134", "user-requirement:2026-09-06"]
+    },
+    {
+      "id": "l0-mouse-wheel-reverse",
+      "name": "鼠标滚轮对调",
+      "status": "approved",
+      "statement": "设置提供「对调垂直滚轮 / 对调横向滚轮」开关（默认关闭），只反转物理鼠标离散滚轮对应轴向，不改触控板与连续滚动（含 Magic Mouse 表面），不改变系统「自然滚动」偏好；滚轮钩子与快捷键钩子相互独立，滚动钩子故障不影响 ⌘Q/⌘X。",
+      "source_refs": ["app-commit:28db8e1", "user-requirement:2026-09-07"]
     }
   ],
   "l1_responsibilities": [
@@ -80,7 +115,7 @@
       "name": "目录菜单渲染",
       "status": "candidate",
       "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开，并包含隐藏文件。",
-      "l0_refs": ["l0-navigate", "l0-recurse", "l0-show-hidden"],
+      "l0_refs": ["l0-navigate", "l0-recurse", "l0-finder-hidden-sync"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
     },
@@ -107,7 +142,43 @@
       "name": "文件系统访问",
       "status": "candidate",
       "responsibility": "枚举目录内容、判断条目是文件还是文件夹、判断路径是否存在、读取隐藏文件。",
-      "l0_refs": ["l0-recurse", "l0-show-hidden", "l0-set-root-clipboard"],
+      "l0_refs": ["l0-recurse", "l0-show-hidden", "l0-finder-hidden-sync", "l0-set-root-clipboard"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-finder-interop",
+      "name": "访达联动与初始化",
+      "status": "candidate",
+      "responsibility": "以访达为外部权威完成联动：隐藏文件显示读写 AppleShowAllFiles 偏好并重启访达；「访达目录初始化」读取访达当前选中项并据此设置根文件夹。",
+      "l0_refs": ["l0-finder-hidden-sync", "l0-finder-selection-init"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-shortcut-engine",
+      "name": "键盘快捷键引擎",
+      "status": "candidate",
+      "responsibility": "实现 x/v移动文件、双击⌘Q、⌘Q强关访达三个快捷键状态机与共享键盘事件钩子的安装/拆除，保证故障时所有按键原样放行。",
+      "l0_refs": ["l0-shortcuts"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-launch-at-login",
+      "name": "开机自启登记",
+      "status": "candidate",
+      "responsibility": "把应用登记为系统登录项（SMAppService.mainApp）并如实反映系统实际状态。",
+      "l0_refs": ["l0-launch-at-login"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-mouse-wheel-reverse",
+      "name": "鼠标滚轮对调",
+      "status": "candidate",
+      "responsibility": "反转物理鼠标离散滚轮的垂直/水平轴向事件，且不改触控板、连续滚动与系统「自然滚动」偏好。",
+      "l0_refs": ["l0-mouse-wheel-reverse"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
     }
@@ -154,6 +225,41 @@
       "status": "candidate",
       "l1_refs": ["l1-root-state"],
       "selectors": ["RootPathStore.swift"]
+    },
+    {
+      "id": "l2-finder-visibility-service",
+      "name": "访达隐藏文件同步服务",
+      "status": "candidate",
+      "l1_refs": ["l1-finder-interop", "l1-filesystem"],
+      "selectors": ["FinderVisibilityService.swift"]
+    },
+    {
+      "id": "l2-finder-selection-service",
+      "name": "访达选中项解析服务",
+      "status": "candidate",
+      "l1_refs": ["l1-finder-interop"],
+      "selectors": ["FinderSelectionService.swift"]
+    },
+    {
+      "id": "l2-shortcut-services",
+      "name": "快捷键服务族",
+      "status": "candidate",
+      "l1_refs": ["l1-shortcut-engine"],
+      "selectors": ["GlobalShortcutService.swift", "GlobalShortcutState.swift", "CommandQTargetProvider.swift", "FinderDismissService.swift", "KeyboardEventSynthesizer.swift", "ShortcutMenuAppearance.swift", "ShortcutSettingsStore.swift"]
+    },
+    {
+      "id": "l2-launch-at-login-service",
+      "name": "开机自启服务",
+      "status": "candidate",
+      "l1_refs": ["l1-launch-at-login"],
+      "selectors": ["LaunchAtLoginService.swift"]
+    },
+    {
+      "id": "l2-mouse-wheel-reverse",
+      "name": "鼠标滚轮对调服务",
+      "status": "candidate",
+      "l1_refs": ["l1-mouse-wheel-reverse"],
+      "selectors": ["MouseWheelReverseService.swift", "MouseWheelReverseStore.swift"]
     }
   ]
 }

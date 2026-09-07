@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-003",
+  "work_package_id": "wp-003",
+  "commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .（governance 仓库）；bash scripts/build.sh（app 仓库，swiftc）",
+  "result_summary": "治理工件语义地图/manifest/wp/信封引用一致性审计通过；app 在 28db8e1 上 Swift/AppKit 源码编译通过，产出 build/Tocode.app。",
+  "limitations": [
+    "audit_project.py 仅校验结构与引用一致性，不校验语义正确性与运行时行为。",
+    "仅 CommandLineTools（无完整 Xcode），未做 xcodebuild/签名。"
+  ]
+}
