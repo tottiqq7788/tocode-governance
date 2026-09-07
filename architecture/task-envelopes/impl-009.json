@@ -1,0 +1,46 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-009",
+  "role": "implementation_owner",
+  "baseline_commit": "46d07ddf5326cda78adef31778b86fb3c2368d5e",
+  "work_package_id": "wp-009",
+  "allowed_scope": [
+    "app/Sources/ScreenBlackoutService.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-009.json",
+    "governance/architecture/task-envelopes/impl-009.json",
+    "governance/architecture/evidence/ev-*-009.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-temporary-blackout",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "所有现有菜单、目录、Finder、微信、Codex、快捷键、滚轮、开机自启行为均保持不变。",
+    "「mac → 临时黑屏」菜单项放在「设置」子菜单之后、分隔线和「退出」之前。",
+    "黑屏已显示时再次激活是 no-op。",
+    "应用退出时移除覆盖窗口，无需额外 AppDelegate 生命周期变更。"
+  ],
+  "must_reject": [
+    "除用户点击或按键外触发其他行为。",
+    "申请辅助功能、输入监控或其他新系统权限。",
+    "修改 Codex、微信或访达状态。",
+    "依赖既有快捷键/滚轮钩子实现黑屏解除。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-009 scope 或 l0-temporary-blackout/l0-action-menu 时立即停止并重新准入。",
+    "实现需要新系统权限或依赖既有快捷键/滚轮钩子时停止。",
+    "无法以可注入 overlay 自动覆盖状态转换分支时停止并调整架构合同。"
+  ],
+  "notes": "覆盖窗口成为关键窗口并接收 keyDown/mouseDown；菜单项为一次性操作，不保留开关状态。runtime_e2e 需要真实多显示器与人工按键/点击验收，若未执行必须登记为跳过。"
+}

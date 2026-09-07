@@ -1,0 +1,32 @@
+{
+  "id": "wp-009",
+  "title": "mac 子菜单临时黑屏叠加层",
+  "baseline_commit": "46d07ddf5326cda78adef31778b86fb3c2368d5e",
+  "goal": "在 Tocode 右键菜单新增「mac」子菜单，下方提供「临时黑屏」。点击后应用在每个显示器上显示全屏黑色无边框覆盖窗口，并在屏幕中央显示灰色文字「点击恢复」；用户按下任意键盘按键或鼠标按键后，所有覆盖窗口立即关闭。该功能是自包含叠加层，不需要辅助功能权限，也不依赖现有快捷键/滚轮钩子。",
+  "scope": [
+    "app/Sources/ScreenBlackoutService.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-009.json",
+    "governance/architecture/task-envelopes/impl-009.json",
+    "governance/architecture/evidence/ev-*-009.json"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope 或触及未声明的 L0 语义时立即停止并回架构准入。",
+    "实现需要申请辅助功能、输入监控或其他新系统权限时停止。",
+    "实现依赖既有快捷键/滚轮钩子或修改 Codex、微信、访达状态时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理结构审计通过，app 的 swiftc 构建与 ad-hoc 签名通过。",
+    "unit：ScreenBlackoutService 使用 mock overlay 验证初始未呈现、activate 调用 show、重复 activate 为 no-op、dismiss 清除状态。",
+    "runtime_e2e：从右键菜单激活，确认每个屏幕变黑并显示灰色「点击恢复」，任意按键与鼠标点击均可解除；若未执行则登记为跳过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-08",
+    "scope": "The user explicitly requested execution of the complete mac temporary blackout plan; this approves the declared business scope before application source changes."
+  }
+}

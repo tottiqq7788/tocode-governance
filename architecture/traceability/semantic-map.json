@@ -40,8 +40,8 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）与「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，提供「同步项目夹」开关，并提供以当前 Codex 用户级模型友好名称为标题的实时 Anker 模型子菜单）。",
-      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d", "user-approved-plan:2026-09-07", "user-revision:2026-09-07"]
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）、「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，提供「同步项目夹」开关，并提供以当前 Codex 用户级模型友好名称为标题的实时 Anker 模型子菜单），以及「mac」子菜单（其下提供「临时黑屏」）。",
+      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d", "user-approved-plan:2026-09-07", "user-revision:2026-09-07", "user-approved-plan:2026-09-08"]
     },
     {
       "id": "l0-wechat-archive",
@@ -119,6 +119,13 @@
       "status": "approved",
       "statement": "右键「codex」子菜单增加以当前 Codex 用户级模型友好名称为标题的模型子菜单；每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
       "source_refs": ["user-approved-plan:2026-09-07", "user-revision:2026-09-07", "app-commit:0790172"]
+    },
+    {
+      "id": "l0-temporary-blackout",
+      "name": "mac 临时黑屏",
+      "status": "candidate",
+      "statement": "右键功能菜单提供「mac → 临时黑屏」；点击后所有屏幕变黑，每个屏幕中央显示灰色文字「点击恢复」，用户按下任意键盘按键或鼠标按键后解除黑屏，无需辅助功能权限，也不依赖既有快捷键/滚轮钩子。",
+      "source_refs": ["user-approved-plan:2026-09-08"]
     }
   ],
   "l1_responsibilities": [
@@ -153,8 +160,8 @@
       "id": "l1-status-bar",
       "name": "菜单栏图标与事件",
       "status": "candidate",
-      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，呈现微信绑定状态并转发绑定和文件位置操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
-      "l0_refs": ["l0-navigate", "l0-action-menu", "l0-set-root-clipboard", "l0-reset-root", "l0-wechat-archive"],
+      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，呈现微信绑定状态并转发绑定和文件位置操作，转发 mac 临时黑屏操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
+      "l0_refs": ["l0-navigate", "l0-action-menu", "l0-set-root-clipboard", "l0-reset-root", "l0-wechat-archive", "l0-temporary-blackout"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
     },
@@ -245,6 +252,15 @@
       "status": "candidate",
       "responsibility": "从 CC Switch 当前 Anker Codex Provider 安全读取凭据并实时获取模型目录，以事务和原子文件替换保持 Provider 模板与 Codex 用户配置的 model 一致；提交成功后延迟 2 秒直接强制终止 Codex 并重新启动，任何配置失败均不得终止 Codex。",
       "l0_refs": ["l0-codex-model-switch", "l0-action-menu"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-temporary-blackout",
+      "name": "临时黑屏叠加层生命周期",
+      "status": "candidate",
+      "responsibility": "管理全屏黑色无边框覆盖窗口的生命周期：按需在每个显示器创建浮于最上层的覆盖窗口与居中灰色「点击恢复」标签，并在任意键盘按键或鼠标按键时解除全部覆盖窗口；已显示时再次激活为 no-op。",
+      "l0_refs": ["l0-temporary-blackout", "l0-action-menu"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
     }
@@ -368,6 +384,13 @@
       "status": "candidate",
       "l1_refs": ["l1-codex-model-switch"],
       "selectors": ["CodexModelSwitchService.swift", "CodexApplicationRestarter.swift", "StatusItemController.swift"]
+    },
+    {
+      "id": "l2-screen-blackout-service",
+      "name": "临时黑屏覆盖服务",
+      "status": "candidate",
+      "l1_refs": ["l1-temporary-blackout"],
+      "selectors": ["ScreenBlackoutService.swift"]
     }
   ]
 }
