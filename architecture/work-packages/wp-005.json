@@ -1,0 +1,24 @@
+{
+  "id": "wp-005",
+  "title": "⌘Q强关访达误报「无法关闭访达窗口」：hide() 中间态被误判为失败",
+  "baseline_commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "goal": "修复「双击⌘Q」与「⌘Q强关访达」同时开启时，双击第二击触发关窗隐藏后仍错误弹出「无法关闭访达窗口/关闭窗口失败，访达保持原状」的问题。真机探针已确证根因：FinderDismissService 关窗成功后立刻调用 NSRunningApplication.hide() 时，系统在窗口收尾期间返回 false 表示请求已提交但瞬间未能确认完成，而 Finder 随后仍会成功隐藏；当前实现把该中间态误判为 .hideFailed，导致效果成功却弹失败提示。",
+  "scope": [
+    "app/Sources/FinderDismissService.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/",
+    "governance/architecture/task-envelopes/",
+    "governance/architecture/evidence/"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope（如新增源文件、改动 GlobalShortcutEngine 状态机、改动双击⌘Q 的命中/放行语义）时立即停止并回架构准入。",
+    "把 hide() 失败判定改为不调用 hide、不隐藏 Finder，或引入会把授权失败(notPermitted)吞掉的逻辑时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：bash scripts/build.sh（或等价 swiftc 编译）通过。",
+    "unit：bash scripts/test.sh 全量断言通过（断言总数以实际 PASS: 行为准，重计后如实登记）。",
+    "runtime_e2e：真机探针 /tmp/finder_hide_probe 复现 hide() 返回 false 而 Finder 最终隐藏成功的路径；修复后在真机双开场景双击 ⌘Q 不再误弹失败提示，登记前执行；如未执行则登记为 skipped。"
+  ],
+  "status": "approved"
+}

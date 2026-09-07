@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-005",
+  "work_package_id": "wp-005",
+  "commit": "aac618aafcb9f33cef4094bc6539d41c780921b2",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh (Tests/TestRunner.swift)",
+  "result_summary": "全部断言通过，PASS: 计数 270（基线 267 基础上新增 3 条）。新增回归覆盖：hide() 瞬时返回 false 视为请求已提交成功（不再走 .failure(.hideFailed)）、Finder 未运行视为无需隐藏、默认多 Finder 进程同样视为成功；既有 fault 路径断言（.notPermitted 不隐藏并单独报告、scriptFailed 不隐藏、关窗成功后仍执行隐藏、MockFinderHider 返回 false 时仍报 .hideFailed）全部保持通过。",
+  "limitations": [
+    "仅为无 GUI 的可自动化逻辑测试；真实 NSRunningApplication.hide() 的中间态行为无法在单元测试内复现，需 runtime_e2e 真机探针确认。",
+    "assertions 以 expect() 记录 PASS/FAIL，无独立断言计数框架；数量为 expect() 调用总数（PASS: 行数）。"
+  ]
+}

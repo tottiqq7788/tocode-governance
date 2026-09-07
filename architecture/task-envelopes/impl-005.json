@@ -1,0 +1,40 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-005",
+  "role": "implementation_owner",
+  "baseline_commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "work_package_id": "wp-005",
+  "allowed_scope": [
+    "app/Sources/FinderDismissService.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-005.json",
+    "governance/architecture/task-envelopes/impl-005.json",
+    "governance/architecture/evidence/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-shortcuts"
+  ],
+  "must_preserve": [
+    "关闭访达窗口仍复用 AppleScript「close every window」，且仍以 NSAppleScriptRunner 返回的 -1743 (notPermitted) 区分自动化授权失败。",
+    "关窗成功后仍执行隐藏；授权失败(notPermitted)时仍弹「请允许 Tocode 控制访达」且不隐藏。",
+    "hide() 返回中间态(false)但 Finder 最终隐藏成功时，不再视为失败、不弹失败提示；单开/双开场景行为一致。",
+    "FinderDismissService 对外仍返回 Result<Void, FinderDismissError>，FinderWindowDismissing 协议签名不变，单元测试注入（MockScript/MockFinderHider）语义保持兼容。"
+  ],
+  "must_reject": [
+    "把 notPermitted 错误归类为 hideFailed 或 scriptFailed，或在 AppleScript 失败时仍尝试隐藏。",
+    "改动 GlobalShortcutState.swift 状态机、双击⌘Q/⌘Q强关访达的按键处理语义，或改动 ⌘Q 在 Finder 下的放行/关窗判定。",
+    "隐藏失败时返回 .success（把真失败也吞掉），或删除「关闭窗口失败」失败提示分支的职责。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际改动超出声明 scope（如需要新增 Swift 源文件或改 GlobalShortcutState.swift 状态机）时立即停止并回架构准入。",
+    "测试全量无法通过或 hide 语义变化无法用 unit 断言覆盖时停止并回架构准入。"
+  ],
+  "notes": "bug 根因（真机探针 /tmp/finder_hide_probe 确证）：WorkspaceFinderHider.hideFinder() 在 close every window 成功后立刻调用 NSRunningApplication.hide()；关窗收尾期间系统返回 false 但 Finder 最终仍隐藏成功（探针：hide() 返回 false、+1s 后 isHidden=true）。当前实现把该中间态当 .hideFailed 处理，GlobalShortcutService.runFinderDismiss() 走 .failure 分支误弹「无法关闭访达窗口/关闭窗口失败，访达保持原状」；而实际效果（关窗+隐藏）已成功。修复方向落在 FinderDismissService/WorkspaceFinderHider：隐藏请求已提交即视为成功（hide() 返回 false 表示请求被接受但异步收尾，不再作为失败），或对 hide 结果采用延迟/二次确认；严禁把 notPermitted 与 hide 中间态混为一谈。"
+}
