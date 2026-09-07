@@ -1,0 +1,36 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "wechat-archive-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-wechat-archive",
+    "l0-action-menu"
+  ],
+  "authority": {
+    "binding": "A non-empty iLink bot_token persisted in macOS Keychain after a confirmed QR response from a trusted HTTPS weixin.qq.com host.",
+    "receive_time": "Local wall-clock time and current system timezone captured when each message is accepted from getupdates.",
+    "archive_root": "/Users/admin/Documents/wechat",
+    "cursor": "Application Support state advanced only after all previously unprocessed messages in the response are archived successfully."
+  },
+  "invariants": [
+    "The runtime is receive-only and must never call sendmessage or any other outbound WeChat message API.",
+    "Bearer tokens are sent only over HTTPS to weixin.qq.com or a subdomain and never appear in browser files, notifications, logs, archives, or persisted cursor state.",
+    "Transient transport errors and HTTP 5xx preserve the current binding; only HTTP 401 or 403 remove the Keychain credential.",
+    "A rebind does not disturb the old listener until the new confirmed credential is safely stored.",
+    "Archive files are append-only and attachments never overwrite an existing path.",
+    "context_token, request headers, bearer tokens, and AES keys are not written to Markdown."
+  ],
+  "archive_format": {
+    "directory": "yyMMdd",
+    "daily_file": "wechat<yyMMdd>.md",
+    "entry_heading": "## HH:mm:ss",
+    "attachment_name": "HHmmss_SSS_<two-digit item index>_<sanitized original name>"
+  },
+  "prohibited_results": [
+    "Reading unrelated personal WeChat conversations or historical messages.",
+    "Sending acknowledgements, AI replies, or any other WeChat message.",
+    "Treating a mock integration test as successful real-account runtime E2E.",
+    "Advancing the cursor or dedupe state after an archive write failure.",
+    "Creating a fabricated voice file when iLink provides ASR text only."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "wp-006",
+  "title": "Tocode 微信关联与消息归档",
+  "baseline_commit": "aac618aafcb9f33cef4094bc6539d41c780921b2",
+  "goal": "在 Tocode 右键菜单新增「微信关联」，通过个人微信 iLink Bot 浏览器扫码绑定；绑定后应用运行期间仅接收发给该 Bot 的新消息，将文字、语音转写和服务端实际提供的媒体按本机收到时间归档到 /Users/admin/Documents/wechat，不调用模型、不发送微信消息。",
+  "scope": [
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/WeChat*.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/WeChatTestSupport.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/governance.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-006.json",
+    "governance/architecture/task-envelopes/impl-006.json",
+    "governance/architecture/evidence/ev-*-006.json"
+  ],
+  "stop_conditions": [
+    "iLink 协议变化要求把 Bearer Token 发往非 HTTPS weixin.qq.com 域名、要求新增出站消息或读取个人账号其他聊天时立即停止并重新准入。",
+    "实际实现需要改动既有目录树、Finder 联动、快捷键、滚轮或开机自启语义时立即停止并重新准入。",
+    "无法保证归档失败时不推进游标、附件不覆盖或 Token 不泄露到明文文件时停止实现。"
+  ],
+  "acceptance_evidence": [
+    "static：治理结构审计通过，app 的 swiftc 构建和 ad-hoc 签名通过。",
+    "contract：自动验证 QR、状态轮询、getupdates 请求合同、受信任 URL、消息类型 1 至 5 解析和 receive-only 边界。",
+    "unit：自动验证日期/时区、Markdown、附件命名、追加、AES-ECB/PKCS7、去重和游标状态。",
+    "integration：注入式 iLink mock 完成扫码确认、凭据替换、自动轮询和文字/语音/加密媒体归档全链路。",
+    "fault_injection：自动覆盖二维码、Keychain、网络/5xx/401/403、重复消息、恢复、媒体和磁盘故障。",
+    "runtime_e2e：真实 iLink 内测账号验证扫码、重启、菜单、Finder 和收件归档；账号无资格时必须登记 unavailable。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-07",
+    "scope": "The user explicitly requested implementation of the complete plan; this is approval of the declared business scope before application source changes."
+  }
+}

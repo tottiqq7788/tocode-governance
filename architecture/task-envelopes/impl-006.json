@@ -1,0 +1,58 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-006",
+  "role": "implementation_owner",
+  "baseline_commit": "aac618aafcb9f33cef4094bc6539d41c780921b2",
+  "work_package_id": "wp-006",
+  "allowed_scope": [
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/WeChat*.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/WeChatTestSupport.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/governance.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-006.json",
+    "governance/architecture/task-envelopes/impl-006.json",
+    "governance/architecture/evidence/ev-*-006.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-wechat-archive",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "左键目录树、Finder 联动、快捷键、滚轮和开机自启现有行为不变。",
+    "旧绑定在重新扫码成功且新凭据安全写入之前继续工作；失败或过期不破坏旧绑定。",
+    "只有明确 HTTP 401/403 才解除绑定；离线、超时和 5xx 保留绑定并退避重试。",
+    "收到时间一经捕获不因媒体下载耗时变化，归档失败不推进游标或去重状态。",
+    "媒体仅在 iLink 提供下载描述时保存；Markdown 与附件均不包含 Token、请求头、AES 密钥或 context_token。",
+    "所有微信能力保持 receive-only，不发送回复、不调用模型、不读取 Bot 收件流以外聊天。"
+  ],
+  "must_reject": [
+    "将 Bearer Token 发送到非 HTTPS 或非 weixin.qq.com 及其子域。",
+    "在浏览器 HTML/PNG、通知、Markdown、日志或游标状态中写入 Token。",
+    "覆盖已有 Markdown 或附件，或在磁盘失败后仍推进游标。",
+    "把网络故障或 HTTP 5xx 当作解绑，或让失败的重新绑定中断旧监听。",
+    "实现 sendmessage、自动回复、AI 调用、历史补拉、暂停/解绑或可配置归档路径。",
+    "仅凭 mock 测试声明真实微信账号 runtime E2E 通过。"
+  ],
+  "required_evidence": [
+    "static",
+    "contract",
+    "unit",
+    "integration",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-006 scope 或 l0-wechat-archive/l0-action-menu 时立即停止并重新准入。",
+    "生产路径必须开放自定义 base URL、复制 QwenPaw/Python 运行时或新增第三方网络依赖才能工作时停止。",
+    "无法通过可注入边界自动验证认证分类、游标提交和磁盘失败语义时停止并调整架构合同。"
+  ],
+  "notes": "实现使用 Swift/AppKit 原生 URLSession、Security、CoreImage、CommonCrypto。生产 iLink 地址固定从 https://ilinkai.weixin.qq.com 获取，confirmed 返回地址必须通过可信 HTTPS 主机校验。runtime E2E 依赖个人微信 iLink 内测资格；资格不可用时登记 unavailable，不阻碍其余自动证据如实提交。"
+}

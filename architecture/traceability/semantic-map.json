@@ -40,8 +40,15 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出功能菜单，包含「读取剪贴板」「更改目录」「重置初始目录」「退出」四项，每项左侧带图标。",
-      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04"]
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单，其下固定提供「绑定微信」和「文件位置」。",
+      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07"]
+    },
+    {
+      "id": "l0-wechat-archive",
+      "name": "微信关联与本地归档",
+      "status": "approved",
+      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入 macOS Keychain，绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息且不回复。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。",
+      "source_refs": ["user-requirement:2026-09-07", "user-approved-plan:2026-09-07"]
     },
     {
       "id": "l0-set-root-clipboard",
@@ -132,8 +139,35 @@
       "id": "l1-status-bar",
       "name": "菜单栏图标与事件",
       "status": "candidate",
-      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，并在设根或重置成功后发送系统通知。",
-      "l0_refs": ["l0-navigate", "l0-action-menu", "l0-set-root-clipboard", "l0-reset-root"],
+      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，呈现微信绑定状态并转发绑定和文件位置操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
+      "l0_refs": ["l0-navigate", "l0-action-menu", "l0-set-root-clipboard", "l0-reset-root", "l0-wechat-archive"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-wechat-association",
+      "name": "微信身份绑定与生命周期",
+      "status": "candidate",
+      "responsibility": "获取并展示 iLink 扫码二维码、轮询确认状态、验证受信任 API 地址、原子更新 Keychain 凭据，并在应用启动、退出和重新绑定时协调监听生命周期。",
+      "l0_refs": ["l0-wechat-archive", "l0-action-menu"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-wechat-ingestion",
+      "name": "iLink 消息接收",
+      "status": "candidate",
+      "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重，且不调用任何出站消息接口。",
+      "l0_refs": ["l0-wechat-archive"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-wechat-archive",
+      "name": "微信归档写入",
+      "status": "candidate",
+      "responsibility": "按本机收到时间创建日期目录，下载并解密可用媒体，永不覆盖地命名附件，并通过串行写入把完整 Markdown 条目实时追加到每日文件。",
+      "l0_refs": ["l0-wechat-archive"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
     },
@@ -195,8 +229,36 @@
       "id": "l2-status-item-controller",
       "name": "菜单栏图标控制器",
       "status": "candidate",
-      "l1_refs": ["l1-status-bar"],
+      "l1_refs": ["l1-status-bar", "l1-wechat-association"],
       "selectors": ["StatusItemController.swift"]
+    },
+    {
+      "id": "l2-wechat-association-service",
+      "name": "微信绑定与监听生命周期服务",
+      "status": "candidate",
+      "l1_refs": ["l1-wechat-association", "l1-wechat-ingestion"],
+      "selectors": ["WeChatAssociationService.swift"]
+    },
+    {
+      "id": "l2-wechat-ilink-client",
+      "name": "微信 iLink 客户端",
+      "status": "candidate",
+      "l1_refs": ["l1-wechat-association", "l1-wechat-ingestion"],
+      "selectors": ["WeChatILinkClient.swift", "WeChatModels.swift", "WeChatCrypto.swift"]
+    },
+    {
+      "id": "l2-wechat-credential-store",
+      "name": "微信 Keychain 凭据存储",
+      "status": "candidate",
+      "l1_refs": ["l1-wechat-association"],
+      "selectors": ["WeChatCredentialStore.swift"]
+    },
+    {
+      "id": "l2-wechat-archive-service",
+      "name": "微信本地归档服务",
+      "status": "candidate",
+      "l1_refs": ["l1-wechat-archive", "l1-wechat-ingestion"],
+      "selectors": ["WeChatArchiveService.swift", "WeChatStateStore.swift"]
     },
     {
       "id": "l2-menu-builder",
