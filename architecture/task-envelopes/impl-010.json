@@ -1,0 +1,62 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-010",
+  "role": "implementation_owner",
+  "baseline_commit": "cb1e0fcb30a9e695555e6372b690c33378783861",
+  "work_package_id": "wp-010",
+  "allowed_scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodeRootChooser.swift",
+    "app/Sources/TocodeIPCProtocol.swift",
+    "app/Sources/TocodeSocketTransport.swift",
+    "app/Sources/TocodeIPCServer.swift",
+    "app/Sources/TocodeCLIRunner.swift",
+    "app/Sources/TocodeCLI.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TocodeCommandTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-010.json",
+    "governance/architecture/task-envelopes/impl-010.json",
+    "governance/architecture/evidence/ev-*-010.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-cli-control",
+    "l0-wechat-command"
+  ],
+  "must_preserve": [
+    "普通微信消息路径（messageType == 1 → 归档 → 提交游标）保持不变。",
+    "现有菜单、目录、Finder、Codex、快捷键、滚轮、开机自启、黑屏与微信绑定行为保持不变。",
+    "微信 receive-only 语义保持不变。",
+    "CLI 不新增第三方依赖，不写入系统目录，不开放跨机能力。",
+    "命令去重 key 与现有 WeChatDeduplication 同一来源；命令消息计入 dedupe 状态但不计归档记录。"
+  ],
+  "must_reject": [
+    "在命令执行器中执行任意 shell 或动态代码。",
+    "把命令消息写入 wechat*.md 或保存其附件。",
+    "微信命令通过 sendmessage、回复或调用模型反馈。",
+    "socket 权限大于 0600 或暴露网络端口。",
+    "对失败/未知命令重试或让其阻塞监听循环。"
+  ],
+  "required_evidence": [
+    "static",
+    "contract",
+    "unit",
+    "integration",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-010 scope 或 l0-cli-control/l0-wechat-command 时立即停止并重新准入。",
+    "IPC 无法以可注入 transport 自动覆盖连接失败、超时与响应损坏分支时停止。",
+    "发现命令解析或执行链路无法保持白名单枚举时停止并调整架构合同。"
+  ],
+  "notes": "app 与 CLI 各自一个 @main，分两次 swiftc 编译避免入口冲突。runtime_e2e 需要真实 GUI 进程与用户交互（如 root choose 弹窗、真实黑屏），无资格或未执行场景必须登记为 unavailable/skipped。"
+}

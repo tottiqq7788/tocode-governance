@@ -1,0 +1,34 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "cli-and-wechat-command-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-cli-control",
+    "l0-wechat-command"
+  ],
+  "authority": {
+    "socket_path": "~/Library/Application Support/com.tocode.app/tocode.sock",
+    "socket_permissions": "0600",
+    "request_format": "{\"id\":string,\"command\":string,\"args\":[string]}",
+    "response_format": "{\"id\":string,\"ok\":bool,\"data\":string?,\"error\":string?}",
+    "wechat_command_marker": "first item type 1 with trimmed text prefix '.'",
+    "wechat_command_alias": ".lshp -> blackout"
+  },
+  "invariants": [
+    "The command executor is an explicit whitelist enumeration from command name to action; it never evaluates arbitrary shell, code, or dynamic dispatch.",
+    "CLI and WeChat commands share the same TocodeCommandParser and TocodeCommandExecutor.",
+    "The CLI connects only to the local Unix domain socket, sends one newline-terminated JSON request, reads one newline-terminated JSON response, and exits 0 on ok and non-zero on failure or when the app is not running.",
+    "The socket is bound under the user's Application Support directory and chmod'ed to 0600; no cross-machine or network port is opened.",
+    "WeChat command detection requires the first item to be text (type 1) and its trimmed text to begin with '.'; the remainder of the items are treated as part of the command and are not archived.",
+    "A WeChat command message advances the dedupe key and cursor before execution, is never archived, and is never retried regardless of success or failure.",
+    "WeChat remains receive-only: command results use local system notifications only and never call sendmessage, reply, or a model."
+  ],
+  "prohibited_results": [
+    "Executing arbitrary shell or code from a command argument.",
+    "Opening a network port or granting cross-user/cross-machine IPC access.",
+    "Archiving a '.'-prefixed command message to wechat*.md or saving its attachments.",
+    "Replying to a WeChat command message or treating it as a normal chat message.",
+    "Repeating a command message after a failure; unknown, invalid, or failing commands are consumed exactly once.",
+    "Persisting the socket with permissions broader than 0600."
+  ]
+}

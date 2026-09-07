@@ -6,126 +6,203 @@
       "name": "根文件夹",
       "status": "approved",
       "statement": "系统始终维护一个唯一的「根文件夹」路径作为目录浏览起点；首次启动时若无根文件夹则默认使用「/Users/admin/Documents」作为根文件夹（不弹选择器），之后可在菜单中修改或重置。",
-      "source_refs": ["user-requirement:2026-09-03", "user-requirement:2026-09-04"]
+      "source_refs": [
+        "user-requirement:2026-09-03",
+        "user-requirement:2026-09-04"
+      ]
     },
     {
       "id": "l0-navigate",
       "name": "左键浏览目录",
       "status": "approved",
       "statement": "左键单击菜单栏图标时，弹出目录树并显示根文件夹下的第一层文件与文件夹（可递归展开），不包含功能项。",
-      "source_refs": ["user-requirement:2026-09-03", "user-feedback:2026-09-03"]
+      "source_refs": [
+        "user-requirement:2026-09-03",
+        "user-feedback:2026-09-03"
+      ]
     },
     {
       "id": "l0-recurse",
       "name": "递归展开子文件夹",
       "status": "approved",
       "statement": "任意层级的子文件夹都可以继续向下展开，显示其下级的文件与文件夹（可无限递归）。",
-      "source_refs": ["user-requirement:2026-09-03"]
+      "source_refs": [
+        "user-requirement:2026-09-03"
+      ]
     },
     {
       "id": "l0-copy-path",
       "name": "复制路径",
       "status": "approved",
       "statement": "点击任一文件或文件夹条目时，将该条目的绝对路径以「路径」格式（全角括号包裹）复制到系统剪贴板。",
-      "source_refs": ["user-requirement:2026-09-03", "user-feedback:2026-09-03"]
+      "source_refs": [
+        "user-requirement:2026-09-03",
+        "user-feedback:2026-09-03"
+      ]
     },
     {
       "id": "l0-hover-expand",
       "name": "悬停展开文件夹",
       "status": "approved",
       "statement": "鼠标悬停文件夹条目时通过原生子菜单展开显示其下级内容；点击文件夹条目时复制其路径（悬停展开、点击复制）。",
-      "source_refs": ["user-requirement:2026-09-03", "user-feedback:2026-09-03"]
+      "source_refs": [
+        "user-requirement:2026-09-03",
+        "user-feedback:2026-09-03"
+      ]
     },
     {
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
       "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）、「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，提供「同步项目夹」开关，并提供以当前 Codex 用户级模型友好名称为标题的实时 Anker 模型子菜单），以及「mac」子菜单（其下提供「临时黑屏」）。",
-      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d", "user-approved-plan:2026-09-07", "user-revision:2026-09-07", "user-approved-plan:2026-09-08"]
+      "source_refs": [
+        "user-feedback:2026-09-03",
+        "user-requirement:2026-09-04",
+        "user-requirement:2026-09-07",
+        "app-commit:2e98f9d",
+        "user-approved-plan:2026-09-07",
+        "user-revision:2026-09-07",
+        "user-approved-plan:2026-09-08"
+      ]
     },
     {
       "id": "l0-wechat-archive",
       "name": "微信关联与本地归档",
       "status": "approved",
       "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入 macOS Keychain，绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息且不回复。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。",
-      "source_refs": ["user-requirement:2026-09-07", "user-approved-plan:2026-09-07", "app-commit:2e98f9d"]
+      "source_refs": [
+        "user-requirement:2026-09-07",
+        "user-approved-plan:2026-09-07",
+        "app-commit:2e98f9d"
+      ]
     },
     {
       "id": "l0-set-root-clipboard",
       "name": "读取剪贴板设根",
       "status": "approved",
       "statement": "右键功能菜单中的「读取剪贴板」被选中时，若当前系统剪贴板的文本是一个不带「」包裹的、真实存在的文件夹路径，则将该路径设为新的根文件夹并弹出一条系统通知；否则不改变根文件夹。",
-      "source_refs": ["user-requirement:2026-09-03", "user-feedback:2026-09-03"]
+      "source_refs": [
+        "user-requirement:2026-09-03",
+        "user-feedback:2026-09-03"
+      ]
     },
     {
       "id": "l0-show-hidden",
       "name": "显示隐藏文件",
       "status": "deprecated",
       "statement": "目录列表包含以点（.）开头的隐藏文件与隐藏文件夹（如 .DS_Store、.git）。",
-      "source_refs": ["user-requirement:2026-09-03"]
+      "source_refs": [
+        "user-requirement:2026-09-03"
+      ]
     },
     {
       "id": "l0-reset-root",
       "name": "重置初始目录",
       "status": "approved",
       "statement": "右键功能菜单中的「重置初始目录」被选中时，将根文件夹设为默认目录「/Users/admin/Documents」，并弹出一条系统通知。",
-      "source_refs": ["user-requirement:2026-09-04"]
+      "source_refs": [
+        "user-requirement:2026-09-04"
+      ]
     },
     {
       "id": "l0-finder-hidden-sync",
       "name": "隐藏文件与访达同步",
       "status": "approved",
       "statement": "目录是否显示隐藏项（点开头条目或带 Finder hidden 属性的条目）以系统访达偏好 AppleShowAllFiles 为唯一权威：从 Tocode 切换会写回访达偏好并重启访达使显示立即生效；从访达（如 ⌘⇧.）切换后，Tocode 菜单下次打开跟随新状态；写入或重启失败时恢复原状态。",
-      "source_refs": ["app-commit:143373f", "user-feedback:2026-09-06"]
+      "source_refs": [
+        "app-commit:143373f",
+        "user-feedback:2026-09-06"
+      ]
     },
     {
       "id": "l0-finder-selection-init",
       "name": "访达目录初始化",
       "status": "approved",
       "statement": "当访达中恰好选中一个条目时，功能菜单条件显示「访达目录初始化」：选中文件夹则将其设为左键根目录，选中文件则设为其父级文件夹；无选中、多选、权限失败或路径失效时不显示或点击不改根目录。",
-      "source_refs": ["app-commit:143373f", "user-requirement:2026-09-06"]
+      "source_refs": [
+        "app-commit:143373f",
+        "user-requirement:2026-09-06"
+      ]
     },
     {
       "id": "l0-shortcuts",
       "name": "访达 x/v 移动与 ⌘Q 快捷键",
       "status": "approved",
       "statement": "设置提供三项默认关闭的快捷键开关，全部关闭时不安装键盘事件钩子：x/v移动文件（仅访达前台时接管 ⌘X/⌘V，⌘X 触发访达复制后下一次 ⌘V 改写为 ⌥⌘V 移动到访达当前窗口目标目录，文本编辑与其它应用不受影响）；双击⌘Q（普通 ⌘Q 第一次按下被静默吞掉且不立即通知，2 秒内再次按同一进程才放行原生退出，2 秒内没有第二次才补发一次系统通知，确认放行或切换目标后待发通知撤销；自动重复只抑制不算第二次，⌘⇧Q/⌥⌘Q/合成 ⌘Q/目标不明一律原样放行）；⌘Q强关访达（访达为普通前台或 Command-Tab 选中时 ⌘Q 关闭全部访达窗口并隐藏、不退出进程；与双击⌘Q 同时开启时访达第一次按下进入待命、第二次按下关窗隐藏而非放行原生退出；关窗成功即为主结果，隐藏为尽力而为，向 Finder 发出 hide() 后其瞬时返回 false 属关窗收尾中间态、Finder 仍会成功隐藏，不视为失败）。钩子创建失败或无法恢复时开关保持关闭且所有按键原样放行。",
-      "source_refs": ["app-commit:024d319", "app-commit:7c1a640", "app-commit:aac618a", "user-requirement:2026-09-06", "user-feedback:2026-09-07"]
+      "source_refs": [
+        "app-commit:024d319",
+        "app-commit:7c1a640",
+        "app-commit:aac618a",
+        "user-requirement:2026-09-06",
+        "user-feedback:2026-09-07"
+      ]
     },
     {
       "id": "l0-launch-at-login",
       "name": "开机自启",
       "status": "approved",
       "statement": "设置提供「开机自启」开关（默认关闭），以系统登录项 SMAppService.mainApp 为唯一权威：菜单只显示系统实际状态，登记失败或需要批准时不会显示为已开启，在系统设置里手动改动后菜单下次打开跟随。",
-      "source_refs": ["app-commit:7efb134", "user-requirement:2026-09-06"]
+      "source_refs": [
+        "app-commit:7efb134",
+        "user-requirement:2026-09-06"
+      ]
     },
     {
       "id": "l0-mouse-wheel-reverse",
       "name": "鼠标滚轮对调",
       "status": "approved",
       "statement": "设置提供「对调垂直滚轮 / 对调横向滚轮」开关（默认关闭），只反转物理鼠标离散滚轮对应轴向，不改触控板与连续滚动（含 Magic Mouse 表面），不改变系统「自然滚动」偏好；滚轮钩子与快捷键钩子相互独立，滚动钩子故障不影响 ⌘Q/⌘X。",
-      "source_refs": ["app-commit:28db8e1", "user-requirement:2026-09-07"]
+      "source_refs": [
+        "app-commit:28db8e1",
+        "user-requirement:2026-09-07"
+      ]
     },
     {
       "id": "l0-codex-project-sync",
       "name": "Codex 项目夹同步",
       "status": "approved",
       "statement": "右键功能菜单新增「codex」子菜单，显示当前 Codex 选中的本地项目名称与根目录，其下方提供勾选开关「同步项目夹」（默认关闭）。开关开启时，左键目录树改用 Codex 当前选中本地项目的根目录并在每次弹出时实时跟随；「读取剪贴板」「更改目录」「重置初始目录」「访达目录初始化」置灰不可点击；关闭时恢复手动根目录与上述功能。Codex 状态不可读或无有效项目时，自动跟随回退到手动根目录，但开关与置灰状态仍以开关为准。",
-      "source_refs": ["user-approved-plan:2026-09-07"]
+      "source_refs": [
+        "user-approved-plan:2026-09-07"
+      ]
     },
     {
       "id": "l0-codex-model-switch",
       "name": "Codex 模型切换与强制重启",
       "status": "approved",
       "statement": "右键「codex」子菜单增加以当前 Codex 用户级模型友好名称为标题的模型子菜单；每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
-      "source_refs": ["user-approved-plan:2026-09-07", "user-revision:2026-09-07", "app-commit:0790172"]
+      "source_refs": [
+        "user-approved-plan:2026-09-07",
+        "user-revision:2026-09-07",
+        "app-commit:0790172"
+      ]
     },
     {
       "id": "l0-temporary-blackout",
       "name": "mac 临时黑屏",
       "status": "candidate",
       "statement": "右键功能菜单提供「mac → 临时黑屏」；点击后所有屏幕变黑，每个屏幕中央显示灰色文字「点击恢复」，用户按下任意键盘按键或鼠标按键后解除黑屏，无需辅助功能权限，也不依赖既有快捷键/滚轮钩子。",
-      "source_refs": ["user-approved-plan:2026-09-08"]
+      "source_refs": [
+        "user-approved-plan:2026-09-08"
+      ]
+    },
+    {
+      "id": "l0-cli-control",
+      "name": "独立 CLI 命令控制",
+      "status": "approved",
+      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果。命令名到动作的映射是显式枚举，不执行任意 shell。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
+      "source_refs": [
+        "user-approved-plan:2026-09-08"
+      ]
+    },
+    {
+      "id": "l0-wechat-command",
+      "name": "微信 . 前缀命令",
+      "status": "approved",
+      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器；命令消息不写入 wechat*.md、不保存附件、不回微信，执行结果仅通过 macOS 系统通知反馈。命令消息执行前先写入去重 key 并推进游标，成功或失败都不重试。微信能力保持 receive-only。",
+      "source_refs": [
+        "user-approved-plan:2026-09-08"
+      ]
     }
   ],
   "l1_responsibilities": [
@@ -134,135 +211,308 @@
       "name": "根文件夹状态",
       "status": "candidate",
       "responsibility": "维护根文件夹路径的持久化存储、读取与修改（首次默认、菜单修改、剪贴板设置、重置为默认目录）。",
-      "l0_refs": ["l0-root", "l0-set-root-clipboard", "l0-reset-root"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-root",
+        "l0-set-root-clipboard",
+        "l0-reset-root"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-menu-navigation",
       "name": "目录菜单渲染",
       "status": "candidate",
       "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开，并包含隐藏文件。",
-      "l0_refs": ["l0-navigate", "l0-recurse", "l0-finder-hidden-sync"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-navigate",
+        "l0-recurse",
+        "l0-finder-hidden-sync"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-copy-interaction",
       "name": "复制与悬停交互",
       "status": "candidate",
       "responsibility": "实现悬停文件夹展开、点击文件或文件夹复制路径，均以「路径」格式写入剪贴板。",
-      "l0_refs": ["l0-copy-path", "l0-hover-expand"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-copy-path",
+        "l0-hover-expand"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-status-bar",
       "name": "菜单栏图标与事件",
       "status": "candidate",
       "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，呈现微信绑定状态并转发绑定和文件位置操作，转发 mac 临时黑屏操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
-      "l0_refs": ["l0-navigate", "l0-action-menu", "l0-set-root-clipboard", "l0-reset-root", "l0-wechat-archive", "l0-temporary-blackout"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-navigate",
+        "l0-action-menu",
+        "l0-set-root-clipboard",
+        "l0-reset-root",
+        "l0-wechat-archive",
+        "l0-temporary-blackout"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-wechat-association",
       "name": "微信身份绑定与生命周期",
       "status": "candidate",
       "responsibility": "获取并展示 iLink 扫码二维码、轮询确认状态、验证受信任 API 地址、原子更新 Keychain 凭据，并在应用启动、退出和重新绑定时协调监听生命周期。",
-      "l0_refs": ["l0-wechat-archive", "l0-action-menu"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-wechat-archive",
+        "l0-action-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-wechat-ingestion",
       "name": "iLink 消息接收",
       "status": "candidate",
       "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重，且不调用任何出站消息接口。",
-      "l0_refs": ["l0-wechat-archive"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-wechat-archive"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-wechat-archive",
       "name": "微信归档写入",
       "status": "candidate",
       "responsibility": "按本机收到时间创建日期目录，下载并解密可用媒体，永不覆盖地命名附件，并通过串行写入把完整 Markdown 条目实时追加到每日文件。",
-      "l0_refs": ["l0-wechat-archive"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-wechat-archive"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-filesystem",
       "name": "文件系统访问",
       "status": "candidate",
       "responsibility": "枚举目录内容、判断条目是文件还是文件夹、判断路径是否存在、读取隐藏文件。",
-      "l0_refs": ["l0-recurse", "l0-show-hidden", "l0-finder-hidden-sync", "l0-set-root-clipboard"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-recurse",
+        "l0-show-hidden",
+        "l0-finder-hidden-sync",
+        "l0-set-root-clipboard"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-finder-interop",
       "name": "访达联动与初始化",
       "status": "candidate",
       "responsibility": "以访达为外部权威完成联动：隐藏文件显示读写 AppleShowAllFiles 偏好并重启访达；「访达目录初始化」读取访达当前选中项并据此设置根文件夹。",
-      "l0_refs": ["l0-finder-hidden-sync", "l0-finder-selection-init"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-finder-hidden-sync",
+        "l0-finder-selection-init"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-shortcut-engine",
       "name": "键盘快捷键引擎",
       "status": "candidate",
       "responsibility": "实现 x/v移动文件、双击⌘Q、⌘Q强关访达三个快捷键状态机与共享键盘事件钩子的安装/拆除，保证故障时所有按键原样放行。",
-      "l0_refs": ["l0-shortcuts"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-shortcuts"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-launch-at-login",
       "name": "开机自启登记",
       "status": "candidate",
       "responsibility": "把应用登记为系统登录项（SMAppService.mainApp）并如实反映系统实际状态。",
-      "l0_refs": ["l0-launch-at-login"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-launch-at-login"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-mouse-wheel-reverse",
       "name": "鼠标滚轮对调",
       "status": "candidate",
       "responsibility": "反转物理鼠标离散滚轮的垂直/水平轴向事件，且不改触控板、连续滚动与系统「自然滚动」偏好。",
-      "l0_refs": ["l0-mouse-wheel-reverse"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-mouse-wheel-reverse"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-codex-project-sync",
       "name": "Codex 项目夹同步",
       "status": "candidate",
       "responsibility": "只读解析 Codex 全局状态文件并解析当前选中的本地项目根目录，提供「同步项目夹」开关的持久化，读取失败时安全回退手动根目录，绝不写入 Codex 状态。",
-      "l0_refs": ["l0-codex-project-sync", "l0-action-menu"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-codex-project-sync",
+        "l0-action-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-codex-model-switch",
       "name": "Codex 模型切换与强制重启",
       "status": "candidate",
       "responsibility": "从 CC Switch 当前 Anker Codex Provider 安全读取凭据并实时获取模型目录，以事务和原子文件替换保持 Provider 模板与 Codex 用户配置的 model 一致；提交成功后延迟 2 秒直接强制终止 Codex 并重新启动，任何配置失败均不得终止 Codex。",
-      "l0_refs": ["l0-codex-model-switch", "l0-action-menu"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-codex-model-switch",
+        "l0-action-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     },
     {
       "id": "l1-temporary-blackout",
       "name": "临时黑屏叠加层生命周期",
       "status": "candidate",
       "responsibility": "管理全屏黑色无边框覆盖窗口的生命周期：按需在每个显示器创建浮于最上层的覆盖窗口与居中灰色「点击恢复」标签，并在任意键盘按键或鼠标按键时解除全部覆盖窗口；已显示时再次激活为 no-op。",
-      "l0_refs": ["l0-temporary-blackout", "l0-action-menu"],
-      "owners": ["architecture_owner"],
-      "reviewers": ["implementation_owner", "independent_reviewer"]
+      "l0_refs": [
+        "l0-temporary-blackout",
+        "l0-action-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-command-parser",
+      "name": "统一命令解析",
+      "status": "candidate",
+      "responsibility": "把 CLI 参数与微信 . 前缀命令体解析为同一 TocodeCommand 枚举；支持大小写不敏感、空白切分参数、别名（含 .lshp -> blackout），未知命令与参数错误返回稳定错误。",
+      "l0_refs": [
+        "l0-cli-control",
+        "l0-wechat-command"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-command-executor",
+      "name": "白名单命令执行器",
+      "status": "candidate",
+      "responsibility": "聚合现有服务，把命令枚举映射到根目录、Codex、微信、黑屏、开机自启、滚轮、隐藏文件、快捷键与退出等动作；只接受显式枚举，不执行动态代码或 shell。",
+      "l0_refs": [
+        "l0-cli-control",
+        "l0-wechat-command"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-ipc-boundary",
+      "name": "本机 IPC 边界",
+      "status": "candidate",
+      "responsibility": "常驻进程用 Network.framework 监听 Unix domain socket，路径固定在 Application Support，权限 0600；处理单行 JSON 请求/响应。CLI 同步连接、发送、读取并映射退出码。",
+      "l0_refs": [
+        "l0-cli-control"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     }
   ],
   "l2_components": [
@@ -270,127 +520,258 @@
       "id": "l2-app-entry",
       "name": "应用入口",
       "status": "candidate",
-      "l1_refs": ["l1-status-bar"],
-      "selectors": ["TocodeApp.swift", "AppDelegate.swift"]
+      "l1_refs": [
+        "l1-status-bar"
+      ],
+      "selectors": [
+        "TocodeApp.swift",
+        "AppDelegate.swift"
+      ]
     },
     {
       "id": "l2-status-item-controller",
       "name": "菜单栏图标控制器",
       "status": "candidate",
-      "l1_refs": ["l1-status-bar", "l1-wechat-association", "l1-codex-project-sync", "l1-codex-model-switch"],
-      "selectors": ["StatusItemController.swift"]
+      "l1_refs": [
+        "l1-status-bar",
+        "l1-wechat-association",
+        "l1-codex-project-sync",
+        "l1-codex-model-switch"
+      ],
+      "selectors": [
+        "StatusItemController.swift"
+      ]
     },
     {
       "id": "l2-wechat-association-service",
       "name": "微信绑定与监听生命周期服务",
       "status": "candidate",
-      "l1_refs": ["l1-wechat-association", "l1-wechat-ingestion"],
-      "selectors": ["WeChatAssociationService.swift"]
+      "l1_refs": [
+        "l1-wechat-association",
+        "l1-wechat-ingestion"
+      ],
+      "selectors": [
+        "WeChatAssociationService.swift"
+      ]
     },
     {
       "id": "l2-wechat-ilink-client",
       "name": "微信 iLink 客户端",
       "status": "candidate",
-      "l1_refs": ["l1-wechat-association", "l1-wechat-ingestion"],
-      "selectors": ["WeChatILinkClient.swift", "WeChatModels.swift", "WeChatCrypto.swift"]
+      "l1_refs": [
+        "l1-wechat-association",
+        "l1-wechat-ingestion"
+      ],
+      "selectors": [
+        "WeChatILinkClient.swift",
+        "WeChatModels.swift",
+        "WeChatCrypto.swift"
+      ]
     },
     {
       "id": "l2-wechat-credential-store",
       "name": "微信 Keychain 凭据存储",
       "status": "candidate",
-      "l1_refs": ["l1-wechat-association"],
-      "selectors": ["WeChatCredentialStore.swift"]
+      "l1_refs": [
+        "l1-wechat-association"
+      ],
+      "selectors": [
+        "WeChatCredentialStore.swift"
+      ]
     },
     {
       "id": "l2-wechat-archive-service",
       "name": "微信本地归档服务",
       "status": "candidate",
-      "l1_refs": ["l1-wechat-archive", "l1-wechat-ingestion"],
-      "selectors": ["WeChatArchiveService.swift", "WeChatStateStore.swift"]
+      "l1_refs": [
+        "l1-wechat-archive",
+        "l1-wechat-ingestion"
+      ],
+      "selectors": [
+        "WeChatArchiveService.swift",
+        "WeChatStateStore.swift"
+      ]
     },
     {
       "id": "l2-menu-builder",
       "name": "菜单树构建器",
       "status": "candidate",
-      "l1_refs": ["l1-menu-navigation"],
-      "selectors": ["MenuBuilder.swift"]
+      "l1_refs": [
+        "l1-menu-navigation"
+      ],
+      "selectors": [
+        "MenuBuilder.swift"
+      ]
     },
     {
       "id": "l2-filesystem-service",
       "name": "文件系统服务",
       "status": "candidate",
-      "l1_refs": ["l1-filesystem"],
-      "selectors": ["FileSystemService.swift"]
+      "l1_refs": [
+        "l1-filesystem"
+      ],
+      "selectors": [
+        "FileSystemService.swift"
+      ]
     },
     {
       "id": "l2-clipboard-service",
       "name": "剪贴板服务",
       "status": "candidate",
-      "l1_refs": ["l1-copy-interaction"],
-      "selectors": ["ClipboardService.swift"]
+      "l1_refs": [
+        "l1-copy-interaction"
+      ],
+      "selectors": [
+        "ClipboardService.swift"
+      ]
     },
     {
       "id": "l2-root-path-store",
       "name": "根文件夹存储",
       "status": "candidate",
-      "l1_refs": ["l1-root-state"],
-      "selectors": ["RootPathStore.swift"]
+      "l1_refs": [
+        "l1-root-state"
+      ],
+      "selectors": [
+        "RootPathStore.swift"
+      ]
     },
     {
       "id": "l2-finder-visibility-service",
       "name": "访达隐藏文件同步服务",
       "status": "candidate",
-      "l1_refs": ["l1-finder-interop", "l1-filesystem"],
-      "selectors": ["FinderVisibilityService.swift"]
+      "l1_refs": [
+        "l1-finder-interop",
+        "l1-filesystem"
+      ],
+      "selectors": [
+        "FinderVisibilityService.swift"
+      ]
     },
     {
       "id": "l2-finder-selection-service",
       "name": "访达选中项解析服务",
       "status": "candidate",
-      "l1_refs": ["l1-finder-interop"],
-      "selectors": ["FinderSelectionService.swift"]
+      "l1_refs": [
+        "l1-finder-interop"
+      ],
+      "selectors": [
+        "FinderSelectionService.swift"
+      ]
     },
     {
       "id": "l2-shortcut-services",
       "name": "快捷键服务族",
       "status": "candidate",
-      "l1_refs": ["l1-shortcut-engine"],
-      "selectors": ["GlobalShortcutService.swift", "GlobalShortcutState.swift", "CommandQTargetProvider.swift", "FinderDismissService.swift", "KeyboardEventSynthesizer.swift", "ShortcutMenuAppearance.swift", "ShortcutSettingsStore.swift"]
+      "l1_refs": [
+        "l1-shortcut-engine"
+      ],
+      "selectors": [
+        "GlobalShortcutService.swift",
+        "GlobalShortcutState.swift",
+        "CommandQTargetProvider.swift",
+        "FinderDismissService.swift",
+        "KeyboardEventSynthesizer.swift",
+        "ShortcutMenuAppearance.swift",
+        "ShortcutSettingsStore.swift"
+      ]
     },
     {
       "id": "l2-launch-at-login-service",
       "name": "开机自启服务",
       "status": "candidate",
-      "l1_refs": ["l1-launch-at-login"],
-      "selectors": ["LaunchAtLoginService.swift"]
+      "l1_refs": [
+        "l1-launch-at-login"
+      ],
+      "selectors": [
+        "LaunchAtLoginService.swift"
+      ]
     },
     {
       "id": "l2-mouse-wheel-reverse",
       "name": "鼠标滚轮对调服务",
       "status": "candidate",
-      "l1_refs": ["l1-mouse-wheel-reverse"],
-      "selectors": ["MouseWheelReverseService.swift", "MouseWheelReverseStore.swift"]
+      "l1_refs": [
+        "l1-mouse-wheel-reverse"
+      ],
+      "selectors": [
+        "MouseWheelReverseService.swift",
+        "MouseWheelReverseStore.swift"
+      ]
     },
     {
       "id": "l2-codex-project-service",
       "name": "Codex 项目解析与同步开关服务",
       "status": "candidate",
-      "l1_refs": ["l1-codex-project-sync"],
-      "selectors": ["CodexProjectService.swift", "CodexSyncSettingsStore.swift"]
+      "l1_refs": [
+        "l1-codex-project-sync"
+      ],
+      "selectors": [
+        "CodexProjectService.swift",
+        "CodexSyncSettingsStore.swift"
+      ]
     },
     {
       "id": "l2-codex-model-switch-service",
       "name": "Codex 模型切换与强制重启服务",
       "status": "candidate",
-      "l1_refs": ["l1-codex-model-switch"],
-      "selectors": ["CodexModelSwitchService.swift", "CodexApplicationRestarter.swift", "StatusItemController.swift"]
+      "l1_refs": [
+        "l1-codex-model-switch"
+      ],
+      "selectors": [
+        "CodexModelSwitchService.swift",
+        "CodexApplicationRestarter.swift",
+        "StatusItemController.swift"
+      ]
     },
     {
       "id": "l2-screen-blackout-service",
       "name": "临时黑屏覆盖服务",
       "status": "candidate",
-      "l1_refs": ["l1-temporary-blackout"],
-      "selectors": ["ScreenBlackoutService.swift"]
+      "l1_refs": [
+        "l1-temporary-blackout"
+      ],
+      "selectors": [
+        "ScreenBlackoutService.swift"
+      ]
+    },
+    {
+      "id": "l2-tocode-command",
+      "name": "命令模型与解析器",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-command-parser"
+      ],
+      "selectors": [
+        "TocodeCommand.swift"
+      ]
+    },
+    {
+      "id": "l2-tocode-command-executor",
+      "name": "命令执行器与目录选择",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-command-executor"
+      ],
+      "selectors": [
+        "TocodeCommandExecutor.swift",
+        "TocodeRootChooser.swift"
+      ]
+    },
+    {
+      "id": "l2-tocode-ipc",
+      "name": "IPC 协议、socket 服务与 CLI",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-ipc-boundary"
+      ],
+      "selectors": [
+        "TocodeIPCProtocol.swift",
+        "TocodeSocketTransport.swift",
+        "TocodeIPCServer.swift",
+        "TocodeCLI.swift",
+        "TocodeCLIRunner.swift"
+      ]
     }
   ]
 }

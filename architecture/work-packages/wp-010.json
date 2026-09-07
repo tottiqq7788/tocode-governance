@@ -1,0 +1,48 @@
+{
+  "id": "wp-010",
+  "title": "Tocode 统一命令层：独立 CLI 与微信 . 前缀命令",
+  "baseline_commit": "cb1e0fcb30a9e695555e6372b690c33378783861",
+  "goal": "新增共享的白名单命令层 TocodeCommandParser 与 TocodeCommandExecutor；新增独立可执行文件 build/tocode，通过本机 Unix domain socket（0600）转发命令给常驻进程；微信监听中把首项文本且 trim 后以 . 开头的消息判定为命令，复用同一执行器且不归档、不回微信，仅本地通知，失败也静默消费并推进游标。",
+  "scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodeRootChooser.swift",
+    "app/Sources/TocodeIPCProtocol.swift",
+    "app/Sources/TocodeSocketTransport.swift",
+    "app/Sources/TocodeIPCServer.swift",
+    "app/Sources/TocodeCLIRunner.swift",
+    "app/Sources/TocodeCLI.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TocodeCommandTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-010.json",
+    "governance/architecture/task-envelopes/impl-010.json",
+    "governance/architecture/evidence/ev-*-010.json"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope 或触及未声明的 L0 语义时立即停止并回架构准入。",
+    "命令执行器出现动态代码、shell 执行或非白名单路径时停止。",
+    "IPC 暴露网络端口、跨机能力或 socket 权限无法保证 0600 时停止。",
+    "微信命令消息落入归档、保存附件、回复微信或重复执行时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理结构审计通过，app 与 CLI 分两次 swiftc 构建、ad-hoc 签名与 codesign 验证通过。",
+    "contract：IPC JSON 结构、CLI 退出码、socket 权限、命令不归档与消费语义与合同一致。",
+    "unit：命令解析、微信 . 前缀判定、执行器逐命令映射、IPC 编解码、CLI runner 退出码全部通过。",
+    "integration：CLI（内存 transport）→ executor 全链路与微信命令消费（不归档、推进游标、失败通知）通过。",
+    "fault_injection：Tocode 未运行、未知命令与执行器失败、命令重复到达不重复执行均有覆盖。",
+    "runtime_e2e：真实 socket 权限 0600、CLI status/root/blackout/quit 实机验证；无资格场景如实登记。"
+  ],
+  "status": "approved",
+  "implementation_commit": "cb1e0fcb30a9e695555e6372b690c33378783861",
+  "approval": {
+    "source": "user-approved-plan:2026-09-08",
+    "scope": "The user explicitly requested execution of the complete CLI + WeChat .-prefix command plan with a shared whitelist executor; this approves the declared L0 additions before application source changes."
+  }
+}
