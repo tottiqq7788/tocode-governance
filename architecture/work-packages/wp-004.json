@@ -1,0 +1,24 @@
+{
+  "id": "wp-004",
+  "title": "双击 ⌘Q 首按静默、2 秒内第二次放行、超时未按才补通知",
+  "baseline_commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "goal": "修复双击 ⌘Q 在普通应用（如 Safari/终端）下按住 ⌘ 连续按两次 Q 只弹通知、不触发退出的时序问题：将原「第一次按下立即通知」改为「第一次按下静默待命，2 秒内同一目标第二次按下才放行原生退出（Finder 场景走关窗隐藏），2 秒内没有第二次才补发一次通知」；通知在 service 层延迟发送，并以触发时的 arm 与当前 engine.quitArm 比对来撤销过期通知。",
+  "scope": [
+    "app/Sources/GlobalShortcutService.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/",
+    "governance/architecture/task-envelopes/",
+    "governance/architecture/evidence/"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope 时立即停止并回架构准入。",
+    "延迟/取消语义改动影响 ⌘⇧Q、⌥⌘Q、合成事件或未知目标（commandQTarget 为 nil）的放行语义，或改变 Finder force-close 关窗隐藏行为时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：bash scripts/build.sh（或等价 swiftc 编译）通过。",
+    "unit：bash scripts/test.sh 全量断言通过（断言总数以实际 PASS: 行为准，重计后如实登记）。",
+    "runtime_e2e：⌘Q 双击交互需人工运行验证（按住 ⌘ 连续两次 Q 应强退普通应用；只按一次 2 秒后仅补一条通知），登记前执行；如未执行则登记为 skipped。"
+  ],
+  "status": "approved"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-004",
+  "work_package_id": "wp-004",
+  "commit": "7c1a640017636edb8c794a8e2879580230c87c7d",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "手动运行 app 交互验证（按住 ⌘ 连续两次 Q 应强退普通应用；只按一次 2 秒后仅补发一条通知）",
+  "result_summary": "本次改动已在 7c1a640 上编译并跑通全量单元断言，但双击 ⌘Q 的实机交互依赖辅助功能授权与前台应用状态，未在本次会话中人工执行 E2E，登记为 skipped 待独立评审补跑。",
+  "limitations": [
+    "未在 7c1a640 上重新执行完整人工 E2E。",
+    "CGEventTap 拦截与系统通知展示需要辅助功能/通知授权，且受前台应用影响，只能手动验证。"
+  ]
+}

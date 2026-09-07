@@ -1,0 +1,42 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-004",
+  "role": "implementation_owner",
+  "baseline_commit": "28db8e18c39c8b7125ad29e9be78ca283ef39753",
+  "work_package_id": "wp-004",
+  "allowed_scope": [
+    "app/Sources/GlobalShortcutService.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-004.json",
+    "governance/architecture/task-envelopes/impl-004.json",
+    "governance/architecture/evidence/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-shortcuts"
+  ],
+  "must_preserve": [
+    "双击 ⌘Q 状态机仍由 GlobalShortcutEngine 驱动：第一次 keyDown 返回 .suppress（吞掉原生退出），2 秒内同 PID 第二次 keyDown 返回 .pass（普通应用放行）或 Finder 场景 .suppress + .dismissFinderWindows（关窗隐藏不退出）。",
+    "⌘⇧Q、⌥⌘Q、合成事件、commandQTarget 为 nil 时一律 .pass 放行的语义不变。",
+    "quitWindow 仍为 2 秒；auto-repeat 只 suppress 不改 arm。",
+    "通知仅在 2 秒窗口内没有第二次按下时才补发一次；已确认放行或已切换 PID/重新 arm 后，旧的通知回调必须被撤销（不发）。",
+    "通知发送仍在 scheduler 主线程（MainQueueShortcutScheduler）执行，测试用 ManualScheduler 语义（async/asyncAfter 同一 FIFO）保持不变。"
+  ],
+  "must_reject": [
+    "修改 GlobalShortcutEngine 状态机的 .notifyQuitArmed 返回语义或在 engine 内引入 I/O/延迟。",
+    "改变 ⌘Q 强关访达（Finder force-close + double-⌘Q 同时开启）在 Finder 下的关窗隐藏行为为强制退出。",
+    "新增 ShortcutEffect case 或改动通知 API 签名造成测试大面积失配。",
+    "让第一次按下立即通知（原 bug 行为回归）。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际改动超出声明 scope（如需要新增 Swift 源文件、改 GlobalShortcutState.swift 状态机或通知 API）时立即停止并回架构准入。",
+    "测试全量无法通过或语义变化无法用 unit 断言覆盖时停止并回架构准入。"
+  ],
+  "notes": "bug 根因：原实现第一次 ⌘Q keyDown 即立即补发通知，用户看到通知再按第二次往往超过 2 秒窗口，第二次被识别为新的第一次继续吞掉+通知，形成只弹通知不退出。修复方案全部落在 service 层：scheduler.asyncAfter(quitWindow) 延迟补发，回调内用触发时捕获的 arm 与当前 engine.quitArm 比对，不一致则撤销；engine 状态机与 ShortcutEffect 语义均不改。"
+}

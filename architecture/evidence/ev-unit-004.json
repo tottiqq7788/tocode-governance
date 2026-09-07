@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-004",
+  "work_package_id": "wp-004",
+  "commit": "7c1a640017636edb8c794a8e2879580230c87c7d",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh (Tests/TestRunner.swift)",
+  "result_summary": "18 个测试函数、267 个断言全部通过（基线 257 基础上新增 10 条）。新增覆盖：服务层第一次 ⌘Q 按下后不立即通知（静默待命）、同 PID 2 秒窗口内第二次放行后撤销补发通知、只按一次超时未二次按下才补发一次正确文案（Safari 退出 / Finder 关窗隐藏）、确认放行后开关仍生效；既有纯状态机用例（.notifyQuitArmed 返回语义、Finder 双开第二次关窗隐藏不放行原生 ⌘Q、⌘⇧Q/⌥⌘Q/合成/目标不明放行）全部保持通过。",
+  "limitations": [
+    "仅为无 GUI 的可自动化逻辑测试；真实 CGEventTap 拦截、系统通知展示与 ⌘Q 双击交互需 runtime_e2e 手动验证。",
+    "assertions 以 expect() 记录 PASS/FAIL，无独立断言计数框架；数量为 expect() 调用总数（PASS: 行数）。"
+  ]
+}
