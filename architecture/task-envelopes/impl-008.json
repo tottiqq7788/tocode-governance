@@ -1,0 +1,54 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-008",
+  "role": "implementation_owner",
+  "baseline_commit": "b3246fbb3c8cec7e6a9085620f28bfd38345b19e",
+  "work_package_id": "wp-008",
+  "allowed_scope": [
+    "app/Sources/CodexModelSwitchService.swift",
+    "app/Sources/CodexApplicationRestarter.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/codex-model-switch-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-008.json",
+    "governance/architecture/task-envelopes/impl-008.json",
+    "governance/architecture/evidence/ev-*-008.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-codex-model-switch",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "现有 Codex 项目名称、根目录展示和同步项目夹开关行为保持不变。",
+    "StatusItemController.swift 中用户尚未提交的「目录」父菜单分组改动必须保留。",
+    "微信关联、目录树、Finder 联动、快捷键、滚轮和开机自启行为保持不变。",
+    "Provider 与实时配置中除唯一顶层 model 值外的全部内容保持不变。",
+    "任何配置失败、复核失败或回滚失败都不得终止 Codex。"
+  ],
+  "must_reject": [
+    "向非 HTTPS ai-router.anker-in.com 地址发送 Anker 凭据。",
+    "只更新一份配置、写入显示名、追加重复 model 或修改非 model 配置。",
+    "允许图片、视觉、标签或明确不兼容 /responses 的模型被选择。",
+    "调用正常退出、模拟 Command-Q、等待 Codex 响应退出或设置退出超时。",
+    "在双配置成功复核前发送任何终止信号。"
+  ],
+  "required_evidence": [
+    "static",
+    "contract",
+    "unit",
+    "integration",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-008 scope 或 l0-codex-model-switch/l0-action-menu 时立即停止并重新准入。",
+    "无法用可注入文件、SQLite、网络、时钟、进程和启动边界自动覆盖关键失败分支时停止并调整架构合同。",
+    "发现 CC Switch schema 与准入时 providers.settings_config 结构不一致，或不存在唯一当前 Anker Codex Provider 时停止生产写入验证。"
+  ],
+  "notes": "模型目录必须每次展开实时获取；配置成功后固定两秒直接 SIGKILL，不请求正常退出。运行态 E2E 会终止当前 Codex，因此必须在静态、单元、集成和故障证据完成后最后执行。"
+}

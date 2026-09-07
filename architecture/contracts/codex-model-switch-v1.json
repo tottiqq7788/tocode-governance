@@ -1,0 +1,38 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "codex-model-switch-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-codex-model-switch",
+    "l0-action-menu"
+  ],
+  "authority": {
+    "provider_database": "~/.cc-switch/cc-switch.db",
+    "provider_selector": "providers.app_type == \"codex\" AND is_current == 1",
+    "provider_template": "settings_config.config",
+    "provider_api_key": "settings_config.auth.OPENAI_API_KEY",
+    "live_config": "~/.codex/config.toml",
+    "model_catalog": "GET https://ai-router.anker-in.com/v1/models",
+    "codex_bundle_id": "com.openai.codex",
+    "codex_application": "/Applications/ChatGPT.app"
+  },
+  "invariants": [
+    "The current Provider must be uniquely selected and identifiable as Anker AI Router before its credential is read or used.",
+    "The Anker credential is sent only to HTTPS host ai-router.anker-in.com and is never logged, notified, persisted outside CC Switch, or copied into test fixtures.",
+    "Every model submenu expansion performs a fresh catalog request; stale or bundled entries are not presented as a successful live response.",
+    "Only the unique uncommented top-level model assignment is changed in each TOML document; all other Provider JSON, TOML, credentials, endpoints, and Codex settings remain byte-for-byte equivalent.",
+    "The CC Switch Provider template and ~/.codex/config.toml must both contain the selected exact model id and pass post-write verification before any Codex process is terminated.",
+    "A successful configuration switch waits exactly two seconds, sends no graceful termination request, then sends SIGKILL to every running main application with bundle id com.openai.codex.",
+    "Relaunch occurs after all targeted old PIDs disappear; ESRCH is treated as already exited, while an immediate permission error stops relaunch and is reported.",
+    "Configuration or rollback failure never terminates Codex."
+  ],
+  "prohibited_results": [
+    "Sending the Anker credential to HTTP, localhost, a redirected foreign host, or any host other than ai-router.anker-in.com.",
+    "Updating only the CC Switch template or only the live Codex config.",
+    "Appending a second model key, editing a commented key, or accepting ambiguous/malformed TOML.",
+    "Writing a friendly display name instead of the exact model id returned by the catalog.",
+    "Allowing image, vision, tag, or explicitly /responses-incompatible models to be selected.",
+    "Calling terminate(), issuing Command-Q, waiting for Codex to acknowledge exit, or using a graceful-exit timeout branch.",
+    "Killing or relaunching Codex after any configuration validation, write, verification, or rollback failure."
+  ]
+}

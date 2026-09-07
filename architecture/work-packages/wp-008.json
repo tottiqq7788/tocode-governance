@@ -1,0 +1,38 @@
+{
+  "id": "wp-008",
+  "title": "Codex 实时模型切换与两秒后强制重启",
+  "baseline_commit": "b3246fbb3c8cec7e6a9085620f28bfd38345b19e",
+  "goal": "在右键 codex 子菜单中增加以当前模型友好名称为标题的模型菜单，每次展开实时读取 Anker 全量模型并分级呈现；选择后一致更新 CC Switch 当前 Provider 模板与 Codex 实时配置，成功后固定等待两秒直接 SIGKILL Codex 并重新启动。",
+  "scope": [
+    "app/Sources/CodexModelSwitchService.swift",
+    "app/Sources/CodexApplicationRestarter.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/codex-model-switch-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-008.json",
+    "governance/architecture/task-envelopes/impl-008.json",
+    "governance/architecture/evidence/ev-*-008.json"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope、触及 Anker Provider 中 model 以外的配置，或影响既有 Codex 项目同步语义时立即停止并重新准入。",
+    "无法保证凭据只发送到 HTTPS ai-router.anker-in.com、无法保证双配置一致提交与失败恢复，或配置失败仍可能终止 Codex 时停止。",
+    "实现需要向 Codex 发送正常退出请求、模拟按键、等待应用确认退出或引入退出超时分支时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计、Swift 构建、类型检查、签名验证和改动检查通过。",
+    "contract：自动验证固定 Anker HTTPS 主机、双配置一致写入、model-only 修改和 SIGKILL-only 生命周期合同。",
+    "unit：覆盖 TOML 解析、模型命名与分类、目录响应、两秒延迟和信号结果分类。",
+    "integration：临时 SQLite/配置文件完成成功切换、并发拒绝、原子回滚；mock 网络与进程边界完成全链路。",
+    "fault_injection：覆盖 401/500/超时/畸形目录、数据库锁、文件失败、复核失败、EPERM/ESRCH 和启动失败。",
+    "runtime_e2e：真实 Anker Provider 下验证实时菜单、双配置一致、两秒 SIGKILL、旧 PID 消失、新 Codex 启动并完成请求；若未执行必须明确登记。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-07",
+    "scope": "The user explicitly requested implementation of the complete Codex model-switch plan and revised restart behavior to a fixed two-second delay followed by direct SIGKILL."
+  }
+}

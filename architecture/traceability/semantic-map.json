@@ -112,6 +112,13 @@
       "status": "approved",
       "statement": "右键功能菜单新增「codex」子菜单，显示当前 Codex 选中的本地项目名称与根目录，其下方提供勾选开关「同步项目夹」（默认关闭）。开关开启时，左键目录树改用 Codex 当前选中本地项目的根目录并在每次弹出时实时跟随；「读取剪贴板」「更改目录」「重置初始目录」「访达目录初始化」置灰不可点击；关闭时恢复手动根目录与上述功能。Codex 状态不可读或无有效项目时，自动跟随回退到手动根目录，但开关与置灰状态仍以开关为准。",
       "source_refs": ["user-approved-plan:2026-09-07"]
+    },
+    {
+      "id": "l0-codex-model-switch",
+      "name": "Codex 模型切换与强制重启",
+      "status": "approved",
+      "statement": "右键「codex」子菜单增加以当前 Codex 用户级模型友好名称为标题的模型子菜单；每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
+      "source_refs": ["user-approved-plan:2026-09-07", "user-revision:2026-09-07"]
     }
   ],
   "l1_responsibilities": [
@@ -231,6 +238,15 @@
       "l0_refs": ["l0-codex-project-sync", "l0-action-menu"],
       "owners": ["architecture_owner"],
       "reviewers": ["implementation_owner", "independent_reviewer"]
+    },
+    {
+      "id": "l1-codex-model-switch",
+      "name": "Codex 模型切换与强制重启",
+      "status": "candidate",
+      "responsibility": "从 CC Switch 当前 Anker Codex Provider 安全读取凭据并实时获取模型目录，以事务和原子文件替换保持 Provider 模板与 Codex 用户配置的 model 一致；提交成功后延迟 2 秒直接强制终止 Codex 并重新启动，任何配置失败均不得终止 Codex。",
+      "l0_refs": ["l0-codex-model-switch", "l0-action-menu"],
+      "owners": ["architecture_owner"],
+      "reviewers": ["implementation_owner", "independent_reviewer"]
     }
   ],
   "l2_components": [
@@ -245,7 +261,7 @@
       "id": "l2-status-item-controller",
       "name": "菜单栏图标控制器",
       "status": "candidate",
-      "l1_refs": ["l1-status-bar", "l1-wechat-association", "l1-codex-project-sync"],
+      "l1_refs": ["l1-status-bar", "l1-wechat-association", "l1-codex-project-sync", "l1-codex-model-switch"],
       "selectors": ["StatusItemController.swift"]
     },
     {
@@ -345,6 +361,13 @@
       "status": "candidate",
       "l1_refs": ["l1-codex-project-sync"],
       "selectors": ["CodexProjectService.swift", "CodexSyncSettingsStore.swift"]
+    },
+    {
+      "id": "l2-codex-model-switch-service",
+      "name": "Codex 模型切换与强制重启服务",
+      "status": "candidate",
+      "l1_refs": ["l1-codex-model-switch"],
+      "selectors": ["CodexModelSwitchService.swift", "CodexApplicationRestarter.swift", "StatusItemController.swift"]
     }
   ]
 }
