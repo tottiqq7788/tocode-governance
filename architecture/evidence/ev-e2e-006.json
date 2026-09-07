@@ -4,12 +4,12 @@
   "work_package_id": "wp-006",
   "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
   "type": "runtime_e2e",
-  "status": "unavailable",
-  "command_or_source": "真实个人微信 iLink Bot 账号扫码与收件人工验证；本次环境未提供可由代理完成的微信扫码确认。尝试读取运行中 Tocode 的菜单栏辅助界面两次，UI 捕获服务均 timeoutReached。",
-  "result_summary": "未执行真实账号的扫码、重启恢复、文字/图片/文件/视频/语音收件、离线恢复和无自动回复人工验证。当前账号是否具备 iLink 内测资格无法确认，因此按工作包要求登记 unavailable；没有用 mock 结果替代真实微信验收。",
+  "status": "passed",
+  "command_or_source": "用户在真实 macOS 环境重新运行 app commit 2e98f9d 后进行人工测试；user-feedback:2026-09-07「已完成测试，效果不错」。",
+  "result_summary": "用户使用重新启动的最新版 Tocode 完成实机测试并确认整体效果良好，据此将真实运行态验收由 unavailable 更新为 passed。该结论来自用户本人操作和反馈，不以本地 mock 结果替代真实验收。",
   "limitations": [
-    "需要用户本人使用具备 iLink 资格的个人微信完成扫码确认并发送测试消息。",
-    "菜单栏应用无普通窗口，本次 UI 捕获服务无法读取其右键菜单；菜单结构由源码接线、编译和回归测试支撑，但未登记为人工 GUI E2E 通过。",
+    "用户反馈未逐项列出文字、图片、文件、视频、语音、重启恢复和离线恢复各子场景的独立结果，因此证据只陈述整体实机验收通过，不虚构更细粒度明细。",
+    "代理侧菜单栏 UI 捕获服务曾两次 timeoutReached；最终运行态结论以用户人工测试为权威。",
     "固定生产归档目录 /Users/admin/Documents/wechat 在自动测试后无测试残留。"
   ]
 }
