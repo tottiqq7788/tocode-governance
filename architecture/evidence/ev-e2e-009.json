@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-009",
+  "work_package_id": "wp-009",
+  "commit": "83678b1610a2840dafd48a60eb93e55b3de063d7",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Built Tocode.app was launched successfully, but the available desktop automation could not reliably inspect the LSUIElement status-bar menu or drive a real multi-display key/mouse dismissal without human input.",
+  "result_summary": "Runtime menu activation, per-screen black overlay with gray '点击恢复' text, and dismissal via arbitrary keyboard or mouse press remain unexecuted. No runtime success is claimed.",
+  "limitations": [
+    "The user must perform the final right-click menu acceptance on the actual machine with the relevant display configuration.",
+    "This skipped evidence cannot be substituted by the passed static or unit evidence."
+  ]
+}
