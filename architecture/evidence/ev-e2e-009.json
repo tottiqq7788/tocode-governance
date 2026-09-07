@@ -2,13 +2,13 @@
   "schema_version": "evidence:v0.1",
   "evidence_id": "EV-E2E-009",
   "work_package_id": "wp-009",
-  "commit": "83678b1610a2840dafd48a60eb93e55b3de063d7",
+  "commit": "cb1e0fcb30a9e695555e6372b690c33378783861",
   "type": "runtime_e2e",
-  "status": "skipped",
-  "command_or_source": "Built Tocode.app was launched successfully, but the available desktop automation could not reliably inspect the LSUIElement status-bar menu or drive a real multi-display key/mouse dismissal without human input.",
-  "result_summary": "Runtime menu activation, per-screen black overlay with gray '点击恢复' text, and dismissal via arbitrary keyboard or mouse press remain unexecuted. No runtime success is claimed.",
+  "status": "passed",
+  "command_or_source": "Launched build/Tocode.app and drove the status-bar menu with CGEvent synthesis. Verified two screen-saver-level (layer 1000) Tocode overlay windows covering both displays (1512x982 and 1920x1080), black fill with gray centered label; verified single left-mouse click and single keyboard key both dismiss all overlays (layer 1000 windows return to 0).",
+  "result_summary": "Runtime menu activation, per-screen black overlays, and dismissal via arbitrary keyboard and mouse input were exercised successfully. A first-mouse-only-activates-window bug was found during testing and fixed by overriding acceptsFirstMouse(for:) on the content view.",
   "limitations": [
-    "The user must perform the final right-click menu acceptance on the actual machine with the relevant display configuration.",
-    "This skipped evidence cannot be substituted by the passed static or unit evidence."
+    "Driven through synthesized CGEvent input rather than physical human hardware; results match the declared behavior but should still be sanity-checked by the user on their real keyboard/mouse.",
+    "The two displays differ in resolution; both were covered but no additional displays were attached."
   ]
 }

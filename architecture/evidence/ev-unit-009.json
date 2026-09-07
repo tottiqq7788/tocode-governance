@@ -2,10 +2,10 @@
   "schema_version": "evidence:v0.1",
   "evidence_id": "EV-UNIT-009",
   "work_package_id": "wp-009",
-  "commit": "83678b1610a2840dafd48a60eb93e55b3de063d7",
+  "commit": "cb1e0fcb30a9e695555e6372b690c33378783861",
   "type": "unit",
   "status": "passed",
-  "command_or_source": "App commit 83678b1: bash scripts/test.sh (Tests/TestRunner.swift).",
+  "command_or_source": "App commits 83678b1..cb1e0fc: bash scripts/test.sh (Tests/TestRunner.swift).",
   "result_summary": "442 PASS and 0 FAIL. New coverage verifies initial not-presented state, activate() calling show once, repeated activate() being a no-op, dismiss() clearing state, and reactivation after dismiss.",
   "limitations": [
     "Overlay behavior is exercised through an injected mock; real NSWindow creation and key/mouse event dismissal are not covered by the unit test.",

@@ -2,11 +2,11 @@
   "schema_version": "evidence:v0.1",
   "evidence_id": "EV-STATIC-009",
   "work_package_id": "wp-009",
-  "commit": "83678b1610a2840dafd48a60eb93e55b3de063d7",
+  "commit": "cb1e0fcb30a9e695555e6372b690c33378783861",
   "type": "static",
   "status": "passed",
-  "command_or_source": "App commit 83678b1: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app. Governance: python3 architecture/tools/audit_project.py --target . and git diff --check.",
-  "result_summary": "The immutable app commit compiles Sources/*.swift (including the new ScreenBlackoutService.swift), produces and ad-hoc-signs build/Tocode.app, passes codesign verification, and the governance structure/reference audit passes.",
+  "command_or_source": "App commits 83678b1..cb1e0fc: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app. Governance: python3 architecture/tools/audit_project.py --target . and git diff --check.",
+  "result_summary": "The immutable app source (including the new ScreenBlackoutService.swift with first-mouse fix) type-checks, builds and ad-hoc-signs build/Tocode.app, passes codesign verification, and the governance structure/reference audit passes.",
   "limitations": [
     "The build uses local Command Line Tools and the stable ad-hoc designated requirement rather than a Developer ID distribution signature.",
     "Static checks do not prove live multi-display overlay rendering or key/mouse dismissal."
