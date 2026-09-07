@@ -31,6 +31,7 @@
     "runtime_e2e：真实 Anker Provider 下验证实时菜单、双配置一致、两秒 SIGKILL、旧 PID 消失、新 Codex 启动并完成请求；若未执行必须明确登记。"
   ],
   "status": "approved",
+  "implementation_commit": "0790172b7a3fc19548cefc600c9672c1dd4e27cf",
   "approval": {
     "source": "user-approved-plan:2026-09-07",
     "scope": "The user explicitly requested implementation of the complete Codex model-switch plan and revised restart behavior to a fixed two-second delay followed by direct SIGKILL."

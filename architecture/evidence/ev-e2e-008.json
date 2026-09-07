@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-008",
+  "work_package_id": "wp-008",
+  "commit": "0790172b7a3fc19548cefc600c9672c1dd4e27cf",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Built Tocode.app was launched successfully. The available desktop automation could not inspect this LSUIElement status-bar menu, and no model item was selected because the approved behavior would SIGKILL the active Codex session completing this implementation.",
+  "result_summary": "Runtime menu rendering, a real dual-configuration write, two-second real SIGKILL, automatic Codex relaunch, and a post-relaunch model request remain unexecuted. No runtime success is claimed.",
+  "limitations": [
+    "The user must perform the final right-click menu and model-selection acceptance after installing/running this build.",
+    "This skipped evidence cannot be substituted by the passed static, unit, integration, or fault-injection evidence."
+  ]
+}

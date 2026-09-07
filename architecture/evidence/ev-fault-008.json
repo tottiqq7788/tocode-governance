@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-008",
+  "work_package_id": "wp-008",
+  "commit": "0790172b7a3fc19548cefc600c9672c1dd4e27cf",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh with injected URLProtocol responses, file writer failures, malformed TOML, signal errors, and absent-process states.",
+  "result_summary": "Covered HTTP 401/500, malformed and empty catalog payloads, duplicate catalog ids, ambiguous model assignments, live-file write failure with SQLite rollback, SIGKILL EPERM without relaunch, ESRCH as already exited, and Codex-not-running immediate launch. No failure path schedules process termination before dual-store success.",
+  "limitations": [
+    "A real SQLite lock race and real filesystem exhaustion were not induced; the same error paths are covered through SQLite return handling and an injected failing writer.",
+    "A real NSWorkspace launch failure was not induced on the user's installed Codex application."
+  ]
+}

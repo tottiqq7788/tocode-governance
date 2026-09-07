@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-008",
+  "work_package_id": "wp-008",
+  "commit": "0790172b7a3fc19548cefc600c9672c1dd4e27cf",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 0790172 detached clean worktree: swiftc -typecheck Sources/*.swift with all application frameworks and -lsqlite3; bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app. Governance: python3 architecture/tools/audit_project.py --target . and git diff --check.",
+  "result_summary": "The immutable app commit type-checks without warnings, builds and signs Tocode.app successfully, links SQLite3, and the governance structure/reference audit passes.",
+  "limitations": [
+    "The build uses the local Command Line Tools and stable ad-hoc designated requirement rather than a Developer ID distribution signature.",
+    "Static checks do not prove live menu interaction or process termination behavior."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-008",
+  "work_package_id": "wp-008",
+  "commit": "0790172b7a3fc19548cefc600c9672c1dd4e27cf",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Detached clean app commit: bash scripts/test.sh (Tests/TestRunner.swift).",
+  "result_summary": "432 PASS and 0 FAIL. New coverage includes unique top-level TOML model parsing/replacement, friendly names and source labels, verified/unverified/unsupported classification, catalog de-duplication, current state parsing, 0600 permission preservation, fixed two-second scheduling, all-PID signaling, no pre-delay signal, immediate launch when absent, EPERM failure, and ESRCH success.",
+  "limitations": [
+    "Process lifecycle tests use injected PID, signal, scheduler, process-checker, and launcher boundaries and do not kill a real Codex process.",
+    "NSMenu rendering is exercised through implementation review and runtime inspection rather than a dedicated AppKit menu snapshot test."
+  ]
+}

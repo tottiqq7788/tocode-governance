@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-INTEGRATION-008",
+  "work_package_id": "wp-008",
+  "commit": "0790172b7a3fc19548cefc600c9672c1dd4e27cf",
+  "type": "integration",
+  "status": "passed",
+  "command_or_source": "Tests/TestRunner.swift temporary SQLite providers database plus temporary Codex config; separate read-only production catalog probe using CodexModelSwitchService against the current CC Switch Anker Provider.",
+  "result_summary": "The temporary integration switches both stores to v_model/gpt-6-astra while preserving Provider auth/other JSON, non-model TOML, and 0600 permissions. The production read-only probe reached https://ai-router.anker-in.com/v1/models and returned 45 unique models including Sol and Astra without modifying either production configuration.",
+  "limitations": [
+    "The production probe read the live Provider credential only in memory and did not print it, modify configuration, or select a model.",
+    "The integration does not claim that every returned Anker model is compatible with Codex /responses."
+  ]
+}

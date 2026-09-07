@@ -40,8 +40,8 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）与「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，并提供「同步项目夹」开关）。",
-      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d", "user-approved-plan:2026-09-07"]
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）与「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，提供「同步项目夹」开关，并提供以当前 Codex 用户级模型友好名称为标题的实时 Anker 模型子菜单）。",
+      "source_refs": ["user-feedback:2026-09-03", "user-requirement:2026-09-04", "user-requirement:2026-09-07", "app-commit:2e98f9d", "user-approved-plan:2026-09-07", "user-revision:2026-09-07"]
     },
     {
       "id": "l0-wechat-archive",
@@ -118,7 +118,7 @@
       "name": "Codex 模型切换与强制重启",
       "status": "approved",
       "statement": "右键「codex」子菜单增加以当前 Codex 用户级模型友好名称为标题的模型子菜单；每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
-      "source_refs": ["user-approved-plan:2026-09-07", "user-revision:2026-09-07"]
+      "source_refs": ["user-approved-plan:2026-09-07", "user-revision:2026-09-07", "app-commit:0790172"]
     }
   ],
   "l1_responsibilities": [

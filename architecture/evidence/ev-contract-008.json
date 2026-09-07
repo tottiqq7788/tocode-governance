@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-CONTRACT-008",
+  "work_package_id": "wp-008",
+  "commit": "0790172b7a3fc19548cefc600c9672c1dd4e27cf",
+  "type": "contract",
+  "status": "passed",
+  "command_or_source": "architecture/contracts/codex-model-switch-v1.json plus automated assertions in Tests/TestRunner.swift for strict top-level model parsing, exact Anker HTTPS URL, Provider credential source, dual-store postconditions, unsupported-model classification, two-second delay, SIGKILL result handling, and no pre-delay signal.",
+  "result_summary": "The implementation and tests match the approved authority sources and invariants: exact model ids, fixed Anker endpoint, model-only changes, dual configuration verification, and SIGKILL-only restart sequencing.",
+  "limitations": [
+    "The contract test validates the observable interfaces and injected boundaries; actual status-bar interaction remains runtime evidence.",
+    "The test credential is synthetic and does not contain or persist the production API key."
+  ]
+}

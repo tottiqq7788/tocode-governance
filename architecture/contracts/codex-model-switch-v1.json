@@ -20,7 +20,7 @@
     "The current Provider must be uniquely selected and identifiable as Anker AI Router before its credential is read or used.",
     "The Anker credential is sent only to HTTPS host ai-router.anker-in.com and is never logged, notified, persisted outside CC Switch, or copied into test fixtures.",
     "Every model submenu expansion performs a fresh catalog request; stale or bundled entries are not presented as a successful live response.",
-    "Only the unique uncommented top-level model assignment is changed in each TOML document; all other Provider JSON, TOML, credentials, endpoints, and Codex settings remain byte-for-byte equivalent.",
+    "Only the unique uncommented top-level model assignment is changed in each TOML document; all other Provider JSON values, TOML values, credentials, endpoints, and Codex settings remain semantically unchanged.",
     "The CC Switch Provider template and ~/.codex/config.toml must both contain the selected exact model id and pass post-write verification before any Codex process is terminated.",
     "A successful configuration switch waits exactly two seconds, sends no graceful termination request, then sends SIGKILL to every running main application with bundle id com.openai.codex.",
     "Relaunch occurs after all targeted old PIDs disappear; ESRCH is treated as already exited, while an immediate permission error stops relaunch and is reported.",
