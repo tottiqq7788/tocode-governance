@@ -3,8 +3,8 @@
   "project_id": "tocode",
   "mode": "new",
   "baseline": {
-    "commit": "2e98f9d73b5ab913f0d5129e873e6ff2f894452d",
-    "status": "frozen"
+    "commit": "763fdaafb43976b33613989140a9acb0338cd681",
+    "status": "candidate"
   },
   "paths": {
     "semantic_map": "architecture/traceability/semantic-map.json",
