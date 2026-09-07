@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-010",
+  "work_package_id": "wp-010",
+  "commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 763fdaafb43976b33613989140a9acb0338cd681: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app. Governance: python3 architecture/tools/audit_project.py --target . and git diff --check.",
+  "result_summary": "App and CLI each compile with their own @main via two swiftc invocations, the app ad-hoc signs and passes codesign verification, and the governance structure/reference audit passes with the two new L0 rules wired to new L1/L2 entries.",
+  "limitations": [
+    "Build uses local Command Line Tools and the stable ad-hoc designated requirement rather than a Developer ID distribution signature.",
+    "Static checks do not prove live socket round-trip or real WeChat command routing."
+  ]
+}

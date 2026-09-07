@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-010",
+  "work_package_id": "wp-010",
+  "commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit 763fdaafb43976b33613989140a9acb0338cd681: bash scripts/test.sh (CLI not-running branch, unknown command consumption, dedupe-on-command behavior).",
+  "result_summary": "CLI reports a clear non-zero error when the app is not running; unknown WeChat commands are consumed exactly once with a local failure notification and do not block the listener; command messages are recorded in dedupe state before execution so failures do not retry.",
+  "limitations": [
+    "IPC mid-stream interruption and timeout are covered by the not-running/early-EOF path and code review rather than a live socket drop test.",
+    "Duplicate command delivery is asserted via dedupe key behavior, not a repeated live getupdates batch."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-INTEGRATION-010",
+  "work_package_id": "wp-010",
+  "commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "type": "integration",
+  "status": "passed",
+  "command_or_source": "App commit 763fdaafb43976b33613989140a9acb0338cd681: bash scripts/test.sh (testTocodeCommandExecutorMapping, testTocodeCLIRunnerAndIPC, testWeChatCommandConsumption).",
+  "result_summary": "Memory IPC transport drives the full CLI runner-to-executor chain; WeChat mock sends .lshp, .blackout, and plain messages and asserts command execution plus no wechat*.md writes for command messages, with cursor and dedupe advancing exactly once.",
+  "limitations": [
+    "WeChat command routing uses a mock transport and archiver rather than the real iLink client.",
+    "The CLI integration uses an injected in-memory transport instead of the real socket."
+  ]
+}

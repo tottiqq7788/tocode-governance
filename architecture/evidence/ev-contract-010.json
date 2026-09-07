@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-CONTRACT-010",
+  "work_package_id": "wp-010",
+  "commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "type": "contract",
+  "status": "passed",
+  "command_or_source": "App commit 763fdaafb43976b33613989140a9acb0338cd681: bash scripts/test.sh; runtime socket created at ~/Library/Application Support/com.tocode.app/tocode.sock with stat showing mode 0600.",
+  "result_summary": "IPC JSON structure matches cli-and-wechat-command-v1.json, CLI returns exit 0 for ok and non-zero for failure/not-running, the socket file reports 0600 permissions, and unit tests assert command messages are not archived while still advancing dedupe/cursor.",
+  "limitations": [
+    "Socket permission verification was observed on this machine only; cross-user access was not independently attacked.",
+    "WeChat receive-only is asserted through code review and mock assertions, not a live sendmessage probe."
+  ]
+}

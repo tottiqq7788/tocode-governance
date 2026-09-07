@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-010",
+  "work_package_id": "wp-010",
+  "commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "App commit 763fdaafb43976b33613989140a9acb0338cd681: launched build/Tocode.app, verified socket mode 0600, then ran build/tocode root get, status, wechat status, codex status, hidden toggle, wheel vertical toggle, shortcut finder-move toggle, blackout, and quit in a single session.",
+  "result_summary": "The resident app bound the Unix domain socket with 0600 permissions and the CLI completed real round-trips: root get returned /Users/admin/Documents, status aggregated live state, and quit returned before terminating. Exit codes were 0 on success and non-zero when the app was not running.",
+  "limitations": [
+    "Real WeChat command routing (.lshp over an authenticated bot) was not exercised because no iLink binding is available on this machine; that path is covered by mock integration tests.",
+    "root choose and blackout visual dismissal were not fully validated interactively in this run."
+  ]
+}

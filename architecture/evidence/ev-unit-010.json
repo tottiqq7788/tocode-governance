@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-010",
+  "work_package_id": "wp-010",
+  "commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 763fdaafb43976b33613989140a9acb0338cd681: bash scripts/test.sh (Tests/TestRunner.swift + Tests/TocodeCommandTestSupport.swift).",
+  "result_summary": "514 PASS and 0 FAIL. New coverage verifies command parsing (trim, case-insensitivity, dot-prefix alias .lshp, args, unknown command), WeChat first-item-type gate, executor whitelist mapping to injected mocks, IPC request/response framing, and CLI runner exit codes.",
+  "limitations": [
+    "Executor mapping is exercised with mock services; real GUI side effects (open panel, blackout window, login item) are covered at the boundary only.",
+    "The raw POSIX socket client path is validated by runtime E2E rather than the unit suite."
+  ]
+}
