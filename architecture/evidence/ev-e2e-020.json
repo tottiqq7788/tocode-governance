@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-020",
+  "work_package_id": "wp-020",
+  "commit": "999c712a590a0575865e43ba931577edd58e9de0",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 999c712a590a0575865e43ba931577edd58e9de0: manual GUI verification of submenu navigation in delete mode was not performed in this run.",
+  "result_summary": "Runtime visual check was not executed; build and unit evidence confirm code change, but submenu navigation in delete mode needs manual confirmation.",
+  "limitations": [
+    "Requires interactive GUI session."
+  ]
+}

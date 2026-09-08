@@ -1,0 +1,28 @@
+{
+  "id": "wp-020",
+  "title": "删除模式保留目录子菜单导航",
+  "baseline_commit": "dfb7de1b2b2b045e3bc6315801d2bd53df560c31",
+  "goal": "修复进入 Command 删除模式后无法悬停进入下层菜单的问题：删除模式下仍保留文件夹子菜单，仅切换条目 action 为删除；下层菜单展开填充时继承当前删除模式，底部「清空」与条目删除动作保持一致。",
+  "scope": [
+    "app/Sources/MenuBuilder.swift",
+    "governance/architecture/work-packages/wp-020.json",
+    "governance/architecture/task-envelopes/impl-020.json",
+    "governance/architecture/evidence/ev-*-020.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过。",
+    "runtime_e2e：真机删除模式下悬停进入下层菜单并保持删除模式验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "999c712a590a0575865e43ba931577edd58e9de0",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user reported losing submenu navigation in delete mode; this approves keeping folder submenus and inheriting the current mode when they are populated."
+  }
+}

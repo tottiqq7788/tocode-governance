@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-020",
+  "role": "implementation_owner",
+  "baseline_commit": "dfb7de1b2b2b045e3bc6315801d2bd53df560c31",
+  "work_package_id": "wp-020",
+  "allowed_scope": [
+    "app/Sources/MenuBuilder.swift",
+    "governance/architecture/work-packages/wp-020.json",
+    "governance/architecture/task-envelopes/impl-020.json",
+    "governance/architecture/evidence/ev-*-020.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-delete-clear"
+  ],
+  "must_preserve": [
+    "悬停文件夹仍可进入下层目录菜单。",
+    "删除模式下条目 action 为删除，底部动作为清空。",
+    "普通模式下条目 action 为复制路径，底部动作为新增。",
+    "删除/清空确认与移入废纸篓语义不变。"
+  ],
+  "must_reject": [
+    "删除模式下移除文件夹子菜单导致无法进入下层菜单。",
+    "使用永久删除替代废纸篓、绕过确认或扩大删除范围。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开或复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空引入不可恢复行为、绕过确认或写入其他目录时停止。"
+  ],
+  "notes": "这是对 wp-019 的导航修复：删除模式下保留子菜单，展开时继承当前删除模式。"
+}
