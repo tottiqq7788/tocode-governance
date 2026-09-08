@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-024",
+  "work_package_id": "wp-024",
+  "commit": "cf55c0f0ab12f674e620ece7d237c314166a6883",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit cf55c0f0ab12f674e620ece7d237c314166a6883: manual GUI verification of WeChat code-block rendering was not performed in this run.",
+  "result_summary": "Runtime visual check was not executed; build and unit evidence confirm code change, but actual WeChat code-block rendering needs manual confirmation.",
+  "limitations": [
+    "Requires interactive WeChat usage."
+  ]
+}

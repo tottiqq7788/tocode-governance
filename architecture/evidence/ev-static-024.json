@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-024",
+  "work_package_id": "wp-024",
+  "commit": "cf55c0f0ab12f674e620ece7d237c314166a6883",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit cf55c0f0ab12f674e620ece7d237c314166a6883: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance.",
+  "result_summary": "App and CLI build with two swiftc invocations; app passes codesign verification after wrapping WeChat replies in code fences; governance structure/reference audit passes.",
+  "limitations": [
+    "Build uses local Command Line Tools and ad-hoc designated requirement."
+  ]
+}

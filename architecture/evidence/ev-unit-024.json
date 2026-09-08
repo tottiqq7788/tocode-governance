@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-024",
+  "work_package_id": "wp-024",
+  "commit": "cf55c0f0ab12f674e620ece7d237c314166a6883",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit cf55c0f0ab12f674e620ece7d237c314166a6883: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing WeChat command consumption and sendmessage contract tests continue to pass after reply formatting change.",
+  "limitations": [
+    "Markdown rendering in the WeChat client is not covered by automated unit tests."
+  ]
+}

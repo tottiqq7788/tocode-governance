@@ -1,0 +1,28 @@
+{
+  "id": "wp-024",
+  "title": "微信命令回复使用 Markdown 代码框",
+  "baseline_commit": "86acd4847379666c13ce388b8afff252542214e8",
+  "goal": "微信 . 命令执行结果的回复文本统一用 Markdown 代码框包裹；命令本身回复仍不回正式归档、不保存附件。",
+  "scope": [
+    "app/Sources/WeChatAssociationService.swift",
+    "governance/architecture/work-packages/wp-024.json",
+    "governance/architecture/task-envelopes/impl-024.json",
+    "governance/architecture/evidence/ev-*-024.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改微信消息 receive-only、命令判定、归档或发送语义时立即停止并重新准入。",
+    "改变 sendmessage 协议或凭据处理时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过。",
+    "runtime_e2e：真机微信 . 命令回复以代码框呈现验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "cf55c0f0ab12f674e620ece7d237c314166a6883",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user asked that every WeChat command reply be wrapped in a Markdown code block; this approves formatting-only changes to reply text."
+  }
+}

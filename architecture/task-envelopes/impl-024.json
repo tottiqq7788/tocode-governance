@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-024",
+  "role": "implementation_owner",
+  "baseline_commit": "86acd4847379666c13ce388b8afff252542214e8",
+  "work_package_id": "wp-024",
+  "allowed_scope": [
+    "app/Sources/WeChatAssociationService.swift",
+    "governance/architecture/work-packages/wp-024.json",
+    "governance/architecture/task-envelopes/impl-024.json",
+    "governance/architecture/evidence/ev-*-024.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-wechat-command"
+  ],
+  "must_preserve": [
+    "仅 . 前缀命令消息回复执行结果，普通消息仍 receive-only。",
+    "命令回复仍通过 sendmessage 发送且不入正式归档、不保存附件。",
+    "成功用 ✅、失败用 ❌ 的前缀语义不变。",
+    "sendmessage 协议与凭据处理不变。"
+  ],
+  "must_reject": [
+    "把回复发送范围扩大到普通微信消息。",
+    "改变 sendmessage 协议、凭据或归档语义。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改微信消息 receive-only、命令判定、归档或发送语义时立即停止并重新准入。",
+    "改变 sendmessage 协议或凭据处理时停止。"
+  ],
+  "notes": "仅对回复文本做 Markdown 代码框格式化。"
+}
