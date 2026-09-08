@@ -1,0 +1,29 @@
+{
+  "id": "wp-013",
+  "title": "修复微信命令回复误报发送失败",
+  "baseline_commit": "6b31226c8e1e1bbfa5c258dd2735a2b6593ea8ce",
+  "goal": "微信 . 命令已实际送达，但 macOS 仍弹「命令结果发送微信失败」。根因是 sendmessage 接口返回 200 且业务码非零（如 ret=-3）时，原实现只解码 ret 不做校验，导致真实失败未上报；同时对成功响应的处理不健壮。修复为解码 ret 并校验 ret==0，非零按 apiFailure 抛出；同时兼容 ret 曾以字符串返回的情况。",
+  "scope": [
+    "app/Sources/WeChatILinkClient.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/work-packages/wp-013.json",
+    "governance/architecture/task-envelopes/impl-013.json",
+    "governance/architecture/evidence/ev-*-013.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为普通微信消息收发语义、命令回复语义或归档语义时立即停止并重新准入。",
+    "sendmessage 校验引入非白名单执行、动态请求或跨机能力时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：bash scripts/build.sh 与 codesign 验证通过。",
+    "unit：bash scripts/test.sh 全量通过，新增 sendmessage 请求契约与非零 ret 失败分类断言。",
+    "runtime_e2e：重建并重启 app，绑定状态正常，CLI 命令返回正常；真实微信命令回复需要微信账号交互。"
+  ],
+  "status": "approved",
+  "implementation_commit": "137fa51638614cefc43ded582a434b68cfcd26fa",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user reported a false WeChat send-failure notification after a successful command reply; this approves the bounded sendmessage ret validation fix."
+  }
+}

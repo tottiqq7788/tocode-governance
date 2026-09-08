@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-013",
+  "work_package_id": "wp-013",
+  "commit": "137fa51638614cefc43ded582a434b68cfcd26fa",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 137fa51638614cefc43ded582a434b68cfcd26fa: bash scripts/test.sh (testWeChatProtocolContract).",
+  "result_summary": "ALL TESTS PASSED. New assertions verify sendmessage POST contract (message_type=2, message_state=2, Bearer, text) and that a non-zero ret (-3) throws apiFailure instead of being treated as success.",
+  "limitations": [
+    "The real iLink sendmessage response path is covered by contract parsing with URLProtocol rather than a live bot round-trip."
+  ]
+}

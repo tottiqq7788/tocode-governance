@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-013",
+  "work_package_id": "wp-013",
+  "commit": "137fa51638614cefc43ded582a434b68cfcd26fa",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "App commit 137fa51638614cefc43ded582a434b68cfcd26fa: rebuilt, relaunched build/Tocode.app, verified tocode wechat status returns bound and socket/CLI remain functional.",
+  "result_summary": "The resident app starts with the fixed sendmessage validation; binding status is reported correctly and CLI control remains available.",
+  "limitations": [
+    "Real WeChat command reply delivery requires interactive WeChat usage and was not completed in this run."
+  ]
+}
