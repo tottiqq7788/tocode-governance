@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-012",
+  "work_package_id": "wp-012",
+  "commit": "6b31226c8e1e1bbfa5c258dd2735a2b6593ea8ce",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 6b31226c8e1e1bbfa5c258dd2735a2b6593ea8ce: bash scripts/test.sh (testWeChatBindingStatusNormalization + existing suite).",
+  "result_summary": "ALL TESTS PASSED. New assertions cover wait, scanning, scanned, confirmed, success, and expired QR status normalization; success binds and scan states no longer show a failure page.",
+  "limitations": [
+    "The normalized binding loop is exercised with a mock transport rather than the live iLink QR status endpoint."
+  ]
+}

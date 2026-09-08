@@ -1,0 +1,29 @@
+{
+  "id": "wp-012",
+  "title": "修复微信扫码绑定状态归一化",
+  "baseline_commit": "0d643704b1f84d83dad145624be88e5bfe05a483",
+  "goal": "修复扫码后页面不自动关闭、无法继续的问题：iLink 扫码状态接口存在 wait/scan/success 等拼写变体，原实现只识别 waiting/scanned/confirmed/expired，扫码中状态被当作未知并立即终止绑定。改为把状态值归一化处理，未知值保守继续轮询，已确认状态识别为 confirmed。",
+  "scope": [
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/work-packages/wp-012.json",
+    "governance/architecture/task-envelopes/impl-012.json",
+    "governance/architecture/evidence/ev-*-012.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为普通微信消息收发语义或命令回复语义时立即停止并重新准入。",
+    "状态归一化导致未知状态不再保守等待、或已确认状态漏识别时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：bash scripts/build.sh 与 codesign 验证通过。",
+    "unit：bash scripts/test.sh 全量通过，新增 wait/scanning/scanned/confirmed/success/expired 状态归一化断言。",
+    "runtime_e2e：重建并重启 app，socket 权限 0600 与 CLI 命令返回正常；真实扫码因需要微信账号交互未完成。"
+  ],
+  "status": "approved",
+  "implementation_commit": "6b31226c8e1e1bbfa5c258dd2735a2b6593ea8ce",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user reported the binding page hangs after scanning; this approves the bounded fix to QR status normalization without changing WeChat message semantics."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-012",
+  "role": "implementation_owner",
+  "baseline_commit": "0d643704b1f84d83dad145624be88e5bfe05a483",
+  "work_package_id": "wp-012",
+  "allowed_scope": [
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/work-packages/wp-012.json",
+    "governance/architecture/task-envelopes/impl-012.json",
+    "governance/architecture/evidence/ev-*-012.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "no_l0_change",
+  "must_preserve": [
+    "微信绑定仍通过 iLink 扫码完成，凭据仍保存为本地 0600 JSON 文件。",
+    "普通微信消息 receive-only、命令回复例外、命令不归档的语义不变。",
+    "绑定成功、过期、失败与状态重置回滚逻辑不变。"
+  ],
+  "must_reject": [
+    "把未知状态当作失败并立即终止绑定。",
+    "改变普通消息收发、命令回复或归档写入语义。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动超出绑定状态归一化范围或触碰 L0 语义时停止并重新准入。"
+  ],
+  "notes": "本轮为 wp-011 后续缺陷修复，不新增或修改 L0。"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-012",
+  "work_package_id": "wp-012",
+  "commit": "6b31226c8e1e1bbfa5c258dd2735a2b6593ea8ce",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "App commit 6b31226c8e1e1bbfa5c258dd2735a2b6593ea8ce: rebuilt, relaunched build/Tocode.app, verified socket mode 600 and tocode wechat status returns unbound.",
+  "result_summary": "The resident app starts after the fix and CLI control remains functional; socket permissions stay 0600.",
+  "limitations": [
+    "Real QR scan completion requires an interactive WeChat account on this machine and was not completed in this run."
+  ]
+}
