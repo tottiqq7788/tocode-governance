@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-018",
+  "work_package_id": "wp-018",
+  "commit": "26ee0dbfbc467b45f24d9c28f87272a1824c7171",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 26ee0dbfbc467b45f24d9c28f87272a1824c7171: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance.",
+  "result_summary": "App and CLI build with two swiftc invocations; app passes codesign verification after adding eventTracking modifier polling; governance structure/reference audit passes.",
+  "limitations": [
+    "Build uses local Command Line Tools and ad-hoc designated requirement."
+  ]
+}

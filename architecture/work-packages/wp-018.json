@@ -1,0 +1,32 @@
+{
+  "id": "wp-018",
+  "title": "目录菜单 Command 删除模式改用跟踪期轮询",
+  "baseline_commit": "6d616eeaa87655298616bdf1a247a4ac24c0dddd",
+  "goal": "修复按住 Command 不切换的问题：在目录菜单弹出期间用 eventTracking 模式的定时器轮询 NSEvent.modifierFlags，实时把「新增」切换为「清空」、条目动作从复制路径切换为删除；松开 Command 后恢复。",
+  "scope": [
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-018.json",
+    "governance/architecture/task-envelopes/impl-018.json",
+    "governance/architecture/evidence/ev-*-018.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。",
+    "需要新增系统权限或调用外部 shell 时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过（既有 FileSystemService/命令相关测试）。",
+    "runtime_e2e：真机打开目录树后按住/松开 Command 实时切换「新增」/「清空」与条目动作验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "26ee0dbfbc467b45f24d9c28f87272a1824c7171",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user reported native alternate items still did not switch; this approves polling modifier flags during menu tracking."
+  }
+}

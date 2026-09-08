@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-018",
+  "work_package_id": "wp-018",
+  "commit": "26ee0dbfbc467b45f24d9c28f87272a1824c7171",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 26ee0dbfbc467b45f24d9c28f87272a1824c7171: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after modifier polling refactor.",
+  "limitations": [
+    "Modifier polling behavior during menu tracking is not covered by automated unit tests."
+  ]
+}
