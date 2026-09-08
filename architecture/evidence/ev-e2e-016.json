@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-016",
+  "work_package_id": "wp-016",
+  "commit": "5a79408eb4970636dd4422a94804facb23bebde8",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 5a79408eb4970636dd4422a94804facb23bebde8: manual GUI verification of live Command-mode switching was not performed in this run.",
+  "result_summary": "Runtime visual/interactive check was not executed; build and unit evidence confirm code wiring, but real Command press/release behavior inside the open menu needs manual confirmation.",
+  "limitations": [
+    "Requires interactive GUI session."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-016",
+  "work_package_id": "wp-016",
+  "commit": "5a79408eb4970636dd4422a94804facb23bebde8",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 5a79408eb4970636dd4422a94804facb23bebde8: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after live mode switching changes.",
+  "limitations": [
+    "Live NSEvent flagsChanged behavior is not covered by automated unit tests."
+  ]
+}

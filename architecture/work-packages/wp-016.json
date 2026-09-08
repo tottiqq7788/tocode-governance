@@ -1,0 +1,32 @@
+{
+  "id": "wp-016",
+  "title": "目录菜单 Command 删除模式实时切换",
+  "baseline_commit": "7f571c62179c6b12405ad868be55ae750d7d2cf1",
+  "goal": "修正左键目录树删除模式的触发方式：不再要求按住 Command 打开菜单（macOS 会拦截为拖动）。改为菜单已打开时监听 flagsChanged，按住 Command 实时把底部「新增」变为「清空」、条目点击由复制路径改为删除；松开 Command 立即恢复复制模式。",
+  "scope": [
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-016.json",
+    "governance/architecture/task-envelopes/impl-016.json",
+    "governance/architecture/evidence/ev-*-016.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。",
+    "需要新增系统权限或调用外部 shell 时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过（既有 FileSystemService/命令相关测试）。",
+    "runtime_e2e：真机打开目录树后按住/松开 Command 实时切换「新增」/「清空」与条目动作验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "5a79408eb4970636dd4422a94804facb23bebde8",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user reported that holding Command prevents the menu from opening; this approves switching delete mode live after the menu is already open."
+  }
+}
