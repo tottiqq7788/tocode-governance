@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-017",
+  "work_package_id": "wp-017",
+  "commit": "6d616eeaa87655298616bdf1a247a4ac24c0dddd",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 6d616eeaa87655298616bdf1a247a4ac24c0dddd: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after alternate-item refactor.",
+  "limitations": [
+    "Native alternate menu display behavior is not covered by automated unit tests."
+  ]
+}

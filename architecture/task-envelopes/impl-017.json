@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-017",
+  "role": "implementation_owner",
+  "baseline_commit": "5a79408eb4970636dd4422a94804facb23bebde8",
+  "work_package_id": "wp-017",
+  "allowed_scope": [
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-017.json",
+    "governance/architecture/task-envelopes/impl-017.json",
+    "governance/architecture/evidence/ev-*-017.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-delete-clear"
+  ],
+  "must_preserve": [
+    "左键目录树仍从根目录开始、悬停文件夹展开、点击复制路径的既有行为保持不变（未按 Command 时）。",
+    "每个目录菜单底部新增「新增」动作；按住 Command 通过原生 alternate 显示「清空」，松开后恢复。",
+    "删除/清空必须先弹确认窗口，确认后移入废纸篓，取消或失败不改变原内容。",
+    "新增文件重名时不覆盖并提示错误。"
+  ],
+  "must_reject": [
+    "使用永久删除替代废纸篓、绕过确认或扩大删除范围。",
+    "修改既有右键功能菜单、微信、Codex、快捷键、滚轮、黑屏等行为。",
+    "申请新系统权限或调用外部 shell。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开或复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空引入不可恢复行为、绕过确认或写入其他目录时停止。",
+    "需要新增系统权限或调用外部 shell 时停止。"
+  ],
+  "notes": "这是对 wp-016 触发方式的再次修正：从本地 flagsChanged 监听改为 NSMenuItem.isAlternate 原生机制。"
+}

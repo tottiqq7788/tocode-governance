@@ -1,0 +1,32 @@
+{
+  "id": "wp-017",
+  "title": "目录菜单 Command 删除模式改用原生 alternate",
+  "baseline_commit": "5a79408eb4970636dd4422a94804facb23bebde8",
+  "goal": "修复左键目录树按住 Command 不切换的问题：改用 NSMenuItem.isAlternate 的原生 alternate 菜单，菜单打开期间按住 Command 由系统自动显示「清空」替代「新增」、删除替代复制路径；松开 Command 自动恢复。",
+  "scope": [
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-017.json",
+    "governance/architecture/task-envelopes/impl-017.json",
+    "governance/architecture/evidence/ev-*-017.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。",
+    "需要新增系统权限或调用外部 shell 时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过（既有 FileSystemService/命令相关测试）。",
+    "runtime_e2e：真机打开目录树后按住/松开 Command 实时切换「新增」/「清空」与条目动作验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "6d616eeaa87655298616bdf1a247a4ac24c0dddd",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user reported the flagsChanged approach still did not switch; this approves using native NSMenuItem alternate items for Command-triggered delete/clear."
+  }
+}

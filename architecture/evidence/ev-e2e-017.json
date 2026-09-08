@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-017",
+  "work_package_id": "wp-017",
+  "commit": "6d616eeaa87655298616bdf1a247a4ac24c0dddd",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 6d616eeaa87655298616bdf1a247a4ac24c0dddd: manual GUI verification of native alternate menu Command switching was not performed in this run.",
+  "result_summary": "Runtime visual/interactive check was not executed; build and unit evidence confirm code wiring, but real Command press/release behavior inside the open menu needs manual confirmation.",
+  "limitations": [
+    "Requires interactive GUI session."
+  ]
+}
