@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-014",
+  "work_package_id": "wp-014",
+  "commit": "99765f9c5818f80cfd0703d8ceba7d9eef72afa6",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 99765f9c5818f80cfd0703d8ceba7d9eef72afa6: manual GUI verification of the mac -> 临时黑屏 menu item and key/click dismissal was not performed in this run.",
+  "result_summary": "Runtime visual check was not executed; build and unit evidence confirm the code no longer creates a hint label, but real display/key-dismiss behavior needs manual confirmation.",
+  "limitations": [
+    "Requires interactive GUI session and multi-monitor observation."
+  ]
+}

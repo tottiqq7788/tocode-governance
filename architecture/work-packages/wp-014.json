@@ -1,0 +1,31 @@
+{
+  "id": "wp-014",
+  "title": "临时黑屏去除屏幕中央提示文字",
+  "baseline_commit": "137fa51638614cefc43ded582a434b68cfcd26fa",
+  "goal": "mac 临时黑屏当前会在每个屏幕中央显示灰色「点击恢复」文字，容易被旁人看出并点击关闭。改为纯黑无边框覆盖窗口，不渲染任何提示文字，仅保留按任意键盘按键或鼠标按键解除的行为；黑屏已显示时再次激活仍为 no-op。",
+  "scope": [
+    "app/Sources/ScreenBlackoutService.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-014.json",
+    "governance/architecture/task-envelopes/impl-014.json",
+    "governance/architecture/evidence/ev-*-014.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改黑屏触发或解除的 L0 语义（按键/点击解除、每个显示器覆盖、no-op 重复激活）时立即停止并重新准入。",
+    "需要申请辅助功能、输入监控或其他新系统权限时停止。",
+    "依赖既有快捷键/滚轮钩子实现显示或解除时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建（bash scripts/build.sh）与治理结构审计通过。",
+    "unit：bash scripts/test.sh 全量通过。",
+    "runtime_e2e：从右键菜单激活，确认每个屏幕为纯黑、无中央文字，任意按键与鼠标点击均可解除；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "99765f9c5818f80cfd0703d8ceba7d9eef72afa6",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user asked to remove the center '点击恢复' text so the blackout convincingly resembles a powered-off display; this approves removing the on-screen hint without changing trigger/dismiss semantics."
+  }
+}

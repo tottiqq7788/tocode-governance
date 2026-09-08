@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-014",
+  "work_package_id": "wp-014",
+  "commit": "99765f9c5818f80cfd0703d8ceba7d9eef72afa6",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 99765f9c5818f80cfd0703d8ceba7d9eef72afa6: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing blackout lifecycle and command mapping tests continue to pass after removing the on-screen hint label.",
+  "limitations": [
+    "ScreenBlackoutService lifecycle is covered through a mock overlay; the real NSWindow rendering path is not exercised in unit tests."
+  ]
+}

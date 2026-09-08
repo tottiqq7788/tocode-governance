@@ -1,0 +1,42 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-014",
+  "role": "implementation_owner",
+  "baseline_commit": "137fa51638614cefc43ded582a434b68cfcd26fa",
+  "work_package_id": "wp-014",
+  "allowed_scope": [
+    "app/Sources/ScreenBlackoutService.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-014.json",
+    "governance/architecture/task-envelopes/impl-014.json",
+    "governance/architecture/evidence/ev-*-014.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-temporary-blackout"
+  ],
+  "must_preserve": [
+    "黑屏仍通过「mac → 临时黑屏」菜单或 blackout/.lshp 命令触发。",
+    "每个显示器仍显示浮于最上层的全屏黑色无边框覆盖窗口。",
+    "任意键盘按键或鼠标按键仍立即解除全部覆盖窗口。",
+    "黑屏已显示时再次激活仍是 no-op，不重复创建覆盖窗口。",
+    "不申请任何新系统权限，也不依赖既有快捷键/滚轮钩子。"
+  ],
+  "must_reject": [
+    "在黑屏覆盖窗口上渲染任何可见提示文字、图标或控件。",
+    "修改黑屏的触发入口、覆盖范围或解除方式。",
+    "引入新的持久化开关或改变应用退出时移除覆盖窗口的行为。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改黑屏触发或解除的 L0 语义时立即停止并重新准入。",
+    "实现需要新系统权限或依赖既有快捷键/滚轮钩子时停止。"
+  ],
+  "notes": "本轮仅移除屏幕中央「点击恢复」提示文字，使黑屏像关机屏；触发、覆盖范围与解除方式均保持不变。"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-014",
+  "work_package_id": "wp-014",
+  "commit": "99765f9c5818f80cfd0703d8ceba7d9eef72afa6",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 99765f9c5818f80cfd0703d8ceba7d9eef72afa6: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance.",
+  "result_summary": "App and CLI build with two swiftc invocations; app passes codesign verification after removing the blackout hint label; governance structure/reference audit passes.",
+  "limitations": [
+    "Build uses local Command Line Tools and ad-hoc designated requirement."
+  ]
+}
