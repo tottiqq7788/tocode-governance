@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-021",
+  "work_package_id": "wp-021",
+  "commit": "343d1ae5a30bb63de89784ef95fae61d581d02a4",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 343d1ae5a30bb63de89784ef95fae61d581d02a4: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after nested-menu inheritance fix.",
+  "limitations": [
+    "Menu population inheritance behavior is not covered by automated unit tests."
+  ]
+}

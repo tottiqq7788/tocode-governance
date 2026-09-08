@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-021",
+  "role": "implementation_owner",
+  "baseline_commit": "999c712a590a0575865e43ba931577edd58e9de0",
+  "work_package_id": "wp-021",
+  "allowed_scope": [
+    "app/Sources/MenuBuilder.swift",
+    "governance/architecture/work-packages/wp-021.json",
+    "governance/architecture/task-envelopes/impl-021.json",
+    "governance/architecture/evidence/ev-*-021.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-delete-clear"
+  ],
+  "must_preserve": [
+    "普通模式条目 action 为复制路径、底部动作为新增。",
+    "删除模式条目 action 为删除、底部动作为清空。",
+    "悬停文件夹仍可进入下层目录菜单。",
+    "删除/清空确认与移入废纸篓语义不变。"
+  ],
+  "must_reject": [
+    "下级菜单在删除模式中显示普通模式动作。",
+    "使用永久删除替代废纸篓、绕过确认或扩大删除范围。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开或复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空引入不可恢复行为、绕过确认或写入其他目录时停止。"
+  ],
+  "notes": "这是对 wp-020 的补充修复：填充菜单时按当前 deleteMode 创建底部动作。"
+}
