@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-019",
+  "work_package_id": "wp-019",
+  "commit": "dfb7de1b2b2b045e3bc6315801d2bd53df560c31",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit dfb7de1b2b2b045e3bc6315801d2bd53df560c31: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance.",
+  "result_summary": "App and CLI build with two swiftc invocations; app passes codesign verification after removing per-entry icons in delete mode; governance structure/reference audit passes.",
+  "limitations": [
+    "Build uses local Command Line Tools and ad-hoc designated requirement."
+  ]
+}

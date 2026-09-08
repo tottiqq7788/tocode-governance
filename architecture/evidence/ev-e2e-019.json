@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-019",
+  "work_package_id": "wp-019",
+  "commit": "dfb7de1b2b2b045e3bc6315801d2bd53df560c31",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit dfb7de1b2b2b045e3bc6315801d2bd53df560c31: manual GUI verification of no-right-shift during Command toggle was not performed in this run.",
+  "result_summary": "Runtime visual check was not executed; build and unit evidence confirm code change, but the menu no longer adds per-entry icons in delete mode.",
+  "limitations": [
+    "Requires interactive GUI session."
+  ]
+}

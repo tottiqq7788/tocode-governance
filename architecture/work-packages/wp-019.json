@@ -1,0 +1,28 @@
+{
+  "id": "wp-019",
+  "title": "修复 Command 删除模式条目图标导致菜单右移",
+  "baseline_commit": "26ee0dbfbc467b45f24d9c28f87272a1824c7171",
+  "goal": "修复按住 Command 进入删除模式后，每个文件/文件夹行新增 trash 图标导致标题列整体右移、多次切换不断累积偏移的问题：删除模式下不再给条目设置图标，只切换 action；底部「新增/清空」仍保留图标。",
+  "scope": [
+    "app/Sources/MenuBuilder.swift",
+    "governance/architecture/work-packages/wp-019.json",
+    "governance/architecture/task-envelopes/impl-019.json",
+    "governance/architecture/evidence/ev-*-019.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过。",
+    "runtime_e2e：真机按住/松开 Command 验证条目不再右移、底部动作仍切换；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "dfb7de1b2b2b045e3bc6315801d2bd53df560c31",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user reported menu rows shifting right each time Command is pressed; this approves removing per-entry icons in delete mode."
+  }
+}

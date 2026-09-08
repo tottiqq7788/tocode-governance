@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-019",
+  "role": "implementation_owner",
+  "baseline_commit": "26ee0dbfbc467b45f24d9c28f87272a1824c7171",
+  "work_package_id": "wp-019",
+  "allowed_scope": [
+    "app/Sources/MenuBuilder.swift",
+    "governance/architecture/work-packages/wp-019.json",
+    "governance/architecture/task-envelopes/impl-019.json",
+    "governance/architecture/evidence/ev-*-019.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-delete-clear"
+  ],
+  "must_preserve": [
+    "按住 Command 时条目 action 仍由复制路径切换为删除。",
+    "底部动作仍由「新增」切换为「清空」并保留图标。",
+    "删除/清空确认与移入废纸篓语义不变。"
+  ],
+  "must_reject": [
+    "在删除模式给条目添加图标导致列偏移。",
+    "使用永久删除替代废纸篓、绕过确认或扩大删除范围。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开或复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空引入不可恢复行为、绕过确认或写入其他目录时停止。"
+  ],
+  "notes": "这是对 wp-018 的显示细节修复：删除模式条目不设置图标。"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-019",
+  "work_package_id": "wp-019",
+  "commit": "dfb7de1b2b2b045e3bc6315801d2bd53df560c31",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit dfb7de1b2b2b045e3bc6315801d2bd53df560c31: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after removing per-entry icons.",
+  "limitations": [
+    "Menu layout behavior is not covered by automated unit tests."
+  ]
+}
