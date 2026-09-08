@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-023",
+  "work_package_id": "wp-023",
+  "commit": "86acd4847379666c13ce388b8afff252542214e8",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 86acd4847379666c13ce388b8afff252542214e8: manual GUI verification of Finder opening the resolved root directory was not performed in this run.",
+  "result_summary": "Runtime visual check was not executed; build and unit evidence confirm code change, but Finder open behavior needs manual confirmation.",
+  "limitations": [
+    "Requires interactive GUI session."
+  ]
+}

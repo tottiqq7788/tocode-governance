@@ -1,0 +1,28 @@
+{
+  "id": "wp-023",
+  "title": "右键菜单增加访达访问",
+  "baseline_commit": "ec63637096ba0c0bac1fbbc18911c2b594f85282",
+  "goal": "在右键菜单「目录」之前增加「访达访问」项，点击后用当前左键目录解析逻辑得到根目录，并在访达中直接展示打开该目录。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "governance/architecture/work-packages/wp-023.json",
+    "governance/architecture/task-envelopes/impl-023.json",
+    "governance/architecture/evidence/ev-*-023.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树、复制路径、删除/清空或访达目录初始化语义时立即停止并重新准入。",
+    "改变微信、Codex、mac、设置子项行为时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过。",
+    "runtime_e2e：真机点击访达访问后访达展示打开对应目录验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "86acd4847379666c13ce388b8afff252542214e8",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user requested a finder-access item before the directory submenu; this approves opening the resolved root directory in Finder."
+  }
+}

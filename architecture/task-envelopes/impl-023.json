@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-023",
+  "role": "implementation_owner",
+  "baseline_commit": "ec63637096ba0c0bac1fbbc18911c2b594f85282",
+  "work_package_id": "wp-023",
+  "allowed_scope": [
+    "app/Sources/StatusItemController.swift",
+    "governance/architecture/work-packages/wp-023.json",
+    "governance/architecture/task-envelopes/impl-023.json",
+    "governance/architecture/evidence/ev-*-023.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "左键目录树根目录解析逻辑不变（同步开启时跟随 Codex 项目，否则手动根目录）。",
+    "既有目录、codex、微信关联、mac、设置、退出子项行为不变。",
+    "访达目录初始化仍条件显示且语义不变。"
+  ],
+  "must_reject": [
+    "把访达访问做成修改根目录或改写文件系统。",
+    "改变既有子项行为或扩大权限。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树、复制路径、删除/清空或访达目录初始化语义时立即停止并重新准入。",
+    "改变微信、Codex、mac、设置子项行为时停止。"
+  ],
+  "notes": "访达访问只是用 resolveDirectoryRoot 的结果在访达中展示目录，不改写任何状态。"
+}

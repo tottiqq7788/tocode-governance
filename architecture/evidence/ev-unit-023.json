@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-023",
+  "work_package_id": "wp-023",
+  "commit": "86acd4847379666c13ce388b8afff252542214e8",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 86acd4847379666c13ce388b8afff252542214e8: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after adding finder access.",
+  "limitations": [
+    "Finder interaction is not covered by automated unit tests."
+  ]
+}
