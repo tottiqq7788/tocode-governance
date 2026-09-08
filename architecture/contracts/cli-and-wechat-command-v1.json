@@ -12,23 +12,33 @@
     "request_format": "{\"id\":string,\"command\":string,\"args\":[string]}",
     "response_format": "{\"id\":string,\"ok\":bool,\"data\":string?,\"error\":string?}",
     "wechat_command_marker": "first item type 1 with trimmed text prefix '.'",
-    "wechat_command_alias": ".lshp -> blackout"
+    "wechat_command_alias": ".lshp -> blackout; .commands/.help -> help",
+    "cli_install_path": "~/.local/bin/tocode",
+    "wechat_credential_path": "~/Library/Application Support/com.tocode.app/wechat-credential.json",
+    "wechat_credential_permissions": "0600"
   },
   "invariants": [
     "The command executor is an explicit whitelist enumeration from command name to action; it never evaluates arbitrary shell, code, or dynamic dispatch.",
     "CLI and WeChat commands share the same TocodeCommandParser and TocodeCommandExecutor.",
+    "Every command returns a result: help/commands return the command table, and all other commands return success or error text; no command is silently consumed by the executor.",
     "The CLI connects only to the local Unix domain socket, sends one newline-terminated JSON request, reads one newline-terminated JSON response, and exits 0 on ok and non-zero on failure or when the app is not running.",
+    "help and commands are resolved locally by the CLI without requiring the resident process.",
+    "On first launch the app installs the CLI to ~/.local/bin/tocode and keeps it refreshed when the binary changes.",
     "The socket is bound under the user's Application Support directory and chmod'ed to 0600; no cross-machine or network port is opened.",
     "WeChat command detection requires the first item to be text (type 1) and its trimmed text to begin with '.'; the remainder of the items are treated as part of the command and are not archived.",
     "A WeChat command message advances the dedupe key and cursor before execution, is never archived, and is never retried regardless of success or failure.",
-    "WeChat remains receive-only: command results use local system notifications only and never call sendmessage, reply, or a model."
+    "A WeChat command reply is sent via the iLink sendmessage endpoint to the originating conversation, carries the execution result, and is itself not treated as an archived inbound message.",
+    "WeChat binding credentials are persisted as a 0600 JSON file under Application Support rather than the macOS Keychain, so ad-hoc-signed builds do not prompt for keychain access on every launch.",
+    "Ordinary (non-command) WeChat messages remain receive-only: they are archived and are never replied to or passed to a model."
   ],
   "prohibited_results": [
     "Executing arbitrary shell or code from a command argument.",
     "Opening a network port or granting cross-user/cross-machine IPC access.",
     "Archiving a '.'-prefixed command message to wechat*.md or saving its attachments.",
-    "Replying to a WeChat command message or treating it as a normal chat message.",
+    "Silently consuming a command result without returning it through CLI stdout or a WeChat reply.",
+    "Replying to ordinary WeChat messages or invoking a model for them.",
     "Repeating a command message after a failure; unknown, invalid, or failing commands are consumed exactly once.",
-    "Persisting the socket with permissions broader than 0600."
+    "Persisting the socket with permissions broader than 0600.",
+    "Persisting WeChat credentials with permissions broader than 0600."
   ]
 }

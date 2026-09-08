@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-011",
+  "work_package_id": "wp-011",
+  "commit": "0d643704b1f84d83dad145624be88e5bfe05a483",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "App commit 0d643704b1f84d83dad145624be88e5bfe05a483: launched build/Tocode.app, verified socket mode 600 and CLI auto-install to ~/.local/bin/tocode, then ran tocode help, commands, root get, status, wechat status, and a bogus command.",
+  "result_summary": "The resident app bound the Unix domain socket with 0600 permissions and installed/refreshed ~/.local/bin/tocode; help and commands returned the full command table locally, root get returned /Users/admin/Documents, status aggregated live state, and a bogus command returned non-zero with a clear error.",
+  "limitations": [
+    "Real WeChat sendmessage reply over an authenticated bot was not exercised because no iLink binding is available on this machine; that path is covered by mock integration tests.",
+    "The CLI PATH install was verified only for ~/.local/bin (already present in this user's .zshrc)."
+  ]
+}

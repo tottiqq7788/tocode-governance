@@ -69,11 +69,12 @@
       "id": "l0-wechat-archive",
       "name": "微信关联与本地归档",
       "status": "approved",
-      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入 macOS Keychain，绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息且不回复。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。",
+      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息例外回复执行结果。",
       "source_refs": [
         "user-requirement:2026-09-07",
         "user-approved-plan:2026-09-07",
-        "app-commit:2e98f9d"
+        "app-commit:2e98f9d",
+        "user-approved-plan:2026-09-08"
       ]
     },
     {
@@ -190,8 +191,9 @@
       "id": "l0-cli-control",
       "name": "独立 CLI 命令控制",
       "status": "approved",
-      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果。命令名到动作的映射是显式枚举，不执行任意 shell。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
+      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
       "source_refs": [
+        "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08"
       ]
     },
@@ -199,8 +201,9 @@
       "id": "l0-wechat-command",
       "name": "微信 . 前缀命令",
       "status": "approved",
-      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器；命令消息不写入 wechat*.md、不保存附件、不回微信，执行结果仅通过 macOS 系统通知反馈。命令消息执行前先写入去重 key 并推进游标，成功或失败都不重试。微信能力保持 receive-only。",
+      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器；命令消息不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试。命令执行结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。普通（非命令）微信消息保持 receive-only。",
       "source_refs": [
+        "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08"
       ]
     }
@@ -284,7 +287,7 @@
       "id": "l1-wechat-association",
       "name": "微信身份绑定与生命周期",
       "status": "candidate",
-      "responsibility": "获取并展示 iLink 扫码二维码、轮询确认状态、验证受信任 API 地址、原子更新 Keychain 凭据，并在应用启动、退出和重新绑定时协调监听生命周期。",
+      "responsibility": "获取并展示 iLink 扫码二维码、轮询确认状态、验证受信任 API 地址、原子更新本地 0600 文件凭据（不使用 Keychain），并在应用启动、退出和重新绑定时协调监听生命周期。",
       "l0_refs": [
         "l0-wechat-archive",
         "l0-action-menu"
@@ -301,7 +304,7 @@
       "id": "l1-wechat-ingestion",
       "name": "iLink 消息接收",
       "status": "candidate",
-      "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重，且不调用任何出站消息接口。",
+      "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重；普通消息不调用任何出站消息接口，仅 . 前缀命令消息例外调用 sendmessage 回复执行结果。",
       "l0_refs": [
         "l0-wechat-archive"
       ],
@@ -485,7 +488,7 @@
       "id": "l1-command-executor",
       "name": "白名单命令执行器",
       "status": "candidate",
-      "responsibility": "聚合现有服务，把命令枚举映射到根目录、Codex、微信、黑屏、开机自启、滚轮、隐藏文件、快捷键与退出等动作；只接受显式枚举，不执行动态代码或 shell。",
+      "responsibility": "聚合现有服务，把命令枚举映射到根目录、Codex、微信、黑屏、开机自启、滚轮、隐藏文件、快捷键与退出等动作；只接受显式枚举，不执行动态代码或 shell。每条命令都返回成功或错误结果（help/commands 返回命令表），不静默消费。",
       "l0_refs": [
         "l0-cli-control",
         "l0-wechat-command"
@@ -502,7 +505,7 @@
       "id": "l1-ipc-boundary",
       "name": "本机 IPC 边界",
       "status": "candidate",
-      "responsibility": "常驻进程用 Network.framework 监听 Unix domain socket，路径固定在 Application Support，权限 0600；处理单行 JSON 请求/响应。CLI 同步连接、发送、读取并映射退出码。",
+      "responsibility": "常驻进程用 Network.framework 监听 Unix domain socket，路径固定在 Application Support，权限 0600；处理单行 JSON 请求/响应。CLI 同步连接、发送、读取并映射退出码；应用初次启动后把 CLI 安装/刷新到 ~/.local/bin/tocode。",
       "l0_refs": [
         "l0-cli-control"
       ],
@@ -570,13 +573,14 @@
     },
     {
       "id": "l2-wechat-credential-store",
-      "name": "微信 Keychain 凭据存储",
+      "name": "微信文件凭据存储",
       "status": "candidate",
       "l1_refs": [
         "l1-wechat-association"
       ],
       "selectors": [
-        "WeChatCredentialStore.swift"
+        "WeChatCredentialStore.swift",
+        "WeChatFileCredentialStore.swift"
       ]
     },
     {

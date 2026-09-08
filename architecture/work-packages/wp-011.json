@@ -1,0 +1,47 @@
+{
+  "id": "wp-011",
+  "title": "命令结果返回、微信命令回复与文件凭据存储优化",
+  "baseline_commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "goal": "在 wp-010 命令层基础上修订已批准语义：新增 commands/help 查询全部命令；每条命令都必须返回结果而非静默执行；微信 . 前缀命令执行后通过 sendmessage 回复原会话且回复不入正式归档；微信绑定凭据从 macOS Keychain 改为 Application Support 下 0600 JSON 文件；应用初次启动后自动安装/刷新 CLI 到 ~/.local/bin/tocode。",
+  "scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodeCLIRunner.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Sources/WeChatILinkClient.swift",
+    "app/Sources/WeChatFileCredentialStore.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/FileSystemService.swift",
+    "app/Tests/WeChatTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-011.json",
+    "governance/architecture/task-envelopes/impl-011.json",
+    "governance/architecture/evidence/ev-*-011.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope 或把回复行为扩大到普通微信消息时立即停止并重新准入。",
+    "命令执行器出现动态代码、shell 执行或非白名单路径时停止。",
+    "微信命令消息落入归档、保存附件、重复执行或回复自身被再次消费时停止。",
+    "凭据文件权限无法保证 0600、CLI 安装位置无法保证仅本用户可写时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理结构审计通过，app/CLI 分两次 swiftc 构建、ad-hoc 签名与 codesign 验证通过。",
+    "contract：命令返回语义、微信命令回复不归档、文件凭据路径/权限与 CLI 安装路径与合同一致。",
+    "unit：help/commands 别名与本地命令表、逐命令返回、微信命令回复、文件凭据 store 编解码全部通过。",
+    "integration：CLI（内存 transport）→ executor 全链路返回结果，微信 mock 发 .lshp/.blackout 验证回复且不归档。",
+    "fault_injection：未连接 CLI、未知命令与执行器失败回复微信、命令重复到达不重复执行均有覆盖。",
+    "runtime_e2e：CLI 自动安装到 ~/.local/bin/tocode、socket 权限 0600、CLI 命令返回实机验证；真实微信 sendmessage 无资格场景登记 unavailable。"
+  ],
+  "status": "approved",
+  "implementation_commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "approval": {
+    "source": "user-approved-plan:2026-09-08",
+    "scope": "The user requested five optimizations to the command layer: a list-all-commands command, guaranteed command results, WeChat command replies that are not archived, file-based WeChat credentials, and automatic CLI PATH installation. This approves modifying l0-cli-control, l0-wechat-command, and l0-wechat-archive."
+  }
+}

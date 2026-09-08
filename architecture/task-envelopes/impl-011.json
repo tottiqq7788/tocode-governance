@@ -1,0 +1,63 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-011",
+  "role": "implementation_owner",
+  "baseline_commit": "763fdaafb43976b33613989140a9acb0338cd681",
+  "work_package_id": "wp-011",
+  "allowed_scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodeCLIRunner.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Sources/WeChatILinkClient.swift",
+    "app/Sources/WeChatFileCredentialStore.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/FileSystemService.swift",
+    "app/Tests/WeChatTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-011.json",
+    "governance/architecture/task-envelopes/impl-011.json",
+    "governance/architecture/evidence/ev-*-011.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-cli-control",
+    "l0-wechat-command",
+    "l0-wechat-archive"
+  ],
+  "must_preserve": [
+    "命令执行器保持白名单枚举，不执行任意 shell 或动态代码。",
+    "普通微信消息路径（messageType == 1 → 归档 → 提交游标）保持不变且仍 receive-only。",
+    "命令消息执行前仍先写去重 key 并推进游标，成功或失败都不重试，且不归档、不保存附件。",
+    "CLI 与微信命令共享同一 TocodeCommandParser 与 TocodeCommandExecutor。",
+    "IPC 仍为本机 Unix domain socket，权限 0600，不开放网络端口或跨机能力。"
+  ],
+  "must_reject": [
+    "把回复行为扩大到普通微信消息或调用模型生成回复。",
+    "把命令消息写入 wechat*.md 或保存其附件。",
+    "用 Keychain 继续存储微信凭据或在启动时触发钥匙串授权提示。",
+    "命令被静默消费而不通过 CLI 输出或微信回复返回结果。",
+    "CLI 自动安装写入系统目录或修改用户 dotfile。",
+    "对失败/未知命令重试或让其阻塞监听循环。"
+  ],
+  "required_evidence": [
+    "static",
+    "contract",
+    "unit",
+    "integration",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-011 scope 或把回复语义扩大到普通微信消息时立即停止并重新准入。",
+    "发现命令解析或执行链路无法保持白名单枚举时停止并调整架构合同。",
+    "凭据文件或 CLI 安装文件权限无法保证最小权限时停止。"
+  ],
+  "notes": "这是对 wp-010 已批准语义的修订（modify_existing）：命令返回与微信命令回复是本次 L0 语义变化；普通消息 receive-only 不变。真实微信 sendmessage E2E 若本机无绑定则登记 unavailable。"
+}

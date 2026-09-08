@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-CONTRACT-011",
+  "work_package_id": "wp-011",
+  "commit": "0d643704b1f84d83dad145624be88e5bfe05a483",
+  "type": "contract",
+  "status": "passed",
+  "command_or_source": "App commit 0d643704b1f84d83dad145624be88e5bfe05a483: bash scripts/test.sh; runtime socket at ~/Library/Application Support/com.tocode.app/tocode.sock verified with stat 600; ~/.local/bin/tocode installed with 0755.",
+  "result_summary": "Contracts now encode: every command returns a result; help/commands list all commands locally; WeChat command replies are sent once and are not archived; credentials persist as a 0600 JSON file; CLI installs to ~/.local/bin/tocode. Runtime checks confirm socket 0600 and CLI install path.",
+  "limitations": [
+    "Socket and file permission verification was observed on this machine only.",
+    "Real WeChat sendmessage reply is asserted via contract and mock tests, not a live bot round-trip."
+  ]
+}

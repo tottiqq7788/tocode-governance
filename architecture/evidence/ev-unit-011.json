@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-011",
+  "work_package_id": "wp-011",
+  "commit": "0d643704b1f84d83dad145624be88e5bfe05a483",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 0d643704b1f84d83dad145624be88e5bfe05a483: bash scripts/test.sh (Tests/TestRunner.swift + Tests/WeChatTestSupport.swift + Tests/TocodeCommandTestSupport.swift).",
+  "result_summary": "ALL TESTS PASSED. New assertions cover the commands alias mapping to help, local help output, executor result text for blackout/root get, WeChat command replies carrying success and error text, and the file credential store code path included in the test build.",
+  "limitations": [
+    "Executor side effects use injected mocks; real GUI side effects are covered at the boundary only.",
+    "The real Keychain-to-file migration of any pre-existing credential is not exercised because no prior credential exists on this machine."
+  ]
+}
