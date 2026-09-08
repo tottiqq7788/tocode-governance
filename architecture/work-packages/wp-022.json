@@ -1,0 +1,28 @@
+{
+  "id": "wp-022",
+  "title": "右键菜单目录收纳与顺序调整",
+  "baseline_commit": "343d1ae5a30bb63de89784ef95fae61d581d02a4",
+  "goal": "把右键菜单中的「访达目录初始化」从顶层收入「目录」子菜单，并将顶层顺序调整为：目录、codex、微信关联、mac、设置、退出。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "governance/architecture/work-packages/wp-022.json",
+    "governance/architecture/task-envelopes/impl-022.json",
+    "governance/architecture/evidence/ev-*-022.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径或删除/清空等 L0 语义时立即停止并重新准入。",
+    "改变微信、Codex、mac、设置各子项行为时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过。",
+    "runtime_e2e：真机右键菜单顺序与目录收纳验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "ec63637096ba0c0bac1fbbc18911c2b594f85282",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user requested moving finder init into the directory submenu and reordering the right-click menu; this approves the bounded menu-structure change."
+  }
+}

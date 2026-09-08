@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-022",
+  "work_package_id": "wp-022",
+  "commit": "ec63637096ba0c0bac1fbbc18911c2b594f85282",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit ec63637096ba0c0bac1fbbc18911c2b594f85282: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after menu reorder.",
+  "limitations": [
+    "Menu structure/order is not covered by automated unit tests."
+  ]
+}

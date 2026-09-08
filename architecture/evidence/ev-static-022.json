@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-022",
+  "work_package_id": "wp-022",
+  "commit": "ec63637096ba0c0bac1fbbc18911c2b594f85282",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit ec63637096ba0c0bac1fbbc18911c2b594f85282: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance.",
+  "result_summary": "App and CLI build with two swiftc invocations; app passes codesign verification after reordering the right-click menu; governance structure/reference audit passes.",
+  "limitations": [
+    "Build uses local Command Line Tools and ad-hoc designated requirement."
+  ]
+}

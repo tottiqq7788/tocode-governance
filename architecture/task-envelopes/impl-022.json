@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-022",
+  "role": "implementation_owner",
+  "baseline_commit": "343d1ae5a30bb63de89784ef95fae61d581d02a4",
+  "work_package_id": "wp-022",
+  "allowed_scope": [
+    "app/Sources/StatusItemController.swift",
+    "governance/architecture/work-packages/wp-022.json",
+    "governance/architecture/task-envelopes/impl-022.json",
+    "governance/architecture/evidence/ev-*-022.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "「访达目录初始化」仍条件显示，且选中时仍执行原有设根逻辑。",
+    "「目录」、codex、微信关联、mac、设置各自子项行为不变。",
+    "退出项仍在分隔线之后。",
+    "同步开启时「目录」父项仍置灰。"
+  ],
+  "must_reject": [
+    "改变访达目录初始化的触发条件或设根语义。",
+    "改变微信、Codex、mac、设置子项行为。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径或删除/清空等 L0 语义时立即停止并重新准入。",
+    "改变微信、Codex、mac、设置各子项行为时停止。"
+  ],
+  "notes": "仅调整右键功能菜单的结构与顺序，不改变各子项业务语义。"
+}
