@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-015",
+  "work_package_id": "wp-015",
+  "commit": "7f571c62179c6b12405ad868be55ae750d7d2cf1",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 7f571c62179c6b12405ad868be55ae750d7d2cf1: manual GUI verification of create-file dialog, Command-delete mode, and clear confirmation was not performed in this run.",
+  "result_summary": "Runtime visual/interactive check was not executed; build and unit evidence confirm underlying filesystem and menu wiring, but real dialog/menu interaction needs manual confirmation.",
+  "limitations": [
+    "Requires interactive GUI session."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-015",
+  "work_package_id": "wp-015",
+  "commit": "7f571c62179c6b12405ad868be55ae750d7d2cf1",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 7f571c62179c6b12405ad868be55ae750d7d2cf1: bash scripts/test.sh (testFileCreationAndTrash).",
+  "result_summary": "ALL TESTS PASSED. New assertions cover FileFormat name normalization, empty-file creation, duplicate-name rejection, single-item trash, and directory trashContents.",
+  "limitations": [
+    "MenuBuilder prompt/confirmation dialogs are not automated in unit tests; FileSystemService behavior is tested directly."
+  ]
+}

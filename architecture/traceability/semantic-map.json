@@ -15,10 +15,11 @@
       "id": "l0-navigate",
       "name": "左键浏览目录",
       "status": "approved",
-      "statement": "左键单击菜单栏图标时，弹出目录树并显示根文件夹下的第一层文件与文件夹（可递归展开），不包含功能项。",
+      "statement": "左键单击菜单栏图标时，弹出目录树并显示根文件夹下的第一层文件与文件夹（可递归展开）。每个目录菜单底部固定提供「新增」；按住 Command 再左键打开目录树时进入删除模式：底部「新增」变为「清空」，点击文件或文件夹从复制路径改为删除。",
       "source_refs": [
         "user-requirement:2026-09-03",
-        "user-feedback:2026-09-03"
+        "user-feedback:2026-09-03",
+        "user-requirement:2026-09-08"
       ]
     },
     {
@@ -206,6 +207,24 @@
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08"
       ]
+    },
+    {
+      "id": "l0-create-file",
+      "name": "新增文件",
+      "status": "candidate",
+      "statement": "目录树每个菜单底部固定提供「新增」；点击后弹出小窗口输入文件名并选择常见格式（txt、md、csv、json、docx、xlsx、pptx、pdf），确认后在当前目录创建一个空文件。文件名无扩展名时自动追加所选格式扩展名，已有扩展名时以输入为准；重名时不覆盖并提示错误。",
+      "source_refs": [
+        "user-requirement:2026-09-08"
+      ]
+    },
+    {
+      "id": "l0-delete-clear",
+      "name": "Command 删除与清空",
+      "status": "candidate",
+      "statement": "按住 Command 再左键打开目录树时进入删除模式：每个菜单底部的「新增」变为「清空」，点击文件或文件夹从复制路径改为删除。点击删除或清空先弹确认窗口，确认后把目标移入废纸篓（可恢复）；取消或删除失败不改变原内容。普通（不按 Command）打开目录树仍为复制路径。",
+      "source_refs": [
+        "user-requirement:2026-09-08"
+      ]
     }
   ],
   "l1_responsibilities": [
@@ -231,11 +250,13 @@
       "id": "l1-menu-navigation",
       "name": "目录菜单渲染",
       "status": "candidate",
-      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开，并包含隐藏文件。",
+      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开并包含隐藏文件；在每个目录菜单底部渲染「新增」或删除模式下的「清空」动作。",
       "l0_refs": [
         "l0-navigate",
         "l0-recurse",
-        "l0-finder-hidden-sync"
+        "l0-finder-hidden-sync",
+        "l0-create-file",
+        "l0-delete-clear"
       ],
       "owners": [
         "architecture_owner"
@@ -336,12 +357,14 @@
       "id": "l1-filesystem",
       "name": "文件系统访问",
       "status": "candidate",
-      "responsibility": "枚举目录内容、判断条目是文件还是文件夹、判断路径是否存在、读取隐藏文件。",
+      "responsibility": "枚举目录内容、判断条目是文件还是文件夹、判断路径是否存在、读取隐藏文件，并负责创建空文件与把文件/目录内容移入废纸篓。",
       "l0_refs": [
         "l0-recurse",
         "l0-show-hidden",
         "l0-finder-hidden-sync",
-        "l0-set-root-clipboard"
+        "l0-set-root-clipboard",
+        "l0-create-file",
+        "l0-delete-clear"
       ],
       "owners": [
         "architecture_owner"

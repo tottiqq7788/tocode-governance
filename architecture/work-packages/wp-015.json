@@ -1,0 +1,34 @@
+{
+  "id": "wp-015",
+  "title": "目录菜单新增文件与 Command 删除/清空",
+  "baseline_commit": "99765f9c5818f80cfd0703d8ceba7d9eef72afa6",
+  "goal": "在左键目录树的每个目录菜单底部增加「新增」动作，弹小窗口输入文件名并选择常见格式（txt/md/csv/json/docx/xlsx/pptx/pdf），创建空文件；按住 Command 再左键打开目录树时进入删除模式，底部动作变为「清空」，点击文件或文件夹从复制路径改为删除。删除与清空均需确认，确认后移入废纸篓（可恢复）。",
+  "scope": [
+    "app/Sources/FileSystemService.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-015.json",
+    "governance/architecture/task-envelopes/impl-015.json",
+    "governance/architecture/evidence/ev-*-015.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径等既有 L0 语义时立即停止并重新准入。",
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。",
+    "需要新增系统权限或调用外部 shell 时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：新增 FileFormat 文件名规整、空文件创建、重名报错、移入废纸篓与清空目录断言，且全量测试通过。",
+    "runtime_e2e：真机从菜单新增文件、按住 Command 删除与清空、确认弹窗路径验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "7f571c62179c6b12405ad868be55ae750d7d2cf1",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user requested create-file at every directory menu and Command-modified delete/clear behavior; this approves the bounded implementation before application source changes."
+  }
+}
