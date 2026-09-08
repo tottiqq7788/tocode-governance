@@ -1,0 +1,31 @@
+{
+  "id": "wp-025",
+  "title": "微信命令回复按单命令代码框并修复误报失败",
+  "baseline_commit": "cf55c0f0ab12f674e620ece7d237c314166a6883",
+  "goal": "1) 微信命令回复不再把整段结果放进一个代码框，而是对 .help 的每条可复制命令单独用代码框包裹，命令均以 . 开头；2) 微信回复与终端回复分为两套文本；3) sendmessage 缺失 ret 字段时不再误判为发送失败。",
+  "scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Sources/WeChatILinkClient.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/work-packages/wp-025.json",
+    "governance/architecture/task-envelopes/impl-025.json",
+    "governance/architecture/evidence/ev-*-025.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改微信 receive-only、命令判定、归档或 sendmessage 协议语义时立即停止并重新准入。",
+    "sendmessage 响应解析放宽导致真实非零 ret 被忽略时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过，新增微信 help 格式断言。",
+    "runtime_e2e：真机微信 .help 单命令代码框与发送成功判定验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "a6de8603e205d4d1d4ffe008eab8bc0d0b1892df",
+  "approval": {
+    "source": "user-request:2026-09-08",
+    "scope": "The user requested per-command code fences for WeChat, separate WeChat/terminal help text, and fixing the false send-failure notification."
+  }
+}

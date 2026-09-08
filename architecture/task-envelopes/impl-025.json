@@ -1,0 +1,42 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-025",
+  "role": "implementation_owner",
+  "baseline_commit": "cf55c0f0ab12f674e620ece7d237c314166a6883",
+  "work_package_id": "wp-025",
+  "allowed_scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Sources/WeChatILinkClient.swift",
+    "app/Tests/TestRunner.swift",
+    "governance/architecture/work-packages/wp-025.json",
+    "governance/architecture/task-envelopes/impl-025.json",
+    "governance/architecture/evidence/ev-*-025.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-wechat-command"
+  ],
+  "must_preserve": [
+    "仅 . 前缀命令消息回复执行结果，普通消息仍 receive-only。",
+    "命令回复仍通过 sendmessage 发送且不入正式归档、不保存附件。",
+    "成功用 ✅、失败用 ❌ 的前缀语义不变。",
+    "sendmessage 显式非零 ret 仍视为失败。"
+  ],
+  "must_reject": [
+    "把回复发送范围扩大到普通微信消息。",
+    "sendmessage 显式非零 ret 被当作成功。",
+    "改变归档或凭据语义。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改微信 receive-only、命令判定、归档或 sendmessage 协议语义时立即停止并重新准入。",
+    "sendmessage 响应解析放宽导致真实非零 ret 被忽略时停止。"
+  ],
+  "notes": "微信 help 文本与终端 help 文本分离；缺失 ret 仅表示响应未携带业务码，按成功处理。"
+}

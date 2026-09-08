@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-025",
+  "work_package_id": "wp-025",
+  "commit": "a6de8603e205d4d1d4ffe008eab8bc0d0b1892df",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit a6de8603e205d4d1d4ffe008eab8bc0d0b1892df: manual GUI verification of WeChat .help per-command code fences and no false send-failure notification was not performed in this run.",
+  "result_summary": "Runtime visual check was not executed; build and unit evidence confirm code change, but actual WeChat rendering and notification behavior need manual confirmation.",
+  "limitations": [
+    "Requires interactive WeChat usage."
+  ]
+}

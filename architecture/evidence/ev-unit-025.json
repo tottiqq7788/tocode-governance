@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-025",
+  "work_package_id": "wp-025",
+  "commit": "a6de8603e205d4d1d4ffe008eab8bc0d0b1892df",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit a6de8603e205d4d1d4ffe008eab8bc0d0b1892df: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. New assertions verify WeChat help uses per-command code fences and dot-prefixed commands.",
+  "limitations": [
+    "sendmessage missing-ret behavior is covered indirectly; real API rendering needs manual confirmation."
+  ]
+}
