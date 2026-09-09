@@ -1,0 +1,29 @@
+{
+  "id": "wp-030",
+  "title": "新增弹窗支持新建文件夹",
+  "baseline_commit": "a6de8603e205d4d1d4ffe008eab8bc0d0b1892df",
+  "goal": "在左键目录菜单「新增」弹出的窗口中增加「文件夹/文件」类型切换，文件夹模式允许输入文件夹名称并在当前目录创建空文件夹；文件模式保持原有文件名与格式选择。",
+  "scope": [
+    "app/Sources/FileSystemService.swift",
+    "app/Sources/MenuBuilder.swift",
+    "governance/architecture/work-packages/wp-030.json",
+    "governance/architecture/task-envelopes/impl-030.json",
+    "governance/architecture/evidence/ev-*-030.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径、删除/清空语义时立即停止并重新准入。",
+    "新建文件夹绕过重名校验或写入其他目录时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过。",
+    "runtime_e2e：真机新增弹窗切换文件夹/文件并创建验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "9f3d6e662c422d59d7f1047e716452f14b30a61a",
+  "approval": {
+    "source": "user-request:2026-09-09",
+    "scope": "The user asked to reset to a6de860/48d0b6c and then add folder creation inside the existing new-item dialog; this approves the bounded addition."
+  }
+}

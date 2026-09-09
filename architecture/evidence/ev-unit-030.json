@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-030",
+  "work_package_id": "wp-030",
+  "commit": "9f3d6e662c422d59d7f1047e716452f14b30a61a",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 9f3d6e662c422d59d7f1047e716452f14b30a61a: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing filesystem create/trash and command tests continue to pass after unified new-item dialog change.",
+  "limitations": [
+    "Dialog type-switching behavior is not covered by automated unit tests."
+  ]
+}

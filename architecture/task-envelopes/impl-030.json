@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-030",
+  "role": "implementation_owner",
+  "baseline_commit": "a6de8603e205d4d1d4ffe008eab8bc0d0b1892df",
+  "work_package_id": "wp-030",
+  "allowed_scope": [
+    "app/Sources/FileSystemService.swift",
+    "app/Sources/MenuBuilder.swift",
+    "governance/architecture/work-packages/wp-030.json",
+    "governance/architecture/task-envelopes/impl-030.json",
+    "governance/architecture/evidence/ev-*-030.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-create-file"
+  ],
+  "must_preserve": [
+    "「新增」菜单项样式不变，仍是单个菜单项。",
+    "文件模式保持文件名与格式选择。",
+    "新建文件夹重名时不覆盖并提示错误。",
+    "删除/清空语义不变。"
+  ],
+  "must_reject": [
+    "改变目录树递归、悬停展开、复制路径、删除/清空语义。",
+    "新建文件夹绕过重名校验或写入其他目录。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、复制路径、删除/清空语义时立即停止并重新准入。",
+    "新建文件夹绕过重名校验或写入其他目录时停止。"
+  ],
+  "notes": "从 a6de860 基线恢复后，仅对新增弹窗增加文件夹类型，不改动菜单项外观。"
+}

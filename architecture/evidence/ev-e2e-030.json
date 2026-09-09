@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-030",
+  "work_package_id": "wp-030",
+  "commit": "9f3d6e662c422d59d7f1047e716452f14b30a61a",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 9f3d6e662c422d59d7f1047e716452f14b30a61a: manual GUI verification of folder/file creation dialog was not performed in this run.",
+  "result_summary": "Runtime visual check was not executed; build and unit evidence confirm code change, but actual dialog interaction needs manual confirmation.",
+  "limitations": [
+    "Requires interactive GUI session."
+  ]
+}
