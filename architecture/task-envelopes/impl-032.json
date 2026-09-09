@@ -1,0 +1,55 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-032",
+  "role": "implementation_owner",
+  "baseline_commit": "1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977",
+  "work_package_id": "wp-032",
+  "allowed_scope": [
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/MultitouchSupportMonitor.swift",
+    "app/Sources/TrackpadShortcutService.swift",
+    "app/Sources/ShortcutRecorderPrompt.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-032.json",
+    "governance/architecture/task-envelopes/impl-032.json",
+    "governance/architecture/evidence/ev-*-032.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-trackpad-shortcuts",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "右键顶层菜单顺序和既有「mac → 临时黑屏」行为不变。",
+    "三指、四指、五指分别只有一个可保存、覆盖和清除的快捷键映射；菜单图标只表达是否存在配置。",
+    "只有精确指数量的短时、低位移、完整抬起轻点触发；滑动、长按、过多手指和未配置手势不触发。",
+    "合成键盘事件携带 Tocode 内部标记，现有 GlobalShortcutService 必须将其原样放行。",
+    "原始触点帧只在内存中用于即时判定，不写日志、不写磁盘、不跨进程发送。",
+    "框架、设备或辅助功能权限不可用时保留配置，停止本功能并提示，不影响其他输入服务。"
+  ],
+  "must_reject": [
+    "通过 root、内核扩展、DriverKit 特殊 entitlement 或修改系统偏好实现。",
+    "吞掉系统触控事件、声称可以可靠阻止系统自身三/四/五指手势，或静默制造双重动作。",
+    "把触控板映射并入既有 Finder x/v、双击⌘Q 或滚轮状态机。",
+    "保存原始触点坐标、轨迹、压力或设备指纹。",
+    "扩大到捏合、旋转、滑动、长按、物理点击或二指手势。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "integration",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "目标 macOS 无法通过当前用户态私有框架稳定取得逐设备触点数量，且实现需要 root、内核扩展或 DriverKit 特殊 entitlement 时停止并重新准入。",
+    "实现需要改写或关闭系统触控板手势、吞掉系统触摸事件、保存原始触点轨迹或扩大到三至五指轻点以外的手势时停止。",
+    "触控监听或按键合成故障会停用、吞掉或改写既有键盘快捷键、鼠标滚轮或菜单行为时停止。"
+  ],
+  "notes": "阶段：先完成 macOS 26 用户态私有框架动态加载与纯轻点状态机，再接入菜单和录入弹窗。业务对象：TrackpadTapGesture 与 RecordedShortcut 一对一映射。L1 责任：l1-trackpad-shortcuts；L2 组件：l2-trackpad-shortcuts，并由应用入口和状态栏控制器协调生命周期与菜单。"
+}

@@ -55,7 +55,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）、「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，提供「同步项目夹」开关，并提供以当前 Codex 用户级模型友好名称为标题的实时 Anker 模型子菜单），以及「mac」子菜单（其下提供「临时黑屏」）。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；除既有目录、设置和退出功能外，包含「微信关联」子菜单（其下固定提供「绑定微信」和「文件位置」）、「codex」子菜单（显示当前 Codex 选中的本地项目名称与根目录，提供「同步项目夹」开关，并提供以当前 Codex 用户级模型友好名称为标题的实时 Anker 模型子菜单），以及「mac」子菜单（其下提供「临时黑屏」与「触控板」子菜单）。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -63,7 +63,8 @@
         "app-commit:2e98f9d",
         "user-approved-plan:2026-09-07",
         "user-revision:2026-09-07",
-        "user-approved-plan:2026-09-08"
+        "user-approved-plan:2026-09-08",
+        "user-requirement:2026-09-09"
       ]
     },
     {
@@ -225,6 +226,16 @@
       "source_refs": [
         "user-requirement:2026-09-08"
       ]
+    },
+    {
+      "id": "l0-trackpad-shortcuts",
+      "name": "触控板轻点映射快捷键",
+      "status": "approved",
+      "statement": "右键功能菜单提供「mac → 触控板 → 三指轻点 / 四指轻点 / 五指轻点」。点击任一手势后弹出快捷键录入窗口，用户可监听录入并保存、覆盖或清除该手势唯一对应的键盘快捷键；已保存配置的菜单项左侧显示勾选图标，未配置显示空心圆。配置持久化并在重启后恢复；仅精确指数量的短时、低位移、完整抬起轻点触发，滑动、长按、指数量不符或未配置均不得合成按键。监听或按键合成不可用时保留配置并明确提示，且不得影响既有快捷键、滚轮、菜单或系统输入。",
+      "source_refs": [
+        "user-requirement:2026-09-09",
+        "app-commit:a61093e"
+      ]
     }
   ],
   "l1_responsibilities": [
@@ -287,14 +298,15 @@
       "id": "l1-status-bar",
       "name": "菜单栏图标与事件",
       "status": "candidate",
-      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，呈现微信绑定状态并转发绑定和文件位置操作，转发 mac 临时黑屏操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
+      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，呈现微信绑定状态并转发绑定和文件位置操作，转发 mac 临时黑屏与触控板快捷键配置操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
       "l0_refs": [
         "l0-navigate",
         "l0-action-menu",
         "l0-set-root-clipboard",
         "l0-reset-root",
         "l0-wechat-archive",
-        "l0-temporary-blackout"
+        "l0-temporary-blackout",
+        "l0-trackpad-shortcuts"
       ],
       "owners": [
         "architecture_owner"
@@ -414,6 +426,23 @@
       "responsibility": "把应用登记为系统登录项（SMAppService.mainApp）并如实反映系统实际状态。",
       "l0_refs": [
         "l0-launch-at-login"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-trackpad-shortcuts",
+      "name": "触控板轻点识别与快捷键映射",
+      "status": "candidate",
+      "responsibility": "维护三指、四指、五指轻点到键盘快捷键的一对一持久化映射；按设备接收触点帧，以纯状态机排除滑动、长按和错误指数量，在完整抬起后合成带内部标记的键盘事件；私有触控接口、辅助功能权限或合成失败不得改变已存配置，也不得影响其他输入服务。",
+      "l0_refs": [
+        "l0-trackpad-shortcuts",
+        "l0-action-menu"
       ],
       "owners": [
         "architecture_owner"
@@ -547,7 +576,8 @@
       "name": "应用入口",
       "status": "candidate",
       "l1_refs": [
-        "l1-status-bar"
+        "l1-status-bar",
+        "l1-trackpad-shortcuts"
       ],
       "selectors": [
         "TocodeApp.swift",
@@ -562,7 +592,8 @@
         "l1-status-bar",
         "l1-wechat-association",
         "l1-codex-project-sync",
-        "l1-codex-model-switch"
+        "l1-codex-model-switch",
+        "l1-trackpad-shortcuts"
       ],
       "selectors": [
         "StatusItemController.swift"
@@ -712,6 +743,20 @@
       ],
       "selectors": [
         "LaunchAtLoginService.swift"
+      ]
+    },
+    {
+      "id": "l2-trackpad-shortcuts",
+      "name": "触控板监听、轻点状态机与快捷键录入",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-trackpad-shortcuts"
+      ],
+      "selectors": [
+        "TrackpadShortcut.swift",
+        "MultitouchSupportMonitor.swift",
+        "TrackpadShortcutService.swift",
+        "ShortcutRecorderPrompt.swift"
       ]
     },
     {

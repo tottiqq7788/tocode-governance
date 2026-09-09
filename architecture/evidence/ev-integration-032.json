@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-INTEGRATION-032",
+  "work_package_id": "wp-032",
+  "commit": "a61093e3fdde8445ce98094398c39f4d2780736b",
+  "type": "integration",
+  "status": "passed",
+  "command_or_source": "App commit a61093e3fdde8445ce98094398c39f4d2780736b on macOS 26.6.2 arm64: TOCODE_MULTITOUCH_PROBE=1 ./build/tests.",
+  "result_summary": "The project PrivateMultitouchMonitor dynamically loaded all required symbols, enumerated the current trackpad, registered and started its callback, reported running, then unregistered and stopped safely. The machine exposed one 24x18 multitouch device.",
+  "limitations": [
+    "The automated run validated framework/device lifecycle but did not receive a user-generated three/four/five-finger contact sequence.",
+    "External Magic Trackpad hot-plug was not tested; sleep/wake re-registration is implemented but not exercised in this run."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-032",
+  "work_package_id": "wp-032",
+  "commit": "a61093e3fdde8445ce98094398c39f4d2780736b",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit a61093e3fdde8445ce98094398c39f4d2780736b: bash scripts/build.sh; codesign --verify --deep --strict --verbose=2 build/Tocode.app; otool -L build/Tocode.app/Contents/MacOS/Tocode; python3 architecture/tools/audit_project.py --target . in governance.",
+  "result_summary": "App and CLI build successfully; Tocode.app satisfies its designated requirement; MultitouchSupport is loaded dynamically rather than recorded as a direct Mach-O dependency; governance structure and references pass audit.",
+  "limitations": [
+    "Build uses the local macOS 26.6 SDK and an ad-hoc signature with a stable designated requirement.",
+    "Use of Apple's private MultitouchSupport framework prevents Mac App Store distribution and requires compatibility checks after macOS upgrades."
+  ]
+}

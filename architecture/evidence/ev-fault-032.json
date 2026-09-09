@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-032",
+  "work_package_id": "wp-032",
+  "commit": "a61093e3fdde8445ce98094398c39f4d2780736b",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit a61093e3fdde8445ce98094398c39f4d2780736b: bash scripts/test.sh with MockMultitouchMonitor, MockTrackpadPermissions, MockTrackpadShortcutPoster and MockAlerts.",
+  "result_summary": "Injected monitor-start failure and accessibility denial both preserve the requested mapping, return an ineffective result, and emit a specific notification. Clearing the last mapping stops only the trackpad monitor; existing keyboard and mouse services remain independent.",
+  "limitations": [
+    "A real TCC revocation during an active process and a real private-framework removal cannot be injected on the development machine."
+  ]
+}

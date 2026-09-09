@@ -1,0 +1,39 @@
+{
+  "id": "wp-032",
+  "title": "mac 触控板三至五指轻点映射快捷键",
+  "baseline_commit": "1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977",
+  "goal": "在右键「mac」下新增「触控板」子菜单，以三指轻点、四指轻点、五指轻点三个入口录入并持久化各自的键盘快捷键；完整轻点后全局合成对应按键，菜单左侧图标反映是否已经配置。",
+  "scope": [
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/MultitouchSupportMonitor.swift",
+    "app/Sources/TrackpadShortcutService.swift",
+    "app/Sources/ShortcutRecorderPrompt.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-032.json",
+    "governance/architecture/task-envelopes/impl-032.json",
+    "governance/architecture/evidence/ev-*-032.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "目标 macOS 无法通过当前用户态私有框架稳定取得逐设备触点数量，且实现需要 root、内核扩展或 DriverKit 特殊 entitlement 时停止并重新准入。",
+    "实现需要改写或关闭系统触控板手势、吞掉系统触摸事件、保存原始触点轨迹或扩大到三至五指轻点以外的手势时停止。",
+    "触控监听或按键合成故障会停用、吞掉或改写既有键盘快捷键、鼠标滚轮或菜单行为时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 验证和治理结构审计通过。",
+    "unit：轻点状态机覆盖精确指数量、完整抬起、滑动、长按、过多手指和持久化覆盖/清除；全量测试通过。",
+    "integration：动态加载 MultitouchSupport、枚举当前触控设备并验证回调注册生命周期，不持久化原始触点。",
+    "fault_injection：框架/设备不可用或辅助功能未授权时保留配置、提示失败且既有输入服务不受影响。",
+    "runtime_e2e：真机完成三/四/五指配置、勾选状态、重启恢复和手势触发；系统手势冲突限制必须明确登记。"
+  ],
+  "status": "approved",
+  "implementation_commit": "a61093e3fdde8445ce98094398c39f4d2780736b",
+  "approval": {
+    "source": "user-request:2026-09-09",
+    "scope": "The user explicitly requested mac → 触控板 with 三指轻点、四指轻点、五指轻点, a shortcut-listening dialog with 保存, and checked icons for configured gestures."
+  }
+}

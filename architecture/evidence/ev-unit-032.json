@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-032",
+  "work_package_id": "wp-032",
+  "commit": "a61093e3fdde8445ce98094398c39f4d2780736b",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit a61093e3fdde8445ce98094398c39f4d2780736b: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. New coverage verifies independent three/four/five-finger mappings, persistence, overwrite and clear; exact-count taps; staggered landing/lift; rejection of two/six fingers, movement, long hold and contact bounce; service lifecycle and shortcut dispatch.",
+  "limitations": [
+    "Shortcut recorder keyboard capture and NSMenu visual layout are not exercised by the command-line test target."
+  ]
+}
