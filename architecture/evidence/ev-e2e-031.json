@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-031",
+  "work_package_id": "wp-031",
+  "commit": "1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "App commit 1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977: manual GUI verification of 访达 submenu, 访问路径, 复制路径, 目录初始化.",
+  "result_summary": "Not visually verified in this run; recorded as skipped per governance acceptance policy.",
+  "limitations": [
+    "Interactive Finder/menu visual check not executed by the automated agent."
+  ]
+}

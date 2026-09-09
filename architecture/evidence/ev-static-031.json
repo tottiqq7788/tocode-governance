@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-031",
+  "work_package_id": "wp-031",
+  "commit": "1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977: bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance.",
+  "result_summary": "App and CLI build with two swiftc invocations; app passes codesign verification after adding 访达 submenu with 访问路径/复制路径/目录初始化; governance structure/reference audit passes.",
+  "limitations": [
+    "Build uses local Command Line Tools and ad-hoc designated requirement."
+  ]
+}

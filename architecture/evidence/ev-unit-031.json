@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-031",
+  "work_package_id": "wp-031",
+  "commit": "1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing Finder selection and command tests continue to pass after adding resolveSelectedItemPath and the new menu items.",
+  "limitations": [
+    "New copy-path and submenu layout behavior is not covered by automated unit tests."
+  ]
+}

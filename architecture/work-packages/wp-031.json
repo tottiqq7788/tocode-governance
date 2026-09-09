@@ -1,0 +1,29 @@
+{
+  "id": "wp-031",
+  "title": "右键菜单新增访达夹并补充复制路径",
+  "baseline_commit": "9f3d6e662c422d59d7f1047e716452f14b30a61a",
+  "goal": "在右键菜单新增顶层「访达」子菜单：将「访达访问」更名为「访问路径」移入其中；将「目录」下的「访达目录初始化」更名为「目录初始化」移入其中；并新增「复制路径」，点击后复制当前访达选中文件或文件夹本身的绝对路径。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/FinderSelectionService.swift",
+    "governance/architecture/work-packages/wp-031.json",
+    "governance/architecture/task-envelopes/impl-031.json",
+    "governance/architecture/evidence/ev-*-031.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "改动扩大为修改目录树递归、悬停展开、删除/清空或新增弹窗语义时立即停止并重新准入。",
+    "复制路径改写文件系统、根目录状态或扩大权限时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与 codesign 验证通过，治理结构审计通过。",
+    "unit：全量测试通过。",
+    "runtime_e2e：真机访达夹展开并点击访问路径/复制路径验收；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "1a78ffe51df3ec7b0b209d03bf6a5cf0dc9e2977",
+  "approval": {
+    "source": "user-request:2026-09-09",
+    "scope": "The user asked to add a 访达 submenu, move/rename finder access and init items into it, and add a copy-path action."
+  }
+}
