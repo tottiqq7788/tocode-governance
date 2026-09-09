@@ -1,0 +1,41 @@
+{
+  "id": "wp-034",
+  "title": "mac 键盘命名快捷键重映射",
+  "baseline_commit": "c73b1a37ba84ab490671968c6b6bb45343fec7b7",
+  "goal": "在右键「mac」的「触控板」下方新增「键盘」子菜单，通过「新增」创建带名称、源快捷键和目标快捷键的全局重映射规则；规则保存后按名称列出，点击可编辑并删除，命中源组合键时吞掉原输入并发送目标组合键。",
+  "scope": [
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/ShortcutRecorderPrompt.swift",
+    "app/Sources/GlobalShortcutService.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-034.json",
+    "governance/architecture/task-envelopes/impl-034.json",
+    "governance/architecture/evidence/ev-*-034.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "实现需要记录、持久化或传输非映射命中的全局按键历史时立即停止。",
+    "实现需要修改既有 Finder 快捷键状态机、触控板状态机、滚轮服务或系统键盘偏好时停止。",
+    "无法保证合成目标事件不递归进入本重映射或既有快捷键保护时停止。",
+    "需求扩大为鼠标按钮、脚本、应用限定规则、按键序列或宏时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：存储、新增/编辑/删除、唯一性、源事件吞掉、目标事件合成、自动重复、合成防递归、录入期间临时透传与钩子生命周期测试通过；全量测试通过。",
+    "fault_injection：辅助功能拒绝、钩子创建/恢复失败时规则保留且其他输入服务不受影响。",
+    "runtime_e2e：真机新增、菜单显示、编辑、删除及源到目标触发；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request-and-clarification:2026-09-09",
+    "scope": "The user corrected 鼠标 to 键盘, confirmed that source is a keyboard combination, and confirmed that matching source input is swallowed while only the target shortcut is emitted.",
+    "implementation_amendment": "录入窗口必须能接收已映射组合键以及既有双击⌘Q保护覆盖的组合键；两个独立 session event tap 的先后安装顺序也不得改变映射优先级。因此准入 GlobalShortcutService.swift，仅增加窗口存续期间的临时透传，以及对已由键盘映射声明事件的无状态放行，不修改任何既有状态机、开关或持久化语义。"
+  }
+}

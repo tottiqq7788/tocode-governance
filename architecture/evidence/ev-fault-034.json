@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-034",
+  "work_package_id": "wp-034",
+  "commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit 95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c: bash scripts/test.sh with MockShortcutPermissions, MockKeyboardShortcutRemapTap, MockTrackpadShortcutPoster, ManualScheduler and MockAlerts.",
+  "result_summary": "Injected accessibility denial, event-tap creation failure and event-tap recovery failure all preserve the saved mapping. Denial and creation failure leave listening stopped with a specific notification; recovery failure removes only the remapping tap and reports that listening stopped. The existing shortcut service remains independent.",
+  "limitations": [
+    "A real mid-session TCC revocation and an operating-system CGEventTap timeout were not induced on the development machine."
+  ]
+}

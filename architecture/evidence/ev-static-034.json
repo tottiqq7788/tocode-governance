@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-034",
+  "work_package_id": "wp-034",
+  "commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c: bash scripts/build.sh; codesign --verify --deep --strict --verbose=2 build/Tocode.app; git diff --check. Governance: python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "The app and CLI build successfully, Tocode.app satisfies its designated requirement, the diff has no whitespace errors, and governance structure and references pass audit. The actual app impact is limited to the ten files declared by IMPL-034.",
+  "limitations": [
+    "The governance audit validates structure and references only; it does not evaluate runtime behavior.",
+    "The app uses an ad-hoc signature with the project's stable designated requirement."
+  ]
+}

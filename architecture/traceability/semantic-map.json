@@ -55,7 +55,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、垂直/横向滚轮对调与双击⌘Q；「设置」保留开机自启。其余既有目录、codex、微信关联和退出功能保持不变。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」保留开机自启。其余既有目录、codex、微信关联和退出功能保持不变。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -66,7 +66,8 @@
         "user-approved-plan:2026-09-08",
         "user-requirement:2026-09-09",
         "user-requirement:2026-09-09-menu-regroup",
-        "app-commit:c73b1a3"
+        "app-commit:c73b1a3",
+        "user-requirement:2026-09-09-keyboard-remap"
       ]
     },
     {
@@ -243,6 +244,17 @@
       "source_refs": [
         "user-requirement:2026-09-09",
         "app-commit:a61093e"
+      ]
+    },
+    {
+      "id": "l0-keyboard-remapping",
+      "name": "命名键盘快捷键重映射",
+      "status": "approved",
+      "statement": "右键功能菜单在「mac → 触控板」下方提供「键盘」子菜单；子菜单固定提供「新增」，并按保存名称列出已有规则。新增或点击规则时弹出编辑窗口，包含名称、源快捷键与目标快捷键：两个快捷键框点击后分别监听一次键盘组合，保存后持久化；编辑既有规则时可以删除。名称不能为空且名称与源快捷键在规则间唯一。命中源快捷键时吞掉原键盘输入，只合成一次带内部标记的目标快捷键，自动重复不重复合成；合成事件不得再次进入重映射。无规则时不安装事件钩子；权限或钩子故障保留规则并明确提示，不得影响既有快捷键、滚轮、触控板或其他输入。",
+      "source_refs": [
+        "user-requirement:2026-09-09-keyboard-remap",
+        "user-clarification:2026-09-09-keyboard-source",
+        "app-commit:2fc3edf"
       ]
     }
   ],
@@ -461,6 +473,23 @@
       ]
     },
     {
+      "id": "l1-keyboard-remapping",
+      "name": "命名键盘快捷键重映射",
+      "status": "candidate",
+      "responsibility": "维护名称、源快捷键、目标快捷键和稳定 ID 组成的持久化规则；校验名称与源快捷键唯一性；按精确键码与修饰键匹配全局键盘事件，吞掉源 keyDown/keyUp，在首次 keyDown 合成带内部标记的目标快捷键并忽略自动重复与所有合成事件；无规则或故障时拆除独立钩子且不改变其他输入服务。",
+      "l0_refs": [
+        "l0-keyboard-remapping",
+        "l0-action-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
       "id": "l1-mouse-wheel-reverse",
       "name": "鼠标滚轮对调",
       "status": "candidate",
@@ -585,7 +614,8 @@
       "status": "candidate",
       "l1_refs": [
         "l1-status-bar",
-        "l1-trackpad-shortcuts"
+        "l1-trackpad-shortcuts",
+        "l1-keyboard-remapping"
       ],
       "selectors": [
         "TocodeApp.swift",
@@ -601,7 +631,8 @@
         "l1-wechat-association",
         "l1-codex-project-sync",
         "l1-codex-model-switch",
-        "l1-trackpad-shortcuts"
+        "l1-trackpad-shortcuts",
+        "l1-keyboard-remapping"
       ],
       "selectors": [
         "StatusItemController.swift"
@@ -764,6 +795,20 @@
         "TrackpadShortcut.swift",
         "MultitouchSupportMonitor.swift",
         "TrackpadShortcutService.swift",
+        "ShortcutRecorderPrompt.swift"
+      ]
+    },
+    {
+      "id": "l2-keyboard-remapping",
+      "name": "键盘映射存储、事件钩子与编辑窗口",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-keyboard-remapping"
+      ],
+      "selectors": [
+        "KeyboardShortcutMapping.swift",
+        "KeyboardShortcutRemapService.swift",
+        "KeyboardShortcutMappingPrompt.swift",
         "ShortcutRecorderPrompt.swift"
       ]
     },

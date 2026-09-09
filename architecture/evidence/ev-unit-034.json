@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-034",
+  "work_package_id": "wp-034",
+  "commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. New coverage verifies validation, persistence, stable editing identity, deletion, exact source matching, source keyDown/keyUp suppression, one-shot target emission, automatic-repeat suppression, synthesized-event recursion prevention, input-capture suspension, mapping priority over the existing shortcut hook, and event-tap lifecycle.",
+  "limitations": [
+    "The command-line test target does not exercise the native NSMenu and NSAlert layout.",
+    "System-delivered keyboard events and TCC behavior are represented by controlled test doubles."
+  ]
+}

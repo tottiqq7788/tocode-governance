@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-034",
+  "work_package_id": "wp-034",
+  "commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI and physical keyboard verification on app commit 95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c.",
+  "result_summary": "Manual navigation through mac > Keyboard, creation and editing of a named mapping, restart restoration, deletion, and physical source-to-target triggering were not executed in this run.",
+  "limitations": [
+    "Native status-bar menu and modal recorder interactions require an interactive app session.",
+    "Real global event interception and target shortcut delivery require Accessibility permission and physical keyboard input.",
+    "Runtime coexistence with enabled Finder and Command-Q shortcuts remains covered by deterministic service tests rather than a physical end-to-end run."
+  ]
+}

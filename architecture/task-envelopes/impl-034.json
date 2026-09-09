@@ -1,0 +1,60 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-034",
+  "role": "implementation_owner",
+  "baseline_commit": "c73b1a37ba84ab490671968c6b6bb45343fec7b7",
+  "work_package_id": "wp-034",
+  "allowed_scope": [
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/ShortcutRecorderPrompt.swift",
+    "app/Sources/GlobalShortcutService.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-034.json",
+    "governance/architecture/task-envelopes/impl-034.json",
+    "governance/architecture/evidence/ev-*-034.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-keyboard-remapping",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "「键盘」位于「mac → 触控板」正下方，既有滚轮和双击⌘Q项目仍在其后。",
+    "每条规则持久化稳定 ID、trim 后名称、源快捷键和目标快捷键；名称与源快捷键分别唯一。",
+    "源快捷键按精确键码与 Control/Option/Shift/Command/Fn 修饰键匹配，命中后吞掉 keyDown/keyUp。",
+    "首次源 keyDown 只合成一次目标 keyDown/keyUp，自动重复只吞掉不重复合成。",
+    "所有合成目标事件携带现有 Tocode synthesizer marker，本服务和既有 GlobalShortcutService 均原样放行。",
+    "无规则时不保留事件钩子；监听失败时规则仍显示并持久化。",
+    "新增窗口含名称、源快捷键、目标快捷键与保存/取消；编辑窗口额外提供删除并只删除当前规则。",
+    "新增/编辑窗口存续期间，既有快捷键钩子与本映射钩子只临时透传按键以供两个录入框捕获；窗口关闭后立即恢复，且不得改写开关、持久化或状态机。",
+    "既有快捷键钩子先于映射钩子收到事件时，只对当前映射服务明确声明的源 keyDown/keyUp 放行；不得自行匹配、持久化或执行映射，也不得改变 Finder/⌘Q 状态。"
+  ],
+  "must_reject": [
+    "记录或保存用户未命中的全局按键历史。",
+    "允许空名称、缺少源/目标快捷键、重复名称或重复源快捷键。",
+    "把目标快捷键作为新源再次递归重映射。",
+    "修改 Finder 快捷键、触控板、滚轮或系统键盘设置。",
+    "扩展到鼠标按钮、脚本、应用限定、序列或宏。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要记录、持久化或传输非映射命中的全局按键历史时立即停止。",
+    "实现需要修改既有 Finder 快捷键状态机、触控板状态机、滚轮服务或系统键盘偏好时停止。",
+    "无法保证合成目标事件不递归进入本重映射或既有快捷键保护时停止。",
+    "需求扩大为鼠标按钮、脚本、应用限定规则、按键序列或宏时停止并重新准入。"
+  ],
+  "notes": "阶段：模型/存储与纯匹配规则，独立 CGEventTap 服务，复用快捷键捕获控件的双字段编辑窗口，最后接入 mac 菜单和应用生命周期。业务对象：KeyboardShortcutMapping。L1：l1-keyboard-remapping。L2：l2-keyboard-remapping。实现复核发现录入窗口会被已启用钩子先行吞键，且两个 session event tap 的 head 插入顺序会随开关启用时序变化；已重新准入 GlobalShortcutService.swift，只允许增加临时透传和对映射已声明事件的放行，不得修改既有 Finder 快捷键状态机。CoreGraphics 头文件明确 kCGHIDEventTap 仅 root 可用，本任务拒绝以提权解决顺序。"
+}
