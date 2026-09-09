@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-033",
+  "work_package_id": "wp-033",
+  "commit": "c73b1a37ba84ab490671968c6b6bb45343fec7b7",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit c73b1a37ba84ab490671968c6b6bb45343fec7b7: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED. Existing Finder hidden-file synchronization, shortcut state machines, permission/fault paths, wheel reversal, launch-at-login and trackpad behavior remain green after the menu regrouping.",
+  "limitations": [
+    "The test target does not instantiate the private right-click NSMenu hierarchy."
+  ]
+}

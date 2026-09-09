@@ -1,0 +1,30 @@
+{
+  "id": "wp-033",
+  "title": "右键菜单按访达与 mac 重新归组",
+  "baseline_commit": "a61093e3fdde8445ce98094398c39f4d2780736b",
+  "goal": "把隐藏文件、x/v移动文件、⌘Q强关访达三个既有菜单项从「设置」移动到「访达」；把垂直/横向滚轮对调与双击⌘Q三个既有菜单项从「设置」移动到「mac」；「设置」保留开机自启，所有功能行为与状态显示不变。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-033.json",
+    "governance/architecture/task-envelopes/impl-033.json",
+    "governance/architecture/evidence/ev-*-033.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "需要修改快捷键、滚轮、隐藏文件服务或持久化存储时停止并重新准入。",
+    "任何菜单项标题、selector、启用状态、图标状态或权限失败语义发生改变时停止。",
+    "改动扩大到顶层菜单顺序、目录、Codex、微信、临时黑屏或触控板行为时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：全量测试通过，既有隐藏文件、快捷键和滚轮行为保持。",
+    "runtime_e2e：真机右键菜单核对访达/mac/设置三组归属；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "c73b1a37ba84ab490671968c6b6bb45343fec7b7",
+  "approval": {
+    "source": "user-request:2026-09-09",
+    "scope": "The user requested moving hidden-files, x/v move and Finder force-Q into 访达, and vertical/horizontal wheel reversal plus double-Q into mac."
+  }
+}

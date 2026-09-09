@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-033",
+  "work_package_id": "wp-033",
+  "commit": "c73b1a37ba84ab490671968c6b6bb45343fec7b7",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual right-click menu verification on app commit c73b1a37ba84ab490671968c6b6bb45343fec7b7.",
+  "result_summary": "The final status-bar app was launched, but the rendered 访达/mac/设置 submenu grouping was not clicked through by the automated run.",
+  "limitations": [
+    "The computer-use interface cannot obtain an accessibility tree for this LSUIElement-only status-bar app.",
+    "User should verify that 访达 contains hidden-files/x-v/Finder-Q, mac contains both wheel toggles/double-Q, and 设置 contains launch-at-login."
+  ]
+}

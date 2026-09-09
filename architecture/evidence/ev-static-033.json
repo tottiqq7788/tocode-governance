@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-033",
+  "work_package_id": "wp-033",
+  "commit": "c73b1a37ba84ab490671968c6b6bb45343fec7b7",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit c73b1a37ba84ab490671968c6b6bb45343fec7b7: bash scripts/build.sh; codesign --verify --deep --strict --verbose=2 build/Tocode.app; rg inspection of the six menu titles/selectors; python3 architecture/tools/audit_project.py --target . in governance.",
+  "result_summary": "App and CLI build successfully, the app satisfies its designated requirement, each moved menu item appears exactly once with its original selector/effective-state expression, and governance audit passes.",
+  "limitations": [
+    "Static inspection proves parent-menu construction in source but not the rendered menu layout."
+  ]
+}
