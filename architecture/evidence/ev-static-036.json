@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-036",
+  "work_package_id": "wp-036",
+  "commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "bash scripts/build.sh; codesign --verify --deep --strict build/Tocode.app; git diff --check; python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "App 与 CLI 编译打包及签名验证通过，治理结构与引用审计通过。实际修改 7 个 app 文件均在 wp-036 scope；新生产组件映射至 l2-anker-credential。当前运行 Tocode 已从新构建重启，CLI status 返回正常。",
+  "limitations": [
+    "治理审计只覆盖结构和引用，不替代架构语义审查。",
+    "未修改既有 Codex 模型切换服务或进程重启实现。"
+  ]
+}

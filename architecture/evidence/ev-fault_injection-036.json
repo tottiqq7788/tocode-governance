@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT_INJECTION-036",
+  "work_package_id": "wp-036",
+  "commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "Tests/AnkerCredentialTests.swift:testAnkerCredentialFailures and testAnkerConfigurationGuards",
+  "result_summary": "在 6 个文件写入点分别注入替换前/替换后失败，全部恢复文件与 SQLite；提交前失败、并发改写、回滚写入失败、重复/缺失配置、错误服务商/域名、自动故障转移、OAuth/环境凭据覆盖与符号链接均有覆盖。无法安全恢复时明确报告，不覆盖外部并发内容。",
+  "limitations": [
+    "捕获故障的补偿回滚不等同于断电/强杀下跨 SQLite 和多文件的原子提交。"
+  ]
+}

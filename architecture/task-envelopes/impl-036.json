@@ -1,0 +1,54 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-036",
+  "role": "implementation_owner",
+  "baseline_commit": "9cf13babfbc1f21af73413a791397e5b62efdb00",
+  "work_package_id": "wp-036",
+  "allowed_scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AnkerCredentialService.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Tests/AnkerCredentialTests.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/anker-credential-v1.json",
+    "governance/architecture/contracts/codex-model-switch-v1.json",
+    "governance/architecture/work-packages/wp-036.json",
+    "governance/architecture/task-envelopes/impl-036.json",
+    "governance/architecture/evidence/ev-*-036.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-anker-credential",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "仅本机用户通过右键 设置 → 安克密钥 的安全输入框触发保存；取消不写入，空白、控制字符和不合法 Bearer Token 拒绝保存。",
+    "保存只更新 OpenCode 与 pi 的 Anker 凭据、CC Switch 当前唯一 Anker Codex Provider 及其 Anker 恢复备份的凭据、Hermes 默认配置与 ANKER_API_KEY；其他服务商、模型（Hermes 除外）、配置、聊天和账户数据不变。",
+    "Hermes 按用户明确选择接入 https://ai-router.anker-in.com/v1，默认模型 apps/v_model/deepseek-v4-pro，使用自定义 provider、chat_completions 与 ${ANKER_API_KEY} 引用；保留微信等其他环境变量。",
+    "保存前完整预检所有目标；数据库事务与文件原子替换组合写入，捕获写入/复核错误时恢复本次已写文件并回滚数据库；并发变更不覆盖，恢复失败必须明确报告。",
+    "密钥不回填、不写日志/通知/命令参数/测试真实夹具；凭据文件权限 0600；只在用户现有的目标配置文件和数据库持久化。",
+    "不更改 Codex 本地代理地址/令牌，不强杀或重启任何 Agent；已启动客户端的缓存需重新加载/重开，保存成功提示说明生效边界。",
+    "当前 CC Switch Provider 必须唯一且模板的实际网关为精确 Anker HTTPS 地址，不能仅凭服务商名称判断；设置文件选中项与数据库选中项必须一致。",
+    "CC Switch 当前 Provider 与恢复备份中，选中 model_providers 段既有 experimental_bearer_token 必须与 auth.OPENAI_API_KEY 同步；其他 TOML 字段逐字保留。存在更高优先级 env.OPENAI_API_KEY 或选中段 env_key 时拒绝写入并报告。"
+  ],
+  "must_reject": [
+    "任一目标失败却显示四工具全部成功；打印密钥或将其发往网络；覆盖无关服务商或账户凭据。",
+    "缺失、歧义、非预期网关/配置/活动档案时猜测并写入；并发变化后盲目回滚覆盖新配置。",
+    "通过 CLI/微信远程入口接收密钥，或自动重启正在工作的 Codex、pi、Hermes、OpenCode。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "integration",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "发现必须修改 scope 外业务组件、模型切换或进程终止逻辑时重新准入。",
+    "四工具实际凭据格式、当前服务商/网关或优先级与已验证结构不符时拒绝保存并报告。"
+  ],
+  "notes": "阶段：本机设置维护；角色：当前 macOS 用户、凭据更新服务与四工具配置消费者；对象：Anker 凭据与 Hermes 默认路由。L1 负责校验、受限写入、失败恢复；L2 为弹窗、服务和设置菜单。异常恢复覆盖可捕获错误；不宣称跨文件与 SQLite 在断电时具有原子性。"
+}

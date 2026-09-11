@@ -55,7 +55,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」保留开机自启。其余既有目录、codex、微信关联和退出功能保持不变。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启和安克密钥。其余既有目录、codex、微信关联和退出功能保持不变。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -67,7 +67,8 @@
         "user-requirement:2026-09-09",
         "user-requirement:2026-09-09-menu-regroup",
         "app-commit:c73b1a3",
-        "user-requirement:2026-09-09-keyboard-remap"
+        "user-requirement:2026-09-09-keyboard-remap",
+        "user-request:2026-09-11-anker-key"
       ]
     },
     {
@@ -255,6 +256,16 @@
         "user-requirement:2026-09-09-keyboard-remap",
         "user-clarification:2026-09-09-keyboard-source",
         "app-commit:2fc3edf"
+      ]
+    },
+    {
+      "id": "l0-anker-credential",
+      "name": "四工具安克密钥统一设置",
+      "status": "approved",
+      "statement": "新增安全输入弹窗，一次保存覆盖 pi、Codex（通过 CC Switch）、Hermes、OpenCode 的 Anker 密钥，并把 Hermes 接入安克 DeepSeek V4 Pro。 使用隐藏输入框，取消不修改；失败恢复且不暴露密钥；运行中的客户端需重载配置，不自动中断任务。",
+      "source_refs": [
+        "user-request:2026-09-11-anker-key",
+        "user-clarification:2026-09-11-hermes-deepseek"
       ]
     }
   ],
@@ -605,6 +616,22 @@
         "implementation_owner",
         "independent_reviewer"
       ]
+    },
+    {
+      "id": "l1-anker-credential",
+      "name": "凭据统一更新与恢复",
+      "status": "approved",
+      "responsibility": "完整预检四工具本机配置，精确校验服务商/网关，安全保存、复核、失败恢复并报告缓存生效边界。",
+      "l0_refs": [
+        "l0-anker-credential",
+        "l0-action-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner"
+      ]
     }
   ],
   "l2_components": [
@@ -896,6 +923,19 @@
         "TocodeIPCServer.swift",
         "TocodeCLI.swift",
         "TocodeCLIRunner.swift"
+      ]
+    },
+    {
+      "id": "l2-anker-credential",
+      "name": "安克密钥服务与安全输入弹窗",
+      "status": "approved",
+      "l1_refs": [
+        "l1-anker-credential"
+      ],
+      "selectors": [
+        "AnkerCredentialService.swift",
+        "AnkerCredentialPrompt.swift",
+        "StatusItemController.swift"
       ]
     }
   ]

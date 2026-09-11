@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-INTEGRATION-036",
+  "work_package_id": "wp-036",
+  "commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "type": "integration",
+  "status": "passed",
+  "command_or_source": "app/build/anker-preflight; node app/build/anker-runtime-check.mjs; Hermes venv Python app/build/anker-hermes-check.py; CC Switch tag v3.20.1 commit 4a104215c4529e78c7d5e27ee47a693ada1ce2a7 source inspection",
+  "result_summary": "真实本机四工具配置通过只读预检。安装的 pi 0.85.1 ModelRuntime 在同一实例中连续两次取钥，第二次读取更新后的统一密钥源，无需刷新；安装的 Hermes 实际配置与 provider 解析器正确解析 Anker、DeepSeek V4 Pro 与新凭据。安装的 CC Switch 3.20.1 对应源码确认每次选路查询 SQLite Provider，并确认 auth 与模板凭据优先级。",
+  "limitations": [
+    "pi/Hermes 运行时兼容性验证使用隔离夹具、关闭模型网络；不执行真实推理。",
+    "CC Switch 热读取是版本匹配的源码审查证据，未替换运行中服务的真实密钥作网络调用。",
+    "OpenCode 已验证配置与认证文件写入，未对运行中 OpenCode 客户端执行请求。"
+  ]
+}

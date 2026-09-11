@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-036",
+  "work_package_id": "wp-036",
+  "commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh (app/build/anker-key-tests.log)",
+  "result_summary": "全量 731 个 PASS 断言通过。覆盖密钥校验、四工具同步、动态 pi 取钥、Hermes 安克路由、可选认证覆盖、CC Switch auth/模板/恢复备份一致更新、非目标内容保留、0600 权限与重复保存幂等。",
+  "limitations": [
+    "所有凭据均为虚构夹具，未改真实密钥。",
+    "本单元测试目标不运行原生菜单。"
+  ]
+}

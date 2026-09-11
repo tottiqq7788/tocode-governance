@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-INPUT-UI-036",
+  "work_package_id": "wp-036",
+  "commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "Computer Use + isolated AppKit harness linking production AnkerCredentialPrompt.swift; app/build/anker-input-check-result.txt",
+  "result_summary": "原生生产弹窗在隔离 AppKit 宿主中验证：空值保存被拦截；粘贴虚构密钥显示圆点，辅助功能只返回安全文本；合法输入返回成功；再次启动点击实际「取消」按钮返回 cancelled; no write attempted。",
+  "limitations": [
+    "运行宿主只有输入弹窗，不连接真实保存服务；保存服务由隔离集成和故障注入测试覆盖。",
+    "原生菜单栏应用无窗口时 Computer Use 读取超时；完整 右键→设置→安克密钥 点击路径未自动执行。"
+  ]
+}

@@ -18,7 +18,7 @@
   },
   "invariants": [
     "The current Provider must be uniquely selected and identifiable as Anker AI Router before its credential is read or used.",
-    "The Anker credential is sent only to HTTPS host ai-router.anker-in.com and is never logged, notified, persisted outside CC Switch, or copied into test fixtures.",
+    "The Anker credential is sent only to HTTPS host ai-router.anker-in.com and is never logged, notified, persisted outside CC Switch by the model-switch workflow (explicit credential rotation is governed separately by anker-credential-v1), or copied into test fixtures.",
     "Every model submenu expansion performs a fresh catalog request; stale or bundled entries are not presented as a successful live response.",
     "Only the unique uncommented top-level model assignment is changed in each TOML document; all other Provider JSON values, TOML values, credentials, endpoints, and Codex settings remain semantically unchanged.",
     "The CC Switch Provider template and ~/.codex/config.toml must both contain the selected exact model id and pass post-write verification before any Codex process is terminated.",

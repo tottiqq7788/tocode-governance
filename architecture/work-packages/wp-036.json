@@ -1,0 +1,39 @@
+{
+  "id": "wp-036",
+  "title": "设置中统一更新四工具安克密钥",
+  "baseline_commit": "9cf13babfbc1f21af73413a791397e5b62efdb00",
+  "goal": "新增安全输入弹窗，一次保存覆盖 pi、Codex（通过 CC Switch）、Hermes、OpenCode 的 Anker 密钥，并把 Hermes 接入安克 DeepSeek V4 Pro。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AnkerCredentialService.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Tests/AnkerCredentialTests.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/anker-credential-v1.json",
+    "governance/architecture/contracts/codex-model-switch-v1.json",
+    "governance/architecture/work-packages/wp-036.json",
+    "governance/architecture/task-envelopes/impl-036.json",
+    "governance/architecture/evidence/ev-*-036.json"
+  ],
+  "stop_conditions": [
+    "发现必须修改 scope 外业务组件、模型切换或进程终止逻辑时重新准入。",
+    "四工具实际凭据格式、当前服务商/网关或优先级与已验证结构不符时拒绝保存并报告。"
+  ],
+  "acceptance_evidence": [
+    "static：Swift App/CLI 构建、签名与治理结构审计。",
+    "unit/integration：隔离配置与 SQLite 夹具验证四工具同步、无关字段保留、输入校验、CC Switch 备份同步。",
+    "fault_injection：中途写入失败、数据库失败、并发冲突与恢复失败。",
+    "runtime_e2e：原生菜单、输入框与取消；真实密钥轮换须用户输入新密钥后执行，未执行时标记 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-09-11-anker-key-and-hermes-clarification",
+    "scope": "用户明确要求设置中增加安克密钥弹窗并覆盖四工具已存凭据；明确确认 Hermes 接入安克并使用 DeepSeek V4 Pro。未授权扩展其他服务商或自动中断正在运行的任务。",
+    "implementation_amendment": "只读发现 CC Switch 当前 Anker Provider 及代理恢复备份同时包含 auth.OPENAI_API_KEY 与选中 model_providers 配置段的 experimental_bearer_token，二者必须在同一事务内同步。仅修改该凭据字段，不改模型、地址、本地 Codex 代理令牌或既有模型切换实现；此补充属于用户已授权的同一密钥覆盖范围。"
+  },
+  "implementation_commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "acceptance_notes": "实现、构建、731 个断言、故障注入、真实配置只读预检、pi/Hermes 解析兼容性与隔离原生弹窗通过；完整菜单到真实四工具推理的 E2E 未执行并已登记 skipped。"
+}

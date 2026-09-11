@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-LIVE-E2E-036",
+  "work_package_id": "wp-036",
+  "commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Real right-click menu through credential rotation and four authenticated inference calls",
+  "result_summary": "尚未进行真实新密钥轮换和四工具联网推理。未向用户索要或显示密钥；由用户在新入口中输入新密钥完成首次实际保存。",
+  "limitations": [
+    "未提供新密钥，测试不能把虚构值写入用户真实配置。",
+    "完整菜单点击路径的自动验证受 Computer Use 对无窗口菜单栏应用的读取超时限制。"
+  ]
+}
