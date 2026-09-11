@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-035",
+  "role": "implementation_owner",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "work_package_id": "wp-035",
+  "allowed_scope": [
+    "app/Sources/CodexModelSwitchService.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/TocodeCommandTestSupport.swift",
+    "governance/architecture/work-packages/wp-035.json",
+    "governance/architecture/task-envelopes/impl-035.json",
+    "governance/architecture/evidence/ev-static-035.json",
+    "governance/architecture/evidence/ev-unit-035.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-codex-model-switch"
+  ],
+  "must_preserve": [
+    "模型选择菜单仍只渲染 GET https://ai-router.anker-in.com/v1/models 的实时返回结果。",
+    "switchModel 对 CC Switch 当前 Provider 模板与 ~/.codex/config.toml 的双配置写入、复核、回滚流程保持不变。",
+    "CodexApplicationRestarter 的固定两秒延迟与 SIGKILL-only 重启流程保持不变。",
+    "Anker 凭据只发往 HTTPS ai-router.anker-in.com，且不落盘、不打印、不写入测试夹具。",
+    "图片、视觉、标签及明确不兼容 /responses 的模型仍标记为不可选择。"
+  ],
+  "must_reject": [
+    "把已下线 ID v_model/gpt-5.5 或不在实时目录的 gpt-5.6-luna 继续标记为已验证。",
+    "让选择菜单从硬编码元数据表渲染条目。",
+    "改动双配置写入、复核、回滚或 SIGKILL/重启流程。",
+    "把测试凭据写为生产 API Key。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-035 scope 或涉及 l0-codex-model-switch 语义之外的行为时立即停止。",
+    "实时模型目录仍返回 v_model/gpt-5.5 或 gpt-5.6-luna 时停止并重新评估下架结论。",
+    "发现改动使选择菜单或已验证标记依赖非实时来源时停止。"
+  ],
+  "notes": "本次仅清理 CodexModelCatalog.verifiedIDs 与 exactNames 中已过期的模型 ID，并将 v_model/gpt 的显示名从「GPT 默认路由」改为「GPT-5.6 Sol」。测试与夹具同步改为使用实时目录中的 v_model/gpt，同时新增断言证明已下线 ID 不再标记为已验证。"
+}

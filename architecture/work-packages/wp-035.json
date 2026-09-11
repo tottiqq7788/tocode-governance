@@ -1,0 +1,30 @@
+{
+  "id": "wp-035",
+  "title": "清理 Codex 模型目录中已下线模型元数据",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "goal": "移除 CodexModelCatalog 中已不再出现在 Anker /v1/models 实时目录里的模型 ID 的「已验证」标记与友好名称映射，并把实时仍可用的 Sol 路由 v_model/gpt 的显示名统一为「GPT-5.6 Sol」；同步更新测试与夹具，避免把已下线模型当作有效选择基准。",
+  "scope": [
+    "app/Sources/CodexModelSwitchService.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/TocodeCommandTestSupport.swift",
+    "governance/architecture/work-packages/wp-035.json",
+    "governance/architecture/task-envelopes/impl-035.json",
+    "governance/architecture/evidence/ev-static-035.json",
+    "governance/architecture/evidence/ev-unit-035.json"
+  ],
+  "stop_conditions": [
+    "实际改动超出上述 scope、改动 switchModel 的写入/回滚/复核流程、改动 CodexApplicationRestarter 的终止/重启流程，或改动目录请求逻辑时立即停止。",
+    "发现实时模型目录仍返回 v_model/gpt-5.5 或 gpt-5.6-luna 时停止，因为下架判断不再成立。",
+    "改动导致模型选择菜单从非实时来源渲染条目、或允许已下线 ID 被标记为已验证时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：Swift 编译、CLI/App 构建与治理结构审计通过。",
+    "unit：模型命名/分类/已验证集测试更新后全部通过，且明确断言已下线 ID 不再标记为已验证。"
+  ],
+  "status": "approved",
+  "implementation_commit": "9cf13babfbc1f21af73413a791397e5b62efdb00",
+  "approval": {
+    "source": "user-request:2026-09-11",
+    "scope": "用户确认清理仅涉及 CodexModelCatalog 的显示名与分类元数据，不影响 tocode 对 Codex/CC Switch 的读写行为、不影响模型选择菜单的实时来源，并同意同步更新相关测试。"
+  }
+}

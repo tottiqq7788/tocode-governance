@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-035",
+  "work_package_id": "wp-035",
+  "commit": "9cf13babfbc1f21af73413a791397e5b62efdb00",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 9cf13babfbc1f21af73413a791397e5b62efdb00: bash scripts/test.sh.",
+  "result_summary": "ALL TESTS PASSED。更新后断言确认 v_model/gpt 显示为「GPT-5.6 Sol」并标记为已验证，v_model/gpt-5.5 与 gpt-5.6-luna 均不再标记为已验证；TOML 解析、目录去重、双配置切换与失败回滚等既有用例全部通过。",
+  "limitations": [
+    "命令行测试目标不覆盖 NSMenu 原生渲染与 NSAlert 交互。",
+    "网络与进程边界均由测试替身控制。"
+  ]
+}

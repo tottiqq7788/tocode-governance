@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-035",
+  "work_package_id": "wp-035",
+  "commit": "9cf13babfbc1f21af73413a791397e5b62efdb00",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 9cf13babfbc1f21af73413a791397e5b62efdb00: bash scripts/build.sh; codesign --verify --deep --strict --verbose=2 build/Tocode.app; git diff --check. Governance: python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "App 与 CLI 均成功构建，Tocode.app 通过 codesign 校验，diff 无空白错误，治理结构审计通过。实际改动仅限 CodexModelSwitchService.swift、TestRunner.swift 与 TocodeCommandTestSupport.swift。",
+  "limitations": [
+    "治理审计只验证结构与引用，不评估运行时行为。",
+    "应用使用本地 ad-hoc 签名与项目稳定 designated requirement。"
+  ]
+}
