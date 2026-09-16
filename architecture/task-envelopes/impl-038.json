@@ -1,0 +1,64 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-038",
+  "role": "implementation_owner",
+  "baseline_commit": "363ea676afba5d03d55cfd389a4285a04727e736",
+  "work_package_id": "wp-038",
+  "allowed_scope": [
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-038.json",
+    "governance/architecture/task-envelopes/impl-038.json",
+    "governance/architecture/evidence/ev-*-038.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-keyboard-remapping",
+    "l0-codex-project-sync",
+    "l0-temporary-blackout"
+  ],
+  "must_preserve": [
+    "既有以目标快捷键为目标的规则读取后语义完全不变；旧持久化格式无需迁移即可读入，UserDefaults 键保持 tocode.keyboardShortcutMappings。",
+    "既有 switchDesktopLeft / switchDesktopRight 规则无需迁移即可读入，且仍走既有 poster 与 synthesizer marker。",
+    "每条规则仍持久化稳定 ID 与 trim 后名称；名称与源快捷键在规则间各自唯一。",
+    "源快捷键按精确键码与 Control/Option/Shift/Command/Fn 修饰键匹配，命中后吞掉 keyDown/keyUp。",
+    "首次源 keyDown 只执行一次，自动重复只吞掉不重复执行。",
+    "桌面切换合成事件仍带 Tocode synthesizer marker，本服务和既有 GlobalShortcutService 均原样放行。",
+    "无规则时不保留事件钩子；权限或钩子故障时规则仍显示并持久化，且不影响触控板、滚轮与既有快捷键服务。",
+    "编辑窗口仍提供名称、源快捷键、保存/取消，编辑态额外提供删除且只删除当前规则。",
+    "新增/编辑窗口存续期间，既有快捷键钩子与本映射钩子只临时透传按键以供录入框捕获；窗口关闭后立即恢复。",
+    "同步项目夹开启时，映射不得改写读取剪贴板、重置初始目录、目录初始化对应的手动根目录。",
+    "临时黑屏已显示时，映射钩子放行所有按键以便覆盖窗按任意键解除。",
+    "开关类功能只有切换，不拆开启/关闭。"
+  ],
+  "must_reject": [
+    "记录或保存用户未命中的全局按键历史。",
+    "写入或修改系统键盘偏好、调度中心偏好或 com.apple.symbolichotkeys。",
+    "本期使用私有 Space / SkyLight API。",
+    "为功能目标新增第三条事件注入通路，或让桌面切换发出不带 synthesizer marker 的事件。",
+    "把目标（含功能解析出的组合键）作为新源再次递归重映射。",
+    "破坏旧格式规则或既有桌面功能规则的反序列化。",
+    "为 CLI 新增命令，或纳入模型切换、绑定微信、安克密钥、触控板配置、键盘配置、更改目录面板、按键序列、宏、应用限定或鼠标按钮。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要写入或修改系统键盘、调度中心偏好或 com.apple.symbolichotkeys 时停止。",
+    "实现需要使用私有 Space / SkyLight API 时停止。",
+    "实现需要修改既有 Finder 快捷键状态机、触控板状态机、滚轮服务或既有目标快捷键合成语义时停止。",
+    "实现需要破坏旧格式规则或既有桌面功能规则反序列化时停止。",
+    "实现需要为 CLI 新增命令，或扩展到模型切换、绑定微信、安克密钥、触控板配置、键盘配置、更改目录面板、按键序列、宏、应用限定或鼠标按钮时停止并重新准入。"
+  ],
+  "notes": "阶段：扩展 KeyboardMappingAction 目录与 RemapStep.invoke，再改引擎分流与校验，随后把功能页改为分组 NSPopUpButton，最后装配 StatusItemController / CommandExecutor / 共享黑屏实例。桌面两项仍 resolvedShortcut+Fn；其余走动作处理。源冲突校验只针对有 synthesizedShortcut 的桌面项。"
+}

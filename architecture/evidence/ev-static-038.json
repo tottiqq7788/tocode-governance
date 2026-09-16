@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-038",
+  "work_package_id": "wp-038",
+  "commit": "d5f76d93ef69d81690a52699c2dab8d7353b1d32",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit d5f76d93ef69d81690a52699c2dab8d7353b1d32: bash scripts/build.sh; codesign --verify --strict build/Tocode.app; git diff --check. Governance: python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "The app bundle and CLI both compile with swiftc -O and no errors, codesign reports build/Tocode.app valid on disk, git diff --check reports no whitespace errors, and the governance audit passes structure and reference checks. Changed app files stay inside IMPL-038 allowed_scope: KeyboardShortcutMapping.swift, KeyboardShortcutMappingPrompt.swift, KeyboardShortcutRemapService.swift, StatusItemController.swift, AppDelegate.swift, Tests/TestRunner.swift and README.md. No new source file was added, so app/scripts/test.sh did not change.",
+  "limitations": [
+    "The governance audit validates structure and references only; it does not evaluate runtime behavior.",
+    "The app uses an ad-hoc signature with the project's stable designated requirement."
+  ]
+}

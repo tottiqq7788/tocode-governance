@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-038",
+  "work_package_id": "wp-038",
+  "commit": "d5f76d93ef69d81690a52699c2dab8d7353b1d32",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit d5f76d93ef69d81690a52699c2dab8d7353b1d32: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 782 passing assertions and 0 failures. testKeyboardShortcutMappingActionTargets now covers the 18-action catalog, desktop resolution with SecondaryFn, blackout having no synthesized shortcut, invoke vs emit, legacy format coexistence, desktop-only source conflict, and Tocode actions not triggering sourceConflictsWithAction. testKeyboardMappingActionDispatchAndYield covers command-executor dispatch for blackout, one-shot toggle with a short success notice, menu-method dispatch for 访问路径/复制路径/读取剪贴板, sync-enabled no-op for the three root-mutating actions, service-level invoke without poster, and pass-through of all mapped events while blackout is presented.",
+  "limitations": [
+    "The command-line test target does not exercise the NSAlert accessory layout or the grouped NSPopUpButton.",
+    "System-delivered keyboard events and TCC behavior are represented by controlled test doubles."
+  ]
+}

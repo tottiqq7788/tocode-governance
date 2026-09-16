@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-038",
+  "work_package_id": "wp-038",
+  "commit": "d5f76d93ef69d81690a52699c2dab8d7353b1d32",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit d5f76d93ef69d81690a52699c2dab8d7353b1d32: bash scripts/test.sh with MockShortcutPermissions, MockKeyboardShortcutRemapTap, MockTrackpadShortcutPoster, ManualScheduler and MockAlerts.",
+  "result_summary": "Injected accessibility denial for both a desktop-action rule and the expanded Tocode-action catalog keeps the rule persisted with its action target undegraded, leaves the remapping tap uninstalled, and raises 键盘映射需要辅助功能权限. Dispatcher failures from the command executor surface as notifications and do not drop the rule. Pre-existing tap-creation and tap-recovery failures still preserve rules and still report 键盘映射监听未启动 and 键盘映射监听已停止.",
+  "limitations": [
+    "A real mid-session TCC revocation and an operating-system CGEventTap timeout were not induced on the development machine."
+  ]
+}

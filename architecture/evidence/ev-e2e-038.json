@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-038",
+  "work_package_id": "wp-038",
+  "commit": "d5f76d93ef69d81690a52699c2dab8d7353b1d32",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI and physical keyboard verification against build/Tocode.app produced by bash scripts/build.sh from app commit d5f76d93ef69d81690a52699c2dab8d7353b1d32. Not executed in this run.",
+  "result_summary": "The required manual sequence was not executed: launch the rebuilt app, open mac > 键盘 > 新增, record a source combination, switch to 映射功能, pick 临时黑屏 from mac, save, press the source key and confirm the overlay appears, press any key to dismiss, then map a toggle such as 双击⌘Q and confirm the setting flips. Desktop-switch mapping should still move spaces after the Fn-flag fix. Native status-bar menus and the grouped popup require an interactive session.",
+  "limitations": [
+    "Native status-bar menu, modal editor and grouped NSPopUpButton interactions require an interactive app session.",
+    "Real global event interception requires Accessibility permission and physical keyboard input."
+  ]
+}

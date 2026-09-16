@@ -1,0 +1,41 @@
+{
+  "id": "wp-038",
+  "title": "键盘映射功能扩展到 Tocode 动作与开关",
+  "baseline_commit": "363ea676afba5d03d55cfd389a4285a04727e736",
+  "goal": "把「映射功能」从仅有向左/向右切换桌面，扩展为可映射 Tocode 已有的一次性菜单动作与开关切换。开关一律按一下翻转当前状态。桌面切换仍走既有 CGEvent 合成通路（含方向键 SecondaryFn）；其余功能调用既有 Tocode 服务或菜单方法，不新增第三条事件注入通路。需要参数、弹窗、扫码、密钥或模型列表的能力全部跳过。",
+  "scope": [
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-038.json",
+    "governance/architecture/task-envelopes/impl-038.json",
+    "governance/architecture/evidence/ev-*-038.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "实现需要写入或修改系统键盘、调度中心偏好或 com.apple.symbolichotkeys 时停止。",
+    "实现需要使用私有 Space / SkyLight API 时停止。",
+    "实现需要修改既有 Finder 快捷键状态机、触控板状态机、滚轮服务或既有目标快捷键合成语义时停止。",
+    "实现需要破坏旧格式规则或既有桌面功能规则反序列化时停止。",
+    "实现需要为 CLI 新增命令，或扩展到模型切换、绑定微信、安克密钥、触控板配置、键盘配置、更改目录面板、按键序列、宏、应用限定或鼠标按钮时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：新动作编解码、旧桌面规则仍可读、引擎 emit 与 invoke 分流、自指冲突只作用于桌面项、同步开启时根目录动作不写、黑屏呈现时放行、开关只触发一次，全量测试通过。",
+    "fault_injection：辅助功能拒绝与钩子故障时功能规则仍保留并提示。",
+    "runtime_e2e：真机验证映射触发临时黑屏与至少一个开关翻转；未执行则登记 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "d5f76d93ef69d81690a52699c2dab8d7353b1d32",
+  "acceptance_notes": "static、unit、fault_injection 三类证据在 app commit d5f76d9 上实测通过：app 与 CLI 构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 全量通过。runtime_e2e 登记为 skipped：原生状态栏菜单与映射编辑窗需要交互式会话。证据 commit 已改绑 d5f76d93。",
+  "approval": {
+    "source": "user-request-and-plan-approval:2026-09-16-keyboard-mapping-tocode-actions",
+    "scope": "The user asked to expand 映射功能 from the two desktop-switch radios to the one-shot Tocode menu actions and toggle-only switches, skip anything that needs a parameter, panel, QR, secret or model list, keep desktop switching on the existing poster, and reuse the command executor for CLI-backed actions.",
+    "design_reference": "plans/键盘映射功能扩展_0e8c2a9c.plan.md"
+  }
+}
