@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-039",
+  "work_package_id": "wp-039",
+  "commit": "fd3376c85a70a8b46e43318876703863a774409f",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit fd3376c85a70a8b46e43318876703863a774409f: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 814 passing assertions and 0 failures. testTrackpadShortcutStoreAndRecognizer now covers legacy RecordedShortcut JSON decoding, action persistence, allBindings vs allShortcuts, and hasAnyShortcut for action-only bindings. testTrackpadShortcutActionBindingsAndDispatch covers action-only monitor start, blackout invoke without poster, desktop emit with Control+Fn, shortcut post, one-shot toggle, and KeyboardMappingTargetEditor reuse with the trackpad trigger phrase.",
+  "limitations": [
+    "The command-line test target does not exercise the NSAlert accessory layout or the grouped NSPopUpButton.",
+    "System-delivered multitouch frames and TCC behavior are represented by controlled test doubles."
+  ]
+}

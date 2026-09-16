@@ -1,0 +1,43 @@
+{
+  "id": "wp-039",
+  "title": "触控板轻点复刻映射功能",
+  "baseline_commit": "d5f76d93ef69d81690a52699c2dab8d7353b1d32",
+  "goal": "让「mac → 触控板 → 三/四/五指轻点」弹窗与键盘映射对齐：分段控件在「映射快捷键」与「映射功能」之间选择。映射功能使用与 wp-038 相同的一次性动作与开关目录，开关一律 toggle。桌面切换仍走既有触控板 poster 合成 Control+Fn+方向键；其余功能调用既有 KeyboardMappingActionDispatcher。旧纯快捷键 JSON 无需迁移即可读入。不改轻点识别状态机，不新增第三条事件注入通路。",
+  "scope": [
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/TrackpadShortcutService.swift",
+    "app/Sources/ShortcutRecorderPrompt.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-039.json",
+    "governance/architecture/task-envelopes/impl-039.json",
+    "governance/architecture/evidence/ev-*-039.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "实现需要写入或修改系统键盘、调度中心偏好或 com.apple.symbolichotkeys 时停止。",
+    "实现需要使用私有 Space / SkyLight API 时停止。",
+    "实现需要修改触控板轻点识别阈值、状态机、私有触控接口、滚轮服务、Finder 快捷键状态机或既有目标快捷键合成语义时停止。",
+    "实现需要破坏旧纯 RecordedShortcut JSON 反序列化，或改 UserDefaults 键 tocode.trackpadShortcut.{3,4,5}FingerTap 时停止。",
+    "实现需要修改键盘映射规则存储或 l0-keyboard-remapping 校验语义时停止。",
+    "实现需要为 CLI 新增命令，或扩展到模型切换、绑定微信、安克密钥、触控板配置、键盘配置、更改目录面板、按键序列、宏、应用限定或鼠标按钮时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：旧快捷键 JSON 仍可读、新 action 编解码、覆盖写、纯功能绑定启动监听、快捷键仍 poster.post、桌面功能带 Fn、Tocode 动作走 handler 且开关一次、同步锁、黑屏不经 CLI .blackout，全量测试通过。",
+    "fault_injection：监听失败与辅助功能拒绝时功能绑定仍保留并提示。",
+    "runtime_e2e：真机验证三指轻点映射临时黑屏并触发；未执行则登记 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "fd3376c85a70a8b46e43318876703863a774409f",
+  "acceptance_notes": "static、unit、fault_injection 三类证据在 app commit fd3376c 上实测通过：app 与 CLI 构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 814 项通过 0 项失败。runtime_e2e 登记为 skipped：原生状态栏菜单与映射编辑窗需要交互式会话。证据 commit 已改绑 fd3376c8。",
+  "approval": {
+    "source": "user-request-and-plan-approval:2026-09-16-trackpad-mapping-tocode-actions",
+    "scope": "The user asked to replicate the keyboard 映射功能 catalog onto 三/四/五指轻点, keep the same toggle-only and skip list, keep desktop switching on the existing poster with Control+Fn+arrow, and reuse the command executor for CLI-backed actions.",
+    "design_reference": "plans/触控板映射功能_c8300fb2.plan.md"
+  }
+}

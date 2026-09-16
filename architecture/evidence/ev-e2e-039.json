@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-039",
+  "work_package_id": "wp-039",
+  "commit": "fd3376c85a70a8b46e43318876703863a774409f",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI and physical trackpad verification against build/Tocode.app produced by bash scripts/build.sh from app commit fd3376c85a70a8b46e43318876703863a774409f. Not executed in this run.",
+  "result_summary": "The required manual sequence was not executed: launch the rebuilt app, open mac > 触控板 > 三指轻点, switch the target segment to 映射功能, pick 临时黑屏, save, tap with three fingers and confirm the overlay appears, press any key to dismiss. Native status-bar menus and the grouped popup require an interactive session.",
+  "limitations": [
+    "Native status-bar menu, modal editor and grouped NSPopUpButton interactions require an interactive app session.",
+    "Real multitouch recognition requires a physical trackpad."
+  ]
+}

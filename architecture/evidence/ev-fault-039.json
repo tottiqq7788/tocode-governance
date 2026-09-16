@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-039",
+  "work_package_id": "wp-039",
+  "commit": "fd3376c85a70a8b46e43318876703863a774409f",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit fd3376c85a70a8b46e43318876703863a774409f: bash scripts/test.sh with MockShortcutPermissions, MockMultitouchMonitor, MockTrackpadShortcutPoster and MockAlerts.",
+  "result_summary": "Injected multitouch start failure and accessibility denial for action-only bindings keep the action target persisted undegraded, leave listening stopped or untrusted, and raise 触控板监听未启动 and 触控板快捷键需要辅助功能权限. Pre-existing shortcut-binding fault paths remain intact.",
+  "limitations": [
+    "A real mid-session TCC revocation was not induced on the development machine."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-039",
+  "role": "implementation_owner",
+  "baseline_commit": "d5f76d93ef69d81690a52699c2dab8d7353b1d32",
+  "work_package_id": "wp-039",
+  "allowed_scope": [
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/TrackpadShortcutService.swift",
+    "app/Sources/ShortcutRecorderPrompt.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-039.json",
+    "governance/architecture/task-envelopes/impl-039.json",
+    "governance/architecture/evidence/ev-*-039.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-trackpad-shortcuts",
+    "l0-codex-project-sync",
+    "l0-temporary-blackout"
+  ],
+  "must_preserve": [
+    "旧版本写入的纯 RecordedShortcut JSON 无需迁移即可读为映射快捷键，语义完全不变；UserDefaults 键保持 tocode.trackpadShortcut.{3,4,5}FingerTap。",
+    "仅精确三/四/五指、短时、低位移、完整抬起才触发；滑动、长按、指数量不符或未配置不得触发。",
+    "轻点识别阈值与 TrackpadTapRecognizer 状态机保持不变。",
+    "映射快捷键与桌面功能仍走既有 TrackpadShortcutEventPosting，合成事件带 Tocode synthesizer marker。",
+    "无绑定时停止触控监听；权限或监听故障时绑定仍显示并持久化，且不影响键盘映射、滚轮与既有快捷键服务。",
+    "录入窗口仍提供保存/取消/清除配置；有任一绑定才可清除。",
+    "录入窗口存续期间，既有快捷键钩子与键盘映射钩子只临时透传按键以供录入框捕获；窗口关闭后立即恢复。",
+    "同步项目夹开启时，映射不得改写读取剪贴板、重置初始目录、目录初始化对应的手动根目录。",
+    "开关类功能只有切换，不拆开启/关闭。",
+    "不把「触控板」菜单项本身映射成改配置，也不纳入模型切换、绑定微信、安克密钥、键盘配置或更改目录面板。"
+  ],
+  "must_reject": [
+    "修改触控板轻点识别阈值、状态机或私有触控接口。",
+    "写入或修改系统键盘偏好、调度中心偏好或 com.apple.symbolichotkeys。",
+    "本期使用私有 Space / SkyLight API。",
+    "为功能目标新增第三条事件注入通路，或让桌面切换发出不带 synthesizer marker 的事件。",
+    "把触控板合成键作为新源再次递归进入键盘重映射。",
+    "破坏旧纯 RecordedShortcut JSON 的反序列化。",
+    "修改键盘映射规则存储键或源快捷键唯一性/自指冲突校验。",
+    "为 CLI 新增命令，或纳入模型切换、绑定微信、安克密钥、触控板配置、键盘配置、更改目录面板、按键序列、宏、应用限定或鼠标按钮。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要写入或修改系统键盘、调度中心偏好或 com.apple.symbolichotkeys 时停止。",
+    "实现需要使用私有 Space / SkyLight API 时停止。",
+    "实现需要修改触控板轻点识别阈值、状态机、私有触控接口、滚轮服务、Finder 快捷键状态机或既有目标快捷键合成语义时停止。",
+    "实现需要破坏旧纯 RecordedShortcut JSON 反序列化，或改 UserDefaults 键 tocode.trackpadShortcut.{3,4,5}FingerTap 时停止。",
+    "实现需要修改键盘映射规则存储或 l0-keyboard-remapping 校验语义时停止。",
+    "实现需要为 CLI 新增命令，或扩展到模型切换、绑定微信、安克密钥、触控板配置、键盘配置、更改目录面板、按键序列、宏、应用限定或鼠标按钮时停止并重新准入。"
+  ],
+  "notes": "阶段：先把 TrackpadShortcutStore 改为 KeyboardShortcutMappingTarget，再让 Service 按 remapStep 分流，随后把 ShortcutRecorderPrompt 嵌入 KeyboardMappingTargetEditor，最后装配 StatusItemController / AppDelegate。KeyboardShortcutMappingPrompt 只增加触发短语参数，不改键盘保存语义。"
+}
