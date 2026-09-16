@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-037",
+  "work_package_id": "wp-037",
+  "commit": "363ea676afba5d03d55cfd389a4285a04727e736",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit 363ea676afba5d03d55cfd389a4285a04727e736: bash scripts/test.sh with MockShortcutPermissions, MockKeyboardShortcutRemapTap, MockTrackpadShortcutPoster, ManualScheduler and MockAlerts.",
+  "result_summary": "Injected accessibility denial for an action-target rule keeps the rule persisted with its action target undegraded, leaves the remapping tap uninstalled, reports that the existing shortcut hook must not yield while listening is down, and raises the specific notification 键盘映射需要辅助功能权限. The pre-existing injected tap-creation failure and tap-recovery failure cases still preserve rules and still report 键盘映射监听未启动 and 键盘映射监听已停止, and no other input service is touched.",
+  "limitations": [
+    "A real mid-session TCC revocation and an operating-system CGEventTap timeout were not induced on the development machine.",
+    "Failure of the operating system to honor a synthesized Control-Left or Control-Right space-switch hotkey cannot be detected by the service and is therefore not covered by fault injection; it is a runtime_e2e concern."
+  ]
+}

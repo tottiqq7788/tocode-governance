@@ -1,0 +1,58 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-037",
+  "role": "implementation_owner",
+  "baseline_commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "work_package_id": "wp-037",
+  "allowed_scope": [
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-037.json",
+    "governance/architecture/task-envelopes/impl-037.json",
+    "governance/architecture/evidence/ev-*-037.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-keyboard-remapping"
+  ],
+  "must_preserve": [
+    "既有以目标快捷键为目标的规则读取后语义完全不变；旧持久化格式无需迁移脚本即可读入，UserDefaults 键保持 tocode.keyboardShortcutMappings。",
+    "每条规则仍持久化稳定 ID 与 trim 后名称；名称与源快捷键在规则间各自唯一。",
+    "源快捷键按精确键码与 Control/Option/Shift/Command/Fn 修饰键匹配，命中后吞掉 keyDown/keyUp。",
+    "首次源 keyDown 只合成一次目标事件，自动重复只吞掉不重复合成。",
+    "所有合成目标事件复用既有 poster 与 Tocode synthesizer marker，本服务和既有 GlobalShortcutService 均原样放行。",
+    "无规则时不保留事件钩子；权限或钩子故障时规则仍显示并持久化，且不影响触控板、滚轮与既有快捷键服务。",
+    "编辑窗口仍提供名称、源快捷键、保存/取消，编辑态额外提供删除且只删除当前规则。",
+    "新增/编辑窗口存续期间，既有快捷键钩子与本映射钩子只临时透传按键以供录入框捕获；窗口关闭后立即恢复。",
+    "既有快捷键钩子仍只对当前映射服务明确声明的源 keyDown/keyUp 放行。",
+    "选择「映射快捷键」时的录入、校验与保存路径与 wp-034 行为一致。"
+  ],
+  "must_reject": [
+    "记录或保存用户未命中的全局按键历史。",
+    "写入或修改系统键盘偏好、调度中心偏好或 com.apple.symbolichotkeys。",
+    "本期使用私有 Space / SkyLight API 绕过系统空间切换快捷键。",
+    "为功能目标新增第二条事件注入通路，或发出不带 synthesizer marker 的目标事件。",
+    "把目标（含功能解析出的组合键）作为新源再次递归重映射。",
+    "破坏旧格式规则的反序列化，或允许空名称、重复名称、重复源快捷键。",
+    "扩展到按键序列、宏、应用限定规则、鼠标按钮，或本期新增第三个以上功能项。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "合成 ⌃← / ⌃→ 在真机 runtime_e2e 中无法触发系统空间切换时停止，回到方案选择，不得自行改用私有 Space API。",
+    "实现需要写入或修改系统键盘、调度中心偏好或 com.apple.symbolichotkeys 时停止。",
+    "实现需要修改既有 Finder 快捷键状态机、触控板状态机、滚轮服务或既有目标快捷键合成语义时停止。",
+    "实现需要破坏旧格式规则反序列化，或需要额外迁移脚本、外部工具才能读入既有规则时停止。",
+    "需求扩大为按键序列、宏、应用限定规则、鼠标按钮或第三个以上功能项时停止并重新准入。"
+  ],
+  "notes": "阶段：先扩展模型（KeyboardMappingAction 与带 kind 判别的目标联合类型，含旧格式兼容解码），再扩展纯引擎的目标解析，随后改编辑窗分段控件与功能单选，最后接入菜单显示、测试与 README。业务对象：KeyboardShortcutMapping（target 由 RecordedShortcut 变为目标联合类型）、KeyboardMappingAction。L1：l1-keyboard-remapping。L2：l2-keyboard-remapping，selectors 不变，不新增源文件，因此 app/scripts/test.sh 无需改动。KeyboardShortcutRemapStep 保持 .emit(RecordedShortcut)，由引擎在命中时发出 target.resolvedShortcut，从而不改变钩子生命周期、吞键与防递归语义。源冲突校验只针对「目标为功能且该功能自身触发键等于源」，源为 ⌃← 而目标为其他快捷键属合法重映射，不得拒绝。系统空间切换热键开关检测本期不做：本机 com.apple.symbolichotkeys 中 id 79/80/81/82 的 params 为空，无法可靠反查 id 与方向的对应关系，猜测会造成误报，改为在弹窗提示文字与 README 写明依赖。"
+}

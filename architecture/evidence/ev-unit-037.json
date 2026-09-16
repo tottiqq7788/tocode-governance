@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-037",
+  "work_package_id": "wp-037",
+  "commit": "363ea676afba5d03d55cfd389a4285a04727e736",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 363ea676afba5d03d55cfd389a4285a04727e736: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 759 passing assertions and 0 failures, re-run on the committed tree at app commit 363ea67. The new testKeyboardShortcutMappingActionTargets covers action titles, resolution of 向左切换桌面/向右切换桌面 to the system Control-Left and Control-Right shortcuts, resolvedShortcut and displayText, decoding of a legacy target stored as a bare RecordedShortcut with no kind discriminator, coexistence of legacy and new-format rules, action-target encode/decode round trip, rejection of a source equal to the selected action's own trigger, acceptance of remapping Control-Left to an unrelated target, engine claim and one-shot emission of the resolved shortcut, automatic-repeat suppression without re-emission, pass-through of marked synthesized events, service-level claim and suppression with delivery through the existing poster, and retention of the action target when accessibility is denied. The pre-existing store, engine, service lifecycle and mapping-priority tests still pass unchanged.",
+  "limitations": [
+    "The command-line test target does not exercise the NSAlert accessory layout, the NSSegmentedControl tab switching, or the radio button group.",
+    "System-delivered keyboard events and TCC behavior are represented by controlled test doubles."
+  ]
+}

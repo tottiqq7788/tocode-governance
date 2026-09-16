@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-037",
+  "work_package_id": "wp-037",
+  "commit": "363ea676afba5d03d55cfd389a4285a04727e736",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 363ea676afba5d03d55cfd389a4285a04727e736: bash scripts/build.sh; codesign --verify --strict build/Tocode.app; codesign -dv build/Tocode.app; git diff --check. Governance: python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "The app bundle and the CLI both compile with swiftc -O and no errors, codesign reports build/Tocode.app valid on disk and satisfying its designated requirement (adhoc, identifier com.tocode.app), git diff --check reports no whitespace errors, and the governance audit passes structure and reference checks. The changed app files are exactly README.md, Sources/KeyboardShortcutMapping.swift, Sources/KeyboardShortcutMappingPrompt.swift, Sources/StatusItemController.swift and Tests/TestRunner.swift, all inside the IMPL-037 allowed scope; app/scripts/test.sh needs no change because no source file was added.",
+  "limitations": [
+    "The governance audit validates structure and references only; it does not evaluate runtime behavior.",
+    "The app uses an ad-hoc signature with the project's stable designated requirement."
+  ]
+}

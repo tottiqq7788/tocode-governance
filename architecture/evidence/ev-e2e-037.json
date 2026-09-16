@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-037",
+  "work_package_id": "wp-037",
+  "commit": "363ea676afba5d03d55cfd389a4285a04727e736",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI and physical keyboard verification against build/Tocode.app produced by bash scripts/build.sh from app commit 363ea676afba5d03d55cfd389a4285a04727e736. Not executed in this run.",
+  "result_summary": "The required manual sequence was not executed: launch the built app, grant Accessibility, open mac > 键盘 > 新增, record a source combination, switch the target segment to 映射功能, pick 向左切换桌面, save, confirm the rule is listed with the 源 → 向左切换桌面 tooltip and the arrow.left.square icon, press the source combination on a multi-desktop session and confirm the desktop actually moves left, repeat for 向右切换桌面, then edit and delete the rule and confirm restoration after relaunch. Whether a synthesized Control-Left / Control-Right posted at the HID tap with the Tocode marker is honored by the operating system as a Mission Control space switch is still unverified; if it is not honored, the wp-037 stop condition applies and the implementation approach must return for re-selection rather than switching to a private Space API.",
+  "limitations": [
+    "Native status-bar menu, modal recorder, segmented control and radio button interactions require an interactive app session.",
+    "Real global event interception and space switching require Accessibility permission, physical keyboard input and a session with more than one desktop.",
+    "The machine's com.apple.symbolichotkeys lists space-switching hotkeys 79/80/81/82 as enabled with empty parameter lists, which confirms the defaults are in force but does not identify which id maps to which direction; direction mapping is only observable on a real desktop switch."
+  ]
+}

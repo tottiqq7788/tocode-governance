@@ -1,0 +1,39 @@
+{
+  "id": "wp-037",
+  "title": "键盘映射支持映射为命名功能（左右切换桌面）",
+  "baseline_commit": "a540da395ce6e9f86e07cd849734e9ffe2acad2c",
+  "goal": "在新增/编辑键盘映射窗口的源快捷键下方提供目标类型分段控件「映射快捷键 / 映射功能」：前者保持既有目标快捷键录入行为，后者提供「向左切换桌面」「向右切换桌面」两个单选项。功能目标解析为系统自身的 ⌃← / ⌃→ 组合键，复用既有事件合成通路与内部标记，不新增第二条注入通路；规则持久化格式升级为带 kind 判别的目标联合类型，且必须能无迁移读入旧格式规则。",
+  "scope": [
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-037.json",
+    "governance/architecture/task-envelopes/impl-037.json",
+    "governance/architecture/evidence/ev-*-037.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "合成 ⌃← / ⌃→ 在真机 runtime_e2e 中无法触发系统空间切换时停止，回到方案选择，不得自行改用私有 Space API。",
+    "实现需要写入或修改系统键盘、调度中心偏好或 com.apple.symbolichotkeys 时停止。",
+    "实现需要修改既有 Finder 快捷键状态机、触控板状态机、滚轮服务或既有目标快捷键合成语义时停止。",
+    "实现需要破坏旧格式规则反序列化，或需要额外迁移脚本、外部工具才能读入既有规则时停止。",
+    "需求扩大为按键序列、宏、应用限定规则、鼠标按钮或第三个以上功能项时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：目标联合类型的编解码、旧格式规则无迁移读入、功能解析为 ⌃←/⌃→、源与功能自身触发键相同时拒绝、引擎命中功能目标只合成一次、既有快捷键目标行为不变，全部通过；全量测试通过。",
+    "fault_injection：辅助功能拒绝与钩子创建/恢复失败时，功能类规则同样保留并明确提示，其他输入服务不受影响。",
+    "runtime_e2e：真机新增两条功能规则并验证桌面确实左右切换；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "363ea676afba5d03d55cfd389a4285a04727e736",
+  "acceptance_notes": "static、unit、fault_injection 三类证据在 app commit 363ea67 上实测通过：app 与 CLI 构建成功、codesign 满足 designated requirement、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 759 项通过 0 项失败。runtime_e2e 登记为 skipped：原生状态栏菜单、模态录入窗、分段控件与单选组需要交互式会话，且合成的 ⌃← / ⌃→ 是否被系统接受为调度中心空间切换只能在多桌面真机会话中观察。该未验证项对应本工作包的 stop condition：若真机不生效，必须回到方案选择，不得改用私有 Space / SkyLight API。实际改动文件与 IMPL-037 的 allowed_scope 完全一致，app/scripts/test.sh 因未新增源文件而无需改动。",
+  "approval": {
+    "source": "user-request-and-design-approval:2026-09-16",
+    "scope": "The user asked for a target-type tab in the mapping dialog with 映射快捷键 / 映射功能, and two single-choice desktop-switch actions. The user approved the recorded design: synthesize the system's own ⌃← / ⌃→ through the existing poster and marker, defer system-hotkey detection because the symbolic hotkey ids cannot be reliably reverse-mapped from an empty parameter list, and reject a source only when it equals the selected action's own trigger so that remapping ⌃← to another shortcut stays legal.",
+    "design_reference": ".codex-progress/keyboard-mapping-action-20260916.md"
+  }
+}
