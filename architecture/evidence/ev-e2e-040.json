@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-040",
+  "work_package_id": "wp-040",
+  "commit": "343b7c9ad84aabdc801b4ae2912bb4fead22dfaa",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI verification against build/Tocode.app produced by bash scripts/build.sh from app commit 343b7c9ad84aabdc801b4ae2912bb4fead22dfaa. Not executed in this run.",
+  "result_summary": "The required manual sequence was not executed: open 设置 and confirm 拓展设置 → AK is unchecked by default and AK密钥 is absent; confirm  codex has no model submenu; check AK; confirm AK密钥 and the Codex model submenu appear; uncheck AK and confirm both hide. Native status-bar menus require an interactive session.",
+  "limitations": [
+    "Native status-bar menu interactions require an interactive app session."
+  ]
+}

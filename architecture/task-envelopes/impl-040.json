@@ -1,0 +1,53 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-040",
+  "role": "implementation_owner",
+  "baseline_commit": "fd3376c85a70a8b46e43318876703863a774409f",
+  "work_package_id": "wp-040",
+  "allowed_scope": [
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-040.json",
+    "governance/architecture/task-envelopes/impl-040.json",
+    "governance/architecture/evidence/ev-*-040.json",
+    "governance/architecture/governance.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-extended-settings",
+    "l0-action-menu",
+    "l0-codex-model-switch",
+    "l0-anker-credential"
+  ],
+  "must_preserve": [
+    "开机自启、codex 项目状态与同步项目夹始终显示，不随 AK 开关隐藏。",
+    "AK 关闭只隐藏菜单项，不删除已保存的安克密钥，不改四工具写入、回滚与不暴露密钥的语义。",
+    "AK 关闭不改变 CLI 与微信命令中的 codex model / 密钥相关能力。",
+    "模型切换的实时目录、风险确认、双配置一致提交与 2 秒后强制重启语义保持不变。",
+    "键盘/触控板映射仍不提供密钥录入与模型切换。",
+    "UserDefaults 键 tocode.extendedSettings.akEnabled；缺省 false。"
+  ],
+  "must_reject": [
+    "默认开启 AK 或在未勾选时仍显示模型切换或 AK密钥。",
+    "按 AK 开关拦截 CLI、微信命令或后台密钥/模型写入。",
+    "本期新增 AK 以外的拓展类型。",
+    "把同步项目夹、开机自启或其他非 AK 专用项藏进拓展设置。",
+    "修改四工具凭据格式、CC Switch 事务或 Codex 进程终止逻辑。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要按 AK 开关拦截 CLI、微信命令、模型切换写入或密钥保存语义时停止并重新准入。",
+    "实现需要新增 AK 以外的拓展类型、或把同步项目夹/开机自启一并隐藏时停止并重新准入。",
+    "实现需要修改四工具凭据格式、CC Switch 事务或 Codex 强制重启逻辑时停止。"
+  ],
+  "notes": "阶段：先持久化 AK 开关，再改右键菜单显隐与安克入口更名。勾选后当场把模型项与 AK密钥插入已打开的菜单，避免必须关掉右键才能看到。"
+}

@@ -55,7 +55,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启和安克密钥。其余既有目录、codex、微信关联和退出功能保持不变。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项。其余既有目录、codex、微信关联和退出功能保持不变。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -68,7 +68,8 @@
         "user-requirement:2026-09-09-menu-regroup",
         "app-commit:c73b1a3",
         "user-requirement:2026-09-09-keyboard-remap",
-        "user-request:2026-09-11-anker-key"
+        "user-request:2026-09-11-anker-key",
+        "user-request:2026-09-16-extended-settings-ak"
       ]
     },
     {
@@ -183,11 +184,12 @@
       "id": "l0-codex-model-switch",
       "name": "Codex 模型切换与强制重启",
       "status": "approved",
-      "statement": "右键「codex」子菜单增加以当前 Codex 用户级模型友好名称为标题的模型子菜单；每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
+      "statement": "仅当右键「设置 → 拓展设置 → AK」勾选时，「codex」子菜单才增加以当前 Codex 用户级模型友好名称为标题的模型子菜单；每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
       "source_refs": [
         "user-approved-plan:2026-09-07",
         "user-revision:2026-09-07",
-        "app-commit:0790172"
+        "app-commit:0790172",
+        "user-request:2026-09-16-extended-settings-ak"
       ]
     },
     {
@@ -271,10 +273,21 @@
       "id": "l0-anker-credential",
       "name": "四工具安克密钥统一设置",
       "status": "approved",
-      "statement": "新增安全输入弹窗，一次保存覆盖 pi、Codex（通过 CC Switch）、Hermes、OpenCode 的 Anker 密钥，并把 Hermes 接入安克 DeepSeek V4 Pro。 使用隐藏输入框，取消不修改；失败恢复且不暴露密钥；运行中的客户端需重载配置，不自动中断任务。",
+      "statement": "仅当右键「设置 → 拓展设置 → AK」勾选时，「设置」才提供「AK密钥」入口（原「安克密钥」仅改菜单名称）。点击后弹出安全输入弹窗，一次保存覆盖 pi、Codex（通过 CC Switch）、Hermes、OpenCode 的 Anker 密钥，并把 Hermes 接入安克 DeepSeek V4 Pro。使用隐藏输入框，取消不修改；失败恢复且不暴露密钥；运行中的客户端需重载配置，不自动中断任务。关闭 AK 只隐藏该入口，不删除已保存密钥。",
       "source_refs": [
         "user-request:2026-09-11-anker-key",
-        "user-clarification:2026-09-11-hermes-deepseek"
+        "user-clarification:2026-09-11-hermes-deepseek",
+        "user-request:2026-09-16-extended-settings-ak"
+      ]
+    },
+    {
+      "id": "l0-extended-settings",
+      "name": "拓展设置功能类型开关",
+      "status": "approved",
+      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示「codex」下的模型切换子菜单，以及「设置」中的「AK密钥」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、codex 项目状态与同步项目夹始终显示。",
+      "source_refs": [
+        "user-request:2026-09-16-extended-settings-ak",
+        "app-commit:343b7c9"
       ]
     }
   ],
@@ -553,7 +566,8 @@
       "responsibility": "从 CC Switch 当前 Anker Codex Provider 安全读取凭据并实时获取模型目录，以事务和原子文件替换保持 Provider 模板与 Codex 用户配置的 model 一致；提交成功后延迟 2 秒直接强制终止 Codex 并重新启动，任何配置失败均不得终止 Codex。",
       "l0_refs": [
         "l0-codex-model-switch",
-        "l0-action-menu"
+        "l0-action-menu",
+        "l0-extended-settings"
       ],
       "owners": [
         "architecture_owner"
@@ -637,13 +651,33 @@
       "responsibility": "完整预检四工具本机配置，精确校验服务商/网关，安全保存、复核、失败恢复并报告缓存生效边界。",
       "l0_refs": [
         "l0-anker-credential",
-        "l0-action-menu"
+        "l0-action-menu",
+        "l0-extended-settings"
       ],
       "owners": [
         "architecture_owner"
       ],
       "reviewers": [
         "implementation_owner"
+      ]
+    },
+    {
+      "id": "l1-extended-settings",
+      "name": "拓展设置类型开关与菜单显隐",
+      "status": "candidate",
+      "responsibility": "持久化拓展设置中的功能类型开关，并据此决定右键菜单是否呈现该类型专用项；关闭类型不得删除已存配置或改变命令层能力。",
+      "l0_refs": [
+        "l0-extended-settings",
+        "l0-action-menu",
+        "l0-codex-model-switch",
+        "l0-anker-credential"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
       ]
     }
   ],
@@ -672,7 +706,8 @@
         "l1-codex-project-sync",
         "l1-codex-model-switch",
         "l1-trackpad-shortcuts",
-        "l1-keyboard-remapping"
+        "l1-keyboard-remapping",
+        "l1-extended-settings"
       ],
       "selectors": [
         "StatusItemController.swift"
@@ -950,6 +985,18 @@
       "selectors": [
         "AnkerCredentialService.swift",
         "AnkerCredentialPrompt.swift",
+        "StatusItemController.swift"
+      ]
+    },
+    {
+      "id": "l2-extended-settings",
+      "name": "拓展设置存储与类型开关",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-extended-settings"
+      ],
+      "selectors": [
+        "ExtendedSettingsStore.swift",
         "StatusItemController.swift"
       ]
     }

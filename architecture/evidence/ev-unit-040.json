@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-040",
+  "work_package_id": "wp-040",
+  "commit": "343b7c9ad84aabdc801b4ae2912bb4fead22dfaa",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 343b7c9ad84aabdc801b4ae2912bb4fead22dfaa: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 821 passing assertions and 0 failures. testExtendedSettingsStore covers AK default-off, persistence across store instances, write-back to off, and the 拓展设置 / AK / AK密钥 titles.",
+  "limitations": [
+    "The command-line test target does not pop the native status-bar menu."
+  ]
+}

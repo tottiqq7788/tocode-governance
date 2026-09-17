@@ -1,0 +1,37 @@
+{
+  "id": "wp-040",
+  "title": "拓展设置类型开关隐藏 AK 专用菜单项",
+  "baseline_commit": "fd3376c85a70a8b46e43318876703863a774409f",
+  "goal": "在右键「设置」中增加「拓展设置」子菜单，并放入类型开关「AK」（默认关闭）。仅当 AK 勾选时，右键菜单才显示「codex」下的模型切换子菜单，以及「设置」中更名为「AK密钥」的原安克密钥入口。关闭类型只隐藏菜单项，不删除已存密钥，也不改变 CLI、微信命令或模型切换/密钥写入语义。",
+  "scope": [
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-040.json",
+    "governance/architecture/task-envelopes/impl-040.json",
+    "governance/architecture/evidence/ev-*-040.json",
+    "governance/architecture/governance.json"
+  ],
+  "stop_conditions": [
+    "实现需要按 AK 开关拦截 CLI、微信命令、模型切换写入或密钥保存语义时停止并重新准入。",
+    "实现需要新增 AK 以外的拓展类型、或把同步项目夹/开机自启一并隐藏时停止并重新准入。",
+    "实现需要修改四工具凭据格式、CC Switch 事务或 Codex 强制重启逻辑时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：AK 默认关闭、可持久化开关、菜单标题为 AK密钥，全量测试通过。",
+    "fault_injection：不适用独立故障注入；密钥与模型切换既有故障路径保持。",
+    "runtime_e2e：真机勾选 AK 后出现模型切换与 AK密钥，取消勾选后隐藏；未执行则登记 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "343b7c9ad84aabdc801b4ae2912bb4fead22dfaa",
+  "acceptance_notes": "static、unit 两类证据在 app commit 343b7c9 上实测通过：app 与 CLI 构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 821 项通过 0 项失败。runtime_e2e 登记为 skipped：原生状态栏菜单需要交互式会话。证据 commit 已改绑 343b7c9a。",
+  "approval": {
+    "source": "user-request:2026-09-16-extended-settings-ak",
+    "scope": "The user asked to add 设置 → 拓展设置 containing type toggle AK, show Codex model switching and Settings AK密钥 only when AK is checked, and rename 安克密钥 to AK密钥. Types other than AK are out of scope."
+  }
+}
