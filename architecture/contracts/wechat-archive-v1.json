@@ -6,6 +6,7 @@
     "l0-wechat-archive",
     "l0-wechat-command",
     "l0-wechat-quick-input",
+    "l0-wechat-cli-send",
     "l0-action-menu"
   ],
   "authority": {
@@ -16,12 +17,12 @@
   },
   "invariants": [
     "Ordinary (non-command, non-quick-input) messages are receive-only: the runtime must never call sendmessage or any other outbound WeChat message API for them.",
-    "The only outbound WeChat message API exceptions are a '.'-prefixed command reply and a recognized quick-input reply; each is sent once to the originating conversation and is not treated as an archived inbound message.",
+    "The only outbound WeChat message API exceptions are a '.'-prefixed command reply, a recognized quick-input reply, and an explicit wechat send; none of these outbound payloads are treated as archived inbound messages.",
     "Bearer tokens are sent only over HTTPS to weixin.qq.com or a subdomain and never appear in browser files, notifications, logs, archives, or persisted cursor state.",
     "Transient transport errors and HTTP 5xx preserve the current binding; only HTTP 401 or 403 remove the credential.",
     "A rebind does not disturb the old listener until the new confirmed credential is safely stored.",
     "Archive files are append-only and attachments never overwrite an existing path.",
-    "context_token, request headers, bearer tokens, and AES keys are not written to Markdown."
+    "context_token, request headers, bearer tokens, and AES keys are not written to Markdown. Reply targets may be stored only in the 0600 receive-state file."
   ],
   "archive_format": {
     "directory": "yyMMdd",
@@ -32,7 +33,7 @@
   "prohibited_results": [
     "Reading unrelated personal WeChat conversations or historical messages.",
     "Sending acknowledgements, AI replies, or any other WeChat message for ordinary (non-command, non-quick-input) messages.",
-    "Archiving a '.'-prefixed command message or a recognized quick-input message to wechat*.md or saving its attachments.",
+    "Archiving a '.'-prefixed command message, a recognized quick-input message, or a wechat send outbound payload to wechat*.md or saving its attachments.",
     "Treating a mock integration test as successful real-account runtime E2E.",
     "Advancing the cursor or dedupe state after an archive write failure.",
     "Creating a fabricated voice file when iLink provides ASR text only."

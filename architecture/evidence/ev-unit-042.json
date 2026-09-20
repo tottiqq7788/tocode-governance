@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-042",
+  "work_package_id": "wp-042",
+  "commit": "7b294ba718d1b1369d23d5463211d21deed21490",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 7b294ba718d1b1369d23d5463211d21deed21490: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 919 passing assertions and 0 failures. Coverage includes wechat send parsing for --text/--to/multiple files and empty payloads; unbound and missing-session failures; default last inbound target; unknown --to; image vs attachment classification; text plus two files sent as three messages; fail-fast after a later upload error; old receive-state JSON still loads; CLI path absolutizing and 60s timeout.",
+  "limitations": [
+    "The command-line test target does not send live iLink traffic."
+  ]
+}

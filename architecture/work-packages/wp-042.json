@@ -1,0 +1,48 @@
+{
+  "id": "wp-042",
+  "title": "CLI 通过已绑定微信发送文字、图片与附件",
+  "baseline_commit": "18f116b8a05e268a41c5ad5305727202e035e4ef",
+  "goal": "新增 CLI 命令 tocode wechat send：用当前已绑定的 iLink Bot，向最近一条入站会话（或 --to 指定且见过的用户）按序发送文字、图片和附件。不改变普通入站 receive-only，不归档出站内容。",
+  "scope": [
+    "app/Sources/WeChatStateStore.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Sources/WeChatILinkClient.swift",
+    "app/Sources/WeChatCrypto.swift",
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodeCLI.swift",
+    "app/Sources/TocodeCLIRunner.swift",
+    "app/Sources/TocodeSocketTransport.swift",
+    "app/Sources/TocodeIPCServer.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/WeChatTestSupport.swift",
+    "app/Tests/TocodeCommandTestSupport.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/work-packages/wp-042.json",
+    "governance/architecture/task-envelopes/impl-042.json",
+    "governance/architecture/evidence/ev-*-042.json"
+  ],
+  "stop_conditions": [
+    "实现需要给从未入站的用户发信，或在缺少 context_token 时猜测会话时停止并重新准入。",
+    "实现需要把视频/语音做成独立发送类型，或把出站写入 wechat*.md / 把密钥写入 Markdown 时停止。",
+    "实现需要对普通入站消息自动回复或调用模型时停止。",
+    "真机 getuploadurl / CDN 协议与实现无法对齐时停止，不得假装发送成功。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign、git diff --check 和治理审计通过。",
+    "unit：解析 --text/--to/多文件；无载荷失败；未绑定失败；默认最近会话；--to 命中/未命中；图与附件分流；文字+两文件按序各发一条；中途失败停止；旧状态文件仍能读。",
+    "fault_injection：上传/发送 API 失败时命令失败且不归档。",
+    "runtime_e2e：真机对最近会话发文字、一张图、一个附件；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "7b294ba718d1b1369d23d5463211d21deed21490",
+  "acceptance_notes": "static、unit、fault_injection 三类证据在 app commit 7b294ba 上实测通过：app 与 CLI 构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 919 项通过 0 项失败。runtime_e2e 登记为 skipped：需要已绑定的真机微信会话。证据已改绑 7b294ba7。",
+  "approval": {
+    "source": "user-approved-plan:2026-09-20-wechat-cli-send",
+    "scope": "The user asked for a CLI that sends text, images and attachments through the already-bound WeChat bot, defaulting to the last inbound conversation with optional --to for a previously seen user, and sequential per-item send with fail-fast.",
+    "design_reference": "plans/微信cli发送_d2e4a138.plan.md"
+  }
+}

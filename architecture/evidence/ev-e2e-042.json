@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-042",
+  "work_package_id": "wp-042",
+  "commit": "7b294ba718d1b1369d23d5463211d21deed21490",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual CLI verification against build/Tocode.app and build/tocode from app commit 7b294ba718d1b1369d23d5463211d21deed21490. Not executed in this run.",
+  "result_summary": "The required live sequence was not executed: with Tocode running and WeChat bound, send text, one image and one attachment to the last inbound conversation via tocode wechat send and confirm delivery without wechat*.md archive entries.",
+  "limitations": [
+    "Live WeChat iLink traffic requires an interactive bound session."
+  ]
+}

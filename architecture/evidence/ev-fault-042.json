@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-042",
+  "work_package_id": "wp-042",
+  "commit": "7b294ba718d1b1369d23d5463211d21deed21490",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit 7b294ba718d1b1369d23d5463211d21deed21490: bash scripts/test.sh with MockWeChatTransport uploadError and unbound/missing-session paths.",
+  "result_summary": "Injected CDN upload failure after a successful text send stops later files, returns a non-success command result, and does not archive outbound payloads. Unbound and missing last-reply states fail closed without calling sendmessage.",
+  "limitations": [
+    "A live getuploadurl protocol mismatch against production iLink was not induced."
+  ]
+}

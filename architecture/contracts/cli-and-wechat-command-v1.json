@@ -5,7 +5,8 @@
   "l0_refs": [
     "l0-cli-control",
     "l0-wechat-command",
-    "l0-wechat-quick-input"
+    "l0-wechat-quick-input",
+    "l0-wechat-cli-send"
   ],
   "authority": {
     "socket_path": "~/Library/Application Support/com.tocode.app/tocode.sock",
@@ -32,7 +33,9 @@
     "A WeChat command or quick-input reply is sent via the iLink sendmessage endpoint to the originating conversation, carries the execution result, and is itself not treated as an archived inbound message.",
     "Quick input is not parsed by TocodeCommandParser and does not add a CLI subcommand; key injection reuses the marked poster and text injection uses the same synthesizer marker.",
     "WeChat binding credentials are persisted as a 0600 JSON file under Application Support rather than the macOS Keychain, so ad-hoc-signed builds do not prompt for keychain access on every launch.",
-    "Ordinary (non-command, non-quick-input) WeChat messages remain receive-only: they are archived and are never replied to or passed to a model."
+    "Ordinary (non-command, non-quick-input) WeChat messages remain receive-only: they are archived and are never replied to or passed to a model.",
+    "wechat send is a whitelist command shared by CLI and WeChat '.' commands. It sends text and local files through the bound bot to the last inbound conversation, or to a --to user that already has a stored context_token. Outbound CLI/send payloads are not archived.",
+    "wechat send file paths are resolved to absolute paths in the CLI process before IPC. A single file may not exceed 20MB. Image extensions jpg/jpeg/png/gif/webp are sent as images; all other files are attachments. Items are sent as separate messages in order, and the first failure stops later items."
   ],
   "prohibited_results": [
     "Executing arbitrary shell or code from a command argument.",
@@ -42,6 +45,8 @@
     "Replying to ordinary WeChat messages or invoking a model for them.",
     "Repeating a command message after a failure; unknown, invalid, or failing commands are consumed exactly once.",
     "Persisting the socket with permissions broader than 0600.",
-    "Persisting WeChat credentials with permissions broader than 0600."
+    "Persisting WeChat credentials with permissions broader than 0600.",
+    "Sending wechat send to a user who has never produced an inbound message, or uploading media in plaintext without AES-128-ECB.",
+    "Archiving a wechat send outbound payload to wechat*.md."
   ]
 }

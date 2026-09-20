@@ -1,0 +1,64 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-042",
+  "role": "implementation_owner",
+  "baseline_commit": "18f116b8a05e268a41c5ad5305727202e035e4ef",
+  "work_package_id": "wp-042",
+  "allowed_scope": [
+    "app/Sources/WeChatStateStore.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Sources/WeChatILinkClient.swift",
+    "app/Sources/WeChatCrypto.swift",
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodeCLI.swift",
+    "app/Sources/TocodeCLIRunner.swift",
+    "app/Sources/TocodeSocketTransport.swift",
+    "app/Sources/TocodeIPCServer.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/WeChatTestSupport.swift",
+    "app/Tests/TocodeCommandTestSupport.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/work-packages/wp-042.json",
+    "governance/architecture/task-envelopes/impl-042.json",
+    "governance/architecture/evidence/ev-*-042.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-wechat-cli-send",
+    "l0-cli-control",
+    "l0-wechat-archive",
+    "l0-wechat-command"
+  ],
+  "must_preserve": [
+    ". 命令与快捷输入消费语义不变。",
+    "普通入站消息保持 receive-only：归档且不回复、不调模型。",
+    "绑定与 401/403 解除绑定语义不变。",
+    "键盘/触控板映射与滚轮钩子语义不变。",
+    "CLI 仍是白名单枚举，socket 权限 0600，不执行任意 shell。"
+  ],
+  "must_reject": [
+    "给从未入站的用户发信。",
+    "视频/语音作为独立发送类型。",
+    "把出站写入归档或把 context_token / token / AES key 写入 Markdown。",
+    "无加密的明文 CDN 上传。",
+    "对普通入站消息自动回复或调用模型。",
+    "新增网络端口。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要给从未入站的用户发信，或在缺少 context_token 时猜测会话时停止并重新准入。",
+    "实现需要把视频/语音做成独立发送类型，或把出站写入 wechat*.md / 把密钥写入 Markdown 时停止。",
+    "实现需要对普通入站消息自动回复或调用模型时停止。",
+    "真机 getuploadurl / CDN 协议与实现无法对齐时停止，不得假装发送成功。"
+  ],
+  "notes": "阶段：先扩展接收状态记住可回复会话，再补加密上传与 sendItems，再接 wechat send 的异步执行与 CLI 绝对路径/超时。"
+}

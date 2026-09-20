@@ -76,13 +76,14 @@
       "id": "l0-wechat-archive",
       "name": "微信关联与本地归档",
       "status": "approved",
-      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息，以及整条可由 {} 按键段与中文引号“”文字段顺序拼接而成的快捷输入消息，例外回复执行结果。",
+      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息、整条可由 {} 按键段与中文引号“”文字段顺序拼接而成的快捷输入消息，以及 CLI/共享命令 wechat send 的主动出站，例外调用 sendmessage。出站内容不写入归档；可回复会话（user_id 与 context_token）只记在权限 0600 的接收状态文件中。",
       "source_refs": [
         "user-requirement:2026-09-07",
         "user-approved-plan:2026-09-07",
         "app-commit:2e98f9d",
         "user-approved-plan:2026-09-08",
-        "user-approved-plan:2026-09-20-wechat-quick-input"
+        "user-approved-plan:2026-09-20-wechat-quick-input",
+        "user-approved-plan:2026-09-20-wechat-cli-send"
       ]
     },
     {
@@ -206,21 +207,32 @@
       "id": "l0-cli-control",
       "name": "独立 CLI 命令控制",
       "status": "approved",
-      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
+      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。白名单包含 wechat send：把文字与本地文件路径交给常驻进程，经已绑定 Bot 主动出站。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
-        "user-approved-plan:2026-09-08"
+        "user-approved-plan:2026-09-08",
+        "user-approved-plan:2026-09-20-wechat-cli-send"
       ]
     },
     {
       "id": "l0-wechat-command",
       "name": "微信 . 前缀命令",
       "status": "approved",
-      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器。不以 . 开头但整条能拆成快捷输入段序列的消息，走同一套命令消费规则：不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试，结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。普通（非命令且非快捷输入）微信消息保持 receive-only。",
+      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器。不以 . 开头但整条能拆成快捷输入段序列的消息，走同一套命令消费规则：不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试，结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。共享白名单包含 wechat send，因此微信侧 .wechat send 也会触发主动出站。普通（非命令且非快捷输入）微信消息保持 receive-only。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08",
-        "user-approved-plan:2026-09-20-wechat-quick-input"
+        "user-approved-plan:2026-09-20-wechat-quick-input",
+        "user-approved-plan:2026-09-20-wechat-cli-send"
+      ]
+    },
+    {
+      "id": "l0-wechat-cli-send",
+      "name": "CLI 微信主动发送",
+      "status": "approved",
+      "statement": "已绑定且 Tocode 正在运行时，CLI 命令 wechat send [--to <user_id>] [--text <文字>] [文件...] 通过 iLink Bot 主动出站。默认发给最近一条入站消息的原会话；--to 只能选择曾经入站且仍记着 context_token 的用户，未见过则失败。至少要有一段非空文字或一个本地文件；多个载荷按「文字，再按文件参数顺序」各发一条，jpg/jpeg/png/gif/webp 走图片，其余走附件，失败即停且已发出的不回滚。文件路径由 CLI 进程解析为绝对路径；单文件不超过 20MB。出站不写入 wechat*.md，不把 context_token、token 或 AES key 写入归档或日志。普通入站消息不因此自动回复。",
+      "source_refs": [
+        "user-approved-plan:2026-09-20-wechat-cli-send"
       ]
     },
     {
@@ -401,11 +413,12 @@
       "id": "l1-wechat-ingestion",
       "name": "iLink 消息接收",
       "status": "candidate",
-      "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重；普通消息不调用任何出站消息接口，仅 . 前缀命令与快捷输入段序列例外调用 sendmessage 回复执行结果。",
+      "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重；处理成功的入站更新可回复会话表。普通消息不调用任何出站消息接口，仅 . 前缀命令、快捷输入与 wechat send 例外调用 sendmessage。",
       "l0_refs": [
         "l0-wechat-archive",
         "l0-wechat-command",
-        "l0-wechat-quick-input"
+        "l0-wechat-quick-input",
+        "l0-wechat-cli-send"
       ],
       "owners": [
         "architecture_owner"
@@ -421,6 +434,24 @@
       "status": "candidate",
       "responsibility": "按本机收到时间创建日期目录，下载并解密可用媒体，永不覆盖地命名附件，并通过串行写入把完整 Markdown 条目实时追加到每日文件。",
       "l0_refs": [
+        "l0-wechat-archive"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-wechat-cli-send",
+      "name": "微信 CLI 主动发送",
+      "status": "candidate",
+      "responsibility": "解析 wechat send 参数，按最近入站或 --to 会话表解析收件人，按序发送文字与本地文件；图片走 getuploadurl+CDN 加密上传后以 image_item 发送，其余文件以 file_item 发送。未绑定、无会话、未见过的 --to、超限或传输失败返回错误，不归档出站。",
+      "l0_refs": [
+        "l0-wechat-cli-send",
+        "l0-cli-control",
         "l0-wechat-archive"
       ],
       "owners": [
@@ -646,10 +677,11 @@
       "id": "l1-command-executor",
       "name": "白名单命令执行器",
       "status": "candidate",
-      "responsibility": "聚合现有服务，把命令枚举映射到根目录、Codex、微信、黑屏、开机自启、滚轮、隐藏文件、快捷键与退出等动作；只接受显式枚举，不执行动态代码或 shell。每条命令都返回成功或错误结果（help/commands 返回命令表），不静默消费。",
+      "responsibility": "聚合现有服务，把命令枚举映射到根目录、Codex、微信（含 wechat send 主动出站）、黑屏、开机自启、滚轮、隐藏文件、快捷键与退出等动作；只接受显式枚举，不执行动态代码或 shell。每条命令都返回成功或错误结果（help/commands 返回命令表），不静默消费。",
       "l0_refs": [
         "l0-cli-control",
-        "l0-wechat-command"
+        "l0-wechat-command",
+        "l0-wechat-cli-send"
       ],
       "owners": [
         "architecture_owner"
@@ -751,10 +783,26 @@
       "l1_refs": [
         "l1-wechat-association",
         "l1-wechat-ingestion",
-        "l1-wechat-quick-input"
+        "l1-wechat-quick-input",
+        "l1-wechat-cli-send"
       ],
       "selectors": [
         "WeChatAssociationService.swift"
+      ]
+    },
+    {
+      "id": "l2-wechat-cli-send",
+      "name": "微信 CLI 发送解析、上传与出站",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-wechat-cli-send"
+      ],
+      "selectors": [
+        "TocodeCommand.swift",
+        "TocodeCommandExecutor.swift",
+        "WeChatILinkClient.swift",
+        "WeChatCrypto.swift",
+        "TocodeCLIRunner.swift"
       ]
     },
     {
@@ -775,7 +823,8 @@
       "status": "candidate",
       "l1_refs": [
         "l1-wechat-association",
-        "l1-wechat-ingestion"
+        "l1-wechat-ingestion",
+        "l1-wechat-cli-send"
       ],
       "selectors": [
         "WeChatILinkClient.swift",
@@ -997,7 +1046,8 @@
       "name": "命令执行器与目录选择",
       "status": "candidate",
       "l1_refs": [
-        "l1-command-executor"
+        "l1-command-executor",
+        "l1-wechat-cli-send"
       ],
       "selectors": [
         "TocodeCommandExecutor.swift",
