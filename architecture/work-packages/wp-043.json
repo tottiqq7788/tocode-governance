@@ -1,0 +1,36 @@
+{
+  "id": "wp-043",
+  "title": "左键目录树 Option 删除与 Command 访问",
+  "baseline_commit": "d7f0217dfc8f8e53bd4b5ea98fafce6c3fa96d04",
+  "goal": "左键目录树打开期间改为三态修饰键：无修饰键仍复制路径且底部为「新增」；按住 Option 进入原删除/清空（确认后进废纸篓）；按住 Command 进入访问模式，底部「新增」变为「访问」并用访达打开当前层文件夹，点击文件夹同样用访达打开，点击文件用默认应用打开。Option 与 Command 同时按下时 Option 优先。不改右键「访问路径」、CLI 或映射。",
+  "scope": [
+    "app/Sources/DirectoryMenuMode.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-043.json",
+    "governance/architecture/task-envelopes/impl-043.json",
+    "governance/architecture/evidence/ev-*-043.json"
+  ],
+  "stop_conditions": [
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。",
+    "实现需要改右键「访问路径」、新增 CLI 命令或改键盘/触控板映射时停止并重新准入。",
+    "实现需要调用外部 shell（含 /usr/bin/open）或申请新系统权限时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、git diff --check 和治理审计通过。",
+    "unit：DirectoryMenuMode.resolve 覆盖无键/Option/Command/两键同时；访问目录走 reveal、访问文件走 open；缺失路径失败。",
+    "runtime_e2e：真机按住 Option 删除/清空、按住 Command 访问文件夹与文件；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "aef4df21221b5cc51526870cd36abf9142492eea",
+  "acceptance_notes": "static 与 unit 证据在 app commit aef4df2 上实测通过：构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 942 项通过。runtime_e2e 登记为 skipped：需要交互式菜单栏与修饰键。证据已改绑 aef4df2。",
+  "approval": {
+    "source": "user-approved-plan:2026-09-20-directory-menu-modifiers",
+    "scope": "The user asked to move delete/clear from Command to Option, add Command access mode that turns 新增 into 访问, open the current folder in Finder, open folder items in Finder, and open files with the default app, with Option winning when both modifiers are held.",
+    "design_reference": "plans/目录菜单修饰键模式_7cf7e2ae.plan.md"
+  }
+}

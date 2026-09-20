@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-043",
+  "work_package_id": "wp-043",
+  "commit": "aef4df21221b5cc51526870cd36abf9142492eea",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit aef4df21221b5cc51526870cd36abf9142492eea: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 942 passing assertions and 0 failures. Coverage includes DirectoryMenuMode.resolve for no modifiers, Option-only delete, Command-only access and Option+Command preferring delete; entry and bottom actions per mode; DirectoryMenuAccess routing directories to reveal and files to open; mock and missing-path open failures.",
+  "limitations": [
+    "The command-line test target does not pop the native status-bar menu or press live modifier keys."
+  ]
+}

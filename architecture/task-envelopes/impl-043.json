@@ -1,0 +1,50 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-043",
+  "role": "implementation_owner",
+  "baseline_commit": "d7f0217dfc8f8e53bd4b5ea98fafce6c3fa96d04",
+  "work_package_id": "wp-043",
+  "allowed_scope": [
+    "app/Sources/DirectoryMenuMode.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-043.json",
+    "governance/architecture/task-envelopes/impl-043.json",
+    "governance/architecture/evidence/ev-*-043.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-access-mode",
+    "l0-navigate",
+    "l0-delete-clear",
+    "l0-copy-path",
+    "l0-hover-expand"
+  ],
+  "must_preserve": [
+    "未按 Option、也未按 Command 时，左键目录树仍从根目录开始、悬停文件夹展开、点击复制「路径」。",
+    "删除/清空必须先弹确认窗口，确认后移入废纸篓，取消或失败不改变原内容。",
+    "右键「访问路径」、键盘/触控板映射、CLI 与微信语义不变。",
+    "新增文件重名时不覆盖并提示错误。"
+  ],
+  "must_reject": [
+    "使用永久删除替代废纸篓、绕过确认或扩大删除范围。",
+    "修改右键「访问路径」、新增 CLI 命令或改键盘/触控板映射。",
+    "申请新系统权限或调用外部 shell（含 /usr/bin/open）。",
+    "把 NSMenuItem 标为 isAlternate 以依赖系统 Option 交替项。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "删除或清空改为不可恢复的永久删除、绕过确认或写入其他目录时停止。",
+    "实现需要改右键「访问路径」、新增 CLI 命令或改键盘/触控板映射时停止并重新准入。",
+    "实现需要调用外部 shell（含 /usr/bin/open）或申请新系统权限时停止。"
+  ],
+  "notes": "新增 l0-access-mode；修改 l0-navigate / l0-delete-clear / l0-copy-path / l0-hover-expand。Option 优先于 Command。"
+}

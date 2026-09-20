@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-043",
+  "work_package_id": "wp-043",
+  "commit": "aef4df21221b5cc51526870cd36abf9142492eea",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI verification against build/Tocode.app produced by bash scripts/build.sh from app commit aef4df21221b5cc51526870cd36abf9142492eea. Not executed in this run.",
+  "result_summary": "The required live sequence was not executed: with the left-click directory tree open, hold Option to delete/clear with confirmation, hold Command so 新增 becomes 访问, open the current folder and a folder item in Finder, and open a file with the default application.",
+  "limitations": [
+    "Live status-item menus and modifier-key tracking require an interactive GUI session."
+  ]
+}

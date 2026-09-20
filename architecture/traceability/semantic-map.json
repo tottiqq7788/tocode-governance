@@ -15,11 +15,12 @@
       "id": "l0-navigate",
       "name": "左键浏览目录",
       "status": "approved",
-      "statement": "左键单击菜单栏图标时，弹出目录树并显示根文件夹下的第一层文件与文件夹（可递归展开）。每个目录菜单底部固定提供「新增」；菜单已打开时按住 Command 实时进入删除模式，松开后恢复。",
+      "statement": "左键单击菜单栏图标时，弹出目录树并显示根文件夹下的第一层文件与文件夹（可递归展开）。每个目录菜单底部固定提供「新增」；菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
       "source_refs": [
         "user-requirement:2026-09-03",
         "user-feedback:2026-09-03",
-        "user-requirement:2026-09-08"
+        "user-requirement:2026-09-08",
+        "user-requirement:2026-09-20-directory-menu-modifiers"
       ]
     },
     {
@@ -35,20 +36,22 @@
       "id": "l0-copy-path",
       "name": "复制路径",
       "status": "approved",
-      "statement": "点击任一文件或文件夹条目时，将该条目的绝对路径以「路径」格式（全角括号包裹）复制到系统剪贴板。",
+      "statement": "未按 Option、也未按 Command 时，点击任一文件或文件夹条目，将该条目的绝对路径以「路径」格式（全角括号包裹）复制到系统剪贴板。",
       "source_refs": [
         "user-requirement:2026-09-03",
-        "user-feedback:2026-09-03"
+        "user-feedback:2026-09-03",
+        "user-requirement:2026-09-20-directory-menu-modifiers"
       ]
     },
     {
       "id": "l0-hover-expand",
       "name": "悬停展开文件夹",
       "status": "approved",
-      "statement": "鼠标悬停文件夹条目时通过原生子菜单展开显示其下级内容；点击文件夹条目时复制其路径（悬停展开、点击复制）。",
+      "statement": "鼠标悬停文件夹条目时通过原生子菜单展开显示其下级内容。未按 Option、也未按 Command 时，点击文件夹条目复制其路径（悬停展开、点击复制）。",
       "source_refs": [
         "user-requirement:2026-09-03",
-        "user-feedback:2026-09-03"
+        "user-feedback:2026-09-03",
+        "user-requirement:2026-09-20-directory-menu-modifiers"
       ]
     },
     {
@@ -255,11 +258,22 @@
     },
     {
       "id": "l0-delete-clear",
-      "name": "Command 删除与清空",
+      "name": "Option 删除与清空",
       "status": "candidate",
-      "statement": "左键目录树已打开时，按住 Command 实时进入删除模式：每个菜单底部的「新增」变为「清空」，点击文件或文件夹从复制路径改为删除；松开 Command 即恢复普通复制模式。点击删除或清空先弹确认窗口，确认后把目标移入废纸篓（可恢复）；取消或删除失败不改变原内容。普通（未按 Command）打开目录树仍为复制路径。",
+      "statement": "左键目录树已打开时，按住 Option 实时进入删除模式：每个菜单底部的「新增」变为「清空」，点击文件或文件夹从复制路径改为删除；松开 Option 即恢复普通复制模式。同时按住 Command 时仍为删除模式。点击删除或清空先弹确认窗口，确认后把目标移入废纸篓（可恢复）；取消或删除失败不改变原内容。普通（未按 Option 且未按 Command）打开目录树仍为复制路径。",
       "source_refs": [
-        "user-requirement:2026-09-08"
+        "user-requirement:2026-09-08",
+        "user-requirement:2026-09-20-directory-menu-modifiers"
+      ]
+    },
+    {
+      "id": "l0-access-mode",
+      "name": "Command 访问模式",
+      "status": "candidate",
+      "statement": "左键目录树已打开时，按住 Command 实时进入访问模式（同时按住 Option 则仍为删除模式）：每个菜单底部的「新增」变为「访问」，点击「访问」用访达打开当前这一层文件夹；点击文件夹条目用访达打开该文件夹；点击文件条目用默认应用打开该文件。松开 Command 后恢复普通复制模式。访问不修改文件系统；路径失效或无法打开时提示错误且不静默成功。不申请新权限，不调用外部 shell。",
+      "source_refs": [
+        "user-requirement:2026-09-20-directory-menu-modifiers",
+        "user-approved-plan:2026-09-20-directory-menu-modifiers"
       ]
     },
     {
@@ -337,13 +351,14 @@
       "id": "l1-menu-navigation",
       "name": "目录菜单渲染",
       "status": "candidate",
-      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开并包含隐藏文件；在每个目录菜单底部渲染「新增」或删除模式下的「清空」动作。",
+      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开并包含隐藏文件；在每个目录菜单底部按模式渲染「新增」、「清空」或「访问」。",
       "l0_refs": [
         "l0-navigate",
         "l0-recurse",
         "l0-finder-hidden-sync",
         "l0-create-file",
-        "l0-delete-clear"
+        "l0-delete-clear",
+        "l0-access-mode"
       ],
       "owners": [
         "architecture_owner"
@@ -357,7 +372,7 @@
       "id": "l1-copy-interaction",
       "name": "复制与悬停交互",
       "status": "candidate",
-      "responsibility": "实现悬停文件夹展开、点击文件或文件夹复制路径，均以「路径」格式写入剪贴板。",
+      "responsibility": "实现悬停文件夹展开；在普通模式（未按 Option、也未按 Command）下点击文件或文件夹复制路径，均以「路径」格式写入剪贴板。",
       "l0_refs": [
         "l0-copy-path",
         "l0-hover-expand"
@@ -382,7 +397,9 @@
         "l0-reset-root",
         "l0-wechat-archive",
         "l0-temporary-blackout",
-        "l0-trackpad-shortcuts"
+        "l0-trackpad-shortcuts",
+        "l0-delete-clear",
+        "l0-access-mode"
       ],
       "owners": [
         "architecture_owner"
@@ -505,10 +522,11 @@
       "id": "l1-finder-interop",
       "name": "访达联动与初始化",
       "status": "candidate",
-      "responsibility": "以访达为外部权威完成联动：隐藏文件显示读写 AppleShowAllFiles 偏好并重启访达；「访达目录初始化」读取访达当前选中项并据此设置根文件夹。",
+      "responsibility": "以访达为外部权威完成联动：隐藏文件显示读写 AppleShowAllFiles 偏好并重启访达；「访达目录初始化」读取访达当前选中项并据此设置根文件夹；左键访问模式通过 NSWorkspace 用访达打开文件夹、用默认应用打开文件。",
       "l0_refs": [
         "l0-finder-hidden-sync",
-        "l0-finder-selection-init"
+        "l0-finder-selection-init",
+        "l0-access-mode"
       ],
       "owners": [
         "architecture_owner"
@@ -862,10 +880,12 @@
       "name": "菜单树构建器",
       "status": "candidate",
       "l1_refs": [
-        "l1-menu-navigation"
+        "l1-menu-navigation",
+        "l1-finder-interop"
       ],
       "selectors": [
-        "MenuBuilder.swift"
+        "MenuBuilder.swift",
+        "DirectoryMenuMode.swift"
       ]
     },
     {
