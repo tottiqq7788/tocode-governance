@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-041",
+  "work_package_id": "wp-041",
+  "commit": "18f116b8a05e268a41c5ad5305727202e035e4ef",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "App commit 18f116b8a05e268a41c5ad5305727202e035e4ef: bash scripts/build.sh; codesign --verify --strict build/Tocode.app; git diff --check. Governance: python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "The app bundle and CLI both compile with swiftc -O and no errors, codesign reports build/Tocode.app valid on disk, git diff --check reports no whitespace errors, and the governance audit passes structure and reference checks. Changed files stay inside IMPL-041 allowed_scope, including the new WeChatQuickInput.swift, gate/consume wiring, contracts, and the test.sh source list.",
+  "limitations": [
+    "The governance audit validates structure and references only; it does not evaluate runtime behavior.",
+    "The app uses an ad-hoc signature with the project's stable designated requirement."
+  ]
+}

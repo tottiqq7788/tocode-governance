@@ -1,0 +1,40 @@
+{
+  "id": "wp-041",
+  "title": "微信快捷输入：按键、文字与顺序组合",
+  "baseline_commit": "343b7c9ad84aabdc801b4ae2912bb4fead22dfaa",
+  "goal": "新增微信快捷输入：整条消息若能拆成 {} 按键段与中文引号“”文字段的顺序序列，则按既有「. 命令」同一套消费规则执行——不归档、先去重、按段依次注入后回复成功或失败。不新增 CLI 命令。按键复用带 synthesizer marker 的既有 poster；文字用同一 marker 注入 Unicode。",
+  "scope": [
+    "app/Sources/WeChatQuickInput.swift",
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/work-packages/wp-041.json",
+    "governance/architecture/task-envelopes/impl-041.json",
+    "governance/architecture/evidence/ev-*-041.json"
+  ],
+  "stop_conditions": [
+    "实现需要新增 CLI 子命令或把快捷输入送进 TocodeCommandParser 时停止并重新准入。",
+    "实现需要支持未包裹裸文本参与拆段、可保存命名宏、鼠标事件、指定前台 App 或改系统键盘偏好时停止。",
+    "实现需要新增第三条无 synthesizer marker 的注入通路时停止。",
+    "实现需要改变绑定、去重、游标或 401/403 解除绑定语义时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign、git diff --check 和治理审计通过。",
+    "unit：gate 点号 / 快捷输入 / 普通三分流；单段与顺序组合；段间空白；未包裹文本不识别；别名与非法键名；某段失败则停止后续；超长/超段数整条不注入；.help 仍是点号命令。",
+    "fault_injection：辅助功能拒绝时回复失败且不归档。",
+    "runtime_e2e：真机微信发 {space}、“你好”、“你好”{enter}；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "18f116b8a05e268a41c5ad5305727202e035e4ef",
+  "acceptance_notes": "static、unit、fault_injection 三类证据在 app commit 18f116b 上实测通过：app 与 CLI 构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 880 项通过 0 项失败。runtime_e2e 登记为 skipped：需要已绑定的真机微信会话。证据已改绑 18f116b8。",
+  "approval": {
+    "source": "user-approved-plan:2026-09-20-wechat-quick-input",
+    "scope": "The user approved sequencing {key} and Chinese-quoted text in one WeChat message, named keys plus modifiers, the same consume/reply lifecycle as '.' commands, and no new CLI commands.",
+    "design_reference": "plans/微信快捷输入_1ad4d78c.plan.md"
+  }
+}

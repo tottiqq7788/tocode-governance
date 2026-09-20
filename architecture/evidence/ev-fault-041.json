@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-FAULT-041",
+  "work_package_id": "wp-041",
+  "commit": "18f116b8a05e268a41c5ad5305727202e035e4ef",
+  "type": "fault_injection",
+  "status": "passed",
+  "command_or_source": "App commit 18f116b8a05e268a41c5ad5305727202e035e4ef: bash scripts/test.sh with MockTrackpadPermissions, MockTrackpadShortcutPoster, MockWeChatUnicodeInjector and MockWeChatQuickInput.",
+  "result_summary": "Injected accessibility denial returns 需要辅助功能权限才能注入快捷输入, posts no key or Unicode events, and the WeChat consume path still advances the dedupe key and cursor, replies with the failure, and does not archive. A failed first key segment stops later text injection. Unknown key names, empty text, over-long text and more than 16 segments fail before any inject.",
+  "limitations": [
+    "A real mid-session TCC revocation was not induced on the development machine."
+  ]
+}

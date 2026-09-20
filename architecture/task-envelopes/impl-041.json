@@ -1,0 +1,54 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-041",
+  "role": "implementation_owner",
+  "baseline_commit": "343b7c9ad84aabdc801b4ae2912bb4fead22dfaa",
+  "work_package_id": "wp-041",
+  "allowed_scope": [
+    "app/Sources/WeChatQuickInput.swift",
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/work-packages/wp-041.json",
+    "governance/architecture/task-envelopes/impl-041.json",
+    "governance/architecture/evidence/ev-*-041.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-wechat-quick-input",
+    "l0-wechat-command",
+    "l0-wechat-archive"
+  ],
+  "must_preserve": [
+    ". 命令解析与执行语义不变。",
+    "普通消息保持 receive-only：归档且不回复、不调模型。",
+    "绑定、去重、游标、401/403 解除绑定语义不变。",
+    "键盘/触控板映射与滚轮钩子语义不变。",
+    "按键注入必须带既有 synthesizer marker，不得新增第三条无标记通路。"
+  ],
+  "must_reject": [
+    "新增 CLI 子命令。",
+    "未包裹文本参与拆段。",
+    "把快捷输入做成可保存的命名宏。",
+    "鼠标事件、指定前台 App、改系统键盘偏好。",
+    "无 marker 的第三套注入。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要新增 CLI 子命令或把快捷输入送进 TocodeCommandParser 时停止并重新准入。",
+    "实现需要支持未包裹裸文本参与拆段、可保存命名宏、鼠标事件、指定前台 App 或改系统键盘偏好时停止。",
+    "实现需要新增第三条无 synthesizer marker 的注入通路时停止。",
+    "实现需要改变绑定、去重、游标或 401/403 解除绑定语义时停止。"
+  ],
+  "notes": "阶段：先写治理与 L0/L1，再扩展 gate 拆段，再按序注入并接到微信消费路径；.help 文末补组合示例，不把它们写成 . 命令。"
+}

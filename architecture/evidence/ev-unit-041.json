@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-041",
+  "work_package_id": "wp-041",
+  "commit": "18f116b8a05e268a41c5ad5305727202e035e4ef",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 18f116b8a05e268a41c5ad5305727202e035e4ef: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 880 passing assertions and 0 failures. Coverage includes gate three-way routing for '.' commands, {key}/“text” sequences and ordinary leftovers; {space}/{enter}/{cmd+space}; “你好”{enter} tokenize-and-order; inter-segment whitespace; 你好{enter} not recognized; alias and illegal key names; fail-fast after a failed segment; over-long and over-count sequences inject nothing; .help remains a dotted command and still lists the quick-input examples without a leading dot.",
+  "limitations": [
+    "The command-line test target does not post real HID events to a foreground WeChat window."
+  ]
+}

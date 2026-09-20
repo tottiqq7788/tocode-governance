@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-041",
+  "work_package_id": "wp-041",
+  "commit": "18f116b8a05e268a41c5ad5305727202e035e4ef",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual WeChat iLink verification against build/Tocode.app produced by bash scripts/build.sh from app commit 18f116b8a05e268a41c5ad5305727202e035e4ef. Not executed in this run.",
+  "result_summary": "The required live sequence was not executed: send {space}, “你好”, and “你好”{enter} from a bound WeChat conversation and confirm the frontmost field receives the key, the text, then text-plus-enter, with success replies and no wechat*.md archive entries.",
+  "limitations": [
+    "Live WeChat iLink traffic requires an interactive bound session and accessibility permission."
+  ]
+}

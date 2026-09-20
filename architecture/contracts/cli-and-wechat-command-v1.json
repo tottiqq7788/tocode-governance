@@ -4,14 +4,15 @@
   "status": "approved",
   "l0_refs": [
     "l0-cli-control",
-    "l0-wechat-command"
+    "l0-wechat-command",
+    "l0-wechat-quick-input"
   ],
   "authority": {
     "socket_path": "~/Library/Application Support/com.tocode.app/tocode.sock",
     "socket_permissions": "0600",
     "request_format": "{\"id\":string,\"command\":string,\"args\":[string]}",
     "response_format": "{\"id\":string,\"ok\":bool,\"data\":string?,\"error\":string?}",
-    "wechat_command_marker": "first item type 1 with trimmed text prefix '.'",
+    "wechat_command_marker": "first item type 1 with trimmed text prefix '.' OR a complete sequence of {key} / “text” segments",
     "wechat_command_alias": ".lshp -> blackout; .commands/.help -> help",
     "cli_install_path": "~/.local/bin/tocode",
     "wechat_credential_path": "~/Library/Application Support/com.tocode.app/wechat-credential.json",
@@ -26,16 +27,18 @@
     "On first launch the app installs the CLI to ~/.local/bin/tocode and keeps it refreshed when the binary changes.",
     "The socket is bound under the user's Application Support directory and chmod'ed to 0600; no cross-machine or network port is opened.",
     "WeChat command detection requires the first item to be text (type 1) and its trimmed text to begin with '.'; the remainder of the items are treated as part of the command and are not archived.",
-    "A WeChat command message advances the dedupe key and cursor before execution, is never archived, and is never retried regardless of success or failure.",
-    "A WeChat command reply is sent via the iLink sendmessage endpoint to the originating conversation, carries the execution result, and is itself not treated as an archived inbound message.",
+    "WeChat quick-input detection applies only after the '.' prefix check fails: the trimmed text must tokenize completely into one or more {key} or “text” segments with only whitespace between them; leftover unwrapped text archives as an ordinary message.",
+    "A WeChat command or quick-input message advances the dedupe key and cursor before execution, is never archived, and is never retried regardless of success or failure.",
+    "A WeChat command or quick-input reply is sent via the iLink sendmessage endpoint to the originating conversation, carries the execution result, and is itself not treated as an archived inbound message.",
+    "Quick input is not parsed by TocodeCommandParser and does not add a CLI subcommand; key injection reuses the marked poster and text injection uses the same synthesizer marker.",
     "WeChat binding credentials are persisted as a 0600 JSON file under Application Support rather than the macOS Keychain, so ad-hoc-signed builds do not prompt for keychain access on every launch.",
-    "Ordinary (non-command) WeChat messages remain receive-only: they are archived and are never replied to or passed to a model."
+    "Ordinary (non-command, non-quick-input) WeChat messages remain receive-only: they are archived and are never replied to or passed to a model."
   ],
   "prohibited_results": [
     "Executing arbitrary shell or code from a command argument.",
     "Opening a network port or granting cross-user/cross-machine IPC access.",
-    "Archiving a '.'-prefixed command message to wechat*.md or saving its attachments.",
-    "Silently consuming a command result without returning it through CLI stdout or a WeChat reply.",
+    "Archiving a '.'-prefixed command message or a recognized quick-input message to wechat*.md or saving its attachments.",
+    "Silently consuming a command or quick-input result without returning it through CLI stdout or a WeChat reply.",
     "Replying to ordinary WeChat messages or invoking a model for them.",
     "Repeating a command message after a failure; unknown, invalid, or failing commands are consumed exactly once.",
     "Persisting the socket with permissions broader than 0600.",

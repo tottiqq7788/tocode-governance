@@ -76,12 +76,13 @@
       "id": "l0-wechat-archive",
       "name": "微信关联与本地归档",
       "status": "approved",
-      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息例外回复执行结果。",
+      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息，以及整条可由 {} 按键段与中文引号“”文字段顺序拼接而成的快捷输入消息，例外回复执行结果。",
       "source_refs": [
         "user-requirement:2026-09-07",
         "user-approved-plan:2026-09-07",
         "app-commit:2e98f9d",
-        "user-approved-plan:2026-09-08"
+        "user-approved-plan:2026-09-08",
+        "user-approved-plan:2026-09-20-wechat-quick-input"
       ]
     },
     {
@@ -215,10 +216,20 @@
       "id": "l0-wechat-command",
       "name": "微信 . 前缀命令",
       "status": "approved",
-      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器；命令消息不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试。命令执行结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。普通（非命令）微信消息保持 receive-only。",
+      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器。不以 . 开头但整条能拆成快捷输入段序列的消息，走同一套命令消费规则：不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试，结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。普通（非命令且非快捷输入）微信消息保持 receive-only。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
-        "user-approved-plan:2026-09-08"
+        "user-approved-plan:2026-09-08",
+        "user-approved-plan:2026-09-20-wechat-quick-input"
+      ]
+    },
+    {
+      "id": "l0-wechat-quick-input",
+      "name": "微信快捷输入",
+      "status": "approved",
+      "statement": "整条微信文本消息 trim 后，若不以 . 开头且能从左到右拆成一段或多段 {按键} / “文字”（段间只允许空白，拆完没有剩余字符），则按命令消费规则执行快捷输入：不归档，先去重并推进游标，按段从左到右依次注入，整段成功或在第一处失败都回复原会话，失败后不再执行后续段，已执行前段不回滚；回复本身不归档。按键段去括号后按 + 分段，必须恰好一个主键，前面为 ⌘/⌥/⇧/⌃/fn 修饰键别名，大小写不敏感；文字段去掉成对中文引号后按一次 Unicode 串注入。空文字段、无法识别的按键段、段数超过 16 或全部文字段合计超过 500 字时整条失败且一段都不注入（非法键名所在段在已判定为快捷输入后失败）。未包裹裸文本、ASCII 直引号或半截括号仍是普通消息。按键复用带 synthesizer marker 的既有 poster，文字使用同一 marker；需要辅助功能权限，拒绝则回复失败且不归档，配置与监听不受影响。不新增 CLI 命令，不经统一命令解析器。",
+      "source_refs": [
+        "user-approved-plan:2026-09-20-wechat-quick-input"
       ]
     },
     {
@@ -390,9 +401,11 @@
       "id": "l1-wechat-ingestion",
       "name": "iLink 消息接收",
       "status": "candidate",
-      "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重；普通消息不调用任何出站消息接口，仅 . 前缀命令消息例外调用 sendmessage 回复执行结果。",
+      "responsibility": "以 receive-only 长轮询接收 iLink 新消息，解析类型 1 至 5 和一层引用，执行认证错误分类、退避、持久游标和最近消息去重；普通消息不调用任何出站消息接口，仅 . 前缀命令与快捷输入段序列例外调用 sendmessage 回复执行结果。",
       "l0_refs": [
-        "l0-wechat-archive"
+        "l0-wechat-archive",
+        "l0-wechat-command",
+        "l0-wechat-quick-input"
       ],
       "owners": [
         "architecture_owner"
@@ -408,6 +421,24 @@
       "status": "candidate",
       "responsibility": "按本机收到时间创建日期目录，下载并解密可用媒体，永不覆盖地命名附件，并通过串行写入把完整 Markdown 条目实时追加到每日文件。",
       "l0_refs": [
+        "l0-wechat-archive"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-wechat-quick-input",
+      "name": "微信快捷输入拆段与注入",
+      "status": "candidate",
+      "responsibility": "在点号命令判定之后，把整条 trim 文本拆成 {按键} 与中文引号文字段序列；校验段数、合计字数、主键与修饰键后，按顺序用带 synthesizer marker 的 poster 注入按键，并用同一 marker 注入 Unicode 文字。辅助功能拒绝或任一段失败则停止后续并返回错误，不经 CLI 解析器。",
+      "l0_refs": [
+        "l0-wechat-quick-input",
+        "l0-wechat-command",
         "l0-wechat-archive"
       ],
       "owners": [
@@ -719,10 +750,23 @@
       "status": "candidate",
       "l1_refs": [
         "l1-wechat-association",
-        "l1-wechat-ingestion"
+        "l1-wechat-ingestion",
+        "l1-wechat-quick-input"
       ],
       "selectors": [
         "WeChatAssociationService.swift"
+      ]
+    },
+    {
+      "id": "l2-wechat-quick-input",
+      "name": "微信快捷输入拆段、按键解析与注入",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-wechat-quick-input"
+      ],
+      "selectors": [
+        "WeChatQuickInput.swift",
+        "TocodeCommand.swift"
       ]
     },
     {
