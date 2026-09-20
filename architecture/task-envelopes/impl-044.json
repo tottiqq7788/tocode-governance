@@ -1,0 +1,59 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-044",
+  "role": "implementation_owner",
+  "baseline_commit": "aef4df21221b5cc51526870cd36abf9142492eea",
+  "work_package_id": "wp-044",
+  "allowed_scope": [
+    "app/Sources/TocodePreferences.swift",
+    "app/Sources/TocodePortableSettings.swift",
+    "app/Sources/RootPathStore.swift",
+    "app/Sources/ShortcutSettingsStore.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/TrackpadShortcutService.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/MouseWheelReverseStore.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/CodexSyncSettingsStore.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-044.json",
+    "governance/architecture/task-envelopes/impl-044.json",
+    "governance/architecture/evidence/ev-*-044.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-settings-domain",
+    "l0-settings-portable-transfer",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "Bundle ID 仍为 com.tocode.mac。",
+    "根目录、开机自启、同步项目夹、拓展设置、微信凭据与安克密钥不进入 .tocode，导入也不改写它们。",
+    "删除/清空仍先确认再进废纸篓。",
+    "CLI 白名单与微信 receive-only 语义不变。"
+  ],
+  "must_reject": [
+    "改 Bundle ID。",
+    "导出或导入密钥、凭据、拓展设置、根目录、开机自启或同步项目夹。",
+    "导入不经确认即覆盖。",
+    "新增 CLI 命令或把导入导出加入映射功能目录。",
+    "用 shell 读写偏好或申请新系统权限。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要改 Bundle ID、导出密钥/凭据/拓展设置/根目录/开机自启/同步项目夹，或导入不经确认即覆盖时停止。",
+    "实现需要新增 CLI 命令或把导入导出加入键盘/触控板映射目录时停止并重新准入。",
+    "实现需要用 shell 读写偏好或申请新系统权限时停止。"
+  ],
+  "notes": "新增 l0-settings-domain 与 l0-settings-portable-transfer；设置菜单结构同步写入 l0-action-menu。"
+}

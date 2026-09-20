@@ -1,0 +1,46 @@
+{
+  "id": "wp-044",
+  "title": "固定配置域、启动迁移与 .tocode 导入导出",
+  "baseline_commit": "aef4df21221b5cc51526870cd36abf9142492eea",
+  "goal": "所有开关与映射改走固定 UserDefaults suite com.tocode.app，启动时一次性把 com.tocode.mac 中已有键覆盖进该 suite（suite 独有键保留）。右键设置提供导出/导入 .tocode：只含键盘映射、触控板、快捷键开关与滚轮；导入前确认并整段覆盖这些可分享项。不改 Bundle ID，不导出密钥、凭据、拓展设置、根目录、开机自启或同步项目夹。",
+  "scope": [
+    "app/Sources/TocodePreferences.swift",
+    "app/Sources/TocodePortableSettings.swift",
+    "app/Sources/RootPathStore.swift",
+    "app/Sources/ShortcutSettingsStore.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/TrackpadShortcut.swift",
+    "app/Sources/TrackpadShortcutService.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/MouseWheelReverseStore.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/CodexSyncSettingsStore.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-044.json",
+    "governance/architecture/task-envelopes/impl-044.json",
+    "governance/architecture/evidence/ev-*-044.json"
+  ],
+  "stop_conditions": [
+    "实现需要改 Bundle ID、导出密钥/凭据/拓展设置/根目录/开机自启/同步项目夹，或导入不经确认即覆盖时停止。",
+    "实现需要新增 CLI 命令或把导入导出加入键盘/触控板映射目录时停止并重新准入。",
+    "实现需要用 shell 读写偏好或申请新系统权限时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、git diff --check 和治理审计通过。",
+    "unit：空 suite 迁入；suite 保留根目录且 mac 映射覆盖；已迁过不再覆盖；导出不含本机/密钥字段；导入替换可分享项、取消与坏文件不写。",
+    "runtime_e2e：真机启动迁移后配置仍在，并完成一次导出/导入；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "4196ef40069148f005ccbdf2bd26470d2a39ca65",
+  "acceptance_notes": "static 与 unit 证据在 app commit 4196ef4 上实测通过：构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 968 项通过。runtime_e2e 登记为 skipped：需要交互式菜单栏与导入导出面板。证据已改绑 4196ef4。",
+  "approval": {
+    "source": "user-approved-plan:2026-09-20-settings-domain-portable",
+    "scope": "The user asked for a stable com.tocode.app suite, one-time overlay migration from com.tocode.mac, and settings import/export of a .tocode file that excludes secrets, credentials and extended settings, with confirmed full replace of the portable subset.",
+    "design_reference": "plans/配置域迁移与便携导出_e3f3c765.plan.md"
+  }
+}

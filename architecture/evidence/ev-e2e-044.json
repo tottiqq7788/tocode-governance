@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-044",
+  "work_package_id": "wp-044",
+  "commit": "4196ef40069148f005ccbdf2bd26470d2a39ca65",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI verification against build/Tocode.app produced by bash scripts/build.sh from app commit 4196ef40069148f005ccbdf2bd26470d2a39ca65. Not executed in this run.",
+  "result_summary": "The required live sequence was not executed: launch after the domain split so com.tocode.mac keys overlay into com.tocode.app, confirm previous mappings and root return, then export a .tocode file and import it with confirmation so portable items replace and secrets/root stay put.",
+  "limitations": [
+    "Live status-item menus, save/open panels and UserDefaults migration on a real machine require an interactive GUI session."
+  ]
+}

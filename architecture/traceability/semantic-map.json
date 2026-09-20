@@ -58,7 +58,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项。其余既有目录、codex、微信关联和退出功能保持不变。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启、导出配置、导入配置与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项。其余既有目录、codex、微信关联和退出功能保持不变。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -72,7 +72,8 @@
         "app-commit:c73b1a3",
         "user-requirement:2026-09-09-keyboard-remap",
         "user-request:2026-09-11-anker-key",
-        "user-request:2026-09-16-extended-settings-ak"
+        "user-request:2026-09-16-extended-settings-ak",
+        "user-requirement:2026-09-20-settings-domain-portable"
       ]
     },
     {
@@ -321,10 +322,31 @@
       "id": "l0-extended-settings",
       "name": "拓展设置功能类型开关",
       "status": "approved",
-      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示「codex」下的模型切换子菜单，以及「设置」中的「AK密钥」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、codex 项目状态与同步项目夹始终显示。",
+      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示「codex」下的模型切换子菜单，以及「设置」中的「AK密钥」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、导出配置、导入配置、codex 项目状态与同步项目夹始终显示。",
       "source_refs": [
         "user-request:2026-09-16-extended-settings-ak",
-        "app-commit:343b7c9"
+        "app-commit:343b7c9",
+        "user-requirement:2026-09-20-settings-domain-portable"
+      ]
+    },
+    {
+      "id": "l0-settings-domain",
+      "name": "固定配置存储域",
+      "status": "candidate",
+      "statement": "开关、根目录、键盘映射、触控板绑定、滚轮与拓展设置一律写入固定 UserDefaults suite com.tocode.app，不跟 Bundle ID 走。Bundle ID 保持 com.tocode.mac。应用启动时若尚未完成迁移，则把 com.tocode.mac 中已有的已知键覆盖写入该 suite，suite 里源域没有的键保留；迁移只做一次。不搬微信凭据/接收状态，不改系统登录项。",
+      "source_refs": [
+        "user-requirement:2026-09-20-settings-domain-portable",
+        "user-approved-plan:2026-09-20-settings-domain-portable"
+      ]
+    },
+    {
+      "id": "l0-settings-portable-transfer",
+      "name": "可分享配置导入导出",
+      "status": "candidate",
+      "statement": "右键「设置」提供「导出配置」与「导入配置」。文件内容为 JSON，后缀 .tocode，format 为 tocode.settings 且 version 为 1。文件只含键盘映射、触控板三/四/五指绑定、x/v移动文件、双击⌘Q、⌘Q强关访达、垂直/横向滚轮。根目录、开机自启、同步项目夹、拓展设置（含 AK 开关）、微信凭据与接收状态、安克密钥不得写入文件，导入也不得改写它们。导入先弹确认，确认后整段覆盖上述可分享项并立即按新配置重装钩子；取消或格式/版本不认识则不改任何键。不提供 CLI，不进入键盘/触控板映射功能目录。",
+      "source_refs": [
+        "user-requirement:2026-09-20-settings-domain-portable",
+        "user-approved-plan:2026-09-20-settings-domain-portable"
       ]
     }
   ],
@@ -399,7 +421,8 @@
         "l0-temporary-blackout",
         "l0-trackpad-shortcuts",
         "l0-delete-clear",
-        "l0-access-mode"
+        "l0-access-mode",
+        "l0-settings-portable-transfer"
       ],
       "owners": [
         "architecture_owner"
@@ -760,6 +783,43 @@
         "implementation_owner",
         "independent_reviewer"
       ]
+    },
+    {
+      "id": "l1-settings-domain",
+      "name": "固定配置域与启动迁移",
+      "status": "candidate",
+      "responsibility": "把开关、根目录、映射与拓展设置写入固定 suite com.tocode.app；启动时一次性从 com.tocode.mac 覆盖已知键，并保留 suite 独有键。",
+      "l0_refs": [
+        "l0-settings-domain",
+        "l0-root",
+        "l0-shortcuts",
+        "l0-keyboard-remapping",
+        "l0-trackpad-shortcuts",
+        "l0-extended-settings"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-settings-portable-transfer",
+      "name": "可分享配置编解码",
+      "status": "candidate",
+      "responsibility": "把可分享配置编为 .tocode JSON，并在确认后整段写回 suite；拒绝未知格式/版本；永不编入或写回密钥、凭据、拓展设置、根目录、开机自启与同步项目夹。",
+      "l0_refs": [
+        "l0-settings-portable-transfer"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     }
   ],
   "l2_components": [
@@ -770,11 +830,13 @@
       "l1_refs": [
         "l1-status-bar",
         "l1-trackpad-shortcuts",
-        "l1-keyboard-remapping"
+        "l1-keyboard-remapping",
+        "l1-settings-domain"
       ],
       "selectors": [
         "TocodeApp.swift",
-        "AppDelegate.swift"
+        "AppDelegate.swift",
+        "TocodePreferences.swift"
       ]
     },
     {
@@ -788,10 +850,12 @@
         "l1-codex-model-switch",
         "l1-trackpad-shortcuts",
         "l1-keyboard-remapping",
-        "l1-extended-settings"
+        "l1-extended-settings",
+        "l1-settings-portable-transfer"
       ],
       "selectors": [
-        "StatusItemController.swift"
+        "StatusItemController.swift",
+        "TocodePortableSettings.swift"
       ]
     },
     {

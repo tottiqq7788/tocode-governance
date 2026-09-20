@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-044",
+  "work_package_id": "wp-044",
+  "commit": "4196ef40069148f005ccbdf2bd26470d2a39ca65",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 4196ef40069148f005ccbdf2bd26470d2a39ca65: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 968 passing assertions and 0 failures. Coverage includes empty-suite migration from a legacy domain; suite-only root and AK keys retained while legacy mappings overlay; a second migrateIfNeeded does not overwrite; exported JSON omits root, extended-settings, AK and wechat fields; bad format and higher version fail closed; apply replaces portable mappings and toggles without writing root, AK or Codex sync.",
+  "limitations": [
+    "The command-line test target does not present NSSavePanel or the import confirmation alert."
+  ]
+}
