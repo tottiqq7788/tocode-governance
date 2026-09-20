@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-045",
+  "work_package_id": "wp-045",
+  "commit": "22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI verification against build/Tocode.app produced by bash scripts/build.sh from app commit 22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383. Not executed in this run.",
+  "result_summary": "The required live sequence was not executed: open 设置 → 说明书, switch among the tab pages, and confirm the window is read-only and does not change settings.",
+  "limitations": [
+    "Live status-item menus and the modal manual window require an interactive GUI session."
+  ]
+}

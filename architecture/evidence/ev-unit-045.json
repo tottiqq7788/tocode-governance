@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-045",
+  "work_package_id": "wp-045",
+  "commit": "22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "App commit 22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 978 passing assertions and 0 failures. Coverage includes seven unique UserManual tab titles, non-empty bodies, Option/Command directory modes, import/export, WeChat quick input or send, CLI help, and absence of ANKER_API_KEY or wechat-credential.json.",
+  "limitations": [
+    "The command-line test target does not open the NSWindow or click native tabs."
+  ]
+}

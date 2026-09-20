@@ -1,0 +1,44 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-045",
+  "role": "implementation_owner",
+  "baseline_commit": "4196ef40069148f005ccbdf2bd26470d2a39ca65",
+  "work_package_id": "wp-045",
+  "allowed_scope": [
+    "app/Sources/UserManual.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-045.json",
+    "governance/architecture/task-envelopes/impl-045.json",
+    "governance/architecture/evidence/ev-*-045.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-user-manual",
+    "l0-action-menu",
+    "l0-extended-settings"
+  ],
+  "must_preserve": [
+    "说明书只读，不改根目录、映射、开关、微信绑定或密钥。",
+    "导入导出、拓展设置与开机自启语义不变。",
+    "CLI 白名单与微信 receive-only 不变。"
+  ],
+  "must_reject": [
+    "在说明书中展示或写入密钥、凭据。",
+    "把说明书加入键盘/触控板映射目录。",
+    "新增 CLI 命令。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "说明书写入或改写任何配置、密钥或凭据时停止。",
+    "实现需要把说明书加入键盘/触控板映射目录或新增 CLI 命令时停止并重新准入。"
+  ],
+  "notes": "新增 l0-user-manual；设置菜单结构同步写入 l0-action-menu。"
+}

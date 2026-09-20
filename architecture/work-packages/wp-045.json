@@ -1,0 +1,33 @@
+{
+  "id": "wp-045",
+  "title": "设置中的说明书弹窗",
+  "baseline_commit": "4196ef40069148f005ccbdf2bd26470d2a39ca65",
+  "goal": "右键设置增加「说明书」。点击后弹出只读窗口，用 Tab 分页说明 Tocode 的功能与用法。不改配置、不含密钥、不进映射目录、不加 CLI。",
+  "scope": [
+    "app/Sources/UserManual.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-045.json",
+    "governance/architecture/task-envelopes/impl-045.json",
+    "governance/architecture/evidence/ev-*-045.json"
+  ],
+  "stop_conditions": [
+    "说明书写入或改写任何配置、密钥或凭据时停止。",
+    "实现需要把说明书加入键盘/触控板映射目录或新增 CLI 命令时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、git diff --check 和治理审计通过。",
+    "unit：分页标题完整且不重复；各页有正文；覆盖目录树修饰键、导入导出、微信命令与 CLI；正文不含密钥字段。",
+    "runtime_e2e：真机打开说明书并切页；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "implementation_commit": "22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383",
+  "acceptance_notes": "static 与 unit 证据在 app commit 22d86e2 上实测通过：构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 978 项通过。runtime_e2e 登记为 skipped：需要交互式说明书窗口。证据已改绑 22d86e2。",
+  "approval": {
+    "source": "user-request:2026-09-20-user-manual",
+    "scope": "The user asked to add 说明书 under 设置 that opens a tabbed popup explaining all Tocode features and how to use them."
+  }
+}

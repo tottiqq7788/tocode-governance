@@ -58,7 +58,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启、导出配置、导入配置与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项。其余既有目录、codex、微信关联和退出功能保持不变。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启、导出配置、导入配置、说明书与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项。其余既有目录、codex、微信关联和退出功能保持不变。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -73,7 +73,8 @@
         "user-requirement:2026-09-09-keyboard-remap",
         "user-request:2026-09-11-anker-key",
         "user-request:2026-09-16-extended-settings-ak",
-        "user-requirement:2026-09-20-settings-domain-portable"
+        "user-requirement:2026-09-20-settings-domain-portable",
+        "user-request:2026-09-20-user-manual"
       ]
     },
     {
@@ -322,11 +323,12 @@
       "id": "l0-extended-settings",
       "name": "拓展设置功能类型开关",
       "status": "approved",
-      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示「codex」下的模型切换子菜单，以及「设置」中的「AK密钥」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、导出配置、导入配置、codex 项目状态与同步项目夹始终显示。",
+      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示「codex」下的模型切换子菜单，以及「设置」中的「AK密钥」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、导出配置、导入配置、说明书、codex 项目状态与同步项目夹始终显示。",
       "source_refs": [
         "user-request:2026-09-16-extended-settings-ak",
         "app-commit:343b7c9",
-        "user-requirement:2026-09-20-settings-domain-portable"
+        "user-requirement:2026-09-20-settings-domain-portable",
+        "user-request:2026-09-20-user-manual"
       ]
     },
     {
@@ -347,6 +349,15 @@
       "source_refs": [
         "user-requirement:2026-09-20-settings-domain-portable",
         "user-approved-plan:2026-09-20-settings-domain-portable"
+      ]
+    },
+    {
+      "id": "l0-user-manual",
+      "name": "设置中的说明书",
+      "status": "candidate",
+      "statement": "右键「设置」始终提供「说明书」。点击后弹出只读窗口，用 Tab 分页说明目录树、访达与目录、mac、微信、命令行与设置的功能及用法。说明书不修改任何配置，不展示密钥或凭据，不进入键盘/触控板映射功能目录，也不提供 CLI。关闭窗口后回到菜单栏，不改变当前根目录或开关。",
+      "source_refs": [
+        "user-request:2026-09-20-user-manual"
       ]
     }
   ],
@@ -422,7 +433,8 @@
         "l0-trackpad-shortcuts",
         "l0-delete-clear",
         "l0-access-mode",
-        "l0-settings-portable-transfer"
+        "l0-settings-portable-transfer",
+        "l0-user-manual"
       ],
       "owners": [
         "architecture_owner"
@@ -820,6 +832,22 @@
         "implementation_owner",
         "independent_reviewer"
       ]
+    },
+    {
+      "id": "l1-user-manual",
+      "name": "说明书分页与展示",
+      "status": "candidate",
+      "responsibility": "提供只读说明书分页正文，并在设置菜单打开带 Tab 的窗口展示；不读写配置或密钥。",
+      "l0_refs": [
+        "l0-user-manual"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
     }
   ],
   "l2_components": [
@@ -851,11 +879,13 @@
         "l1-trackpad-shortcuts",
         "l1-keyboard-remapping",
         "l1-extended-settings",
-        "l1-settings-portable-transfer"
+        "l1-settings-portable-transfer",
+        "l1-user-manual"
       ],
       "selectors": [
         "StatusItemController.swift",
-        "TocodePortableSettings.swift"
+        "TocodePortableSettings.swift",
+        "UserManual.swift"
       ]
     },
     {
