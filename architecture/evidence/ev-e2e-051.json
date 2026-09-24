@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-051",
+  "work_package_id": "wp-051",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Built and restarted app/build/Tocode.app; 历史 submenu hover was not exercised in this agent session.",
+  "result_summary": "请人工：左键根菜单应仍是根第一层；点进深层某项后关闭；再打开悬停「历史」应看到该次点击项的同级目录。不应再出现整菜单直接跳到深层、也不应有顶栏面包屑/上一级/根目录。",
+  "limitations": [
+    "菜单栏悬停无法在当前 agent 环境可靠自动化。",
+    "实现仍在工作树，证据尚未绑定不可变 commit。"
+  ]
+}

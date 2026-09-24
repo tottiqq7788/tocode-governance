@@ -1,0 +1,33 @@
+{
+  "id": "wp-051",
+  "title": "目录树「历史」子菜单复用",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "goal": "取消整棵左键菜单跳转到上次文件夹的实现；根菜单始终从当前根第一层打开。在分隔线与「新增」之间增加「历史」：悬停展开为上次点击的文件或文件夹的同级目录内容。无有效点击记忆或路径失效时「历史」不可用。",
+  "scope": [
+    "app/Sources/DirectoryMenuResume.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-051.json",
+    "governance/architecture/task-envelopes/impl-051.json",
+    "governance/architecture/evidence/ev-*-051.json"
+  ],
+  "stop_conditions": [
+    "实现再次把整棵左键菜单默认改到非根展示层时停止。",
+    "实现需要保留面包屑/上一级/根目录顶栏时停止并确认需求。",
+    "实现需要把历史记忆写入可分享 .tocode 配置时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：构建、codesign、治理审计通过。",
+    "unit：由上次点击路径解析同级目录；根外/失效时无历史目录；说明书与菜单文案含「历史」。",
+    "runtime_e2e：本机点击深路径后重开，悬停「历史」见同级；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-09-24-directory-menu-history",
+    "scope": "User rejects full-menu resume; wants a 历史 item above 新增 whose submenu shows siblings of the last clicked file or folder."
+  }
+}

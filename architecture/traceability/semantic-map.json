@@ -15,13 +15,14 @@
       "id": "l0-navigate",
       "name": "左键浏览目录",
       "status": "approved",
-      "statement": "左键单击菜单栏图标时，弹出目录树；默认展示上次展开到的文件夹内容（见 l0-directory-menu-resume），否则展示根文件夹下的第一层文件与文件夹（可递归展开）。每个目录菜单底部固定提供「新增」；菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
+      "statement": "左键单击菜单栏图标时，弹出目录树并显示根文件夹下的第一层文件与文件夹（可递归展开）。每个目录菜单底部固定提供「新增」；根层菜单在「新增」上方另提供「历史」（见 l0-directory-menu-resume）。菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
       "source_refs": [
         "user-requirement:2026-09-03",
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-08",
         "user-requirement:2026-09-20-directory-menu-modifiers",
-        "user-request:2026-09-24-directory-menu-resume"
+        "user-request:2026-09-24-directory-menu-resume",
+        "user-request:2026-09-24-directory-menu-history"
       ]
     },
     {
@@ -35,11 +36,12 @@
     },
     {
       "id": "l0-directory-menu-resume",
-      "name": "目录树恢复展开位置",
+      "name": "目录树历史同级复用",
       "status": "approved",
-      "statement": "左键目录树记住用户最近展开到的文件夹（悬停打开子菜单时更新）。下次打开时直接显示该文件夹下的内容，便于复用；记忆路径必须位于当前根文件夹之下且目录仍存在，否则回退到根或其仍存在的最近上级。当显示层不是根时，菜单顶部提供只读面包屑、「上一级」与「根目录」以便继续索引；悬停子文件夹仍可向下展开并刷新记忆。该记忆写入本机固定偏好域，不进入可分享配置导入导出，也不改变根文件夹权威。",
+      "statement": "左键根目录菜单始终从当前根第一层打开，不因历史记忆改变整棵菜单的展示根。记住用户最近一次点击的文件或文件夹路径（复制、删除、访问或 Shift 多选点击时更新；悬停展开不更新）。根菜单在分隔线与「新增/清空/访问」之间提供「历史」：悬停展开的子菜单展示该路径所属父目录下的同级文件与文件夹，便于快速回到上次位置继续索引。无有效点击记忆、记忆不在当前根下、或父目录不存在时，「历史」不可用（无子菜单或禁用）。该记忆写入本机固定偏好域，不进入可分享配置导入导出，也不改变根文件夹权威。",
       "source_refs": [
-        "user-request:2026-09-24-directory-menu-resume"
+        "user-request:2026-09-24-directory-menu-resume",
+        "user-request:2026-09-24-directory-menu-history"
       ]
     },
     {
@@ -401,7 +403,7 @@
       "id": "l1-menu-navigation",
       "name": "目录菜单渲染",
       "status": "candidate",
-      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开并包含隐藏文件；在每个目录菜单底部按模式渲染「新增」、「清空」或「访问」；记住并恢复上次展开文件夹，非根层提供面包屑与上一级/根目录导航。",
+      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开并包含隐藏文件；在每个目录菜单底部按模式渲染「新增」、「清空」或「访问」；根层在「新增」上方提供「历史」子菜单以复用上次点击项的同级目录。",
       "l0_refs": [
         "l0-navigate",
         "l0-recurse",

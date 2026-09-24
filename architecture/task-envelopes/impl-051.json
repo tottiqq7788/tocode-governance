@@ -1,0 +1,45 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-051",
+  "role": "implementation_owner",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "work_package_id": "wp-051",
+  "allowed_scope": [
+    "app/Sources/DirectoryMenuResume.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-051.json",
+    "governance/architecture/task-envelopes/impl-051.json",
+    "governance/architecture/evidence/ev-*-051.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-directory-menu-resume",
+    "l0-navigate"
+  ],
+  "must_preserve": [
+    "左键根菜单始终从当前根第一层打开。",
+    "悬停展开、复制、Shift 多选、Option/Command、新增语义不变。",
+    "历史记忆不进入可分享配置。"
+  ],
+  "must_reject": [
+    "再次用整菜单跳转代替「历史」子菜单。",
+    "无点击记忆时仍展开错误目录。",
+    "在子文件夹菜单底部也强制插入「历史」改变原有深层结构（仅根层菜单需要「历史」。）"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现再次把整棵左键菜单默认改到非根展示层时停止。",
+    "实现需要保留面包屑/上一级/根目录顶栏时停止并确认需求。",
+    "实现需要把历史记忆写入可分享 .tocode 配置时停止。"
+  ],
+  "notes": "修改 l0-directory-menu-resume：记忆改为上次点击路径；复用入口改为根菜单「历史」子菜单展示其父目录（同级）。"
+}

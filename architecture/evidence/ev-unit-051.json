@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-051",
+  "work_package_id": "wp-051",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1031 项断言通过、0 失败。覆盖：上次点击→同级父目录；根外/无记忆/父目录缺失返回 nil；旧 resume 键清理；说明书含「历史」、不含整菜单跳转文案。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "未在单元测试中点击 NSMenu「历史」子菜单。"
+  ]
+}
