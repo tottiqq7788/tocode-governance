@@ -1,0 +1,31 @@
+{
+  "id": "wp-049",
+  "title": "新增成功后自动复制路径",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "goal": "目录树「新增」成功创建文件或文件夹后，自动把新建项的绝对路径以「路径」格式写入剪贴板；取消或创建失败不改剪贴板。",
+  "scope": [
+    "app/Sources/MenuBuilder.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-049.json",
+    "governance/architecture/task-envelopes/impl-049.json",
+    "governance/architecture/evidence/ev-*-049.json"
+  ],
+  "stop_conditions": [
+    "实现需要改变新增对话框字段、支持的文件格式或重名不覆盖策略时停止并重新准入。",
+    "实现需要改「路径」全角括号格式时停止。",
+    "实现需要在创建失败或部分成功时仍写入剪贴板时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、治理审计通过。",
+    "unit：创建文件/文件夹返回路径；成功后写入的剪贴板为单条「路径」；失败路径不要求写剪贴板。",
+    "runtime_e2e：本机目录树新增一项后粘贴为该「路径」；未跑则登记 skipped 并写明限制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-09-24-copy-path-after-create",
+    "scope": "User wants the newly created file or folder path automatically copied to the clipboard after a successful 新增."
+  }
+}

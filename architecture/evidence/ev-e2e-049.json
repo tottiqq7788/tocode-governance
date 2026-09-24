@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-049",
+  "work_package_id": "wp-049",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Built app/build/Tocode.app; directory-tree 新增 dialog was not clicked in this agent session.",
+  "result_summary": "未在本机会话中点击菜单栏「新增」做运行态验证。请人工：左键目录树 → 新增文件或文件夹 → 成功后粘贴应为该「路径」。",
+  "limitations": [
+    "菜单栏新增对话框无法在当前 agent 环境可靠自动化。",
+    "实现仍在工作树，证据尚未绑定不可变 commit。"
+  ]
+}

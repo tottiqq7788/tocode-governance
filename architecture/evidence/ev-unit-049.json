@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-049",
+  "work_package_id": "wp-049",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1018 项断言通过、0 失败。新增覆盖：创建文件/文件夹返回路径后写入「路径」剪贴板；说明书含新增成功复制路径说明。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "命令行测试不点击目录树「新增」对话框，MenuBuilder 成功分支的 clipboard.copyPath 由创建返回路径 + ClipboardService 契约覆盖。"
+  ]
+}

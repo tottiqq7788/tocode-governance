@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-049",
+  "role": "implementation_owner",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "work_package_id": "wp-049",
+  "allowed_scope": [
+    "app/Sources/MenuBuilder.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-049.json",
+    "governance/architecture/task-envelopes/impl-049.json",
+    "governance/architecture/evidence/ev-*-049.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-create-file"
+  ],
+  "must_preserve": [
+    "新增仍支持文件夹与常见格式空文件；重名不覆盖。",
+    "路径仍用全角「」包裹。",
+    "取消对话框或创建失败时不改变剪贴板。",
+    "Option 删除、Command 访问、Shift 多选复制语义不变。"
+  ],
+  "must_reject": [
+    "创建失败仍写入剪贴板。",
+    "改变「」格式或多路径换行语义。",
+    "静默覆盖已存在的同名文件或文件夹。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要改变新增对话框字段、支持的文件格式或重名不覆盖策略时停止并重新准入。",
+    "实现需要改「路径」全角括号格式时停止。",
+    "实现需要在创建失败或部分成功时仍写入剪贴板时停止。"
+  ],
+  "notes": "阶段：左键目录树新增。角色：本机用户。业务对象：新建文件/文件夹路径与剪贴板。不变量：重名不覆盖、「」格式、失败不写剪贴板。L1：目录树/文件系统。L2：MenuBuilder、FileSystemService、ClipboardService。证据：static、unit、runtime_e2e。"
+}

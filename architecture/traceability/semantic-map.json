@@ -254,11 +254,12 @@
     },
     {
       "id": "l0-create-file",
-      "name": "新增文件",
+      "name": "新增文件或文件夹",
       "status": "candidate",
-      "statement": "目录树每个菜单底部固定提供「新增」；点击后弹出小窗口输入文件名并选择常见格式（txt、md、csv、json、docx、xlsx、pptx、pdf），确认后在当前目录创建一个空文件。文件名无扩展名时自动追加所选格式扩展名，已有扩展名时以输入为准；重名时不覆盖并提示错误。",
+      "statement": "目录树每个菜单底部固定提供「新增」；点击后弹出小窗口，可新建文件夹，或输入文件名并选择常见格式（txt、md、csv、json、docx、xlsx、pptx、pdf）创建空文件。文件名无扩展名时自动追加所选格式扩展名，已有扩展名时以输入为准；重名时不覆盖并提示错误。创建成功后，将该新建文件或文件夹的绝对路径以「路径」格式（全角括号包裹）写入系统剪贴板；取消对话框或创建失败时不改变剪贴板。",
       "source_refs": [
-        "user-requirement:2026-09-08"
+        "user-requirement:2026-09-08",
+        "user-request:2026-09-24-copy-path-after-create"
       ]
     },
     {
