@@ -1,0 +1,46 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-047",
+  "role": "implementation_owner",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "work_package_id": "wp-047",
+  "allowed_scope": [
+    "app/Sources/WeChatArchiveService.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-047.json",
+    "governance/architecture/task-envelopes/impl-047.json",
+    "governance/architecture/evidence/ev-*-047.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-wechat-archive"
+  ],
+  "must_preserve": [
+    "归档根仍是固定目录，用户不能选择或配置。",
+    "日期分区、每日 wechat<yyMMdd>.md、附件命名、追加写入和 receive-only 边界不变。",
+    "绑定凭据、游标、401/403 解绑和命令/快捷输入/wechat send 出站例外不变。",
+    "根文件夹默认路径仍是 /Users/admin/Documents。"
+  ],
+  "must_reject": [
+    "继续把生产归档根写死为 /Users/admin/Documents/wechat。",
+    "把归档根做成可配置、随项目根变化或写到应用支持目录。",
+    "改绑定、收件、出站、凭据或归档格式。",
+    "改根文件夹默认路径。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要把归档根目录做成菜单可改、可配置或随项目根目录变化时停止并重新准入。",
+    "实现需要改绑定、收件、出站、凭据或 Markdown/附件格式时停止。",
+    "实现需要改根文件夹默认路径 /Users/admin/Documents 时停止并单独准入。"
+  ],
+  "notes": "阶段：本机微信归档与访达打开。角色：当前 macOS 登录用户。业务对象：微信归档根目录。不变量：固定目录、日期分区、追加写入、receive-only。禁止结果：写死其他用户家目录，或开放可配置路径。L1：l1-wechat-archive、l1-wechat-association。L2：l2-wechat-archive-service、l2-wechat-association-service。证据：static、unit、runtime_e2e。"
+}

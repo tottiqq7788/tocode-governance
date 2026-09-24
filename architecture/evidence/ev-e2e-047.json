@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-047",
+  "work_package_id": "wp-047",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "Restarted app/build/Tocode.app, then ran app/build/tocode wechat location against the live IPC server on user totti.",
+  "result_summary": "CLI 返回「已在访达打开微信归档目录」，本机创建并打开 /Users/totti/Documents/wechat。旧写死路径 /Users/admin 在本机不存在，不再作为创建目标。",
+  "limitations": [
+    "通过 CLI wechat location 触发与菜单「文件位置」相同的 openArchiveLocation，未再人工点菜单栏。",
+    "实现仍在工作树，证据尚未绑定不可变 commit。"
+  ]
+}

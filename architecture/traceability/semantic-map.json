@@ -36,11 +36,12 @@
       "id": "l0-copy-path",
       "name": "复制路径",
       "status": "approved",
-      "statement": "未按 Option、也未按 Command 时，点击任一文件或文件夹条目，将该条目的绝对路径以「路径」格式（全角括号包裹）复制到系统剪贴板。",
+      "statement": "未按 Option、也未按 Command 时，点击任一文件或文件夹条目，将该条目的绝对路径以「路径」格式（全角括号包裹）复制到系统剪贴板，菜单随即关闭。按住 Shift 连续点击多个条目时，按点击顺序把多条「路径」以换行拼接写入剪贴板，且目录树保持打开；松开 Shift 后的下一次普通点击仍只复制一条并关闭菜单。Shift 多选仅在普通复制模式下生效；Option 删除与 Command 访问优先于 Shift。",
       "source_refs": [
         "user-requirement:2026-09-03",
         "user-feedback:2026-09-03",
-        "user-requirement:2026-09-20-directory-menu-modifiers"
+        "user-requirement:2026-09-20-directory-menu-modifiers",
+        "user-request:2026-09-24-shift-multi-copy-path"
       ]
     },
     {
@@ -58,7 +59,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启、导出配置、导入配置、说明书与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项。其余既有目录、codex、微信关联和退出功能保持不变。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启、「配置」（导出配置、导入配置）与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项；「说明书」位于「设置」下方、「退出」上方，不在「设置」夹内。其余既有目录、codex、微信关联和退出功能保持不变。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -74,21 +75,23 @@
         "user-request:2026-09-11-anker-key",
         "user-request:2026-09-16-extended-settings-ak",
         "user-requirement:2026-09-20-settings-domain-portable",
-        "user-request:2026-09-20-user-manual"
+        "user-request:2026-09-20-user-manual",
+        "user-request:2026-09-20-menu-reorg"
       ]
     },
     {
       "id": "l0-wechat-archive",
       "name": "微信关联与本地归档",
       "status": "approved",
-      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入固定目录 /Users/admin/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息、整条可由 {} 按键段与中文引号“”文字段顺序拼接而成的快捷输入消息，以及 CLI/共享命令 wechat send 的主动出站，例外调用 sendmessage。出站内容不写入归档；可回复会话（user_id 与 context_token）只记在权限 0600 的接收状态文件中。",
+      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入当前用户文稿下的固定目录 ~/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息、整条可由 {} 按键段与中文引号“”文字段顺序拼接而成的快捷输入消息，以及 CLI/共享命令 wechat send 的主动出站，例外调用 sendmessage。出站内容不写入归档；可回复会话（user_id 与 context_token）只记在权限 0600 的接收状态文件中。归档根目录随当前登录用户解析，不写死其他用户的家目录，也不可由菜单配置。",
       "source_refs": [
         "user-requirement:2026-09-07",
         "user-approved-plan:2026-09-07",
         "app-commit:2e98f9d",
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-20-wechat-quick-input",
-        "user-approved-plan:2026-09-20-wechat-cli-send"
+        "user-approved-plan:2026-09-20-wechat-cli-send",
+        "user-feedback:2026-09-20-wechat-archive-location"
       ]
     },
     {
@@ -323,12 +326,13 @@
       "id": "l0-extended-settings",
       "name": "拓展设置功能类型开关",
       "status": "approved",
-      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示「codex」下的模型切换子菜单，以及「设置」中的「AK密钥」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、导出配置、导入配置、说明书、codex 项目状态与同步项目夹始终显示。",
+      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示「codex」下的模型切换子菜单，以及「设置」中的「AK密钥」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、「设置 → 配置」中的导出配置与导入配置、顶层说明书、codex 项目状态与同步项目夹始终显示。",
       "source_refs": [
         "user-request:2026-09-16-extended-settings-ak",
         "app-commit:343b7c9",
         "user-requirement:2026-09-20-settings-domain-portable",
-        "user-request:2026-09-20-user-manual"
+        "user-request:2026-09-20-user-manual",
+        "user-request:2026-09-20-menu-reorg"
       ]
     },
     {
@@ -345,19 +349,21 @@
       "id": "l0-settings-portable-transfer",
       "name": "可分享配置导入导出",
       "status": "candidate",
-      "statement": "右键「设置」提供「导出配置」与「导入配置」。文件内容为 JSON，后缀 .tocode，format 为 tocode.settings 且 version 为 1。文件只含键盘映射、触控板三/四/五指绑定、x/v移动文件、双击⌘Q、⌘Q强关访达、垂直/横向滚轮。根目录、开机自启、同步项目夹、拓展设置（含 AK 开关）、微信凭据与接收状态、安克密钥不得写入文件，导入也不得改写它们。导入先弹确认，确认后整段覆盖上述可分享项并立即按新配置重装钩子；取消或格式/版本不认识则不改任何键。不提供 CLI，不进入键盘/触控板映射功能目录。",
+      "statement": "右键「设置 → 配置」提供「导出配置」与「导入配置」。文件内容为 JSON，后缀 .tocode，format 为 tocode.settings 且 version 为 1。文件只含键盘映射、触控板三/四/五指绑定、x/v移动文件、双击⌘Q、⌘Q强关访达、垂直/横向滚轮。根目录、开机自启、同步项目夹、拓展设置（含 AK 开关）、微信凭据与接收状态、安克密钥不得写入文件，导入也不得改写它们。导入先弹确认，确认后整段覆盖上述可分享项并立即按新配置重装钩子；取消或格式/版本不认识则不改任何键。不提供 CLI，不进入键盘/触控板映射功能目录。",
       "source_refs": [
         "user-requirement:2026-09-20-settings-domain-portable",
-        "user-approved-plan:2026-09-20-settings-domain-portable"
+        "user-approved-plan:2026-09-20-settings-domain-portable",
+        "user-request:2026-09-20-menu-reorg"
       ]
     },
     {
       "id": "l0-user-manual",
-      "name": "设置中的说明书",
+      "name": "说明书",
       "status": "candidate",
-      "statement": "右键「设置」始终提供「说明书」。点击后弹出只读窗口，用 Tab 分页说明目录树、访达与目录、mac、微信、命令行与设置的功能及用法。说明书不修改任何配置，不展示密钥或凭据，不进入键盘/触控板映射功能目录，也不提供 CLI。关闭窗口后回到菜单栏，不改变当前根目录或开关。",
+      "statement": "右键功能菜单在「设置」下方、「退出」上方始终提供「说明书」，不放在「设置」夹内。点击后弹出只读窗口，用 Tab 分页说明目录树、访达与目录、mac、微信、命令行与设置的功能及用法。说明书不修改任何配置，不展示密钥或凭据，不进入键盘/触控板映射功能目录，也不提供 CLI。关闭窗口后回到菜单栏，不改变当前根目录或开关。",
       "source_refs": [
-        "user-request:2026-09-20-user-manual"
+        "user-request:2026-09-20-user-manual",
+        "user-request:2026-09-20-menu-reorg"
       ]
     }
   ],
@@ -405,7 +411,7 @@
       "id": "l1-copy-interaction",
       "name": "复制与悬停交互",
       "status": "candidate",
-      "responsibility": "实现悬停文件夹展开；在普通模式（未按 Option、也未按 Command）下点击文件或文件夹复制路径，均以「路径」格式写入剪贴板。",
+      "responsibility": "实现悬停文件夹展开；在普通模式（未按 Option、也未按 Command）下点击文件或文件夹复制路径，均以「路径」格式写入剪贴板；按住 Shift 时连续点击追加多条换行「路径」并保持目录树打开。",
       "l0_refs": [
         "l0-copy-path",
         "l0-hover-expand"
@@ -837,7 +843,7 @@
       "id": "l1-user-manual",
       "name": "说明书分页与展示",
       "status": "candidate",
-      "responsibility": "提供只读说明书分页正文，并在设置菜单打开带 Tab 的窗口展示；不读写配置或密钥。",
+      "responsibility": "提供只读说明书分页正文，并从右键顶层「说明书」打开带 Tab 的窗口展示；不读写配置或密钥。",
       "l0_refs": [
         "l0-user-manual"
       ],

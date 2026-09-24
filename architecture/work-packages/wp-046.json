@@ -1,0 +1,32 @@
+{
+  "id": "wp-046",
+  "title": "右键菜单整理说明书与配置夹",
+  "baseline_commit": "22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383",
+  "goal": "把说明书从设置中移到设置下方、退出上方，不放进设置夹。设置里的导出配置与导入配置收到「配置」夹，配置夹放在设置夹内。不改导入导出语义、说明书只读语义、拓展设置与开机自启。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TocodePortableSettings.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-046.json",
+    "governance/architecture/task-envelopes/impl-046.json",
+    "governance/architecture/evidence/ev-*-046.json"
+  ],
+  "stop_conditions": [
+    "实现需要改导入导出格式、覆盖范围、确认步骤，或让说明书写入配置/密钥时停止。",
+    "实现需要把说明书或导入导出加入键盘/触控板映射目录或新增 CLI 命令时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、git diff --check 和治理审计通过。",
+    "unit：配置夹与说明书标题；说明书正文写明配置夹与顶层说明书位置；导入导出与说明书只读约束保持。",
+    "runtime_e2e：真机打开右键菜单核对照片级层级；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "acceptance_notes": "static 与 unit 证据在工作树相对 app HEAD 22d86e2 实测通过：构建成功、codesign 有效、git diff --check 无空白错误、治理审计 passed；bash scripts/test.sh 得到 985 项通过。runtime_e2e 登记为 skipped：需要交互式右键菜单。证据待绑定不可变 commit。TocodePreferences.swift 的既有脏改动不在本包范围。",
+  "approval": {
+    "source": "user-request:2026-09-20-menu-reorg",
+    "scope": "The user asked to place 说明书 below 设置 and above 退出 (not inside 设置), and to move 导出配置/导入配置 into a 配置 folder that lives inside 设置."
+  }
+}

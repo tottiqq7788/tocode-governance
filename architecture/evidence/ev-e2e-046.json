@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-046",
+  "work_package_id": "wp-046",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual GUI verification against build/Tocode.app produced by bash scripts/build.sh. Not executed in this run.",
+  "result_summary": "The required live sequence was not executed: open the status-item menu, confirm 说明书 sits below 设置 and above 退出, confirm 设置 contains 配置, and confirm 配置 contains 导出配置 and 导入配置.",
+  "limitations": [
+    "Live status-item menus require an interactive GUI session."
+  ]
+}

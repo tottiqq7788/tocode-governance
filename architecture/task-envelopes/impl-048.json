@@ -1,0 +1,46 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-048",
+  "role": "implementation_owner",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "work_package_id": "wp-048",
+  "allowed_scope": [
+    "app/Sources/ClipboardService.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-048.json",
+    "governance/architecture/task-envelopes/impl-048.json",
+    "governance/architecture/evidence/ev-*-048.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-copy-path"
+  ],
+  "must_preserve": [
+    "未按 Shift 时仍是单次点击复制一条「路径」并关闭菜单。",
+    "路径仍用全角「」包裹。",
+    "Option 删除优先于 Command 访问；二者优先于普通复制（含 Shift 多选）。",
+    "悬停展开子文件夹、底部新增/清空/访问行为不变。"
+  ],
+  "must_reject": [
+    "未按 Shift 却保持菜单打开或静默追加多条。",
+    "Shift+Option 或 Shift+Command 下仍走多选复制而不是删除/访问。",
+    "改变「」格式或用空格/逗号等非换行拼接多路径。",
+    "把多选复制做到右键「复制路径」或改读取剪贴板设根语义。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要改变 Option 删除或 Command 访问的语义、优先级或底部按钮行为时停止并重新准入。",
+    "实现需要改「路径」全角括号格式、或把多路径做成可配置分隔符时停止。",
+    "实现需要把 Shift 多选扩展到右键功能菜单「复制路径」或访达选中项时停止并单独准入。"
+  ],
+  "notes": "阶段：左键目录树普通模式交互。角色：本机用户。业务对象：剪贴板路径列表。不变量：单点复制、全角「」、Option/Command 优先。禁止结果：误在删除/访问模式多选复制。L1：l1-copy-interaction。L2：l2-menu-builder、l2-clipboard-service、l2-status-item。证据：static、unit、runtime_e2e。"
+}

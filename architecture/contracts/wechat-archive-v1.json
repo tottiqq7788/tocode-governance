@@ -12,7 +12,7 @@
   "authority": {
     "binding": "A non-empty iLink bot_token persisted as a 0600 JSON file under ~/Library/Application Support/com.tocode.app/wechat-credential.json after a confirmed QR response from a trusted HTTPS weixin.qq.com host.",
     "receive_time": "Local wall-clock time and current system timezone captured when each message is accepted from getupdates.",
-    "archive_root": "/Users/admin/Documents/wechat",
+    "archive_root": "~/Documents/wechat",
     "cursor": "Application Support state advanced only after all previously unprocessed messages in the response are archived successfully."
   },
   "invariants": [

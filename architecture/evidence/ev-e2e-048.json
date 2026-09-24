@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-048",
+  "work_package_id": "wp-048",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Built app/build/Tocode.app; status-item Shift multi-click was not automated in this agent session.",
+  "result_summary": "未在本机会话中点击菜单栏左键目录树做 Shift 连续多选的运行态验证。请人工：左键打开目录树 → 按住 Shift 连续点两项 → 粘贴应为两行「路径」且第一次点击后菜单仍在（或立即再弹出同一菜单）。",
+  "limitations": [
+    "菜单栏 NSStatusItem 的 Shift+点击无法在当前 agent 环境可靠自动化。",
+    "实现仍在工作树，证据尚未绑定不可变 commit。"
+  ]
+}

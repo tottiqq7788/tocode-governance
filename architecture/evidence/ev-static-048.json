@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-048",
+  "work_package_id": "wp-048",
+  "commit": "uncommitted-working-tree",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/build.sh; codesign --verify --strict app/build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "app 与 CLI 均编译成功，codesign 报告 Tocode.app valid，治理审计 structure_and_references_only 为 passed。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "治理审计只检查结构与引用，不评价运行行为。"
+  ]
+}

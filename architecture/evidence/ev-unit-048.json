@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-048",
+  "work_package_id": "wp-048",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1010 项断言通过、0 失败。新增覆盖：copyPaths 一行一个「路径」；Shift 普通模式按顺序追加；删除/访问模式与非条目点击不改会话；说明书含 Shift 多选说明。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "命令行测试不点击菜单栏左键目录树，菜单保持打开依赖运行态验证。"
+  ]
+}

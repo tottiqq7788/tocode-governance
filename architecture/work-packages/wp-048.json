@@ -1,0 +1,33 @@
+{
+  "id": "wp-048",
+  "title": "Shift 连续多选复制路径",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "goal": "在左键目录树普通模式下，按住 Shift 连续点击多个文件或文件夹条目时，按点击顺序把多条「路径」以换行拼接写入剪贴板，且菜单保持打开；未按 Shift 的单次点击仍复制一条并关闭菜单。",
+  "scope": [
+    "app/Sources/ClipboardService.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-048.json",
+    "governance/architecture/task-envelopes/impl-048.json",
+    "governance/architecture/evidence/ev-*-048.json"
+  ],
+  "stop_conditions": [
+    "实现需要改变 Option 删除或 Command 访问的语义、优先级或底部按钮行为时停止并重新准入。",
+    "实现需要改「路径」全角括号格式、或把多路径做成可配置分隔符时停止。",
+    "实现需要把 Shift 多选扩展到右键功能菜单「复制路径」或访达选中项时停止并单独准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、治理审计通过。",
+    "unit：单路径与多路径「」换行格式；Shift 追加顺序；非 Shift 重置为单条；普通模式才启用 Shift 多选逻辑的纯函数覆盖。",
+    "runtime_e2e：本机左键目录树按住 Shift 连续点两项后粘贴为两行「路径」且菜单未因第一次点击关闭；未跑则登记 skipped 并写明限制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-09-24-shift-multi-copy-path",
+    "scope": "User wants holding Shift while left-clicking multiple directory-tree items to accumulate paths one-per-line without the menu dismissing after each click."
+  }
+}

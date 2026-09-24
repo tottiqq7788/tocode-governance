@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-046",
+  "work_package_id": "wp-046",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree against app HEAD 22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383: bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 985 passing assertions and 0 failures. Coverage includes 配置/导出配置/导入配置 titles, 说明书 top-level title, manual text for 设置 → 配置 import/export and 说明书 outside 设置, plus existing portable-transfer and secret-absence checks.",
+  "limitations": [
+    "Implementation is still in the working tree; this evidence is not yet bound to an immutable commit.",
+    "The command-line test target does not open the native status-item menu or click 设置 → 配置.",
+    "One extra migration assertion from a pre-existing dirty TocodePreferences change is included in the 985 count and is outside IMPL-046."
+  ]
+}

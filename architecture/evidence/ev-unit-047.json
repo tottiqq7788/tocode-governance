@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-047",
+  "work_package_id": "wp-047",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，995 项断言通过、0 失败。新增覆盖：默认归档根等于当前用户 ~/Documents/wechat；文件位置创建并打开可写目录；父路径为文件时通知无法创建且不打开访达；访达打开失败时通知无法打开微信文件位置；说明书写明文稿/wechat 且不写死 /Users/admin。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "命令行测试不点击菜单栏右键菜单，打开访达由 MockWeChatOpener 代替。"
+  ]
+}

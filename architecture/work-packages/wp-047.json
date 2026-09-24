@@ -1,0 +1,33 @@
+{
+  "id": "wp-047",
+  "title": "微信归档目录跟随当前用户文稿",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "goal": "把微信归档根目录从写死的 /Users/admin/Documents/wechat 改为当前用户文稿下的固定目录 ~/Documents/wechat，使「文件位置」在本机可创建并打开，且不把归档路径做成用户可配置项。",
+  "scope": [
+    "app/Sources/WeChatArchiveService.swift",
+    "app/Sources/WeChatAssociationService.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-047.json",
+    "governance/architecture/task-envelopes/impl-047.json",
+    "governance/architecture/evidence/ev-*-047.json"
+  ],
+  "stop_conditions": [
+    "实现需要把归档根目录做成菜单可改、可配置或随项目根目录变化时停止并重新准入。",
+    "实现需要改绑定、收件、出站、凭据或 Markdown/附件格式时停止。",
+    "实现需要改根文件夹默认路径 /Users/admin/Documents 时停止并单独准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、git diff --check 和治理审计通过。",
+    "unit：默认归档根等于当前用户 ~/Documents/wechat；文件位置能创建并打开可写目录；不可创建时只通知、不打开访达。",
+    "runtime_e2e：本机触发文件位置后 ~/Documents/wechat 存在；未跑菜单点击则登记 skipped 或用 CLI/服务调用替代并写明限制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-09-20-wechat-archive-location",
+    "scope": "The user clicked 微信关联 → 文件位置 and got 无法创建微信归档目录 for /Users/admin/Documents/wechat on a machine whose login user is not admin."
+  }
+}

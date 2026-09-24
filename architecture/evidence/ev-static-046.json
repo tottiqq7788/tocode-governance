@@ -1,0 +1,16 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-046",
+  "work_package_id": "wp-046",
+  "commit": "uncommitted-working-tree",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "Working tree against app HEAD 22d86e2e0e8d17f3bd0fe3dc2e547449a4ad1383: bash scripts/build.sh; codesign --verify --strict build/Tocode.app; git diff --check. Governance: python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "The app bundle and CLI both compile with swiftc -O and no errors, codesign reports build/Tocode.app valid on disk, git diff --check reports no whitespace errors, and the governance audit passes structure and reference checks. Menu-reorg files stay inside IMPL-046 allowed_scope. Evidence must be rebound to an immutable commit after commit.",
+  "limitations": [
+    "Implementation is still in the working tree; this evidence is not yet bound to an immutable commit.",
+    "The governance audit validates structure and references only; it does not evaluate runtime behavior.",
+    "The app uses an ad-hoc signature with the project's stable designated requirement.",
+    "TocodePreferences.swift and its extra migration test were already dirty before this task and are outside IMPL-046."
+  ]
+}
