@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-050",
+  "work_package_id": "wp-050",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Built and restarted app/build/Tocode.app; nested directory-menu resume was not clicked in this agent session.",
+  "result_summary": "未在本机会话中做多层悬停展开后关闭再打开的运行态验证。请人工：左键展开多层 → 关闭 → 再左键应落在上次文件夹，顶部可见面包屑/上一级/根目录。",
+  "limitations": [
+    "菜单栏多层悬停无法在当前 agent 环境可靠自动化。",
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "AppKit 无公开 API 恢复级联子菜单，采用「直接打开上次文件夹」实现同等复用。"
+  ]
+}

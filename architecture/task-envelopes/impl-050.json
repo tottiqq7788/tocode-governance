@@ -1,0 +1,45 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-050",
+  "role": "implementation_owner",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "work_package_id": "wp-050",
+  "allowed_scope": [
+    "app/Sources/DirectoryMenuResume.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-050.json",
+    "governance/architecture/task-envelopes/impl-050.json",
+    "governance/architecture/evidence/ev-*-050.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-directory-menu-resume"
+  ],
+  "must_preserve": [
+    "悬停展开、点击复制、Shift 多选、Option 删除、Command 访问、底部新增语义不变。",
+    "恢复位置不得超出当前根文件夹。",
+    "恢复路径不进入可分享配置导入导出。"
+  ],
+  "must_reject": [
+    "用私有 API 伪造级联子菜单作为唯一实现。",
+    "根变更后仍打开已不在新根下的旧路径。",
+    "把恢复路径写进 .tocode 可分享配置。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要依赖私有 AppKit API 强制弹出级联子菜单时停止并重新准入。",
+    "实现需要把恢复路径写入可分享 .tocode 配置或改变根目录权威时停止。",
+    "实现需要取消悬停展开或改变 Option/Command/Shift 语义时停止。"
+  ],
+  "notes": "阶段：左键目录树导航复用。因 AppKit 无公开 API 恢复多层子菜单级联，采用「下次打开落在上次展开文件夹 + 上一级/根目录」实现同等复用目标。L1：l1-menu-navigation。L2：MenuBuilder、新 DirectoryMenuResume。"
+}

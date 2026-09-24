@@ -1,0 +1,34 @@
+{
+  "id": "wp-050",
+  "title": "目录树恢复上次展开位置",
+  "baseline_commit": "95eeb993f855b4c0f69e9cb858c6ec0f1d2e4f9c",
+  "goal": "左键目录树记住用户最近展开到的文件夹；下次打开直接显示该层内容（须仍在当前根下且目录存在，否则回退到根或仍存在的最近上级），顶部提供面包屑、「上一级」与「根目录」便于继续索引；悬停展开仍刷新记忆。",
+  "scope": [
+    "app/Sources/DirectoryMenuResume.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "app/Sources/UserManual.swift",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-050.json",
+    "governance/architecture/task-envelopes/impl-050.json",
+    "governance/architecture/evidence/ev-*-050.json"
+  ],
+  "stop_conditions": [
+    "实现需要依赖私有 AppKit API 强制弹出级联子菜单时停止并重新准入。",
+    "实现需要把恢复路径写入可分享 .tocode 配置或改变根目录权威时停止。",
+    "实现需要取消悬停展开或改变 Option/Command/Shift 语义时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建、codesign、治理审计通过。",
+    "unit：路径标准化、是否在根下、失效路径回退到最近上级、面包屑相对路径。",
+    "runtime_e2e：本机展开多层后关闭再打开落在上次文件夹；未跑则登记 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-09-24-directory-menu-resume",
+    "scope": "User expands many nested folder menus, selects an item, and wants the next left-click menu to reopen at the previous expansion depth for reuse."
+  }
+}

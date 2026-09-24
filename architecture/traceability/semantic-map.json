@@ -15,12 +15,13 @@
       "id": "l0-navigate",
       "name": "左键浏览目录",
       "status": "approved",
-      "statement": "左键单击菜单栏图标时，弹出目录树并显示根文件夹下的第一层文件与文件夹（可递归展开）。每个目录菜单底部固定提供「新增」；菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
+      "statement": "左键单击菜单栏图标时，弹出目录树；默认展示上次展开到的文件夹内容（见 l0-directory-menu-resume），否则展示根文件夹下的第一层文件与文件夹（可递归展开）。每个目录菜单底部固定提供「新增」；菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
       "source_refs": [
         "user-requirement:2026-09-03",
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-08",
-        "user-requirement:2026-09-20-directory-menu-modifiers"
+        "user-requirement:2026-09-20-directory-menu-modifiers",
+        "user-request:2026-09-24-directory-menu-resume"
       ]
     },
     {
@@ -30,6 +31,15 @@
       "statement": "任意层级的子文件夹都可以继续向下展开，显示其下级的文件与文件夹（可无限递归）。",
       "source_refs": [
         "user-requirement:2026-09-03"
+      ]
+    },
+    {
+      "id": "l0-directory-menu-resume",
+      "name": "目录树恢复展开位置",
+      "status": "approved",
+      "statement": "左键目录树记住用户最近展开到的文件夹（悬停打开子菜单时更新）。下次打开时直接显示该文件夹下的内容，便于复用；记忆路径必须位于当前根文件夹之下且目录仍存在，否则回退到根或其仍存在的最近上级。当显示层不是根时，菜单顶部提供只读面包屑、「上一级」与「根目录」以便继续索引；悬停子文件夹仍可向下展开并刷新记忆。该记忆写入本机固定偏好域，不进入可分享配置导入导出，也不改变根文件夹权威。",
+      "source_refs": [
+        "user-request:2026-09-24-directory-menu-resume"
       ]
     },
     {
@@ -391,10 +401,11 @@
       "id": "l1-menu-navigation",
       "name": "目录菜单渲染",
       "status": "candidate",
-      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开并包含隐藏文件；在每个目录菜单底部按模式渲染「新增」、「清空」或「访问」。",
+      "responsibility": "将目录内容渲染为菜单树，支持任意层级递归展开并包含隐藏文件；在每个目录菜单底部按模式渲染「新增」、「清空」或「访问」；记住并恢复上次展开文件夹，非根层提供面包屑与上一级/根目录导航。",
       "l0_refs": [
         "l0-navigate",
         "l0-recurse",
+        "l0-directory-menu-resume",
         "l0-finder-hidden-sync",
         "l0-create-file",
         "l0-delete-clear",
@@ -986,7 +997,8 @@
       ],
       "selectors": [
         "MenuBuilder.swift",
-        "DirectoryMenuMode.swift"
+        "DirectoryMenuMode.swift",
+        "DirectoryMenuResume.swift"
       ]
     },
     {

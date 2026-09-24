@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-050",
+  "work_package_id": "wp-050",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1032 项断言通过、0 失败。新增覆盖：根下判定、失效路径回退、面包屑、UserDefaults 记忆读写；说明书含上次展开与上一级。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "命令行测试不点击菜单栏验证恢复弹出。"
+  ]
+}
