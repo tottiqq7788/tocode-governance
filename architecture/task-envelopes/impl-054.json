@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-054",
+  "role": "implementation_owner",
+  "baseline_commit": "374e51393eca9b72d39b42f0953d351f5caf19de",
+  "work_package_id": "wp-054",
+  "allowed_scope": [
+    "app/Sources/MacTimer.swift",
+    "app/Sources/MacTimerService.swift",
+    "app/Sources/MacTimerPrompt.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-054.json",
+    "governance/architecture/task-envelopes/impl-054.json",
+    "governance/architecture/evidence/ev-*-054.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-mac-timer"
+  ],
+  "must_preserve": [
+    "不把定时器写入 .tocode 可分享配置、CLI 或映射功能表。",
+    "事项目录与键盘映射相同的白名单与禁止项。",
+    "旧无调度类型字段的任务可读为一次性。"
+  ],
+  "must_reject": [
+    "冷启动时对已过点任务补执行。",
+    "一次性到点后仍保持运行中勾选。",
+    "cron 表达式非法时仍允许启动。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求扩大为 6 段 cron、秒级精度、或要把定时器写入可分享配置/CLI/映射功能表时停止并重新准入。"
+  ],
+  "notes": "修改 l0-mac-timer / l1-mac-timer。一次性时长拆为小时+分钟步进；cron 为 5 段本机时区表达式。"
+}

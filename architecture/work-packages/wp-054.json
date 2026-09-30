@@ -1,0 +1,32 @@
+{
+  "id": "wp-054",
+  "title": "定时器一次性/cron 时间输入",
+  "baseline_commit": "374e51393eca9b72d39b42f0953d351f5caf19de",
+  "goal": "定时器弹窗改为「一次性 / cron」切换：一次性用小时+分钟步进输入（默认 10 分钟）；cron 校验 5 段表达式并显示下次执行时间；一次性到点后未勾选，cron 到点后保持勾选并续排。",
+  "scope": [
+    "app/Sources/MacTimer.swift",
+    "app/Sources/MacTimerService.swift",
+    "app/Sources/MacTimerPrompt.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-054.json",
+    "governance/architecture/task-envelopes/impl-054.json",
+    "governance/architecture/evidence/ev-*-054.json"
+  ],
+  "stop_conditions": [
+    "需求扩大为 6 段 cron、秒级精度、或要把定时器写入可分享配置/CLI/映射功能表时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：默认 10 分钟、只填小时、两格皆空、cron 下次时间、到点后续排、冷启动 cron 不补执行但保持勾选、旧 JSON 视为一次性；说明书覆盖。",
+    "runtime_e2e：真机弹窗切换与 cron 下次预览；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-30-mac-timer-schedule-input",
+    "scope": "User approved the plan: once/cron tabs; hour+minute steppers default 10m; cron expression with next fire preview; once becomes idle after fire; cron stays checked and reschedules."
+  }
+}

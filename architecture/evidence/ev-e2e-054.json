@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-054",
+  "work_package_id": "wp-054",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual: right-click mac → 定时器 → 新增; switch once/cron tabs; verify steppers and cron next-fire preview; start short once and cron timers.",
+  "result_summary": "未在本会话执行真机弹窗切换与 cron 预览验证。",
+  "limitations": [
+    "runtime_e2e 依赖菜单栏弹窗交互，自动化环境无法可靠复现。",
+    "实现仍在工作树，证据尚未绑定不可变 commit。"
+  ]
+}
