@@ -5,10 +5,10 @@
   "status": "passed",
   "produced_at": "2026-09-30",
   "command_or_source": "bash scripts/test.sh real NWListener + controlled OpenAI-compatible URLProtocol upstream; restart app/build/Tocode.app; curl http://127.0.0.1:27800/v1/models without Authorization; lsof -nP -iTCP:27800 -sTCP:LISTEN",
-  "result_summary": "真实 loopback listener E2E 通过 /v1/models、chat、responses、SSE、客户端断开和端口冲突/回滚；重启完整 App 后进程正常，lsof 仅显示 IPv4 127.0.0.1:27800，未鉴权请求返回 401。",
+  "result_summary": "真实 loopback listener E2E 通过 /v1/models、chat、responses、SSE、客户端断开和端口冲突/回滚；重启完整 App commit 39250d987fe4a9eab983d66ad08dc0c1b0015b9f 后进程正常，lsof 仅显示 IPv4 127.0.0.1:27800，未鉴权请求返回 401。",
   "limitations": [
     "完整 App 进程内的已鉴权三接口依赖用户先从 GUI 创建本地 Key，本轮为避免写入用户配置而由同实现的真实 NWListener 测试进程覆盖。",
     "真实 Keychain 跨 App 重启恢复与菜单改端口为人工项，未自动化。"
   ],
-  "commit": "4aa440c648f4f8f9ac7045a16c6c437952070ac3"
+  "commit": "39250d987fe4a9eab983d66ad08dc0c1b0015b9f"
 }

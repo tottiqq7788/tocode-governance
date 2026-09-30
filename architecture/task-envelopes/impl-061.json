@@ -40,8 +40,8 @@
   "must_preserve": [
     "listener 仅绑定 127.0.0.1，默认端口 27800，端口冲突不自动换端口。",
     "所有本地 API 均要求 Bearer 本地 Key；只开放三条已批准路由。",
-    "模型别名决定唯一上游厂商与 model id；健康 Key 仅在响应前轮询/故障转移。",
-    "任何响应字节写出后不切 Key、不重试、不拼接流。",
+    "模型别名决定唯一厂家实体与 model id；厂家实体只使用其唯一上游 Key，不做内部轮询或故障转移。",
+    "上游失败明确失败；任何响应字节写出后不重试、不拼接流。",
     "Authorization、上游/本地 Key、请求与响应正文均不写日志。"
   ],
   "must_reject": [
@@ -60,5 +60,5 @@
   "stop_conditions": [
     "需求扩大为非 OpenAI-compatible 上游、远程监听、无鉴权或流开始后故障转移时停止并重新准入。"
   ],
-  "notes": "阶段：数据面。角色：本机 OpenAI 客户端。业务对象：请求、模型路由、上游 Key 池与 SSE 流。不变量：loopback、Bearer、响应前 failover。"
+  "notes": "阶段：数据面。角色：本机 OpenAI 客户端。业务对象：请求、模型路由、单 Key 厂家实体与 SSE 流。不变量：loopback、Bearer、唯一路由、上游失败明确传播。"
 }

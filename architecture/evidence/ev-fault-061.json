@@ -2,11 +2,11 @@
   "schema_version": "evidence:v0.1",
   "evidence_id": "EV-FAULT-061",
   "work_package_id": "wp-061",
-  "commit": "4aa440c648f4f8f9ac7045a16c6c437952070ac3",
+  "commit": "39250d987fe4a9eab983d66ad08dc0c1b0015b9f",
   "type": "fault_injection",
   "status": "passed",
   "command_or_source": "bash scripts/test.sh with URLProtocol/NWListener controlled faults",
-  "result_summary": "注入 401/403、429、5xx、Keychain 缺失、流开始后断网、客户端断开和端口占用；验证鉴权失败不会被五分钟自动刷新清除、手动刷新可重验、临时凭据缺失有限冷却、仅响应前切换 Key、listener 未 ready 不启动目录刷新、流不拼接、上游任务取消，以及新端口失败时配置不落盘并恢复原 listener。",
+  "result_summary": "注入 401/403、429、5xx、Keychain/配置保存与删除失败、流开始后断网、客户端断开和端口占用；验证单 Key 厂家失败时不切换、连接切换始终先准备新 Key 再提交活跃引用、候选/退役 Key 清理失败进入持久化日志并可在重启恢复、listener 未 ready 不启动目录刷新、流不拼接、上游任务取消，以及新端口失败时配置不落盘并恢复原 listener。",
   "limitations": [
     "未向真实第三方 OpenAI-compatible 服务注入生产网络故障。",
     "Keychain permission denied 使用存储抽象行为与失败关闭路径覆盖，未修改当前用户钥匙串 ACL。"

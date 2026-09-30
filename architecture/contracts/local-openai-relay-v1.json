@@ -29,12 +29,14 @@
     "The top-level 模型 menu is always visible and is independent from AK → AK-模型 / 密钥 → AI. It never changes Codex model-switch or four-tool AK credential semantics.",
     "The relay binds only IPv4 loopback 127.0.0.1. It never binds all interfaces, IPv6 wildcard, LAN or a network hostname. Port conflicts leave the relay stopped with an explicit status; no automatic port substitution occurs.",
     "Every route requires a valid generated local Bearer key. Local key authentication uses a constant-time digest comparison and never requires decrypting the copyable secret.",
-    "New providers are created by selecting an audited OpenAI-compatible provider preset and entering only a unique display name. The preset determines the Base URL; the UI does not request a free-form URL. Editing an unmatched legacy provider may retain its existing URL but cannot create a new arbitrary endpoint.",
+    "A provider entity has one globally unique display name, one audited OpenAI-compatible preset or validated custom Base URL, and at most one upstream Key. The same preset may be used by multiple entities with different names.",
+    "A new or connection-changing provider entity is persisted only after its exact Base URL and candidate Key successfully return a non-empty OpenAI-compatible /models response. Test failure or persistence failure leaves neither provider metadata nor an orphan Keychain item.",
+    "Provider create, connection change and delete serialize metadata and Keychain writes. Candidate and retired Key UUIDs are covered by a durable cleanup journal before any crash window; active configuration never references a missing Key, and startup plus periodic refresh retry journal cleanup idempotently.",
     "Provider names, local key names and model aliases are unique in their respective global namespaces. A model alias resolves to exactly one provider and one upstream model id.",
     "Upstream secrets are stored only as generic-password Keychain items using service com.tocode.app.model-relay.upstream and stable UUID accounts. Keychain denial never falls back to plaintext storage.",
     "A generated local key uses at least 32 random bytes and a tc_ prefix. Its copyable secret is encrypted using a viewing-password-derived key; only its digest, salt, nonce and ciphertext are persisted. Viewing passwords and plaintext keys are never persisted.",
     "GET /v1/models returns the enabled local aliases. POST chat/completions and responses replace only the request model alias with its upstream model id and otherwise preserve the OpenAI-compatible JSON body.",
-    "Provider keys are selected round-robin from healthy candidates. Connection errors, 401/403, 429 and 5xx may fail over only before any response bytes are sent to the client. Once response headers or body/SSE bytes are sent, the request is never retried or spliced.",
+    "Each model alias resolves through exactly one provider entity and its single upstream Key. There is no within-entity round-robin or failover; connection errors, 401/403, 429 and 5xx fail explicitly. Once response headers or body/SSE bytes are sent, the request is never retried or spliced.",
     "SSE is forwarded incrementally with backpressure and upstream cancellation when the local client disconnects. Request and response bodies are never logged.",
     "Remote upstream base URLs require HTTPS; HTTP is accepted only for loopback upstreams. Redirects must not leak Authorization to an untrusted host.",
     "Relay providers, model aliases, upstream key references, local keys and viewing-password material never enter .tocode exports, CLI, WeChat commands, keyboard/trackpad mappings, logs, notifications or manual examples.",
@@ -48,7 +50,7 @@
     "Retrying or changing upstream keys after any response bytes have reached the client.",
     "Treating the relay as an arbitrary HTTP proxy or adding Anthropic/Gemini protocol conversion under this contract.",
     "Exporting relay configuration or secrets through .tocode, CLI, WeChat or mapping features.",
-    "Requesting a free-form Base URL when creating a provider or deriving an endpoint from the user-entered display name.",
+    "Persisting an untested new or changed provider endpoint/Key pair, or retaining more than one Key on a newly written provider entity.",
     "Mutating AK → AK-模型, AK → 密钥 → AI, CC Switch or Codex configuration as part of relay CRUD or request routing."
   ]
 }

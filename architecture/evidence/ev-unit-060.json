@@ -5,6 +5,6 @@
   "status": "passed",
   "produced_at": "2026-09-30",
   "command_or_source": "bash scripts/test.sh",
-  "result_summary": "ALL TESTS PASSED。覆盖官方厂商预设 URL 映射、下拉框尺寸、名称框可编辑/默认焦点、旧自定义地址保留、0600 配置往返/损坏拒绝、厂商/Key/别名唯一性、Keychain mock、PBKDF2 + AES-GCM、本地 Key 摘要鉴权、错误查看密码、上游 Key 保存前校验、冲突别名和 AK 回归。",
-  "commit": "4aa440c648f4f8f9ac7045a16c6c437952070ac3"
+  "result_summary": "ALL TESTS PASSED。覆盖预设/自定义 URL、名称框可编辑与默认焦点、测试结果失效门闩、同预设多实体、单 Key 强约束、连接 UUID 轮换、每次配置提交的活跃 Keychain 引用、候选/退役 Key 持久化清理日志与重启恢复、0600 原子替换、历史多 Key 模型/别名迁移、过期刷新隔离、本地 Key 鉴权和 AK 回归。",
+  "commit": "39250d987fe4a9eab983d66ad08dc0c1b0015b9f"
 }

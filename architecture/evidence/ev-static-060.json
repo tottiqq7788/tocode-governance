@@ -5,6 +5,6 @@
   "status": "passed",
   "produced_at": "2026-09-30",
   "command_or_source": "bash scripts/build.sh; codesign --verify --deep --strict --verbose=2 build/Tocode.app; python architecture/tools/audit_project.py --target .",
-  "result_summary": "App/CLI 构建、稳定 designated requirement 签名校验及治理结构/引用审计通过；ModelRelay* 仅编入 App。",
-  "commit": "4aa440c648f4f8f9ac7045a16c6c437952070ac3"
+  "result_summary": "App/CLI 构建、稳定 designated requirement 签名校验、补丁格式及治理结构/引用审计通过；ModelRelay* 仅编入 App。",
+  "commit": "39250d987fe4a9eab983d66ad08dc0c1b0015b9f"
 }
