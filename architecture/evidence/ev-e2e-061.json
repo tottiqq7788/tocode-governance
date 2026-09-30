@@ -10,5 +10,5 @@
     "完整 App 进程内的已鉴权三接口依赖用户先从 GUI 创建本地 Key，本轮为避免写入用户配置而由同实现的真实 NWListener 测试进程覆盖。",
     "真实 Keychain 跨 App 重启恢复与菜单改端口为人工项，未自动化。"
   ],
-  "commit": "36f28ef7d176cdf249d1a5bdb09c1f7fde562b10"
+  "commit": "4aa440c648f4f8f9ac7045a16c6c437952070ac3"
 }

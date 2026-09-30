@@ -298,9 +298,10 @@
       "id": "l0-local-model-relay-menu",
       "name": "本地模型中转站菜单控制面",
       "status": "approved",
-      "statement": "右键独立顶层「模型」始终显示并与 AK 完全隔离。其下显示运行状态和可修改端口；「厂商」支持新增唯一名称与 OpenAI-compatible Base URL，厂商项支持新增命名上游 Key、刷新 /v1/models、查看并修改全局唯一模型别名、替换/删除 Key 与确认删除厂商；上游 secret 只存 macOS Keychain且不回填。「Key」支持输入唯一名称、查看密码与确认密码后生成 tc_ 前缀随机本地访问 Key；命名项点击后校验查看密码，成功立即把当前 Base URL、API Key 与排序后的可用模型别名写入剪贴板；同一密码流程可删除，忘记密码只能删除重建。顶层「模型」不受拓展设置→AK 控制，不进入 CLI、微信或键盘/触控板映射。",
+      "statement": "右键独立顶层「模型」始终显示并与 AK 完全隔离。其下显示运行状态和可修改端口；「厂商」新增或编辑时从内置的常见 OpenAI-compatible 厂商预设中选择，只填写全局唯一显示名称，Base URL 由预设固定映射且不要求手动输入；既有无法匹配预设的自定义厂商在编辑时保留原地址。厂商项支持新增命名上游 Key、刷新 /v1/models、查看并修改全局唯一模型别名、替换/删除 Key 与确认删除厂商；上游 secret 只存 macOS Keychain且不回填。「Key」支持输入唯一名称、查看密码与确认密码后生成 tc_ 前缀随机本地访问 Key；命名项点击后校验查看密码，成功立即把当前 Base URL、API Key 与排序后的可用模型别名写入剪贴板；同一密码流程可删除，忘记密码只能删除重建。顶层「模型」不受拓展设置→AK 控制，不进入 CLI、微信或键盘/触控板映射。",
       "source_refs": [
-        "user-approved-plan:2026-09-30-local-model-relay"
+        "user-approved-plan:2026-09-30-local-model-relay",
+        "user-request:2026-09-30-provider-preset-dropdown"
       ]
     },
     {

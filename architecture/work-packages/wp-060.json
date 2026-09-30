@@ -29,14 +29,14 @@
   ],
   "acceptance_evidence": [
     "static：app/CLI 构建、codesign 与治理审计通过。",
-    "unit：版本化配置、名称/别名唯一性、Keychain mock、本地 Key 生成/加密/鉴权、错误密码、复制块、菜单标题与 AK 回归。",
+    "unit：厂商预设映射与下拉布局、版本化配置、名称/别名唯一性、Keychain mock、本地 Key 生成/加密/鉴权、错误密码、复制块、菜单标题与 AK 回归。",
     "runtime_e2e：真机 Keychain 重启恢复、菜单 CRUD 与密码复制；未跑部分登记 skipped。"
   ],
   "acceptance_notes": {
-    "implementation_commit": "36f28ef7d176cdf249d1a5bdb09c1f7fde562b10",
+    "implementation_commit": "4aa440c648f4f8f9ac7045a16c6c437952070ac3",
     "passed": [
       "App/CLI 构建、codesign、治理审计和全量测试通过。",
-      "配置权限/损坏拒绝、唯一性、保存前上游校验、本地 Key 加密鉴权、弹窗输入布局和 AK 隔离均有自动化证据。",
+      "厂商预设映射/下拉布局、配置权限/损坏拒绝、唯一性、保存前上游校验、本地 Key 加密鉴权和 AK 隔离均有自动化证据。",
       "完整 App 已重启并成功带起独立 listener。"
     ],
     "skipped": [
@@ -47,6 +47,9 @@
   "status": "approved",
   "approval": {
     "source": "user-approved-plan:2026-09-30-local-model-relay",
+    "change_sources": [
+      "user-request:2026-09-30-provider-preset-dropdown"
+    ],
     "scope": "User approved an independent top-level 模型 relay control plane with vendors, upstream keys, generated local keys protected by per-key viewing passwords, model aliases, and configurable default port 27800.",
     "design_reference": "plans/本地模型中转站_f2c292cc.plan.md"
   }

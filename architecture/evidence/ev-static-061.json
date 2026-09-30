@@ -6,5 +6,5 @@
   "produced_at": "2026-09-30",
   "command_or_source": "bash scripts/build.sh; codesign --verify --deep --strict --verbose=2 build/Tocode.app; git diff --check; python architecture/tools/audit_project.py --target .",
   "result_summary": "App/CLI 构建、签名、补丁格式及治理审计通过；CLI 可独立执行 help，未链接 ModelRelay* 实现。",
-  "commit": "36f28ef7d176cdf249d1a5bdb09c1f7fde562b10"
+  "commit": "4aa440c648f4f8f9ac7045a16c6c437952070ac3"
 }

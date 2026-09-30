@@ -29,6 +29,7 @@
     "The top-level 模型 menu is always visible and is independent from AK → AK-模型 / 密钥 → AI. It never changes Codex model-switch or four-tool AK credential semantics.",
     "The relay binds only IPv4 loopback 127.0.0.1. It never binds all interfaces, IPv6 wildcard, LAN or a network hostname. Port conflicts leave the relay stopped with an explicit status; no automatic port substitution occurs.",
     "Every route requires a valid generated local Bearer key. Local key authentication uses a constant-time digest comparison and never requires decrypting the copyable secret.",
+    "New providers are created by selecting an audited OpenAI-compatible provider preset and entering only a unique display name. The preset determines the Base URL; the UI does not request a free-form URL. Editing an unmatched legacy provider may retain its existing URL but cannot create a new arbitrary endpoint.",
     "Provider names, local key names and model aliases are unique in their respective global namespaces. A model alias resolves to exactly one provider and one upstream model id.",
     "Upstream secrets are stored only as generic-password Keychain items using service com.tocode.app.model-relay.upstream and stable UUID accounts. Keychain denial never falls back to plaintext storage.",
     "A generated local key uses at least 32 random bytes and a tc_ prefix. Its copyable secret is encrypted using a viewing-password-derived key; only its digest, salt, nonce and ciphertext are persisted. Viewing passwords and plaintext keys are never persisted.",
@@ -47,6 +48,7 @@
     "Retrying or changing upstream keys after any response bytes have reached the client.",
     "Treating the relay as an arbitrary HTTP proxy or adding Anthropic/Gemini protocol conversion under this contract.",
     "Exporting relay configuration or secrets through .tocode, CLI, WeChat or mapping features.",
+    "Requesting a free-form Base URL when creating a provider or deriving an endpoint from the user-entered display name.",
     "Mutating AK → AK-模型, AK → 密钥 → AI, CC Switch or Codex configuration as part of relay CRUD or request routing."
   ]
 }
