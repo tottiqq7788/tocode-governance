@@ -71,7 +71,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「设置」提供开机自启、「配置」（导出配置、导入配置）与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项；「说明书」位于「设置」下方、「退出」上方，不在「设置」夹内。其余既有目录、codex、微信关联和退出功能保持不变。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单；「访达」子菜单除路径操作外提供隐藏文件、x/v移动文件与⌘Q强关访达控制；「mac」子菜单提供临时黑屏、触控板、键盘、定时器、垂直/横向滚轮对调、双击⌘Q，以及底部的「限制程序坞弹出」；「设置」提供开机自启、「配置」（导出配置、导入配置）与「拓展设置」，以及仅在对应拓展类型勾选时出现的专用项；「说明书」位于「设置」下方、「退出」上方，不在「设置」夹内。其余既有目录、codex、微信关联和退出功能保持不变。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -88,7 +88,29 @@
         "user-request:2026-09-16-extended-settings-ak",
         "user-requirement:2026-09-20-settings-domain-portable",
         "user-request:2026-09-20-user-manual",
-        "user-request:2026-09-20-menu-reorg"
+        "user-request:2026-09-20-menu-reorg",
+        "user-approved-plan:2026-09-24-dock-autohide-restrict",
+        "user-approved-plan:2026-09-30-mac-timer"
+      ]
+    },
+    {
+      "id": "l0-mac-timer",
+      "name": "mac 定时器倒计时",
+      "status": "approved",
+      "statement": "右键「mac → 键盘」下方提供「定时器」子菜单；子菜单固定「新增」，并按保存顺序列出任务。新增或点击任务时弹出编辑窗口：名称、从启动起算的整数分钟（1…10080）、事项。事项复用键盘/触控板同一目标编辑器（映射快捷键或映射功能，目录与禁止项相同）。新增与未启动编辑的主按钮为「启动」，运行中编辑为「保存」（按表单分钟数从现在重计）；编辑时可删除且无二次确认。运行中菜单项实心勾选且标题含剩余倒计时；到点只执行一次事项，随后变为未启动（空心圆、清掉到期时刻）。执行分流与键盘命中后相同。持久化写入固定偏好域 com.tocode.app，不进入可分享配置、CLI 或映射功能表。启动时恢复尚未到期的倒计时；进程未运行期间已过点的任务不补执行、直接未启动；进程仍在时睡眠唤醒后对已过点任务补执行一次再未启动。",
+      "source_refs": [
+        "user-requirement:2026-09-30-mac-timer",
+        "user-approved-plan:2026-09-30-mac-timer"
+      ]
+    },
+    {
+      "id": "l0-dock-autohide-restrict",
+      "name": "限制程序坞弹出",
+      "status": "approved",
+      "statement": "右键「mac」子菜单底部提供「限制程序坞弹出」勾选开关（默认关闭）。开启时仅在系统已开启「自动隐藏和显示程序坞」的前提下，把 com.apple.dock 的 autohide-delay 设为很大的值并重启 Dock，使鼠标悬停屏幕边缘时程序坞不再弹出；关闭时写回开启前备份的原 delay（无备份则为 0）并重启 Dock。未开系统自动隐藏时保持开关关闭并通知用户，不替用户改写 autohide。开关写入本机固定偏好域 com.tocode.app，不进入可分享配置导入导出，也不进入键盘/触控板映射功能表或 CLI。应用启动时若偏好为开则重新施加；应用正常退出时恢复系统 delay，但保留偏好以便下次启动再施加。",
+      "source_refs": [
+        "user-request:2026-09-24-dock-autohide-restrict",
+        "user-approved-plan:2026-09-24-dock-autohide-restrict"
       ]
     },
     {
@@ -678,6 +700,41 @@
       ]
     },
     {
+      "id": "l1-mac-timer",
+      "name": "mac 定时器倒计时调度",
+      "status": "approved",
+      "responsibility": "维护名称、分钟时长、事项目标、稳定 ID 与可选到期时刻组成的持久化任务；校验名称唯一与分钟范围；按最近到期时刻调度到点执行，执行后清到期时刻为未启动；启动恢复未到期任务并对冷启动已过点任务不补执行；睡眠唤醒时对进程内已过点任务补执行一次。",
+      "l0_refs": [
+        "l0-mac-timer",
+        "l0-action-menu",
+        "l0-keyboard-remapping"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-dock-autohide-restrict",
+      "name": "限制程序坞弹出",
+      "status": "approved",
+      "responsibility": "持久化「限制程序坞弹出」开关；在系统已开启 Dock 自动隐藏时读写 com.apple.dock 的 autohide-delay 并重启 Dock；未开自动隐藏时拒绝开启并通知；正常退出时恢复 delay 且保留偏好。",
+      "l0_refs": [
+        "l0-dock-autohide-restrict",
+        "l0-action-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
       "id": "l1-codex-project-sync",
       "name": "Codex 项目夹同步",
       "status": "candidate",
@@ -1127,6 +1184,35 @@
       "selectors": [
         "MouseWheelReverseService.swift",
         "MouseWheelReverseStore.swift"
+      ]
+    },
+    {
+      "id": "l2-mac-timer",
+      "name": "mac 定时器存储、调度与编辑窗口",
+      "status": "approved",
+      "l1_refs": [
+        "l1-mac-timer"
+      ],
+      "selectors": [
+        "MacTimer.swift",
+        "MacTimerService.swift",
+        "MacTimerPrompt.swift",
+        "StatusItemController.swift",
+        "AppDelegate.swift"
+      ]
+    },
+    {
+      "id": "l2-dock-autohide-restrict",
+      "name": "限制程序坞弹出服务",
+      "status": "approved",
+      "l1_refs": [
+        "l1-dock-autohide-restrict"
+      ],
+      "selectors": [
+        "DockAutohideRestrictService.swift",
+        "DockAutohideRestrictStore.swift",
+        "StatusItemController.swift",
+        "AppDelegate.swift"
       ]
     },
     {

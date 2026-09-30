@@ -1,0 +1,36 @@
+{
+  "id": "wp-053",
+  "title": "mac 定时器夹",
+  "baseline_commit": "5fb221f1f4ab34f0adc09d53b8d20ae39fb3a882",
+  "goal": "在右键「mac → 键盘」下方新增「定时器」夹：分钟时长倒计时、事项复用键盘目标目录；到点执行一次后变未启动；可启动/编辑/删除；持久化本机偏好且不进可分享配置与 CLI。",
+  "scope": [
+    "app/Sources/MacTimer.swift",
+    "app/Sources/MacTimerService.swift",
+    "app/Sources/MacTimerPrompt.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TocodePreferences.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-053.json",
+    "governance/architecture/task-envelopes/impl-053.json",
+    "governance/architecture/evidence/ev-*-053.json"
+  ],
+  "stop_conditions": [
+    "需求扩大为日历闹钟、周期重复、或要把定时器写入可分享配置/CLI/映射功能表时停止并重新准入。",
+    "实现需要后台保活绕过系统睡眠节能策略时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：校验、持久化、到点只执行一次并变未启动、冷启动过点不执行、剩余时间文案；说明书含定时器。",
+    "runtime_e2e：真机右键菜单倒计时刷新与到点执行；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-30-mac-timer",
+    "scope": "User approved the plan: mac timer submenu under keyboard; duration in minutes; reuse keyboard mapping targets; fire once then idle unchecked; cold-start miss no execute; sleep-wake while alive does execute; not in portable settings or CLI."
+  }
+}

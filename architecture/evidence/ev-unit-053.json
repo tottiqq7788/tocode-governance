@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-053",
+  "work_package_id": "wp-053",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1120 项断言通过、0 失败。覆盖：分钟校验与剩余文案；Store 保存/重名/非法拒绝；到点只执行一次并变未启动；冷启动过点不补执行；唤醒补执行；删除；说明书含定时器。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "单测使用 MockClock 与 ManualScheduler，不真等一分钟。"
+  ]
+}

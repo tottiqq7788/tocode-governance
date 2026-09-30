@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-052",
+  "work_package_id": "wp-052",
+  "commit": "uncommitted-working-tree",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/build.sh; codesign --verify --strict app/build/Tocode.app; python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "app 与 CLI 编译成功，codesign 通过，治理审计 passed。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。"
+  ]
+}

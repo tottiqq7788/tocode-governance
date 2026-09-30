@@ -1,0 +1,36 @@
+{
+  "id": "wp-052",
+  "title": "限制程序坞弹出",
+  "baseline_commit": "5fb221f1f4ab34f0adc09d53b8d20ae39fb3a882",
+  "goal": "在右键「mac」菜单底部新增勾选「限制程序坞弹出」。开启时通过拉长 com.apple.dock autohide-delay 阻止悬停弹出；关闭或退出应用时恢复原 delay。仅在系统已开启自动隐藏程序坞时允许开启；不进可分享配置、键盘/触控板映射与 CLI。",
+  "scope": [
+    "app/Sources/DockAutohideRestrictStore.swift",
+    "app/Sources/DockAutohideRestrictService.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TocodePreferences.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-052.json",
+    "governance/architecture/task-envelopes/impl-052.json",
+    "governance/architecture/evidence/ev-*-052.json"
+  ],
+  "stop_conditions": [
+    "真机上仅改 autohide-delay 无法阻止悬停弹出时停止，回到方案选择，不得改用私有 Dock API。",
+    "实现需要静默开启或关闭系统「自动隐藏程序坞」时停止。",
+    "需求扩大为改程序坞位置/大小/常驻显示，或要进映射功能表、可分享配置或 CLI 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：Store 读写、未开 autohide 拒绝开启、开关往返恢复 delay、退出恢复且保留偏好；说明书含「限制程序坞弹出」。",
+    "runtime_e2e：真机开启后悬停屏幕边缘程序坞不弹出，关闭后恢复；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-24-dock-autohide-restrict",
+    "scope": "User approved the plan: mac menu bottom checkbox 限制程序坞弹出; autohide-delay mechanism; require system autohide already on; restore on quit; not in portable settings, mapping actions, or CLI."
+  }
+}

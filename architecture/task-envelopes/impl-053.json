@@ -1,0 +1,48 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-053",
+  "role": "implementation_owner",
+  "baseline_commit": "5fb221f1f4ab34f0adc09d53b8d20ae39fb3a882",
+  "work_package_id": "wp-053",
+  "allowed_scope": [
+    "app/Sources/MacTimer.swift",
+    "app/Sources/MacTimerService.swift",
+    "app/Sources/MacTimerPrompt.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/TocodePreferences.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-053.json",
+    "governance/architecture/task-envelopes/impl-053.json",
+    "governance/architecture/evidence/ev-*-053.json"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-mac-timer",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "不改键盘/触控板钩子、滚轮与访达/设置夹既有语义。",
+    "不把定时器写入 .tocode 可分享配置。",
+    "不把「配置定时器」加入键盘/触控板映射功能表或 CLI。",
+    "事项目录与键盘映射相同的白名单与禁止项。"
+  ],
+  "must_reject": [
+    "冷启动时对进程未运行期间已过点的任务补执行。",
+    "到点后任务仍保持运行中勾选态。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求扩大为日历闹钟、周期重复、或要把定时器写入可分享配置/CLI/映射功能表时停止并重新准入。",
+    "实现需要后台保活绕过系统睡眠节能策略时停止。"
+  ],
+  "notes": "新增 l0-mac-timer；修改 l0-action-menu 的 mac 子菜单描述。倒计时以分钟时长从启动时刻起算；到点执行复用 KeyboardShortcutMappingTarget 分流。"
+}

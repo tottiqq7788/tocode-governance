@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-053",
+  "work_package_id": "wp-053",
+  "commit": "uncommitted-working-tree",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "Manual: right-click mac → 定时器 → 新增 short timer; observe countdown while menu open; wait for fire; confirm idle appearance and action.",
+  "result_summary": "未在本会话执行真机菜单倒计时与到点验证。",
+  "limitations": [
+    "runtime_e2e 依赖菜单栏交互与真实时间流逝，自动化环境无法可靠复现。",
+    "实现仍在工作树，证据尚未绑定不可变 commit。"
+  ]
+}

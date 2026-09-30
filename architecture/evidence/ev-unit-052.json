@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-052",
+  "work_package_id": "wp-052",
+  "commit": "uncommitted-working-tree",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "Working tree: bash app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1082 项断言通过、0 失败。覆盖：Store 默认与备份读写；未开 autohide 拒绝开启并通知；开关往返恢复 delay；shutdown 恢复 delay 且保留偏好；applySavedSettings 重施不覆盖备份；写入/重启失败回滚；说明书含「限制程序坞弹出」。",
+  "limitations": [
+    "实现仍在工作树，证据尚未绑定不可变 commit。",
+    "单测使用注入的 DockPreferenceStore / DockRelauncher，未真实 killall Dock。"
+  ]
+}
