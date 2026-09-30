@@ -4,11 +4,11 @@
   "kind": "runtime_e2e",
   "status": "partial",
   "produced_at": "2026-09-30",
-  "command_or_source": "Restarted app/build/Tocode.app from app commit 65fd7c71761d8a0a0381e2f80a0bc9269cdc1e18; verified process startup and listener integration.",
+  "command_or_source": "Restarted app/build/Tocode.app from app commit 38e8da0ce8e024cc75add77a7e92c38602441662; verified process startup and listener integration.",
   "result_summary": "App 重建后可正常重启并带起独立模型中转服务。顶层菜单 CRUD、真实 Keychain 重启恢复及查看密码后剪贴板内容需要人工操作，本轮未自动化。",
   "limitations": [
     "skipped：macOS 菜单栏弹窗、删除确认和剪贴板交互未做 GUI 自动化。",
     "skipped：为避免写入或弹出用户真实钥匙串授权，未创建生产 Keychain 项做跨进程恢复。"
   ],
-  "commit": "65fd7c71761d8a0a0381e2f80a0bc9269cdc1e18"
+  "commit": "38e8da0ce8e024cc75add77a7e92c38602441662"
 }

@@ -41,7 +41,7 @@
     "runtime_e2e：本机 OpenAI-compatible stub 验证三接口、SSE、改端口与 App 重启；未跑部分登记 skipped。"
   ],
   "acceptance_notes": {
-    "implementation_commit": "65fd7c71761d8a0a0381e2f80a0bc9269cdc1e18",
+    "implementation_commit": "38e8da0ce8e024cc75add77a7e92c38602441662",
     "passed": [
       "真实 NWListener 自动化覆盖鉴权、三接口、普通响应、SSE、客户端断开和端口冲突回滚。",
       "故障注入覆盖 401、429、5xx、流开始后断网和仅响应前 failover。",

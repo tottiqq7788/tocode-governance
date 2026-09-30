@@ -6,5 +6,5 @@
   "produced_at": "2026-09-30",
   "command_or_source": "bash scripts/test.sh",
   "result_summary": "ALL TESTS PASSED。覆盖 0600 配置往返/损坏拒绝、厂商/Key/别名唯一性、Keychain mock、PBKDF2 + AES-GCM、本地 Key 摘要鉴权、错误查看密码、上游 Key 保存前校验、冲突别名和 AK 回归。",
-  "commit": "65fd7c71761d8a0a0381e2f80a0bc9269cdc1e18"
+  "commit": "38e8da0ce8e024cc75add77a7e92c38602441662"
 }

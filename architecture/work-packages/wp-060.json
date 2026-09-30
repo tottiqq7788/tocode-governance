@@ -33,7 +33,7 @@
     "runtime_e2e：真机 Keychain 重启恢复、菜单 CRUD 与密码复制；未跑部分登记 skipped。"
   ],
   "acceptance_notes": {
-    "implementation_commit": "65fd7c71761d8a0a0381e2f80a0bc9269cdc1e18",
+    "implementation_commit": "38e8da0ce8e024cc75add77a7e92c38602441662",
     "passed": [
       "App/CLI 构建、codesign、治理审计和全量测试通过。",
       "配置权限/损坏拒绝、唯一性、保存前上游校验、本地 Key 加密鉴权和 AK 隔离均有自动化证据。",
