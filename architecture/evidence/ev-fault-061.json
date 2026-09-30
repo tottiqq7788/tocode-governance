@@ -2,7 +2,7 @@
   "schema_version": "evidence:v0.1",
   "evidence_id": "EV-FAULT-061",
   "work_package_id": "wp-061",
-  "commit": "078a4708fea207b032a367096b77a992623e10b7",
+  "commit": "65fd7c71761d8a0a0381e2f80a0bc9269cdc1e18",
   "type": "fault_injection",
   "status": "passed",
   "command_or_source": "bash scripts/test.sh with URLProtocol/NWListener controlled faults",
