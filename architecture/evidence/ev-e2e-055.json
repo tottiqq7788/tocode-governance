@@ -1,0 +1,13 @@
+{
+  "id": "ev-e2e-055",
+  "work_package_id": "wp-055",
+  "kind": "runtime_e2e",
+  "produced_at": "2026-09-30",
+  "command_or_source": "Built app/build/Tocode.app; menu GUI not clicked in this agent session.",
+  "result_summary": "skipped：当前 agent 环境无法可靠点选菜单栏左/右键验证「根目录」「输入」「工具」「模型」「设置→密钥→AI」「设置→说明书」。请人工抽检。",
+  "status": "skipped",
+  "notes": [
+    "菜单栏 NSMenu 无法在当前 agent 环境可靠自动化。"
+  ],
+  "commit": "93e1eade5056fcaa6835770bf94de22b622b1a21"
+}

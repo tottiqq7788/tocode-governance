@@ -1,0 +1,71 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-055",
+  "role": "implementation_owner",
+  "baseline_commit": "0fc9605d98d023b7ddfa9e5857c9b7820a39e6b5",
+  "work_package_id": "wp-055",
+  "allowed_scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/DirectoryRootResolver.swift",
+    "app/Sources/FinderFollowSettingsStore.swift",
+    "app/Sources/CodexSyncSettingsStore.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodePreferences.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Sources/UserManual.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-055.json",
+    "governance/architecture/task-envelopes/impl-055.json",
+    "governance/architecture/evidence/ev-*-055.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-finder-selection-init",
+    "l0-codex-project-sync",
+    "l0-codex-model-switch",
+    "l0-anker-credential",
+    "l0-extended-settings",
+    "l0-user-manual",
+    "l0-set-root-clipboard",
+    "l0-reset-root",
+    "l0-navigate",
+    "l0-directory-menu-resume",
+    "l0-shortcuts",
+    "l0-mouse-wheel-reverse",
+    "l0-trackpad-shortcuts",
+    "l0-keyboard-remapping",
+    "l0-mac-timer",
+    "l0-dock-autohide-restrict",
+    "l0-cli-control"
+  ],
+  "must_preserve": [
+    "访达跟随与旧目录初始化相同的单选解析规则（恰好一项；文件夹用自身，文件用父目录）。",
+    "codex跟随开启时仍置灰手动设根项；访达跟随开启不置灰。",
+    "跟随开关与根目录不进入 .tocode 可分享配置。",
+    "模型切换与 AI 密钥写入语义不变，仅改菜单入口。",
+    "映射动作 initRootFromFinder 的持久化 raw value 保持兼容，仅改展示名与行为为开关翻转。"
+  ],
+  "must_reject": [
+    "左右菜单仍保留顶层「目录」「mac」「codex」旧分组作为主入口。",
+    "访达跟随开启时置灰手动设根项。",
+    "根解析优先于访达跟随去用 codex跟随。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求扩大为持续轮询访达选中、改写微信/密钥写入语义、或把跟随开关写入可分享 .tocode 时停止并重新准入。"
+  ],
+  "notes": "阶段：菜单 IA 与根权威。角色：本机用户。业务对象：左键展示根、跟随开关、右键功能分组。不变量：优先级访达>codex>手动；选中规则；AK 门控。禁止结果：误置灰、错误优先级、密钥入说明书。L1：status-bar / directory / finder / codex sync / model / settings。证据：static、unit、runtime_e2e。"
+}

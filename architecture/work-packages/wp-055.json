@@ -1,0 +1,41 @@
+{
+  "id": "wp-055",
+  "title": "菜单信息架构重组与根跟随优先级",
+  "baseline_commit": "0d3166efd416112bbb4d6d518710f5e425793ad9",
+  "goal": "左键「根目录」收拢设根与「访达跟随」「codex跟随」；右键按访达/输入/工具/模型/微信/设置重排；一次性访达目录初始化改为访达跟随勾选，根解析优先级为访达跟随 > codex跟随 > 手动根。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/MenuBuilder.swift",
+    "app/Sources/DirectoryRootResolver.swift",
+    "app/Sources/FinderFollowSettingsStore.swift",
+    "app/Sources/CodexSyncSettingsStore.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/TocodePreferences.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Sources/UserManual.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-055.json",
+    "governance/architecture/task-envelopes/impl-055.json",
+    "governance/architecture/evidence/ev-*-055.json"
+  ],
+  "stop_conditions": [
+    "需求扩大为持续轮询访达选中、改写微信/密钥写入语义、或把跟随开关写入可分享 .tocode 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 与 CLI 构建、codesign 和治理审计通过。",
+    "unit：根解析优先级、访达跟随不置灰、codex跟随置灰、CLI finder-follow、映射文案与分组、说明书覆盖。",
+    "runtime_e2e：真机左右菜单结构抽检；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-30-menu-ia-reorg",
+    "scope": "User approved implementing plan 菜单信息架构重组_5c45bbe2: left 根目录 with 访达跟随/codex跟随; right 访达/输入/工具/模型/微信/设置; 密钥→AI; 说明书 under 设置."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-055",
+  "work_package_id": "wp-055",
+  "kind": "unit",
+  "produced_at": "2026-09-30",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED with 1141 passing assertions and 0 failures. Covers DirectoryRootResolver priority, 访达跟随/codex跟随 mapping titles and groups, CLI root finder-follow, UserManual IA text, and dispatcher gray-out only for codex跟随.",
+  "commit": "93e1eade5056fcaa6835770bf94de22b622b1a21"
+}
