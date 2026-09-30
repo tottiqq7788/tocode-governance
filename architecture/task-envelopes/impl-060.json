@@ -1,0 +1,56 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-060",
+  "role": "implementation_owner",
+  "baseline_commit": "b13fa8a83c9962c847344e170262abf53b1ebedd",
+  "work_package_id": "wp-060",
+  "allowed_scope": [
+    "app/Sources/ModelRelayModels.swift",
+    "app/Sources/ModelRelayConfigStore.swift",
+    "app/Sources/ModelRelayKeychainStore.swift",
+    "app/Sources/ModelRelayLocalKeyVault.swift",
+    "app/Sources/ModelRelayPrompts.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/ClipboardService.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/ModelRelayTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-060.json",
+    "governance/architecture/task-envelopes/impl-060.json",
+    "governance/architecture/evidence/ev-*-060.json"
+  ],
+  "l0_impact": "add_new_and_modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-local-model-relay-menu",
+    "l0-local-openai-relay",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "顶层「模型」独立于 AK，始终显示；AK 既有模型切换与密钥写入语义不变。",
+    "上游 secret 只存 Keychain；本地 secret 仅保存摘要与查看密码加密密文。",
+    "本地 Key 名称全局唯一、模型别名全局唯一、厂商名称全局唯一。",
+    "所有中转配置和密钥均不进入 .tocode、CLI、微信、映射、日志或通知。"
+  ],
+  "must_reject": [
+    "明文 secret 落盘或回填上游 Key。",
+    "错误查看密码仍复制本地 Key。",
+    "删除厂商后残留可路由模型或可读取 Keychain secret。",
+    "把顶层模型中转站挂到 AK 开关。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求把顶层「模型」与 AK → AK-模型或 AK → 密钥 → AI 合并时停止并重新准入。",
+    "需求把上游或本地密钥写入 UserDefaults、.tocode、日志、通知、CLI 或微信时停止并重新准入。"
+  ],
+  "notes": "阶段：控制面。角色：本机用户。业务对象：厂商、模型路由、上游 Key、本地访问 Key。禁止结果：密钥泄漏、命名歧义、AK 语义串线。"
+}

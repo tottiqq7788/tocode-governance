@@ -1,0 +1,53 @@
+{
+  "id": "wp-060",
+  "title": "本地模型中转站控制面",
+  "baseline_commit": "b13fa8a83c9962c847344e170262abf53b1ebedd",
+  "goal": "新增独立顶层「模型」夹，提供厂商、上游 Key、模型别名、本地访问 Key、查看密码与端口管理；与 AK → AK-模型 / 密钥 → AI 完全隔离。",
+  "scope": [
+    "app/Sources/ModelRelayModels.swift",
+    "app/Sources/ModelRelayConfigStore.swift",
+    "app/Sources/ModelRelayKeychainStore.swift",
+    "app/Sources/ModelRelayLocalKeyVault.swift",
+    "app/Sources/ModelRelayPrompts.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/ClipboardService.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/ModelRelayTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-060.json",
+    "governance/architecture/task-envelopes/impl-060.json",
+    "governance/architecture/evidence/ev-*-060.json"
+  ],
+  "stop_conditions": [
+    "需求把顶层「模型」与 AK → AK-模型或 AK → 密钥 → AI 合并时停止并重新准入。",
+    "需求把上游或本地密钥写入 UserDefaults、.tocode、日志、通知、CLI 或微信时停止并重新准入。",
+    "需求让查看密码可恢复、绕过或重置既有本地 Key 明文时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app/CLI 构建、codesign 与治理审计通过。",
+    "unit：版本化配置、名称/别名唯一性、Keychain mock、本地 Key 生成/加密/鉴权、错误密码、复制块、菜单标题与 AK 回归。",
+    "runtime_e2e：真机 Keychain 重启恢复、菜单 CRUD 与密码复制；未跑部分登记 skipped。"
+  ],
+  "acceptance_notes": {
+    "implementation_commit": "078a4708fea207b032a367096b77a992623e10b7",
+    "passed": [
+      "App/CLI 构建、codesign、治理审计和全量测试通过。",
+      "配置权限/损坏拒绝、唯一性、保存前上游校验、本地 Key 加密鉴权和 AK 隔离均有自动化证据。",
+      "完整 App 已重启并成功带起独立 listener。"
+    ],
+    "skipped": [
+      "菜单 CRUD、密码弹窗与剪贴板由人工验收。",
+      "未写入用户生产钥匙串做跨 App 重启恢复。"
+    ]
+  },
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-30-local-model-relay",
+    "scope": "User approved an independent top-level 模型 relay control plane with vendors, upstream keys, generated local keys protected by per-key viewing passwords, model aliases, and configurable default port 27800.",
+    "design_reference": "plans/本地模型中转站_f2c292cc.plan.md"
+  }
+}

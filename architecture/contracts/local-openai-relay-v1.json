@@ -1,0 +1,52 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "local-openai-relay-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-local-model-relay-menu",
+    "l0-local-openai-relay",
+    "l0-action-menu",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "authority": {
+    "listen_host": "127.0.0.1",
+    "default_port": 27800,
+    "port_range": "1024...65535",
+    "base_url": "http://127.0.0.1:<port>/v1",
+    "routes": [
+      "GET /v1/models",
+      "POST /v1/chat/completions",
+      "POST /v1/responses"
+    ],
+    "local_auth": "Authorization: Bearer <generated tc_ key>",
+    "upstream_protocol": "OpenAI-compatible only",
+    "upstream_keychain_service": "com.tocode.app.model-relay.upstream",
+    "metadata_path": "~/Library/Application Support/com.tocode.app/model-relay.json",
+    "metadata_permissions": "0600"
+  },
+  "invariants": [
+    "The top-level 模型 menu is always visible and is independent from AK → AK-模型 / 密钥 → AI. It never changes Codex model-switch or four-tool AK credential semantics.",
+    "The relay binds only IPv4 loopback 127.0.0.1. It never binds all interfaces, IPv6 wildcard, LAN or a network hostname. Port conflicts leave the relay stopped with an explicit status; no automatic port substitution occurs.",
+    "Every route requires a valid generated local Bearer key. Local key authentication uses a constant-time digest comparison and never requires decrypting the copyable secret.",
+    "Provider names, local key names and model aliases are unique in their respective global namespaces. A model alias resolves to exactly one provider and one upstream model id.",
+    "Upstream secrets are stored only as generic-password Keychain items using service com.tocode.app.model-relay.upstream and stable UUID accounts. Keychain denial never falls back to plaintext storage.",
+    "A generated local key uses at least 32 random bytes and a tc_ prefix. Its copyable secret is encrypted using a viewing-password-derived key; only its digest, salt, nonce and ciphertext are persisted. Viewing passwords and plaintext keys are never persisted.",
+    "GET /v1/models returns the enabled local aliases. POST chat/completions and responses replace only the request model alias with its upstream model id and otherwise preserve the OpenAI-compatible JSON body.",
+    "Provider keys are selected round-robin from healthy candidates. Connection errors, 401/403, 429 and 5xx may fail over only before any response bytes are sent to the client. Once response headers or body/SSE bytes are sent, the request is never retried or spliced.",
+    "SSE is forwarded incrementally with backpressure and upstream cancellation when the local client disconnects. Request and response bodies are never logged.",
+    "Remote upstream base URLs require HTTPS; HTTP is accepted only for loopback upstreams. Redirects must not leak Authorization to an untrusted host.",
+    "Relay providers, model aliases, upstream key references, local keys and viewing-password material never enter .tocode exports, CLI, WeChat commands, keyboard/trackpad mappings, logs, notifications or manual examples.",
+    "The relay starts and stops with Tocode. The default port is 27800; users may select a fixed port in 1024...65535 and successful changes restart the listener atomically."
+  ],
+  "prohibited_results": [
+    "Listening on 0.0.0.0, ::, a LAN interface or any non-loopback endpoint.",
+    "Serving models or proxying a request without a valid local Bearer key.",
+    "Persisting an upstream key outside Keychain or persisting a local/viewing key in plaintext.",
+    "Logging Authorization, key material, request bodies or response bodies.",
+    "Retrying or changing upstream keys after any response bytes have reached the client.",
+    "Treating the relay as an arbitrary HTTP proxy or adding Anthropic/Gemini protocol conversion under this contract.",
+    "Exporting relay configuration or secrets through .tocode, CLI, WeChat or mapping features.",
+    "Mutating AK → AK-模型, AK → 密钥 → AI, CC Switch or Codex configuration as part of relay CRUD or request routing."
+  ]
+}

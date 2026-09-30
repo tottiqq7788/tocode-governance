@@ -71,7 +71,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单：「访达」提供显示/隐藏隐藏文件、x/v移动文件与⌘Q强关访达；「输入」提供触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「工具」提供定时器、临时黑屏与限制程序坞弹出；「AK」仅在拓展设置→AK 开启时出现，其下提供「AK-模型」与「密钥 → AI」；「微信」提供绑定与文件位置；「设置」提供开机自启、配置导入导出、拓展设置与最底部的说明书。退出位于分隔线下方。不再提供顶层「目录」「mac」「codex」或顶层裸「模型」夹，也不在「设置」内提供密钥入口，也不再提供一次性「目录初始化」或「访问路径」菜单项。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单：「访达」提供显示/隐藏隐藏文件、x/v移动文件与⌘Q强关访达；「输入」提供触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「工具」提供定时器、临时黑屏与限制程序坞弹出；独立顶层「模型」始终显示且只承载本地 OpenAI 中转站；「AK」仅在拓展设置→AK 开启时出现，其下提供「AK-模型」与「密钥 → AI」；「微信」提供绑定与文件位置；「设置」提供开机自启、配置导入导出、拓展设置与最底部的说明书。退出位于分隔线下方。不再提供顶层「目录」「mac」「codex」，不得把 Codex/Anker 模型切换塞回顶层「模型」，不在「设置」内提供密钥入口，也不再提供一次性「目录初始化」或「访问路径」菜单项。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -92,7 +92,8 @@
         "user-approved-plan:2026-09-24-dock-autohide-restrict",
         "user-approved-plan:2026-09-30-mac-timer",
         "user-request:2026-09-30-ak-folder-ak-model",
-        "user-request:2026-09-30-ak-secrets-ai-no-anker-copy"
+        "user-request:2026-09-30-ak-secrets-ai-no-anker-copy",
+        "user-approved-plan:2026-09-30-local-model-relay"
       ]
     },
     {
@@ -294,6 +295,24 @@
       ]
     },
     {
+      "id": "l0-local-model-relay-menu",
+      "name": "本地模型中转站菜单控制面",
+      "status": "approved",
+      "statement": "右键独立顶层「模型」始终显示并与 AK 完全隔离。其下显示运行状态和可修改端口；「厂商」支持新增唯一名称与 OpenAI-compatible Base URL，厂商项支持新增命名上游 Key、刷新 /v1/models、查看并修改全局唯一模型别名、替换/删除 Key 与确认删除厂商；上游 secret 只存 macOS Keychain且不回填。「Key」支持输入唯一名称、查看密码与确认密码后生成 tc_ 前缀随机本地访问 Key；命名项点击后校验查看密码，成功立即把当前 Base URL、API Key 与排序后的可用模型别名写入剪贴板；同一密码流程可删除，忘记密码只能删除重建。顶层「模型」不受拓展设置→AK 控制，不进入 CLI、微信或键盘/触控板映射。",
+      "source_refs": [
+        "user-approved-plan:2026-09-30-local-model-relay"
+      ]
+    },
+    {
+      "id": "l0-local-openai-relay",
+      "name": "本机 OpenAI 兼容模型中转",
+      "status": "approved",
+      "statement": "Tocode 随应用生命周期在 IPv4 loopback 127.0.0.1 上常驻 OpenAI-compatible 中转，默认端口 27800 且可固定改为 1024…65535；端口冲突明确停止而不自动换端口。只提供带本地 Bearer Key 鉴权的 GET /v1/models、POST /v1/chat/completions、POST /v1/responses，支持普通 JSON 与 SSE。模型别名唯一映射到厂商与上游 model id；每厂商在健康 Key 中轮询，连接失败、401/403、429、5xx 仅可在任何响应字节写出前故障转移，流开始后绝不重试或拼接。远程上游只允许 HTTPS，HTTP 仅允许 loopback。上游 Key 仅存 Keychain，本地 Key 只持久化常量时间鉴权摘要与查看密码加密密文；所有密钥、Authorization 与请求/响应正文均不得写日志、通知、.tocode、CLI 或微信。",
+      "source_refs": [
+        "user-approved-plan:2026-09-30-local-model-relay"
+      ]
+    },
+    {
       "id": "l0-create-file",
       "name": "新增文件或文件夹",
       "status": "candidate",
@@ -394,21 +413,23 @@
       "id": "l0-settings-portable-transfer",
       "name": "可分享配置导入导出",
       "status": "candidate",
-      "statement": "右键「设置 → 配置」提供「导出配置」与「导入配置」。文件内容为 JSON，后缀 .tocode，format 为 tocode.settings 且 version 为 1。文件只含键盘映射、触控板三/四/五指绑定、x/v移动文件、双击⌘Q、⌘Q强关访达、垂直/横向滚轮。根目录、开机自启、同步项目夹、拓展设置（含 AK 开关）、微信凭据与接收状态、安克密钥不得写入文件，导入也不得改写它们。导入先弹确认，确认后整段覆盖上述可分享项并立即按新配置重装钩子；取消或格式/版本不认识则不改任何键。不提供 CLI，不进入键盘/触控板映射功能目录。",
+      "statement": "右键「设置 → 配置」提供「导出配置」与「导入配置」。文件内容为 JSON，后缀 .tocode，format 为 tocode.settings 且 version 为 1。文件只含键盘映射、触控板三/四/五指绑定、x/v移动文件、双击⌘Q、⌘Q强关访达、垂直/横向滚轮。根目录、开机自启、同步项目夹、拓展设置（含 AK 开关）、微信凭据与接收状态、安克密钥、本地模型中转的端口/厂商/模型别名/Keychain 引用/上游 Key/本地 Key/查看密码材料均不得写入文件，导入也不得改写它们。导入先弹确认，确认后整段覆盖上述可分享项并立即按新配置重装钩子；取消或格式/版本不认识则不改任何键。不提供 CLI，不进入键盘/触控板映射功能目录。",
       "source_refs": [
         "user-requirement:2026-09-20-settings-domain-portable",
         "user-approved-plan:2026-09-20-settings-domain-portable",
-        "user-request:2026-09-20-menu-reorg"
+        "user-request:2026-09-20-menu-reorg",
+        "user-approved-plan:2026-09-30-local-model-relay"
       ]
     },
     {
       "id": "l0-user-manual",
       "name": "说明书",
       "status": "candidate",
-      "statement": "右键「设置」夹最底部始终提供「说明书」，不放在右键顶层。点击后弹出只读窗口，用 Tab 分页说明目录树、根目录跟随、访达、输入、工具、微信、命令行与设置的功能及用法。说明书不修改任何配置，不展示密钥或凭据，不进入键盘/触控板映射功能目录，也不提供 CLI。关闭窗口后回到菜单栏，不改变当前根目录或开关。",
+      "statement": "右键「设置」夹最底部始终提供「说明书」，不放在右键顶层。点击后弹出只读窗口，用 Tab 分页说明目录树、根目录跟随、访达、输入、工具、微信、命令行、顶层模型中转与设置的功能及用法。说明书只描述本地 Base URL、鉴权方式和菜单操作，不展示真实上游或本地密钥、查看密码或凭据，不修改任何配置，不进入键盘/触控板映射功能目录，也不提供 CLI。关闭窗口后回到菜单栏，不改变当前根目录或开关。",
       "source_refs": [
         "user-request:2026-09-20-user-manual",
-        "user-request:2026-09-20-menu-reorg"
+        "user-request:2026-09-20-menu-reorg",
+        "user-approved-plan:2026-09-30-local-model-relay"
       ]
     }
   ],
@@ -474,7 +495,7 @@
       "id": "l1-status-bar",
       "name": "菜单栏图标与事件",
       "status": "candidate",
-      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单，呈现微信绑定状态并转发绑定和文件位置操作，转发 mac 临时黑屏与触控板快捷键配置操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
+      "responsibility": "承载菜单栏图标，左键弹出目录树、右键弹出功能菜单；编排独立顶层模型中转菜单与 AK 专用菜单；呈现微信绑定状态并转发绑定和文件位置操作，转发 mac 临时黑屏与触控板快捷键配置操作，在设根、重置或微信生命周期需要用户处理时发送系统通知。",
       "l0_refs": [
         "l0-navigate",
         "l0-action-menu",
@@ -486,7 +507,9 @@
         "l0-delete-clear",
         "l0-access-mode",
         "l0-settings-portable-transfer",
-        "l0-user-manual"
+        "l0-user-manual",
+        "l0-local-model-relay-menu",
+        "l0-local-openai-relay"
       ],
       "owners": [
         "architecture_owner"
@@ -884,6 +907,59 @@
       ]
     },
     {
+      "id": "l1-local-model-config",
+      "name": "本地模型中转配置与密钥",
+      "status": "approved",
+      "responsibility": "以 0600 版本化文件维护端口、厂商、模型别名、上游 Key 引用和本地 Key 密文；以上游 Keychain 与查看密码派生加密实现启动恢复、唯一性校验、复制和安全删除，不持久化明文。",
+      "l0_refs": [
+        "l0-local-model-relay-menu",
+        "l0-local-openai-relay",
+        "l0-settings-portable-transfer"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-local-model-menu",
+      "name": "本地模型中转菜单交互",
+      "status": "approved",
+      "responsibility": "构建始终可见的顶层模型菜单，编排状态、端口、厂商/上游 Key/模型别名、本地 Key CRUD、安全输入、确认删除与密码验证后复制连接块；与 AK 菜单严格隔离。",
+      "l0_refs": [
+        "l0-action-menu",
+        "l0-local-model-relay-menu",
+        "l0-user-manual"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-local-openai-relay",
+      "name": "本机 OpenAI 兼容中转",
+      "status": "approved",
+      "responsibility": "仅在 127.0.0.1 监听经 Bearer 鉴权的三条 OpenAI-compatible 路由，解析模型别名并用厂商健康 Key 轮询转发普通 JSON/SSE；只在响应前故障转移并维护明确运行状态。",
+      "l0_refs": [
+        "l0-local-openai-relay",
+        "l0-local-model-relay-menu"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
       "id": "l1-settings-domain",
       "name": "固定配置域与启动迁移",
       "status": "candidate",
@@ -908,7 +984,7 @@
       "id": "l1-settings-portable-transfer",
       "name": "可分享配置编解码",
       "status": "candidate",
-      "responsibility": "把可分享配置编为 .tocode JSON，并在确认后整段写回 suite；拒绝未知格式/版本；永不编入或写回密钥、凭据、拓展设置、根目录、开机自启与同步项目夹。",
+      "responsibility": "把可分享配置编为 .tocode JSON，并在确认后整段写回 suite；拒绝未知格式/版本；永不编入或写回密钥、凭据、拓展设置、根目录、开机自启、同步项目夹及任何本地模型中转配置或密钥材料。",
       "l0_refs": [
         "l0-settings-portable-transfer"
       ],
@@ -924,7 +1000,7 @@
       "id": "l1-user-manual",
       "name": "说明书分页与展示",
       "status": "candidate",
-      "responsibility": "提供只读说明书分页正文，并从右键顶层「说明书」打开带 Tab 的窗口展示；不读写配置或密钥。",
+      "responsibility": "提供只读说明书分页正文，并从设置夹打开带 Tab 的窗口展示；说明顶层模型中转的本地地址与操作但不展示真实密钥、查看密码或凭据，不读写配置。",
       "l0_refs": [
         "l0-user-manual"
       ],
@@ -946,7 +1022,9 @@
         "l1-status-bar",
         "l1-trackpad-shortcuts",
         "l1-keyboard-remapping",
-        "l1-settings-domain"
+        "l1-settings-domain",
+        "l1-local-openai-relay",
+        "l1-local-model-config"
       ],
       "selectors": [
         "TocodeApp.swift",
@@ -967,12 +1045,16 @@
         "l1-keyboard-remapping",
         "l1-extended-settings",
         "l1-settings-portable-transfer",
-        "l1-user-manual"
+        "l1-user-manual",
+        "l1-local-model-menu",
+        "l1-local-openai-relay",
+        "l1-local-model-config"
       ],
       "selectors": [
         "StatusItemController.swift",
         "TocodePortableSettings.swift",
-        "UserManual.swift"
+        "UserManual.swift",
+        "ModelRelayPrompts.swift"
       ]
     },
     {
@@ -1323,6 +1405,50 @@
       "selectors": [
         "ExtendedSettingsStore.swift",
         "StatusItemController.swift"
+      ]
+    },
+    {
+      "id": "l2-local-model-config",
+      "name": "本地模型中转配置、Keychain 与本地 Key 保险库",
+      "status": "approved",
+      "l1_refs": [
+        "l1-local-model-config"
+      ],
+      "selectors": [
+        "ModelRelayModels.swift",
+        "ModelRelayConfigStore.swift",
+        "ModelRelayKeychainStore.swift",
+        "ModelRelayLocalKeyVault.swift"
+      ]
+    },
+    {
+      "id": "l2-local-model-menu",
+      "name": "本地模型中转弹窗与菜单",
+      "status": "approved",
+      "l1_refs": [
+        "l1-local-model-menu",
+        "l1-status-bar"
+      ],
+      "selectors": [
+        "ModelRelayPrompts.swift",
+        "StatusItemController.swift",
+        "ClipboardService.swift"
+      ]
+    },
+    {
+      "id": "l2-local-openai-relay",
+      "name": "本地 OpenAI HTTP 与上游转发服务",
+      "status": "approved",
+      "l1_refs": [
+        "l1-local-openai-relay",
+        "l1-local-model-config"
+      ],
+      "selectors": [
+        "ModelRelayHTTPParser.swift",
+        "ModelRelayRouter.swift",
+        "ModelRelayUpstreamClient.swift",
+        "ModelRelayHTTPServer.swift",
+        "ModelRelayService.swift"
       ]
     }
   ]

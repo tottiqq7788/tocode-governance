@@ -1,0 +1,61 @@
+{
+  "id": "wp-061",
+  "title": "本地 OpenAI 兼容中转数据面",
+  "baseline_commit": "b13fa8a83c9962c847344e170262abf53b1ebedd",
+  "goal": "常驻监听 127.0.0.1:27800（端口可改），提供 /v1/models、/v1/chat/completions、/v1/responses，支持 SSE、多上游 Key 健康轮询与仅响应前故障转移。",
+  "scope": [
+    "app/Sources/ModelRelayModels.swift",
+    "app/Sources/ModelRelayConfigStore.swift",
+    "app/Sources/ModelRelayKeychainStore.swift",
+    "app/Sources/ModelRelayLocalKeyVault.swift",
+    "app/Sources/ModelRelayHTTPParser.swift",
+    "app/Sources/ModelRelayRouter.swift",
+    "app/Sources/ModelRelayUpstreamClient.swift",
+    "app/Sources/ModelRelayHTTPServer.swift",
+    "app/Sources/ModelRelayService.swift",
+    "app/Sources/ModelRelayPrompts.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/ModelRelayTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-061.json",
+    "governance/architecture/task-envelopes/impl-061.json",
+    "governance/architecture/evidence/ev-*-061.json"
+  ],
+  "stop_conditions": [
+    "需求扩大为非 OpenAI-compatible 上游或 Anthropic/Gemini 协议转换时停止并重新准入。",
+    "需求把 listener 绑定到非 loopback、自动换端口、开放远程访问或取消本地 Bearer 鉴权时停止并重新准入。",
+    "实现需要在已经向客户端写出任何响应字节后切换上游 Key 或拼接流时停止。",
+    "需求扩大为任意 HTTP 透明代理、请求正文日志或密钥日志时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：app/CLI 构建、codesign 与治理审计通过。",
+    "unit：HTTP 分帧、鉴权、别名路由、/models、普通响应、SSE、round-robin、冷却与响应前 failover。",
+    "fault_injection：端口占用、Keychain 拒绝、连接失败、401/403、429、5xx、流开始后失败均不伪装成功。",
+    "runtime_e2e：本机 OpenAI-compatible stub 验证三接口、SSE、改端口与 App 重启；未跑部分登记 skipped。"
+  ],
+  "acceptance_notes": {
+    "implementation_commit": "078a4708fea207b032a367096b77a992623e10b7",
+    "passed": [
+      "真实 NWListener 自动化覆盖鉴权、三接口、普通响应、SSE、客户端断开和端口冲突回滚。",
+      "故障注入覆盖 401、429、5xx、流开始后断网和仅响应前 failover。",
+      "完整 App 重启后仅监听 IPv4 127.0.0.1:27800，未鉴权 /v1/models 返回 401。"
+    ],
+    "skipped": [
+      "完整 App 已鉴权请求需先经 GUI 创建本地 Key，本轮由同实现的测试进程覆盖。",
+      "真实第三方上游故障和生产 Keychain ACL 拒绝未注入。"
+    ]
+  },
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-30-local-model-relay",
+    "scope": "User approved a localhost OpenAI-compatible relay on configurable port 27800 with /v1/models, chat/completions, responses, SSE, unique model aliases, healthy-key round-robin and pre-response failover.",
+    "design_reference": "plans/本地模型中转站_f2c292cc.plan.md"
+  }
+}

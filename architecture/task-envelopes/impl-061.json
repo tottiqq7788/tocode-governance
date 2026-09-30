@@ -1,0 +1,64 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-061",
+  "role": "implementation_owner",
+  "baseline_commit": "b13fa8a83c9962c847344e170262abf53b1ebedd",
+  "work_package_id": "wp-061",
+  "allowed_scope": [
+    "app/Sources/ModelRelayModels.swift",
+    "app/Sources/ModelRelayConfigStore.swift",
+    "app/Sources/ModelRelayKeychainStore.swift",
+    "app/Sources/ModelRelayLocalKeyVault.swift",
+    "app/Sources/ModelRelayHTTPParser.swift",
+    "app/Sources/ModelRelayRouter.swift",
+    "app/Sources/ModelRelayUpstreamClient.swift",
+    "app/Sources/ModelRelayHTTPServer.swift",
+    "app/Sources/ModelRelayService.swift",
+    "app/Sources/ModelRelayPrompts.swift",
+    "app/Sources/AppDelegate.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/ModelRelayTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-061.json",
+    "governance/architecture/task-envelopes/impl-061.json",
+    "governance/architecture/evidence/ev-*-061.json"
+  ],
+  "l0_impact": "add_new_and_modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-local-model-relay-menu",
+    "l0-local-openai-relay",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "listener 仅绑定 127.0.0.1，默认端口 27800，端口冲突不自动换端口。",
+    "所有本地 API 均要求 Bearer 本地 Key；只开放三条已批准路由。",
+    "模型别名决定唯一上游厂商与 model id；健康 Key 仅在响应前轮询/故障转移。",
+    "任何响应字节写出后不切 Key、不重试、不拼接流。",
+    "Authorization、上游/本地 Key、请求与响应正文均不写日志。"
+  ],
+  "must_reject": [
+    "绑定 0.0.0.0、:: 或局域网接口。",
+    "支持任意透明 HTTP 路由或非 OpenAI-compatible 协议转换。",
+    "未鉴权即可列模型或转发请求。",
+    "流开始后切换上游或重放请求。",
+    "Keychain 读取失败时回退明文 secret。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "fault_injection",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求扩大为非 OpenAI-compatible 上游、远程监听、无鉴权或流开始后故障转移时停止并重新准入。"
+  ],
+  "notes": "阶段：数据面。角色：本机 OpenAI 客户端。业务对象：请求、模型路由、上游 Key 池与 SSE 流。不变量：loopback、Bearer、响应前 failover。"
+}
