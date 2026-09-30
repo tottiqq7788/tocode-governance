@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-056",
+  "work_package_id": "wp-056",
+  "kind": "unit",
+  "produced_at": "2026-09-30",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED. DirectoryRootResolver frontmost gating, no gray-out/mapping block for codex follow, UserManual/README coverage.",
+  "commit": "c8c76346ae18971ab77d293c2b19561eb4e85948"
+}

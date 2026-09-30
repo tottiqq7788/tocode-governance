@@ -1,0 +1,32 @@
+{
+  "id": "wp-056",
+  "title": "跟随改为前台才接管",
+  "baseline_commit": "4f82977a1ab51640e42e79f50f3b5bdd4f404047",
+  "goal": "固定目录始终是左键默认根；仅当访达或 Codex 为前台且对应跟随开关开启时临时接管展示根；codex跟随不再置灰手动设根项。",
+  "scope": [
+    "app/Sources/DirectoryRootResolver.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/KeyboardShortcutRemapService.swift",
+    "app/Sources/GlobalShortcutState.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-056.json",
+    "governance/architecture/task-envelopes/impl-056.json",
+    "governance/architecture/evidence/ev-*-056.json"
+  ],
+  "stop_conditions": [
+    "需求扩大为持续监听前台切换实时刷新已打开菜单、或改写 CLI root get 为展示根时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app/CLI 构建与治理审计通过。",
+    "unit：DirectoryRootResolver 前台条件、无置灰/无映射拦截；说明书覆盖。",
+    "runtime_e2e：真机前台切换抽检；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-09-30-frontmost-follow",
+    "scope": "User approved plan 前台条件跟随: fixed root default; Finder/Codex frontmost gates; no gray-out on codex follow."
+  }
+}

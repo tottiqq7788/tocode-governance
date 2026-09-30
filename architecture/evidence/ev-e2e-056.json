@@ -1,0 +1,13 @@
+{
+  "id": "ev-e2e-056",
+  "work_package_id": "wp-056",
+  "kind": "runtime_e2e",
+  "produced_at": "2026-09-30",
+  "command_or_source": "Built app/build/Tocode.app; frontmost Finder/Codex switching not automated.",
+  "result_summary": "skipped：需人工在访达/Codex 前台切换下抽检左键展示根与设根项不置灰。",
+  "status": "skipped",
+  "notes": [
+    "前台应用切换与菜单栏弹出依赖本机 GUI。"
+  ],
+  "commit": "c8c76346ae18971ab77d293c2b19561eb4e85948"
+}
