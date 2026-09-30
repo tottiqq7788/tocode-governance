@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-059",
+  "work_package_id": "wp-059",
+  "kind": "unit",
+  "produced_at": "2026-09-30",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED. Manual/README path is AK → 密钥 → AI; prompt-related user errors contain no 安克.",
+  "commit": "58bc8b4e15f7ac90708b6565a1c39fdf7ff094f6"
+}

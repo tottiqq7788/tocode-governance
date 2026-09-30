@@ -1,0 +1,45 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-058",
+  "role": "implementation_owner",
+  "baseline_commit": "a38bd53b6c29d4acf2956f7d7c4dde03560a4bcb",
+  "work_package_id": "wp-058",
+  "allowed_scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-058.json",
+    "governance/architecture/task-envelopes/impl-058.json",
+    "governance/architecture/evidence/ev-*-058.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-codex-model-switch",
+    "l0-extended-settings"
+  ],
+  "must_preserve": [
+    "仅当设置→拓展设置→AK 勾选时显示顶层 AK 入口。",
+    "模型列表实时加载与切换/强制重启语义不变。",
+    "设置→密钥→AI 仍由 AK 门控，位置不挪到顶层 AK 夹。",
+    "CLI / 微信命令不变。"
+  ],
+  "must_reject": [
+    "继续在右键顶层直接放「模型」夹。",
+    "AK 关闭时仍显示顶层 AK 或 AK-模型。",
+    "把拓展设置里的 AK 开关挪出设置夹。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求把设置→拓展设置→AK 开关挪到顶层 AK 夹，或改模型切换/密钥写入语义时停止并重新准入。",
+    "需求在 AK 关闭时仍展示空 AK 夹，或把密钥入口也挪进顶层 AK 夹时停止并重新准入。"
+  ],
+  "notes": "阶段：右键菜单信息架构。角色：本机用户。业务对象：AK 门控菜单入口。不变量：AK 开关权威仍在拓展设置。禁止结果：顶层裸「模型」、关闭仍可见。"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "wp-058",
+  "title": "右键顶层 AK 夹承载 AK-模型",
+  "baseline_commit": "a38bd53b6c29d4acf2956f7d7c4dde03560a4bcb",
+  "goal": "右键功能菜单在拓展设置→AK 开启时出现顶层「AK」夹；原顶层「模型」挪入其下并改名为「AK-模型」，模型列表仍挂在「AK-模型」下。不改模型切换/密钥语义，不改设置→拓展设置→AK 开关位置。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-058.json",
+    "governance/architecture/task-envelopes/impl-058.json",
+    "governance/architecture/evidence/ev-*-058.json"
+  ],
+  "stop_conditions": [
+    "需求把设置→拓展设置→AK 开关挪到顶层 AK 夹，或改模型切换/密钥写入语义时停止并重新准入。",
+    "需求在 AK 关闭时仍展示空 AK 夹，或把密钥入口也挪进顶层 AK 夹时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app/CLI 构建与治理审计通过。",
+    "unit：标题常量与说明书/README 覆盖 AK / AK-模型路径；不回归为顶层「模型」。",
+    "runtime_e2e：真机右键抽检；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "acceptance_notes": "static、unit 在 app commit 58bc8b4 上通过：构建、治理审计、ALL TESTS PASSED。runtime_e2e skipped。证据已改绑 58bc8b4。",
+  "approval": {
+    "source": "user-request:2026-09-30-ak-folder-ak-model",
+    "scope": "User asked to add a top-level right-click AK folder and move 模型 under it renamed as AK-模型."
+  },
+  "implementation_commit": "58bc8b4e15f7ac90708b6565a1c39fdf7ff094f6"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "wp-059",
+  "title": "密钥入口迁入 AK 夹并去「安克」点击文案",
+  "baseline_commit": "a38bd53b6c29d4acf2956f7d7c4dde03560a4bcb",
+  "goal": "把「设置 → 密钥 → AI」挪到顶层「AK → 密钥 → AI」；点击后的安全输入/结果弹窗与相关用户可见错误文案去掉「安克」字眼。不改密钥写入四工具语义，不改设置→拓展设置→AK 开关位置。",
+  "scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Sources/AnkerCredentialService.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/anker-credential-v1.json",
+    "governance/architecture/work-packages/wp-059.json",
+    "governance/architecture/task-envelopes/impl-059.json",
+    "governance/architecture/evidence/ev-*-059.json"
+  ],
+  "stop_conditions": [
+    "需求把设置→拓展设置→AK 开关挪到顶层 AK 夹，或改四工具密钥写入语义时停止并重新准入。",
+    "需求通过 CLI/微信接收密钥时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app/CLI 构建与治理审计通过。",
+    "unit：说明书/README/合同入口为 AK→密钥→AI；弹窗与 invalidKey 等用户文案不含「安克」。",
+    "runtime_e2e：真机右键抽检；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "acceptance_notes": "static、unit 在 app commit 58bc8b4 上通过：构建、治理审计、ALL TESTS PASSED。runtime_e2e skipped。证据已改绑 58bc8b4。",
+  "approval": {
+    "source": "user-request:2026-09-30-ak-secrets-ai-no-anker-copy",
+    "scope": "User asked to move 设置-密钥-AI under AK-密钥-AI and remove 安克 from click dialog copy."
+  },
+  "implementation_commit": "58bc8b4e15f7ac90708b6565a1c39fdf7ff094f6"
+}

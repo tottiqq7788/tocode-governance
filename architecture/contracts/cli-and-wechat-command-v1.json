@@ -35,7 +35,10 @@
     "WeChat binding credentials are persisted as a 0600 JSON file under Application Support rather than the macOS Keychain, so ad-hoc-signed builds do not prompt for keychain access on every launch.",
     "Ordinary (non-command, non-quick-input) WeChat messages remain receive-only: they are archived and are never replied to or passed to a model.",
     "wechat send is a whitelist command shared by CLI and WeChat '.' commands. It sends text and local files through the bound bot to the last inbound conversation, or to a --to user that already has a stored context_token. Outbound CLI/send payloads are not archived.",
-    "wechat send file paths are resolved to absolute paths in the CLI process before IPC. A single file may not exceed 20MB. Image extensions jpg/jpeg/png/gif/webp are sent as images; all other files are attachments. Items are sent as separate messages in order, and the first failure stops later items."
+    "wechat send file paths are resolved to absolute paths in the CLI process before IPC. A single file may not exceed 20MB. Image extensions jpg/jpeg/png/gif/webp are sent as images; all other files are attachments. Items are sent as separate messages in order, and the first failure stops later items.",
+    "root clipboard is a whitelist command shared by CLI and WeChat: if the clipboard text is an existing directory path and is not wrapped in 「」, set it as the fixed root and return success or error text; never succeed silently.",
+    "root open is a whitelist command shared by CLI and WeChat: open the fixed root from root get in Finder. It must not open the Finder/Codex follow display root.",
+    "finder copy is a whitelist command shared by CLI and WeChat: copy the absolute path of the single Finder selection to the clipboard (「path」 format) and return that path; fail when selection is not exactly one valid item."
   ],
   "prohibited_results": [
     "Executing arbitrary shell or code from a command argument.",
@@ -47,6 +50,9 @@
     "Persisting the socket with permissions broader than 0600.",
     "Persisting WeChat credentials with permissions broader than 0600.",
     "Sending wechat send to a user who has never produced an inbound message, or uploading media in plaintext without AES-128-ECB.",
-    "Archiving a wechat send outbound payload to wechat*.md."
+    "Archiving a wechat send outbound payload to wechat*.md.",
+    "Accepting a 「」-wrapped clipboard path or a non-directory as a successful root clipboard.",
+    "Making root open open the follow display root, or making root get return the display root.",
+    "Adding dock autohide restrict, mac timer, Anker credential, user manual, portable .tocode transfer, WeChat quick input, or switch-desktop as CLI subcommands."
   ]
 }

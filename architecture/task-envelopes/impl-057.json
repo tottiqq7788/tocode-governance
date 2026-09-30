@@ -1,0 +1,50 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-057",
+  "role": "implementation_owner",
+  "baseline_commit": "a38bd53b6c29d4acf2956f7d7c4dde03560a4bcb",
+  "work_package_id": "wp-057",
+  "allowed_scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/work-packages/wp-057.json",
+    "governance/architecture/task-envelopes/impl-057.json",
+    "governance/architecture/evidence/ev-*-057.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-cli-control",
+    "l0-wechat-command",
+    "l0-set-root-clipboard"
+  ],
+  "must_preserve": [
+    "命令执行器仍是显式白名单枚举；CLI 与微信共享 Parser/Executor。",
+    "root get 仍返回固定根，不返回跟随后的展示根。",
+    "程序坞限制、定时器、密钥、说明书、.tocode 配置包、微信快捷输入、切桌面不进 CLI。",
+    "help/commands 本地解析；其余命令经 socket；结果不静默。"
+  ],
+  "must_reject": [
+    "把 dock / timer / credential / manual / portable settings / quick-input / switchDesktop 做成 CLI 子命令。",
+    "root open 打开展示根，或改写 root get 为展示根。",
+    "root clipboard 接受「」包裹路径或非目录仍成功。",
+    "新增命令后 helpText / weChatHelpCommands / README / 说明书命令行页不同步。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求扩大为限制程序坞弹出、定时器、Anker 密钥、说明书、.tocode 导入导出、微信快捷输入或切桌面进入 CLI 白名单时停止并重新准入。",
+    "需求把 root open 改成打开跟随后的展示根，或把 root get 改成返回展示根时停止并重新准入。",
+    "需求新增键盘/触控板映射的增删改 CLI 时停止并重新准入。"
+  ],
+  "notes": "阶段：命令白名单扩展。角色：本机用户与微信命令调用方。业务对象：固定根、访达选中路径。不变量：固定根权威；白名单边界。禁止结果：静默失败、展示根泄漏进 root open/get、越界能力进 CLI。实现前先改 L0 语句与合同 invariants，再改 Parser/Executor。"
+}

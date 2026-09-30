@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-058",
+  "work_package_id": "wp-058",
+  "kind": "unit",
+  "produced_at": "2026-09-30",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED. Covers ExtendedSettingsStore topLevelFolderTitle/modelMenuTitle and UserManual/README AK → AK-模型 wording; rejects top-level bare 模型 folder wording.",
+  "commit": "58bc8b4e15f7ac90708b6565a1c39fdf7ff094f6"
+}

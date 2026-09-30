@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-058",
+  "work_package_id": "wp-058",
+  "kind": "static",
+  "produced_at": "2026-09-30",
+  "command_or_source": "bash scripts/build.sh; python architecture/tools/audit_project.py --target .",
+  "result_summary": "App/CLI build and governance structure audit passed after top-level AK folder and AK-模型 menu move.",
+  "commit": "58bc8b4e15f7ac90708b6565a1c39fdf7ff094f6"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-057",
+  "work_package_id": "wp-057",
+  "kind": "static",
+  "produced_at": "2026-09-30",
+  "command_or_source": "bash scripts/build.sh; codesign -dv build/Tocode.app build/tocode; python architecture/tools/audit_project.py --target .",
+  "result_summary": "App/CLI build succeeded with adhoc codesign; governance structure audit passed after root clipboard / root open / finder copy whitelist updates.",
+  "commit": "58bc8b4e15f7ac90708b6565a1c39fdf7ff094f6"
+}

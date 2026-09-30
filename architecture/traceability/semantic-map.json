@@ -71,7 +71,7 @@
       "id": "l0-action-menu",
       "name": "右键功能菜单",
       "status": "approved",
-      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单：「访达」提供显示/隐藏隐藏文件、x/v移动文件与⌘Q强关访达；「输入」提供触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「工具」提供定时器、临时黑屏与限制程序坞弹出；「模型」仅在拓展设置→AK 开启时出现且其下直接列实时模型选项；「微信」提供绑定与文件位置；「设置」提供开机自启、配置导入导出、拓展设置、密钥（→AI，AK 门控）与最底部的说明书。退出位于分隔线下方。不再提供顶层「目录」「mac」「codex」夹，也不再提供一次性「目录初始化」或「访问路径」菜单项。",
+      "statement": "右键单击菜单栏图标时，弹出带图标的功能菜单：「访达」提供显示/隐藏隐藏文件、x/v移动文件与⌘Q强关访达；「输入」提供触控板、键盘、垂直/横向滚轮对调与双击⌘Q；「工具」提供定时器、临时黑屏与限制程序坞弹出；「AK」仅在拓展设置→AK 开启时出现，其下提供「AK-模型」与「密钥 → AI」；「微信」提供绑定与文件位置；「设置」提供开机自启、配置导入导出、拓展设置与最底部的说明书。退出位于分隔线下方。不再提供顶层「目录」「mac」「codex」或顶层裸「模型」夹，也不在「设置」内提供密钥入口，也不再提供一次性「目录初始化」或「访问路径」菜单项。",
       "source_refs": [
         "user-feedback:2026-09-03",
         "user-requirement:2026-09-04",
@@ -90,7 +90,9 @@
         "user-request:2026-09-20-user-manual",
         "user-request:2026-09-20-menu-reorg",
         "user-approved-plan:2026-09-24-dock-autohide-restrict",
-        "user-approved-plan:2026-09-30-mac-timer"
+        "user-approved-plan:2026-09-30-mac-timer",
+        "user-request:2026-09-30-ak-folder-ak-model",
+        "user-request:2026-09-30-ak-secrets-ai-no-anker-copy"
       ]
     },
     {
@@ -133,10 +135,11 @@
       "id": "l0-set-root-clipboard",
       "name": "读取剪贴板设根",
       "status": "approved",
-      "statement": "左键「配置 → 读取剪贴板」：若剪贴板是存在的文件夹路径（不以「」包裹），则设为固定根目录并通知。无论跟随开关是否开启均可用，不置灰。",
+      "statement": "左键「配置 → 读取剪贴板」与 CLI/微信命令 root clipboard：若剪贴板是存在的文件夹路径（不以「」包裹），则设为固定根目录并通知。CLI 与微信入口必须返回成功或错误文本，不得静默。无论跟随开关是否开启均可用，不置灰。",
       "source_refs": [
         "user-requirement:2026-09-03",
-        "user-feedback:2026-09-03"
+        "user-feedback:2026-09-03",
+        "user-approved-plan:2026-09-30-cli-gap"
       ]
     },
     {
@@ -229,12 +232,13 @@
       "id": "l0-codex-model-switch",
       "name": "Codex 模型切换与强制重启",
       "status": "approved",
-      "statement": "仅当右键「设置 → 拓展设置 → AK」勾选时，右键顶层出现「模型」夹；其下直接提供实时模型列表（不再嵌套在「codex」或当前模型名之下）。每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
+      "statement": "仅当右键「设置 → 拓展设置 → AK」勾选时，右键顶层出现「AK」夹，其下提供「AK-模型」；「AK-模型」下直接提供实时模型列表（不再嵌套在「codex」、当前模型名或右键顶层裸「模型」之下）。每次展开均从 Anker AI Router 实时读取完整模型目录，已验证主模型可直接选择，未验证文本模型须风险确认，图片、视觉、标签及明确不兼容 Codex /responses 的模型仅展示不可选择。选择成功时，Tocode 只修改 CC Switch 当前 Anker Codex Provider 模板与 ~/.codex/config.toml 中唯一的顶层 model 值，二者一致提交并复核成功后固定等待 2 秒，不发送正常退出请求，直接 SIGKILL 所有 com.openai.codex 主应用进程，待旧 PID 消失后重新启动 /Applications/ChatGPT.app。",
       "source_refs": [
         "user-approved-plan:2026-09-07",
         "user-revision:2026-09-07",
         "app-commit:0790172",
-        "user-request:2026-09-16-extended-settings-ak"
+        "user-request:2026-09-16-extended-settings-ak",
+        "user-request:2026-09-30-ak-folder-ak-model"
       ]
     },
     {
@@ -250,23 +254,25 @@
       "id": "l0-cli-control",
       "name": "独立 CLI 命令控制",
       "status": "approved",
-      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。白名单包含 wechat send：把文字与本地文件路径交给常驻进程，经已绑定 Bot 主动出站。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
+      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。白名单包含 wechat send，以及 root clipboard、root open、finder copy：剪贴板设固定根、访达打开固定根、复制访达选中项绝对路径。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08",
-        "user-approved-plan:2026-09-20-wechat-cli-send"
+        "user-approved-plan:2026-09-20-wechat-cli-send",
+        "user-approved-plan:2026-09-30-cli-gap"
       ]
     },
     {
       "id": "l0-wechat-command",
       "name": "微信 . 前缀命令",
       "status": "approved",
-      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器。不以 . 开头但整条能拆成快捷输入段序列的消息，走同一套命令消费规则：不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试，结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。共享白名单包含 wechat send，因此微信侧 .wechat send 也会触发主动出站。普通（非命令且非快捷输入）微信消息保持 receive-only。",
+      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器。不以 . 开头但整条能拆成快捷输入段序列的消息，走同一套命令消费规则：不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试，结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。共享白名单包含 wechat send 与 root clipboard / root open / finder copy，因此微信侧对应点号命令也会触发。普通（非命令且非快捷输入）微信消息保持 receive-only。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-20-wechat-quick-input",
-        "user-approved-plan:2026-09-20-wechat-cli-send"
+        "user-approved-plan:2026-09-20-wechat-cli-send",
+        "user-approved-plan:2026-09-30-cli-gap"
       ]
     },
     {
@@ -351,24 +357,27 @@
       "id": "l0-anker-credential",
       "name": "四工具安克密钥统一设置",
       "status": "approved",
-      "statement": "仅当右键「设置 → 拓展设置 → AK」勾选时，「设置」才提供「密钥 → AI」入口（原「安克密钥」仅改菜单名称）。点击后弹出安全输入弹窗，一次保存覆盖 pi、Codex（通过 CC Switch）、Hermes、OpenCode 的 Anker 密钥，并把 Hermes 接入安克 DeepSeek V4 Pro。使用隐藏输入框，取消不修改；失败恢复且不暴露密钥；运行中的客户端需重载配置，不自动中断任务。关闭 AK 只隐藏该入口，不删除已保存密钥。",
+      "statement": "仅当右键「设置 → 拓展设置 → AK」勾选时，顶层「AK」夹提供「密钥 → AI」入口。点击后弹出安全输入弹窗，一次保存覆盖 pi、Codex（通过 CC Switch）、Hermes、OpenCode 的 Anker 密钥，并把 Hermes 接入 DeepSeek V4 Pro。弹窗与用户可见错误文案不使用「安克」字眼。使用隐藏输入框，取消不修改；失败恢复且不暴露密钥；运行中的客户端需重载配置，不自动中断任务。关闭 AK 只隐藏该入口，不删除已保存密钥。设置夹内不再提供密钥入口。",
       "source_refs": [
         "user-request:2026-09-11-anker-key",
         "user-clarification:2026-09-11-hermes-deepseek",
-        "user-request:2026-09-16-extended-settings-ak"
+        "user-request:2026-09-16-extended-settings-ak",
+        "user-request:2026-09-30-ak-secrets-ai-no-anker-copy"
       ]
     },
     {
       "id": "l0-extended-settings",
       "name": "拓展设置功能类型开关",
       "status": "approved",
-      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示顶层「模型」夹，以及「设置 → 密钥 → AI」。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、「设置 → 配置」导入导出与「设置」内说明书始终显示。",
+      "statement": "右键「设置」提供「拓展设置」子菜单，其中列出功能类型开关。类型默认关闭；仅当某类型勾选时，右键菜单才呈现该类型专用项。当前类型为 AK：勾选后才显示顶层「AK」夹（内含「AK-模型」与「密钥 → AI」）。关闭类型只隐藏菜单项，不删除已保存密钥，不改变 CLI、微信命令，也不卸载模型切换或密钥写入实现。开机自启、「设置 → 配置」导入导出与「设置」内说明书始终显示；设置夹内不再提供密钥入口。",
       "source_refs": [
         "user-request:2026-09-16-extended-settings-ak",
         "app-commit:343b7c9",
         "user-requirement:2026-09-20-settings-domain-portable",
         "user-request:2026-09-20-user-manual",
-        "user-request:2026-09-20-menu-reorg"
+        "user-request:2026-09-20-menu-reorg",
+        "user-request:2026-09-30-ak-folder-ak-model",
+        "user-request:2026-09-30-ak-secrets-ai-no-anker-copy"
       ]
     },
     {

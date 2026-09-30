@@ -1,0 +1,47 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-059",
+  "role": "implementation_owner",
+  "baseline_commit": "a38bd53b6c29d4acf2956f7d7c4dde03560a4bcb",
+  "work_package_id": "wp-059",
+  "allowed_scope": [
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/AnkerCredentialPrompt.swift",
+    "app/Sources/AnkerCredentialService.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/anker-credential-v1.json",
+    "governance/architecture/work-packages/wp-059.json",
+    "governance/architecture/task-envelopes/impl-059.json",
+    "governance/architecture/evidence/ev-*-059.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-anker-credential",
+    "l0-extended-settings"
+  ],
+  "must_preserve": [
+    "仅当设置→拓展设置→AK 勾选时显示顶层 AK 入口及其下模型与密钥。",
+    "一次保存仍覆盖 pi、Codex（CC Switch）、Hermes、OpenCode；失败恢复且不暴露密钥。",
+    "CLI / 微信不接收密钥。"
+  ],
+  "must_reject": [
+    "设置夹内继续提供密钥→AI。",
+    "点击弹窗或用户可见错误文案仍含「安克」。",
+    "AK 关闭时仍显示密钥入口。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求把设置→拓展设置→AK 开关挪到顶层 AK 夹，或改四工具密钥写入语义时停止并重新准入。",
+    "需求通过 CLI/微信接收密钥时停止并重新准入。"
+  ],
+  "notes": "阶段：菜单入口与用户文案。业务对象：AK 门控密钥入口。禁止结果：设置内密钥残留、「安克」用户文案。"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "wp-057",
+  "title": "CLI 补齐 root clipboard / root open / finder copy",
+  "baseline_commit": "a38bd53b6c29d4acf2956f7d7c4dde03560a4bcb",
+  "goal": "在统一命令白名单中仅新增三条：root clipboard（剪贴板为现有目录则设固定根）、root open（访达打开 root get 的固定根）、finder copy（复制访达选中项绝对路径并打印）。不把程序坞限制、定时器、密钥、说明书、.tocode 配置包、微信快捷输入或切桌面补进 CLI。",
+  "scope": [
+    "app/Sources/TocodeCommand.swift",
+    "app/Sources/TocodeCommandExecutor.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/KeyboardShortcutMapping.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/work-packages/wp-057.json",
+    "governance/architecture/task-envelopes/impl-057.json",
+    "governance/architecture/evidence/ev-*-057.json"
+  ],
+  "stop_conditions": [
+    "需求扩大为限制程序坞弹出、定时器、Anker 密钥、说明书、.tocode 导入导出、微信快捷输入或切桌面进入 CLI 白名单时停止并重新准入。",
+    "需求把 root open 改成打开跟随后的展示根，或把 root get 改成返回展示根时停止并重新准入。",
+    "需求新增键盘/触控板映射的增删改 CLI 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app/CLI 构建、codesign 与治理审计通过。",
+    "unit：解析与执行 root clipboard（合法目录成功、「」包裹/非目录失败）、root open（打开固定根）、finder copy（有选中打印路径、无选中失败）；help/weChatHelp 含三条；既有 status 字段不新增程序坞/定时器/AK。",
+    "runtime_e2e：真机对三条命令抽检；未跑则 skipped。"
+  ],
+  "status": "approved",
+  "acceptance_notes": "static、unit 在 app commit 58bc8b4 上通过：构建、治理审计、ALL TESTS PASSED。runtime_e2e skipped。证据已改绑 58bc8b4。",
+  "approval": {
+    "source": "user-approved-plan:2026-09-30-cli-gap",
+    "scope": "User approved CLI gap plan: keep dock/timer/credential/manual/portable-settings/quick-input out of CLI; optional WP only for root clipboard, root open, finder copy; root open uses fixed root from root get; WeChat '.' shares the same three commands.",
+    "design_reference": "plans/cli_缺口规划_615001c0.plan.md"
+  },
+  "notes": [
+    "边界维持（本包禁止范围）：l0-dock-autohide-restrict、l0-mac-timer、l0-user-manual、l0-settings-portable-transfer、anker-credential、微信快捷输入均保持不进 CLI。",
+    "root clipboard 对齐 l0-set-root-clipboard：不以「」包裹的现有文件夹路径才设根；CLI/微信须返回成功或错误文本，不得静默。",
+    "root open 与菜单 openFinderAtRoot 刻意不同：命令打开固定根（root get），菜单可继续打开当前展示根。",
+    "微信 .root clipboard / .root open / .finder copy 因共享 Parser/Executor 自动生效，属预期。",
+    "本包批准后仍须按 task envelope 实现；批准不等于已实现。"
+  ],
+  "implementation_commit": "58bc8b4e15f7ac90708b6565a1c39fdf7ff094f6"
+}
