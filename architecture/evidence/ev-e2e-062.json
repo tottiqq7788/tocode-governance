@@ -1,0 +1,14 @@
+{
+  "id": "ev-e2e-062",
+  "work_package_id": "wp-062",
+  "kind": "runtime_e2e",
+  "status": "passed",
+  "produced_at": "2026-10-02",
+  "command_or_source": "bash scripts/build.sh; open build/Tocode.app; pgrep -lf Tocode.app/Contents/MacOS/Tocode; lsof -nP -iTCP:27800 -sTCP:LISTEN",
+  "result_summary": "重启后 Tocode 常驻且仅监听 127.0.0.1:27800。菜单四项与状态窗折线图/打开日志由同提交单元覆盖与手工可点验。",
+  "commit": "4c19b487b8588aedecbaff950a493aee68dd9c1d",
+  "notes": "完整 GUI 点按状态窗与打开日志文件未自动化，登记为 skipped 补充项。",
+  "skipped": [
+    "完整 App GUI 点击「状态」打开面板与「打开今日日志文件」未自动化。"
+  ]
+}

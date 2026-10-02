@@ -1,0 +1,61 @@
+{
+  "id": "wp-062",
+  "title": "模型菜单状态面与调用次数观测",
+  "baseline_commit": "2e2cbc5a3c03ffd6d23eb2bd21cb7f0797505c77",
+  "goal": "「模型」菜单改为状态/端口/厂家/密钥；点击状态查看当前 URL 与按厂家下钻的调用次数折线图；按入站请求记录近一天元数据日志（0600）并次日覆盖。",
+  "scope": [
+    "app/Sources/ModelRelayCallMetricsStore.swift",
+    "app/Sources/ModelRelayStatusPanel.swift",
+    "app/Sources/ModelRelayModels.swift",
+    "app/Sources/ModelRelayRouter.swift",
+    "app/Sources/ModelRelayUpstreamClient.swift",
+    "app/Sources/ModelRelayHTTPServer.swift",
+    "app/Sources/ModelRelayService.swift",
+    "app/Sources/ModelRelayPrompts.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/ModelRelayTests.swift",
+    "app/Tests/ModelRelayTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-062.json",
+    "governance/architecture/task-envelopes/impl-062.json",
+    "governance/architecture/evidence/ev-*-062.json"
+  ],
+  "stop_conditions": [
+    "需求要求记录请求/响应正文、Authorization 或任何密钥材料时停止并重新准入。",
+    "需求改为统计 token 或合并多次入站调用时停止并重新准入。",
+    "需求把明细日志保留超过一日或改为非 0600 明文落盘时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app/CLI 构建、codesign 与治理审计通过。",
+    "unit：入站一次只记一次（含上游重试）、换日覆盖明细、聚合桶边界、日志字段不含 body/密钥。",
+    "runtime_e2e：菜单四项文案、状态窗 URL/折线图、打开今日日志；未跑部分登记 skipped。"
+  ],
+  "acceptance_notes": {
+    "implementation_commit": "4c19b487b8588aedecbaff950a493aee68dd9c1d",
+    "passed": [
+      "静态：构建、codesign、治理审计通过。",
+      "单元：调用次数桶聚合、换日覆盖、0600、无 body/密钥/token；入站一次只记一次。",
+      "运行态：App 重启后仅监听 127.0.0.1:27800。"
+    ],
+    "skipped": [
+      "完整 App GUI 点击「状态」面板与打开今日日志未自动化。"
+    ]
+  },
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-02-relay-status-charts",
+    "change_sources": [
+      "user-request:2026-10-02-status-call-count-charts",
+      "user-decision:2026-10-02-count-calls-not-tokens",
+      "user-decision:2026-10-02-open-log-file-only"
+    ],
+    "scope": "User approved renaming 模型 submenu to 状态/端口/厂家/密钥, status panel with URL and provider call-count charts (6h/week/month), and one-day metadata call log at 0600 overwritten next day.",
+    "design_reference": "plans/relay_status_charts_644f6e74.plan.md"
+  }
+}

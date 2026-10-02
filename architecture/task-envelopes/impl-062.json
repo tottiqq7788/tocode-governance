@@ -1,0 +1,56 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-062",
+  "role": "implementation_owner",
+  "baseline_commit": "2e2cbc5a3c03ffd6d23eb2bd21cb7f0797505c77",
+  "work_package_id": "wp-062",
+  "allowed_scope": [
+    "app/Sources/ModelRelayCallMetricsStore.swift",
+    "app/Sources/ModelRelayStatusPanel.swift",
+    "app/Sources/ModelRelayModels.swift",
+    "app/Sources/ModelRelayRouter.swift",
+    "app/Sources/ModelRelayUpstreamClient.swift",
+    "app/Sources/ModelRelayHTTPServer.swift",
+    "app/Sources/ModelRelayService.swift",
+    "app/Sources/ModelRelayPrompts.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/ModelRelayTests.swift",
+    "app/Tests/ModelRelayTestSupport.swift",
+    "app/Tests/TestRunner.swift",
+    "app/scripts/build.sh",
+    "app/scripts/test.sh",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-062.json",
+    "governance/architecture/task-envelopes/impl-062.json",
+    "governance/architecture/evidence/ev-*-062.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-local-model-relay-menu",
+    "l0-local-openai-relay",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "listener 仅绑定 127.0.0.1；三条已批准路由与 Bearer 鉴权不变。",
+    "厂家实体单 Key、无内部 failover；流开始后不重试不拼接。",
+    "Authorization、上游/本地 Key、请求与响应正文均不写日志。",
+    "调用按入站 POST 计数，不合并，不统计 token。"
+  ],
+  "must_reject": [
+    "记录 body、Authorization 或密钥材料。",
+    "把明细日志做成状态窗内嵌列表或跨日保留。",
+    "改变鉴权、路由、厂家 CRUD 或端口语义。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求扩大为 token 统计、正文日志或跨日明细保留时停止并重新准入。"
+  ],
+  "notes": "阶段：观测面。角色：本机 OpenAI 客户端与菜单操作者。业务对象：调用次数、厂家分桶、当日元数据日志。不变量：一次入站一次记录、0600、无 body/密钥。"
+}

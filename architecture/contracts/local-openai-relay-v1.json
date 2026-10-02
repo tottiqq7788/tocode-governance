@@ -23,10 +23,14 @@
     "upstream_protocol": "OpenAI-compatible only",
     "upstream_keychain_service": "com.tocode.app.model-relay.upstream",
     "metadata_path": "~/Library/Application Support/com.tocode.app/model-relay.json",
-    "metadata_permissions": "0600"
+    "metadata_permissions": "0600",
+    "calls_log_path": "~/Library/Application Support/com.tocode.app/model-relay-calls.log",
+    "metrics_path": "~/Library/Application Support/com.tocode.app/model-relay-metrics.json",
+    "observability_permissions": "0600"
   },
   "invariants": [
     "The top-level 模型 menu is always visible and is independent from AK → AK-模型 / 密钥 → AI. It never changes Codex model-switch or four-tool AK credential semantics.",
+    "Under 模型 the submenu labels are exactly 状态, 端口, 厂家 and 密钥. Clicking 状态 opens a status panel showing the current Base URL, a provider-scoped call-count line chart (近六小时 / 近一周 / 近一个月) defaulting to the last-used provider, and a control that only opens today's call log file with the system application.",
     "The relay binds only IPv4 loopback 127.0.0.1. It never binds all interfaces, IPv6 wildcard, LAN or a network hostname. Port conflicts leave the relay stopped with an explicit status; no automatic port substitution occurs.",
     "Every route requires a valid generated local Bearer key. Local key authentication uses a constant-time digest comparison and never requires decrypting the copyable secret.",
     "A provider entity has one globally unique display name, one audited OpenAI-compatible preset or validated custom Base URL, and at most one upstream Key. The same preset may be used by multiple entities with different names.",
@@ -38,8 +42,11 @@
     "GET /v1/models returns the enabled published model ids. POST chat/completions and responses replace only the request model id with its upstream model id and otherwise preserve the OpenAI-compatible JSON body.",
     "Each published model id resolves through exactly one provider entity and its single upstream Key. There is no within-entity round-robin or failover; connection errors, 401/403, 429 and 5xx fail explicitly. Once response headers or body/SSE bytes are sent, the request is never retried or spliced.",
     "SSE is forwarded incrementally with backpressure and upstream cancellation when the local client disconnects. Request and response bodies are never logged.",
+    "Each inbound POST /v1/chat/completions or /v1/responses counts as exactly one call for observability, including when the upstream session retries or fails. Agent sessions that issue multiple inbound requests are never merged. GET /v1/models is not counted.",
+    "Call observability persists only metadata fields ts, route, providerId, providerName, publishedModel, upstreamModel, status, durationMs and ok. Charts aggregate call counts by provider into 10-minute buckets for the last six hours, daily buckets for the last week and weekly buckets for the last month. Token usage is never recorded or displayed.",
+    "The day call detail log is a single 0600 file that is truncated and rewritten when the local calendar day changes. Aggregate metrics and lastUsedProviderID are stored separately in a 0600 metrics file retained about 31 days. Neither file may contain Authorization, key material, request bodies or response bodies.",
     "Remote upstream base URLs require HTTPS; HTTP is accepted only for loopback upstreams. Redirects must not leak Authorization to an untrusted host.",
-    "Relay providers, published model ids, upstream key references, local keys and viewing-password material never enter .tocode exports, CLI, WeChat commands, keyboard/trackpad mappings, logs, notifications or manual examples.",
+    "Relay providers, published model ids, upstream key references, local keys and viewing-password material never enter .tocode exports, CLI, WeChat commands, keyboard/trackpad mappings, notifications or manual examples. Call metadata logs and aggregate metrics may only live under the approved Application Support paths.",
     "The relay starts and stops with Tocode. The default port is 27800; users may select a fixed port in 1024...65535 and successful changes restart the listener atomically."
   ],
   "prohibited_results": [
@@ -47,6 +54,9 @@
     "Serving models or proxying a request without a valid local Bearer key.",
     "Persisting an upstream key outside Keychain or persisting a local/viewing key in plaintext.",
     "Logging Authorization, key material, request bodies or response bodies.",
+    "Recording or displaying token usage as part of relay observability.",
+    "Merging multiple inbound POST calls into a single observability record.",
+    "Keeping more than one calendar day's call detail log, or writing call logs/metrics without 0600 permissions.",
     "Retrying or changing upstream keys after any response bytes have reached the client.",
     "Treating the relay as an arbitrary HTTP proxy or adding Anthropic/Gemini protocol conversion under this contract.",
     "Exporting relay configuration or secrets through .tocode, CLI, WeChat or mapping features.",

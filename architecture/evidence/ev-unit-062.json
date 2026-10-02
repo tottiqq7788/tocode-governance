@@ -1,0 +1,10 @@
+{
+  "id": "ev-unit-062",
+  "work_package_id": "wp-062",
+  "kind": "unit",
+  "status": "passed",
+  "produced_at": "2026-10-02",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。覆盖调用次数存储（十分钟/日/周桶、lastUsed、0600、换日覆盖、无 body/Authorization/token）、入站一次只记一次（上游 5xx 失败）、说明书四项菜单与状态日志语义。",
+  "commit": "4c19b487b8588aedecbaff950a493aee68dd9c1d",
+  }
