@@ -32,14 +32,14 @@
     "A provider entity has one globally unique display name, one audited OpenAI-compatible preset or validated custom Base URL, and at most one upstream Key. The same preset may be used by multiple entities with different names.",
     "A new or connection-changing provider entity is persisted only after its exact Base URL and candidate Key successfully return a non-empty OpenAI-compatible /models response. Test failure or persistence failure leaves neither provider metadata nor an orphan Keychain item.",
     "Provider create, connection change and delete serialize metadata and Keychain writes. Candidate and retired Key UUIDs are covered by a durable cleanup journal before any crash window; active configuration never references a missing Key, and startup plus periodic refresh retry journal cleanup idempotently.",
-    "Provider names, local key names and model aliases are unique in their respective global namespaces. A model alias resolves to exactly one provider and one upstream model id.",
+    "Provider names, local key names and published model ids are unique in their respective global namespaces. A published model id is derived from the upstream model id (with automatic provider-name prefixing only when needed for uniqueness) and is never user-editable.",
     "Upstream secrets are stored only as generic-password Keychain items using service com.tocode.app.model-relay.upstream and stable UUID accounts. Keychain denial never falls back to plaintext storage.",
     "A generated local key uses at least 32 random bytes and a tc_ prefix. Its copyable secret is encrypted using a viewing-password-derived key; only its digest, salt, nonce and ciphertext are persisted. Viewing passwords and plaintext keys are never persisted.",
-    "GET /v1/models returns the enabled local aliases. POST chat/completions and responses replace only the request model alias with its upstream model id and otherwise preserve the OpenAI-compatible JSON body.",
-    "Each model alias resolves through exactly one provider entity and its single upstream Key. There is no within-entity round-robin or failover; connection errors, 401/403, 429 and 5xx fail explicitly. Once response headers or body/SSE bytes are sent, the request is never retried or spliced.",
+    "GET /v1/models returns the enabled published model ids. POST chat/completions and responses replace only the request model id with its upstream model id and otherwise preserve the OpenAI-compatible JSON body.",
+    "Each published model id resolves through exactly one provider entity and its single upstream Key. There is no within-entity round-robin or failover; connection errors, 401/403, 429 and 5xx fail explicitly. Once response headers or body/SSE bytes are sent, the request is never retried or spliced.",
     "SSE is forwarded incrementally with backpressure and upstream cancellation when the local client disconnects. Request and response bodies are never logged.",
     "Remote upstream base URLs require HTTPS; HTTP is accepted only for loopback upstreams. Redirects must not leak Authorization to an untrusted host.",
-    "Relay providers, model aliases, upstream key references, local keys and viewing-password material never enter .tocode exports, CLI, WeChat commands, keyboard/trackpad mappings, logs, notifications or manual examples.",
+    "Relay providers, published model ids, upstream key references, local keys and viewing-password material never enter .tocode exports, CLI, WeChat commands, keyboard/trackpad mappings, logs, notifications or manual examples.",
     "The relay starts and stops with Tocode. The default port is 27800; users may select a fixed port in 1024...65535 and successful changes restart the listener atomically."
   ],
   "prohibited_results": [
@@ -51,6 +51,7 @@
     "Treating the relay as an arbitrary HTTP proxy or adding Anthropic/Gemini protocol conversion under this contract.",
     "Exporting relay configuration or secrets through .tocode, CLI, WeChat or mapping features.",
     "Persisting an untested new or changed provider endpoint/Key pair, or retaining more than one Key on a newly written provider entity.",
+    "Exposing a user-editable model alias UI or persisting a manually chosen alias that differs from the auto-derived published model id.",
     "Mutating AK → AK-模型, AK → 密钥 → AI, CC Switch or Codex configuration as part of relay CRUD or request routing."
   ]
 }

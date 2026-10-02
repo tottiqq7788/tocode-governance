@@ -2,7 +2,7 @@
   "id": "wp-061",
   "title": "本地 OpenAI 兼容中转数据面",
   "baseline_commit": "b13fa8a83c9962c847344e170262abf53b1ebedd",
-  "goal": "常驻监听 127.0.0.1:27800（端口可改），提供 /v1/models、/v1/chat/completions、/v1/responses 与 SSE；每个模型别名只路由到单 Key 厂家实体并明确传播上游失败。",
+  "goal": "常驻监听 127.0.0.1:27800（端口可改），提供 /v1/models、/v1/chat/completions、/v1/responses 与 SSE；每个自动派生的模型名只路由到单 Key 厂家实体并明确传播上游失败。",
   "scope": [
     "app/Sources/ModelRelayModels.swift",
     "app/Sources/ModelRelayConfigStore.swift",
@@ -36,12 +36,12 @@
   ],
   "acceptance_evidence": [
     "static：app/CLI 构建、codesign 与治理审计通过。",
-    "unit：HTTP 分帧、鉴权、别名到单 Key 厂家实体的唯一路由、/models、普通响应、SSE 与健康冷却。",
+    "unit：HTTP 分帧、鉴权、自动派生模型名到单 Key 厂家实体的唯一路由、/models、普通响应、SSE 与健康冷却。",
     "fault_injection：端口占用、Keychain 拒绝、连接切换/删除阶段失败与重启恢复、401/403、429、5xx、流开始后失败均明确失败且不伪装成功。",
     "runtime_e2e：本机 OpenAI-compatible stub 验证三接口、SSE、改端口与 App 重启；未跑部分登记 skipped。"
   ],
   "acceptance_notes": {
-    "implementation_commit": "39250d987fe4a9eab983d66ad08dc0c1b0015b9f",
+    "implementation_commit": "e76eee80eccc32c82b129e75bb3ed31efb43642f",
     "passed": [
       "真实 NWListener 自动化覆盖鉴权、三接口、普通响应、SSE、客户端断开和端口冲突回滚。",
       "故障注入覆盖 401、429、5xx、流开始后断网、Keychain/配置失败、连接切换清理失败与重启恢复；单 Key 厂家失败时不做内部 failover。",
@@ -56,9 +56,10 @@
   "approval": {
     "source": "user-approved-plan:2026-09-30-local-model-relay",
     "change_sources": [
-      "user-approved-plan:2026-09-30-provider-entity-refactor"
+      "user-approved-plan:2026-09-30-provider-entity-refactor",
+      "user-request:2026-09-30-provider-edit-dialog-no-alias"
     ],
-    "scope": "User approved a localhost OpenAI-compatible relay on configurable port 27800 with unique aliases resolving to one provider entity and one upstream Key, without within-entity round-robin or failover.",
+    "scope": "User approved a localhost OpenAI-compatible relay on configurable port 27800 with auto-derived published model ids resolving to one provider entity and one upstream Key, without user-editable aliases or within-entity round-robin/failover.",
     "design_reference": "plans/厂家实体重构_a8a866ae.plan.md"
   }
 }

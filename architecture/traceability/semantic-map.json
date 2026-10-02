@@ -298,7 +298,7 @@
       "id": "l0-local-model-relay-menu",
       "name": "本地模型中转站菜单控制面",
       "status": "approved",
-      "statement": "右键独立顶层「模型」始终显示并与 AK 完全隔离。其下显示运行状态和可修改端口；「厂商 → 新增」创建由全局唯一显示名称、一个内置 OpenAI-compatible 厂商预设或自定义 Base URL、一个上游 Key 组成的厂家实体，同一预设可用不同名称重复创建。自定义远程地址必须 HTTPS，HTTP 仅允许 loopback；使用待保存 Key 成功读取非空 /models 后才可原子保存，失败不得留下配置或 Keychain 项；候选与退役 Key UUID 在崩溃窗口前进入持久化清理日志，启动和定时刷新幂等重试，活跃配置不得引用缺失 Key。厂商列表中的命名项是普通可点击项而不是文件夹；点击后由统一弹窗编辑名称/地址/替换 Key、测试并刷新模型、管理全局唯一模型别名或确认删除。上游 secret 只存 macOS Keychain且不回填，每个厂家实体最多一个上游 Key。「Key」夹继续管理带查看密码的 tc_ 本地访问 Key，流程与语义不变。顶层「模型」不受拓展设置→AK 控制，不进入 CLI、微信或键盘/触控板映射。",
+      "statement": "右键独立顶层「模型」始终显示并与 AK 完全隔离。其下显示运行状态和可修改端口；「厂商 → 新增」创建由全局唯一显示名称、一个内置 OpenAI-compatible 厂商预设或自定义 Base URL、一个上游 Key 组成的厂家实体，同一预设可用不同名称重复创建。自定义远程地址必须 HTTPS，HTTP 仅允许 loopback；使用待保存 Key 成功读取非空 /models 后才可原子保存，失败不得留下配置或 Keychain 项；候选与退役 Key UUID 在崩溃窗口前进入持久化清理日志，启动和定时刷新幂等重试，活跃配置不得引用缺失 Key。厂商列表中的命名项是普通可点击项而不是文件夹；点击后直接打开与新增相同的编辑弹窗并回显信息，可保存、测试连接、刷新上游模型目录或确认删除；不提供可编辑的模型别名。上游 secret 只存 macOS Keychain且不回填，每个厂家实体最多一个上游 Key。「Key」夹继续管理带查看密码的 tc_ 本地访问 Key，流程与语义不变。顶层「模型」不受拓展设置→AK 控制，不进入 CLI、微信或键盘/触控板映射。",
       "source_refs": [
         "user-approved-plan:2026-09-30-local-model-relay",
         "user-request:2026-09-30-provider-preset-dropdown",
@@ -309,7 +309,7 @@
       "id": "l0-local-openai-relay",
       "name": "本机 OpenAI 兼容模型中转",
       "status": "approved",
-      "statement": "Tocode 随应用生命周期在 IPv4 loopback 127.0.0.1 上常驻 OpenAI-compatible 中转，默认端口 27800 且可固定改为 1024…65535；端口冲突明确停止而不自动换端口。只提供带本地 Bearer Key 鉴权的 GET /v1/models、POST /v1/chat/completions、POST /v1/responses，支持普通 JSON 与 SSE。模型别名唯一映射到一个厂家实体与上游 model id；每个厂家实体只使用其唯一 Key，不在实体内部轮询或故障转移，上游连接失败、401/403、429 或 5xx 时明确失败，任何响应字节写出后绝不重试或拼接。远程上游只允许 HTTPS，HTTP 仅允许 loopback。上游 Key 仅存 Keychain，本地 Key 只持久化常量时间鉴权摘要与查看密码加密密文；所有密钥、Authorization 与请求/响应正文均不得写日志、通知、.tocode、CLI 或微信。",
+      "statement": "Tocode 随应用生命周期在 IPv4 loopback 127.0.0.1 上常驻 OpenAI-compatible 中转，默认端口 27800 且可固定改为 1024…65535；端口冲突明确停止而不自动换端口。只提供带本地 Bearer Key 鉴权的 GET /v1/models、POST /v1/chat/completions、POST /v1/responses，支持普通 JSON 与 SSE。本地暴露的模型名直接取上游 model id（跨厂家冲突时系统自动加厂家前缀消歧，不可人工改别名）；每个厂家实体只使用其唯一 Key，不在实体内部轮询或故障转移，上游连接失败、401/403、429 或 5xx 时明确失败，任何响应字节写出后绝不重试或拼接。远程上游只允许 HTTPS，HTTP 仅允许 loopback。上游 Key 仅存 Keychain，本地 Key 只持久化常量时间鉴权摘要与查看密码加密密文；所有密钥、Authorization 与请求/响应正文均不得写日志、通知、.tocode、CLI 或微信。",
       "source_refs": [
         "user-approved-plan:2026-09-30-local-model-relay",
         "user-approved-plan:2026-09-30-provider-entity-refactor"
@@ -416,7 +416,7 @@
       "id": "l0-settings-portable-transfer",
       "name": "可分享配置导入导出",
       "status": "candidate",
-      "statement": "右键「设置 → 配置」提供「导出配置」与「导入配置」。文件内容为 JSON，后缀 .tocode，format 为 tocode.settings 且 version 为 1。文件只含键盘映射、触控板三/四/五指绑定、x/v移动文件、双击⌘Q、⌘Q强关访达、垂直/横向滚轮。根目录、开机自启、同步项目夹、拓展设置（含 AK 开关）、微信凭据与接收状态、安克密钥、本地模型中转的端口/厂商/模型别名/Keychain 引用/上游 Key/本地 Key/查看密码材料均不得写入文件，导入也不得改写它们。导入先弹确认，确认后整段覆盖上述可分享项并立即按新配置重装钩子；取消或格式/版本不认识则不改任何键。不提供 CLI，不进入键盘/触控板映射功能目录。",
+      "statement": "右键「设置 → 配置」提供「导出配置」与「导入配置」。文件内容为 JSON，后缀 .tocode，format 为 tocode.settings 且 version 为 1。文件只含键盘映射、触控板三/四/五指绑定、x/v移动文件、双击⌘Q、⌘Q强关访达、垂直/横向滚轮。根目录、开机自启、同步项目夹、拓展设置（含 AK 开关）、微信凭据与接收状态、安克密钥、本地模型中转的端口/厂商/模型目录/Keychain 引用/上游 Key/本地 Key/查看密码材料均不得写入文件，导入也不得改写它们。导入先弹确认，确认后整段覆盖上述可分享项并立即按新配置重装钩子；取消或格式/版本不认识则不改任何键。不提供 CLI，不进入键盘/触控板映射功能目录。",
       "source_refs": [
         "user-requirement:2026-09-20-settings-domain-portable",
         "user-approved-plan:2026-09-20-settings-domain-portable",
@@ -913,7 +913,7 @@
       "id": "l1-local-model-config",
       "name": "本地模型中转配置与密钥",
       "status": "approved",
-      "responsibility": "以 0600 版本化文件维护端口、单 Key 厂家实体、模型别名、本地 Key 密文和候选/退役 Key UUID 清理日志；先用候选地址/Key 测试 /models，再串行提交上游 Keychain 与配置，启动及定时刷新幂等清理日志；无损拆分历史多 Key 厂商且不持久化明文。",
+      "responsibility": "以 0600 版本化文件维护端口、单 Key 厂家实体、上游模型目录、本地 Key 密文和候选/退役 Key UUID 清理日志；先用候选地址/Key 测试 /models，再串行提交上游 Keychain 与配置，启动及定时刷新幂等清理日志；无损拆分历史多 Key 厂商且不持久化明文；模型名始终由上游 id 自动派生，不提供人工别名。",
       "l0_refs": [
         "l0-local-model-relay-menu",
         "l0-local-openai-relay",
@@ -931,7 +931,7 @@
       "id": "l1-local-model-menu",
       "name": "本地模型中转菜单交互",
       "status": "approved",
-      "responsibility": "构建始终可见的顶层模型菜单；以普通可点击厂家项编排预设/自定义地址、唯一上游 Key、测试门闩、模型刷新/别名和删除管理弹窗，同时保持本地 Key CRUD、密码复制与 AK 菜单严格隔离。",
+      "responsibility": "构建始终可见的顶层模型菜单；点击厂家项直接打开与新增相同的编辑弹窗并回显，编排预设/自定义地址、唯一上游 Key、测试门闩、模型目录刷新与删除，同时保持本地 Key CRUD、密码复制与 AK 菜单严格隔离。",
       "l0_refs": [
         "l0-action-menu",
         "l0-local-model-relay-menu",
@@ -949,7 +949,7 @@
       "id": "l1-local-openai-relay",
       "name": "本机 OpenAI 兼容中转",
       "status": "approved",
-      "responsibility": "仅在 127.0.0.1 监听经 Bearer 鉴权的三条 OpenAI-compatible 路由，把模型别名唯一解析到单 Key 厂家实体并转发普通 JSON/SSE；上游失败明确失败且流开始后不重试或拼接。",
+      "responsibility": "仅在 127.0.0.1 监听经 Bearer 鉴权的三条 OpenAI-compatible 路由，把本地暴露的模型名唯一解析到单 Key 厂家实体及其上游 model id 并转发普通 JSON/SSE；上游失败明确失败且流开始后不重试或拼接。",
       "l0_refs": [
         "l0-local-openai-relay",
         "l0-local-model-relay-menu"

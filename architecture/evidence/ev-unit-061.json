@@ -5,6 +5,6 @@
   "status": "passed",
   "produced_at": "2026-09-30",
   "command_or_source": "bash scripts/test.sh",
-  "result_summary": "ALL TESTS PASSED。覆盖 Content-Length/chunked/边界拒绝、本地鉴权、/v1/models、chat、responses、普通 JSON、SSE、模型替换、别名到单 Key 厂家实体的唯一路由、401/403 手动恢复、过期目录刷新拒绝、流开始后禁止重试、listener ready 门闩、客户端断开取消上游及写回背压。",
-  "commit": "39250d987fe4a9eab983d66ad08dc0c1b0015b9f"
+  "result_summary": "ALL TESTS PASSED。覆盖 Content-Length/chunked/边界拒绝、本地鉴权、/v1/models、chat、responses、普通 JSON、SSE、模型替换、自动派生模型名到单 Key 厂家实体的唯一路由、401/403 手动恢复、过期目录刷新拒绝、流开始后禁止重试、listener ready 门闩、客户端断开取消上游及写回背压。",
+  "commit": "e76eee80eccc32c82b129e75bb3ed31efb43642f"
 }
