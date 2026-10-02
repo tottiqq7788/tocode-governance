@@ -1,0 +1,10 @@
+{
+  "id": "ev-unit-063",
+  "work_package_id": "wp-063",
+  "kind": "unit",
+  "status": "passed",
+  "produced_at": "2026-10-03",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。覆盖 ExtendedSettingsStore.modelMenuTitle=模型 与说明书 AK → 模型 路径。",
+  "commit": "7c7094399857b923c51af1ea96c64f3a7cb9466c"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ev-e2e-063",
+  "work_package_id": "wp-063",
+  "kind": "runtime_e2e",
+  "status": "skipped",
+  "produced_at": "2026-10-03",
+  "command_or_source": "manual right-click menu inspection",
+  "result_summary": "完整 App GUI 右键确认「AK → 模型」未自动化；构建产物与单元合同已通过。",
+  "commit": "7c7094399857b923c51af1ea96c64f3a7cb9466c"
+}

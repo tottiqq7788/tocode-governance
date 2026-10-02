@@ -29,7 +29,7 @@
     "observability_permissions": "0600"
   },
   "invariants": [
-    "The top-level 模型 menu is always visible and is independent from AK → AK-模型 / 密钥 → AI. It never changes Codex model-switch or four-tool AK credential semantics.",
+    "The top-level 模型 menu is always visible and is independent from AK → 模型 / 密钥 → AI. It never changes Codex model-switch or four-tool AK credential semantics.",
     "Under 模型 the submenu labels are exactly 状态, 端口, 厂家 and 密钥. Clicking 状态 opens a status panel showing the current Base URL, a provider-scoped call-count line chart (近六小时 / 近一周 / 近一个月) defaulting to the last-used provider, and a control that only opens today's call log file with the system application.",
     "The relay binds only IPv4 loopback 127.0.0.1. It never binds all interfaces, IPv6 wildcard, LAN or a network hostname. Port conflicts leave the relay stopped with an explicit status; no automatic port substitution occurs.",
     "Every route requires a valid generated local Bearer key. Local key authentication uses a constant-time digest comparison and never requires decrypting the copyable secret.",
@@ -62,6 +62,6 @@
     "Exporting relay configuration or secrets through .tocode, CLI, WeChat or mapping features.",
     "Persisting an untested new or changed provider endpoint/Key pair, or retaining more than one Key on a newly written provider entity.",
     "Exposing a user-editable model alias UI or persisting a manually chosen alias that differs from the auto-derived published model id.",
-    "Mutating AK → AK-模型, AK → 密钥 → AI, CC Switch or Codex configuration as part of relay CRUD or request routing."
+    "Mutating AK → 模型, AK → 密钥 → AI, CC Switch or Codex configuration as part of relay CRUD or request routing."
   ]
 }

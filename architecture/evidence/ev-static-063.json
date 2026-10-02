@@ -1,0 +1,10 @@
+{
+  "id": "ev-static-063",
+  "work_package_id": "wp-063",
+  "kind": "static",
+  "status": "passed",
+  "produced_at": "2026-10-03",
+  "command_or_source": "bash scripts/build.sh; codesign --verify --deep --strict --verbose=2 build/Tocode.app; git diff --check; python architecture/tools/audit_project.py --target .",
+  "result_summary": "App/CLI 构建、nested codesign、补丁格式与治理结构审计通过。",
+  "commit": "7c7094399857b923c51af1ea96c64f3a7cb9466c"
+}

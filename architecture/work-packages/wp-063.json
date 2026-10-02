@@ -1,0 +1,43 @@
+{
+  "id": "wp-063",
+  "title": "AK 夹内模型入口改名为模型",
+  "baseline_commit": "4c19b487b8588aedecbaff950a493aee68dd9c1d",
+  "goal": "将右键「AK」夹下的「AK-模型」改名为「模型」，路径变为「AK → 模型」；不改变模型切换语义，也不与顶层本地中转「模型」合并。",
+  "scope": [
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/ModelRelayTests.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-063.json",
+    "governance/architecture/task-envelopes/impl-063.json",
+    "governance/architecture/evidence/ev-*-063.json"
+  ],
+  "stop_conditions": [
+    "需求把顶层本地中转「模型」与「AK → 模型」合并为同一菜单时停止并重新准入。",
+    "需求改变 Codex 模型切换、密钥写入或拓展设置→AK 门控语义时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：app 构建与治理审计通过。",
+    "unit：标题常量与说明书/README 覆盖「AK → 模型」。",
+    "runtime_e2e：真机右键抽检；未跑则 skipped。"
+  ],
+  "acceptance_notes": {
+    "implementation_commit": "7c7094399857b923c51af1ea96c64f3a7cb9466c",
+    "passed": [
+      "单元测试 ALL TESTS PASSED，覆盖 AK → 模型标题常量与说明书。",
+      "App/CLI 构建、nested codesign 与治理结构审计通过。"
+    ],
+    "skipped": [
+      "完整 App GUI 右键确认「AK → 模型」未自动化。"
+    ]
+  },
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-03-ak-model-rename",
+    "scope": "User asked to rename AK → AK-模型 to AK → 模型."
+  }
+}

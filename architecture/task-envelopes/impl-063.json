@@ -1,0 +1,45 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-063",
+  "role": "implementation_owner",
+  "baseline_commit": "4c19b487b8588aedecbaff950a493aee68dd9c1d",
+  "work_package_id": "wp-063",
+  "allowed_scope": [
+    "app/Sources/ExtendedSettingsStore.swift",
+    "app/Sources/StatusItemController.swift",
+    "app/Sources/UserManual.swift",
+    "app/Tests/TestRunner.swift",
+    "app/Tests/ModelRelayTests.swift",
+    "app/README.md",
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-063.json",
+    "governance/architecture/task-envelopes/impl-063.json",
+    "governance/architecture/evidence/ev-*-063.json"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-extended-settings",
+    "l0-local-model-relay-menu",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "顶层「模型」仍只承载本地 OpenAI 中转站。",
+    "Codex/Anker 模型切换仍只出现在「AK → 模型」且受拓展设置→AK 门控。",
+    "模型切换与密钥写入语义不变。"
+  ],
+  "must_reject": [
+    "把顶层中转「模型」与「AK → 模型」合并。",
+    "AK 关闭时仍显示「AK → 模型」。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "需求合并两个「模型」入口或改切换语义时停止并重新准入。"
+  ],
+  "notes": "仅菜单文案：AK-模型 → 模型。"
+}
