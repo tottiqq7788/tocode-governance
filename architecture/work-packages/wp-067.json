@@ -1,0 +1,31 @@
+{
+  "id": "wp-067",
+  "title": "映射打开网址",
+  "baseline_commit": "29aa3c1f5e603dd2ea5edc5a461b84aa476f8ede",
+  "goal": "键盘、触控板和定时器的映射功能可以保存一个带协议的网址，触发时用系统默认方式打开。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-067.json",
+    "governance/architecture/task-envelopes/impl-067.json",
+    "governance/architecture/evidence/ev-*-067.json",
+    "mac_app/Sources/KeyboardShortcutMapping.swift",
+    "mac_app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "mac_app/Sources/KeyboardShortcutRemapService.swift",
+    "mac_app/Sources/TrackpadShortcutService.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "需要把打开网址加入遥控或 CLI 时停止。",
+    "需要允许无协议文本，或让 Tocode 自己请求该网址时停止。"
+  ],
+  "acceptance_evidence": [
+    "unit：带协议网址可解析并编解码；无协议和空白被拒绝；旧快捷键格式仍可读；键盘命中产生打开步骤并抑制重复；无参数功能仍为 18 项。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-13-mapping-open-url",
+    "scope": "Add an open-URL mapping target for keyboard, trackpad, and timers."
+  }
+}

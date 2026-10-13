@@ -1,0 +1,31 @@
+{
+  "id": "wp-066",
+  "title": "终端窗口跟随",
+  "baseline_commit": "29aa3c1f5e603dd2ea5edc5a461b84aa476f8ede",
+  "goal": "左键展示根在系统终端的已记录窗口处于前台时，临时使用该窗口启动时的目录。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-066.json",
+    "governance/architecture/task-envelopes/impl-066.json",
+    "governance/architecture/evidence/ev-*-066.json",
+    "mac_app/Sources/DirectoryTerminal.swift",
+    "mac_app/Sources/DirectoryRootResolver.swift",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Resources/Info.plist",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "需要 Tocode 自己执行任意 shell，或把终端跟随加入遥控、CLI、键盘映射时停止。",
+    "需要新增配置开关，或把跟随目录写回固定根时停止。"
+  ],
+  "acceptance_evidence": [
+    "unit：前台已记录窗口使用启动目录；窗口不在前台、编号不符、原标签消失或目录失效时用固定目录；访达与 Codex 前台不受影响；目录仍只作为 osascript 参数。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-13-terminal-window-follow",
+    "scope": "Follow the launch path of the frontmost Terminal window opened by Tocode."
+  }
+}
