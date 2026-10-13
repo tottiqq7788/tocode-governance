@@ -1,0 +1,44 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-068",
+  "role": "implementation_owner",
+  "baseline_commit": "f1f4300f5746f06746a0e388c59f65b00a5bdaec",
+  "work_package_id": "wp-068",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/anker-credential-v1.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-068.json",
+    "governance/architecture/task-envelopes/impl-068.json",
+    "governance/architecture/evidence/ev-*-068.json",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/ExtendedSettingsStore.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/Tests/ModelRelayTests.swift"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-codex-model-switch",
+    "l0-anker-credential",
+    "l0-extended-settings"
+  ],
+  "must_preserve": [
+    "顶层「模型」仍只承载本地中转站。",
+    "AK 关闭时不删除已保存密钥，也不卸载模型切换或密钥写入实现。",
+    "Codex 模型切换的选择、确认和强制重启语义不变。"
+  ],
+  "must_reject": [
+    "右键仍提供「密钥」或「AI」密钥入口。",
+    "Codex 模型列表仍包在「AK → 模型」子夹里。"
+  ],
+  "required_evidence": [
+    "unit"
+  ],
+  "stop_conditions": [
+    "实现需要删除已保存密钥，或把模型列表放回顶层中转「模型」时停止并重新准入。"
+  ],
+  "notes": "阶段：右键菜单。角色：本机用户。业务对象：AK 菜单。不变量：模型列表上移一层，密钥入口从右键消失。禁止结果：删密钥数据、改中转站菜单。"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ev-unit-068",
+  "work_package_id": "wp-068",
+  "kind": "unit",
+  "status": "passed",
+  "produced_at": "2026-10-13",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1384 条通过、0 失败。说明书不再包含 AK → 密钥 与 AK → 模型，AK 标题保持为 AK，密钥写入测试仍在。",
+  "commit": "f0c7fe7448eb2628d205131ac87d980794c70d54"
+}
