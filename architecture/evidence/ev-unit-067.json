@@ -6,5 +6,5 @@
   "produced_at": "2026-10-13",
   "command_or_source": "bash scripts/test.sh",
   "result_summary": "ALL TESTS PASSED。带协议网址可解析并编解码；无协议和空白被拒绝；旧快捷键格式仍可读；键盘命中产生打开步骤并抑制重复；无参数功能仍为 18 项。",
-  "commit": "pending-local-commit"
+  "commit": "beff526ea2b19432b1d2626c5d79f9f63911e57e"
 }

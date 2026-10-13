@@ -6,5 +6,5 @@
   "produced_at": "2026-10-13",
   "command_or_source": "bash scripts/test.sh",
   "result_summary": "ALL TESTS PASSED。前台已记录窗口使用启动目录；窗口不在前台、编号不符、原标签消失或目录失效时用固定目录；访达与 Codex 前台不受终端记录影响；目录仍只作为 osascript 参数。",
-  "commit": "pending-local-commit"
+  "commit": "beff526ea2b19432b1d2626c5d79f9f63911e57e"
 }
