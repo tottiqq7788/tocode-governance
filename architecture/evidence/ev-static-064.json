@@ -6,5 +6,5 @@
   "produced_at": "2026-10-12",
   "command_or_source": "python3 architecture/tools/audit_project.py --target .",
   "result_summary": "治理结构与合同引用审计通过。微信命令和快捷输入 L0 已退役，新增 l0-android-remote-control。",
-  "commit": "pending-local-commit"
+  "commit": "961020d802a6fc4bf163414fb2559d98c5705473"
 }
