@@ -1,0 +1,10 @@
+{
+  "id": "ev-unit-071",
+  "work_package_id": "wp-071",
+  "kind": "unit",
+  "status": "passed",
+  "produced_at": "2026-10-14",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1436 条通过、0 失败。hermes跟随读取桌面最近本地会话路由对应的配置档案；较新路由覆盖旧路由；远程路由和非法档案名不改读其它库；没有路由时仍读默认档案；WAL 项目库在没有共享内存文件时仍能读到主目录；已打开的项目和自动发现目录优先于 active_id；窗口已显示进入的项目名立即解析，不等本地记录落盘；未进入项目时跟随当前会话所属项目的主目录，会话在更深子目录时仍用主目录。",
+  "commit": "1e2f0a9507f2ee5a0902a27b815f2b42b2408a58"
+}

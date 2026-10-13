@@ -1,0 +1,27 @@
+{
+  "id": "wp-071",
+  "title": "hermes跟随读取当前配置档案",
+  "baseline_commit": "4d564afd492d68c61b3fa3f4acf139c819462f5a",
+  "goal": "hermes跟随读取桌面当前配置档案，并跟随当前打开的项目，而不是始终停在 active_id。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-071.json",
+    "governance/architecture/task-envelopes/impl-071.json",
+    "governance/architecture/evidence/ev-*-071.json",
+    "mac_app/Sources/HermesProjectService.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "需要把 hermes跟随加入遥控、CLI 或键盘/触控板映射，或把跟随目录写回固定根时停止。"
+  ],
+  "acceptance_evidence": [
+    "unit：当前档案的未归档主目录有效时跟随该目录；默认档案路径失效不再挡住具名档案；远程路由和非法档案名不改读其它库；已打开的项目和当前会话所属项目优先于 active_id，会话在项目内部更深的目录时仍用项目主目录；窗口上的项目名不等本地记录落盘。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-14-hermes-profile-follow",
+    "scope": "Fix hermes跟随 so it reads the desktop's current profile projects database."
+  }
+}

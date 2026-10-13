@@ -244,9 +244,10 @@
       "id": "l0-hermes-project-follow",
       "name": "hermes跟随",
       "status": "approved",
-      "statement": "左键根菜单「配置」在「codex跟随」下方提供「hermes跟随」勾选开关（默认关闭）。开启后，仅当弹出左键目录树时前台应用为 Hermes 桌面应用（com.nousresearch.hermes）且只读 ~/.hermes/projects.db 能解析到未归档当前项目的有效主目录时，展示根临时跟随该主目录；主目录为空时使用该项目 is_primary 文件夹。前台不是该桌面应用（含安装器 com.nousresearch.hermes.setup）、开关关闭、没有当前项目、项目已归档、库不可读或路径失效时，仍用固定目录。不置灰「读取剪贴板」「更改目录」「重置初始目录」。只读项目库绝不写回，不跟随会话后来改变的工作目录，也不进入可分享配置、CLI、键盘、触控板或遥控。",
+      "statement": "左键根菜单「配置」在「codex跟随」下方提供「hermes跟随」勾选开关（默认关闭）。开启后，仅当弹出左键目录树时前台应用为 Hermes 桌面应用（com.nousresearch.hermes）时，展示根临时跟随当前打开的项目。已进入的具体项目优先：窗口已显示进入该项目时按窗口上的项目名立即解析主目录，不等本地存储落盘；否则 projectScope 是未归档项目 id 时用该项目主目录，是现存目录时用该目录（自动发现的项目）。未进入具体项目时，用当前会话所属项目的主目录；会话路径落在项目文件夹内部时仍用该主目录，不改用更深层目录。没有会话归属时，才用当前配置档案的 active_id。当前档案取桌面最近一条本地会话路由中的档案名；读不到、不合法或为 default 时读 ~/.hermes/projects.db 与 ~/.hermes/state.db，合法具名档案读 ~/.hermes/profiles/<档案名>/ 下的同名库，不改读其它档案。主目录为空时使用该项目 is_primary 文件夹。前台不是该桌面应用（含安装器 com.nousresearch.hermes.setup）、开关关闭、没有当前项目、项目已归档、库不可读或路径失效时，仍用固定目录。不置灰「读取剪贴板」「更改目录」「重置初始目录」。只读项目库和会话库，绝不写回，也不进入可分享配置、CLI、键盘、触控板或遥控。",
       "source_refs": [
-        "user-request:2026-10-13-hermes-follow"
+        "user-request:2026-10-13-hermes-follow",
+        "user-request:2026-10-14-hermes-profile-follow"
       ]
     },
     {
@@ -830,7 +831,7 @@
       "id": "l1-hermes-project-follow",
       "name": "Hermes 当前项目跟随",
       "status": "candidate",
-      "responsibility": "只读解析 Hermes projects.db 中的当前未归档项目主目录，提供「hermes跟随」开关的持久化；读取失败、项目归档或路径失效时回退固定目录，绝不写入项目库或固定根。",
+      "responsibility": "只读解析 Hermes 桌面当前打开的项目目录，提供「hermes跟随」开关的持久化。窗口已显示的项目名优先于尚未落盘的本地记录；已进入的项目和当前会话所属项目优先于 active_id；读取失败、项目归档或路径失效时回退固定目录，绝不写入项目库、会话库或固定根。",
       "l0_refs": [
         "l0-hermes-project-follow",
         "l0-navigate",

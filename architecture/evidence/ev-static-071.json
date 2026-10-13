@@ -1,0 +1,10 @@
+{
+  "id": "ev-static-071",
+  "work_package_id": "wp-071",
+  "kind": "static",
+  "status": "passed",
+  "produced_at": "2026-10-14",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "python3 architecture/tools/audit_project.py --target . 返回 status passed，scope structure_and_references_only。l0-hermes-project-follow 已写明跟随当前打开的项目：窗口上的项目名立即解析，其次是 projectScope 和当前会话所属项目的主目录，最后才是 active_id。",
+  "commit": "pending-local-commit"
+}
