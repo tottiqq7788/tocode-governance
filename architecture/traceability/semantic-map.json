@@ -121,7 +121,7 @@
       "id": "l0-wechat-archive",
       "name": "微信关联与本地归档",
       "status": "approved",
-      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入当前用户文稿下的固定目录 ~/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。普通消息保持 receive-only（归档且不回复、不调模型）；仅以 . 开头的命令消息、整条可由 {} 按键段与中文引号“”文字段顺序拼接而成的快捷输入消息，以及 CLI/共享命令 wechat send 的主动出站，例外调用 sendmessage。出站内容不写入归档；可回复会话（user_id 与 context_token）只记在权限 0600 的接收状态文件中。归档根目录随当前登录用户解析，不写死其他用户的家目录，也不可由菜单配置。",
+      "statement": "用户可通过个人微信 iLink Bot 浏览器扫码绑定；绑定凭据只存入应用支持目录下、权限 0600 的本地 JSON 文件（不使用 macOS Keychain），绑定后 Tocode 运行期间自动接收发给该 Bot 的新消息。收到时间按本机时区写入当前用户文稿下的固定目录 ~/Documents/wechat 的 yyMMdd 日期分区，每日实时追加一个 wechat<yyMMdd>.md，媒体在服务端提供下载描述时解密并按收到时间重命名保存；网络与服务端暂时故障保留绑定，仅明确 401/403 解除绑定。所有入站消息都只归档，不识别点号命令或快捷输入，也不自动回复、不调用模型。CLI 命令 wechat send 仍可主动出站，出站内容不写入归档；可回复会话（user_id 与 context_token）只记在权限 0600 的接收状态文件中。归档根目录随当前登录用户解析，不写死其他用户的家目录，也不可由菜单配置。",
       "source_refs": [
         "user-requirement:2026-09-07",
         "user-approved-plan:2026-09-07",
@@ -129,14 +129,15 @@
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-20-wechat-quick-input",
         "user-approved-plan:2026-09-20-wechat-cli-send",
-        "user-feedback:2026-09-20-wechat-archive-location"
+        "user-feedback:2026-09-20-wechat-archive-location",
+        "user-approved-plan:2026-10-12-android-remote"
       ]
     },
     {
       "id": "l0-set-root-clipboard",
       "name": "读取剪贴板设根",
       "status": "approved",
-      "statement": "左键「配置 → 读取剪贴板」与 CLI/微信命令 root clipboard：若剪贴板是存在的文件夹路径（不以「」包裹），则设为固定根目录并通知。CLI 与微信入口必须返回成功或错误文本，不得静默。无论跟随开关是否开启均可用，不置灰。",
+      "statement": "左键「配置 → 读取剪贴板」与 CLI 命令 root clipboard：若剪贴板是存在的文件夹路径（不以「」包裹），则设为固定根目录并通知。CLI 与微信入口必须返回成功或错误文本，不得静默。无论跟随开关是否开启均可用，不置灰。",
       "source_refs": [
         "user-requirement:2026-09-03",
         "user-feedback:2026-09-03",
@@ -255,25 +256,27 @@
       "id": "l0-cli-control",
       "name": "独立 CLI 命令控制",
       "status": "approved",
-      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。白名单包含 wechat send，以及 root clipboard、root open、finder copy：剪贴板设固定根、访达打开固定根、复制访达选中项绝对路径。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。",
+      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。白名单包含 wechat send，以及 root clipboard、root open、finder copy：剪贴板设固定根、访达打开固定根、复制访达选中项绝对路径。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。 微信入站消息不再触发这些命令。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-20-wechat-cli-send",
-        "user-approved-plan:2026-09-30-cli-gap"
+        "user-approved-plan:2026-09-30-cli-gap",
+        "user-approved-plan:2026-10-12-android-remote"
       ]
     },
     {
       "id": "l0-wechat-command",
       "name": "微信 . 前缀命令",
-      "status": "approved",
-      "statement": "微信监听循环中，若某条消息第一项为文本且 trim 后以 . 开头，则整条消息判定为命令，复用统一命令解析器与执行器。不以 . 开头但整条能拆成快捷输入段序列的消息，走同一套命令消费规则：不写入 wechat*.md、不保存附件，执行前先写入去重 key 并推进游标，成功或失败都不重试，结果通过 sendmessage 回复到原会话，回复本身不作为正式归档记录。共享白名单包含 wechat send 与 root clipboard / root open / finder copy，因此微信侧对应点号命令也会触发。普通（非命令且非快捷输入）微信消息保持 receive-only。",
+      "status": "deprecated",
+      "statement": "已退役。微信入站消息不再按英文句点识别为命令，不再执行命令，也不再把结果回复到微信。点号开头的消息与普通消息一样只归档。本机 CLI 白名单命令保持不变。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-20-wechat-quick-input",
         "user-approved-plan:2026-09-20-wechat-cli-send",
-        "user-approved-plan:2026-09-30-cli-gap"
+        "user-approved-plan:2026-09-30-cli-gap",
+        "user-approved-plan:2026-10-12-android-remote"
       ]
     },
     {
@@ -288,10 +291,20 @@
     {
       "id": "l0-wechat-quick-input",
       "name": "微信快捷输入",
-      "status": "approved",
-      "statement": "整条微信文本消息 trim 后，若不以 . 开头且能从左到右拆成一段或多段 {按键} / “文字”（段间只允许空白，拆完没有剩余字符），则按命令消费规则执行快捷输入：不归档，先去重并推进游标，按段从左到右依次注入，整段成功或在第一处失败都回复原会话，失败后不再执行后续段，已执行前段不回滚；回复本身不归档。按键段去括号后按 + 分段，必须恰好一个主键，前面为 ⌘/⌥/⇧/⌃/fn 修饰键别名，大小写不敏感；文字段去掉成对中文引号后按一次 Unicode 串注入。空文字段、无法识别的按键段、段数超过 16 或全部文字段合计超过 500 字时整条失败且一段都不注入（非法键名所在段在已判定为快捷输入后失败）。未包裹裸文本、ASCII 直引号或半截括号仍是普通消息。按键复用带 synthesizer marker 的既有 poster，文字使用同一 marker；需要辅助功能权限，拒绝则回复失败且不归档，配置与监听不受影响。不新增 CLI 命令，不经统一命令解析器。",
+      "status": "deprecated",
+      "statement": "已退役。微信入站消息不再识别 {按键} 或中文引号文字段，不再向 Mac 注入按键或文字，也不再回复执行结果。这类消息与普通消息一样只归档。",
       "source_refs": [
-        "user-approved-plan:2026-09-20-wechat-quick-input"
+        "user-approved-plan:2026-09-20-wechat-quick-input",
+        "user-approved-plan:2026-10-12-android-remote"
+      ]
+    },
+    {
+      "id": "l0-android-remote-control",
+      "name": "安卓遥控关联与中转",
+      "status": "approved",
+      "statement": "一部安卓遥控器可以同时关联多台 Mac，一台 Mac 也可以被多部安卓关联；每一条关联固定一台 Mac 和一部安卓。Mac 右键「遥控 → 应用关联」生成只含中转地址和 8 位配对码的二维码，配对码 180 秒内一次性有效。安卓扫码后，中转把这部手机和这台 Mac 记成一条关联，不包含角色。Mac 启动后若已配置中转地址，就保持一条出站长连接。安卓只能发送固定白名单动作：设备状态、临时黑屏、隐藏文件、访达跟随、Codex 跟随、滚轮方向、访达 X/V 移动、访达强退快捷键、双击 Cmd-Q、开机自启。中转校验动作后只在内存中转发给对应 Mac，Mac 执行后回传结果；中转不保存动作、参数或结果正文。Mac 离线立即失败且不排队。任一方解除关联后路由立即失效，并通知仍在线的另一端。不得经此通道执行自由文本、shell、改根目录、切换模型、退出 Tocode、微信发送或任意键入。微信收发与归档不走这条中转。",
+      "source_refs": [
+        "user-approved-plan:2026-10-12-android-remote"
       ]
     },
     {

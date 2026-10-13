@@ -1,0 +1,32 @@
+{
+  "id": "wp-064",
+  "title": "安卓设备遥控器",
+  "baseline_commit": "9cce525dfe7cd0b07ca651071c34cb8bbd458cac",
+  "goal": "微信入站只归档。安卓通过中转向指定 Mac 发送固定安全动作，不再走角色聊天或微信命令。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/work-packages/wp-064.json",
+    "governance/architecture/task-envelopes/impl-064.json",
+    "governance/architecture/evidence/ev-*-064.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "需要自由命令、shell、改根目录、切模型、退出或微信发送时停止。",
+    "需要中转保存命令或结果正文时停止。"
+  ],
+  "acceptance_evidence": [
+    "unit：微信点号与快捷输入样式只归档；遥控白名单与拒绝；中转隔离。",
+    "integration：Mac 配对与动作执行结果回传。",
+    "isolation：命令不进入微信，路由文件不含命令正文，删除后失效。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-12-android-remote",
+    "scope": "Replace WeChat command entry with a fixed-button Android remote."
+  }
+}

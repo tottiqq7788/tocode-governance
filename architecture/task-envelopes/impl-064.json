@@ -1,0 +1,47 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-064",
+  "role": "implementation_owner",
+  "baseline_commit": "9cce525dfe7cd0b07ca651071c34cb8bbd458cac",
+  "work_package_id": "wp-064",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/wechat-archive-v1.json",
+    "governance/architecture/contracts/cli-and-wechat-command-v1.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/work-packages/wp-064.json",
+    "governance/architecture/task-envelopes/impl-064.json",
+    "governance/architecture/evidence/ev-*-064.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "l0_impact": "add_new_and_modify_existing",
+  "l0_rule_ids": [
+    "l0-wechat-archive",
+    "l0-wechat-command",
+    "l0-wechat-quick-input",
+    "l0-wechat-cli-send",
+    "l0-cli-control",
+    "l0-android-remote-control"
+  ],
+  "must_preserve": [
+    "微信入站消息和文件继续归档。",
+    "CLI wechat send 继续主动发送文字和不超过 20MB 的文件。",
+    "中转不保存命令或结果正文。"
+  ],
+  "must_reject": [
+    "从微信执行命令或注入按键文字。",
+    "遥控通道执行白名单之外的动作。",
+    "删除后的关联继续可用。"
+  ],
+  "required_evidence": [
+    "unit",
+    "integration",
+    "isolation"
+  ],
+  "stop_conditions": [
+    "实现需要放宽动作白名单或让中转落命令正文时停止并重新准入。"
+  ],
+  "notes": "阶段：设备遥控。角色：安卓用户、指定 Mac、中转。业务对象：设备关联、固定动作、执行结果。不变量：只控制关联 Mac，正文不落盘。禁止结果：微信控制与自由命令。"
+}

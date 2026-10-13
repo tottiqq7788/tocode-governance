@@ -1,0 +1,41 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "android-remote-control-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-android-remote-control"
+  ],
+  "authority": {
+    "pairing_qr": "tocode-app://pair?relay=<url>&code=<8 chars>",
+    "pairing_ttl_seconds": 180,
+    "relay_persistence": "devices and links only; no command or result bodies",
+    "mac_association_file_mode": "0600"
+  },
+  "invariants": [
+    "One association binds one Android remote to one Mac. One Android may hold many associations, and one Mac may be linked from many Androids.",
+    "The relay forwards only the fixed action whitelist in memory and returns mac_offline immediately when that Mac socket is absent.",
+    "accepted means the peer socket received the frame. result is the Mac execution outcome and is correlated by request_id.",
+    "Deleting an association removes the route immediately and notifies the peer that is still connected.",
+    "The remote channel cannot run shell, free text, root changes, model switching, quit, WeChat send, or key/text injection."
+  ],
+  "actions": [
+    "status",
+    "blackout",
+    "hidden",
+    "finder-follow",
+    "codex-follow",
+    "wheel-vertical",
+    "wheel-horizontal",
+    "finder-move",
+    "finder-cmdq",
+    "double-cmdq",
+    "login"
+  ],
+  "prohibited_results": [
+    "Persisting a command, parameter, or result body in the relay route file.",
+    "Routing a command to a Mac that is not the association target.",
+    "Keeping a deleted association usable.",
+    "Reusing a pairing code or accepting an expired code.",
+    "Carrying a role, prompt, or credential inside the pairing QR."
+  ]
+}

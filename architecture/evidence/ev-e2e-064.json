@@ -1,0 +1,10 @@
+{
+  "id": "ev-e2e-064",
+  "work_package_id": "wp-064",
+  "kind": "runtime_e2e",
+  "status": "partial",
+  "produced_at": "2026-10-12",
+  "command_or_source": "rsync server.py and restart relay.service; curl https://totti.xin/health; open mac_app/build/Tocode.app; adb devices",
+  "result_summary": "中转已部署并重启，旧 devices/links 已清空并备份为 routes.json.bak-20261012。https://totti.xin/health 为 {\"ok\": true}，首页和 https://zhouhuo.totti.xin/ 均为 200。Mac 应用已用新构建重启。adb devices 没有已连接手机，因此没有安装 APK，也没有做真机“设备状态”和“临时黑屏”验收。",
+  "commit": "pending-local-commit"
+}

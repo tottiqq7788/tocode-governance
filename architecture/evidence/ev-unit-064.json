@@ -1,0 +1,10 @@
+{
+  "id": "ev-unit-064",
+  "work_package_id": "wp-064",
+  "kind": "unit",
+  "status": "passed",
+  "produced_at": "2026-10-12",
+  "command_or_source": "mac_app/scripts/test.sh; mac_app/scripts/build.sh; python3 -m unittest tests/test_route.py; ./gradlew :app:testDebugUnitTest :app:assembleDebug",
+  "result_summary": "Mac 全量测试通过：点号和快捷输入样式只归档且不回复，遥控白名单回传结果，未知动作拒绝。Relay 单测通过：多 Mac 隔离、accepted/result、越权动作拒绝、删除后失效、路由文件不含结果正文。Android 单测 4 项通过并产出 debug APK。",
+  "commit": "pending-local-commit"
+}
