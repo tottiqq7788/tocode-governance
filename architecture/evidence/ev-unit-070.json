@@ -1,0 +1,10 @@
+{
+  "id": "ev-unit-070",
+  "work_package_id": "wp-070",
+  "kind": "unit",
+  "status": "passed",
+  "produced_at": "2026-10-13",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1399 条通过、0 失败。hermes跟随缺省关闭；关闭或前台不是 Hermes 时用固定目录；打开且主目录有效时用该目录；归档、缺记录、路径失效和安装器包名不跟随；映射功能仍为 18 项。",
+  "commit": "df68e23fbaa5fbeef514484652a37924fafd72f6"
+}

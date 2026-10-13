@@ -15,7 +15,7 @@
       "id": "l0-navigate",
       "name": "左键浏览目录",
       "status": "approved",
-      "statement": "左键单击菜单栏图标时，弹出目录树并显示当前展示根下的第一层文件与文件夹（可递归展开）。展示根默认是已保存的固定目录；仅当弹出瞬间前台为访达且「访达跟随」开启、且访达恰好选中一项时，临时用该选中目录（文件用其父文件夹）；仅当前台为 Codex（com.openai.codex）且「codex跟随」开启、且能解析到有效本地项目根时，临时用该项目根；仅当前台为系统「终端」（com.apple.Terminal）且「终端跟随」开启、最前面的窗口是本次运行中由「终端」打开、其启动时的标签仍在该窗口内、且当时记录的目录仍存在时，临时用该窗口启动时记录的目录；该开关关闭、窗口不在最前、记录对不上、原标签已不在、目录已失效，或其它前台与跟随未触发时，一律用固定目录。跟随结果不写回固定目录偏好。「配置」在「访达跟随」下方、「codex跟随」上方提供默认关闭的「终端跟随」；打开「终端」不受该开关影响。每个目录菜单底部固定提供「新增」；根层菜单在「新增」上方依次提供「历史」、「配置」与「终端」。「终端」只出现在根菜单，点击后用系统「终端」新开窗口，工作目录为当前展示根，并记下该窗口编号、新建标签的 tty 与当时目录（仅本次运行内存，窗口内之后改变工作目录不影响这条记录）；按住 Option 或 Command 时该项仍是「终端」，且不写入历史。Tocode 自身不执行 shell。菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
+      "statement": "左键单击菜单栏图标时，弹出目录树并显示当前展示根下的第一层文件与文件夹（可递归展开）。展示根默认是已保存的固定目录；仅当弹出瞬间前台为访达且「访达跟随」开启、且访达恰好选中一项时，临时用该选中目录（文件用其父文件夹）；仅当前台为 Codex（com.openai.codex）且「codex跟随」开启、且能解析到有效本地项目根时，临时用该项目根；仅当前台为 Hermes（com.nousresearch.hermes）且「hermes跟随」开启、且能解析到未归档当前项目的有效主目录时，临时用该主目录；仅当前台为系统「终端」（com.apple.Terminal）且「终端跟随」开启、最前面的窗口是本次运行中由「终端」打开、其启动时的标签仍在该窗口内、且当时记录的目录仍存在时，临时用该窗口启动时记录的目录；该开关关闭、窗口不在最前、记录对不上、原标签已不在、目录已失效，或其它前台与跟随未触发时，一律用固定目录。跟随结果不写回固定目录偏好。「配置」在「访达跟随」下方、「codex跟随」上方提供默认关闭的「终端跟随」，并在「codex跟随」下方提供默认关闭的「hermes跟随」；打开「终端」不受该开关影响。每个目录菜单底部固定提供「新增」；根层菜单在「新增」上方依次提供「历史」、「配置」与「终端」。「终端」只出现在根菜单，点击后用系统「终端」新开窗口，工作目录为当前展示根，并记下该窗口编号、新建标签的 tty 与当时目录（仅本次运行内存，窗口内之后改变工作目录不影响这条记录）；按住 Option 或 Command 时该项仍是「终端」，且不写入历史。Tocode 自身不执行 shell。菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
       "source_refs": [
         "user-requirement:2026-09-03",
         "user-feedback:2026-09-03",
@@ -25,7 +25,8 @@
         "user-request:2026-09-24-directory-menu-history",
         "user-approved-plan:2026-10-13-directory-terminal",
         "user-approved-plan:2026-10-13-terminal-window-follow",
-        "user-request:2026-10-13-terminal-follow-toggle"
+        "user-request:2026-10-13-terminal-follow-toggle",
+        "user-request:2026-10-13-hermes-follow"
       ]
     },
     {
@@ -41,13 +42,14 @@
       "id": "l0-directory-menu-resume",
       "name": "目录树历史同级复用",
       "status": "approved",
-      "statement": "左键根目录菜单始终从当前解析根第一层打开，不因历史记忆改变整棵菜单的展示根。记住用户最近一次点击的文件或文件夹路径（复制、删除、访问或 Shift 多选点击时更新；悬停展开不更新；点击「终端」也不更新）。根菜单在分隔线与「新增/清空/访问」之间依次提供「历史」、「配置」与「终端」：「历史」悬停展开为上次点击项同级目录；「配置」提供复制路径、手动设根，以及按访达跟随、终端跟随、codex跟随排列的开关。无有效点击记忆、记忆不在当前根下、或父目录不存在时，「历史」不可用。该记忆写入本机固定偏好域，不进入可分享配置导入导出，也不改变根文件夹权威。本次运行中由「终端」打开的系统终端窗口，仅当「终端跟随」开启且该窗口处于最前时把展示根临时改为其启动目录；开关关闭或窗口不在前台时不使用该记录。该记录不写入历史，也不改变根文件夹权威。",
+      "statement": "左键根目录菜单始终从当前解析根第一层打开，不因历史记忆改变整棵菜单的展示根。记住用户最近一次点击的文件或文件夹路径（复制、删除、访问或 Shift 多选点击时更新；悬停展开不更新；点击「终端」也不更新）。根菜单在分隔线与「新增/清空/访问」之间依次提供「历史」、「配置」与「终端」：「历史」悬停展开为上次点击项同级目录；「配置」提供复制路径、手动设根，以及按访达跟随、终端跟随、codex跟随、hermes跟随排列的开关。无有效点击记忆、记忆不在当前根下、或父目录不存在时，「历史」不可用。该记忆写入本机固定偏好域，不进入可分享配置导入导出，也不改变根文件夹权威。本次运行中由「终端」打开的系统终端窗口，仅当「终端跟随」开启且该窗口处于最前时把展示根临时改为其启动目录；开关关闭或窗口不在前台时不使用该记录。该记录不写入历史，也不改变根文件夹权威。",
       "source_refs": [
         "user-request:2026-09-24-directory-menu-resume",
         "user-request:2026-09-24-directory-menu-history",
         "user-approved-plan:2026-10-13-directory-terminal",
         "user-approved-plan:2026-10-13-terminal-window-follow",
-        "user-request:2026-10-13-terminal-follow-toggle"
+        "user-request:2026-10-13-terminal-follow-toggle",
+        "user-request:2026-10-13-hermes-follow"
       ]
     },
     {
@@ -236,6 +238,15 @@
       "statement": "左键根菜单「配置」提供「codex跟随」勾选开关（默认关闭；原「同步项目夹」）。开启后，仅当弹出左键目录树时前台应用为 Codex（com.openai.codex）且能解析到有效本地项目根时，展示根临时跟随该项目根；前台不是 Codex，或 Codex 状态不可读/无有效项目时，仍用固定目录。开启 codex跟随不置灰「读取剪贴板」「更改目录」「重置初始目录」。只读 Codex 状态绝不写回。右键不再展示 codex 项目/根路径只读行与该开关。CLI `codex sync` 语义保持为该开关。",
       "source_refs": [
         "user-approved-plan:2026-09-07"
+      ]
+    },
+    {
+      "id": "l0-hermes-project-follow",
+      "name": "hermes跟随",
+      "status": "approved",
+      "statement": "左键根菜单「配置」在「codex跟随」下方提供「hermes跟随」勾选开关（默认关闭）。开启后，仅当弹出左键目录树时前台应用为 Hermes 桌面应用（com.nousresearch.hermes）且只读 ~/.hermes/projects.db 能解析到未归档当前项目的有效主目录时，展示根临时跟随该主目录；主目录为空时使用该项目 is_primary 文件夹。前台不是该桌面应用（含安装器 com.nousresearch.hermes.setup）、开关关闭、没有当前项目、项目已归档、库不可读或路径失效时，仍用固定目录。不置灰「读取剪贴板」「更改目录」「重置初始目录」。只读项目库绝不写回，不跟随会话后来改变的工作目录，也不进入可分享配置、CLI、键盘、触控板或遥控。",
+      "source_refs": [
+        "user-request:2026-10-13-hermes-follow"
       ]
     },
     {
@@ -816,6 +827,24 @@
       ]
     },
     {
+      "id": "l1-hermes-project-follow",
+      "name": "Hermes 当前项目跟随",
+      "status": "candidate",
+      "responsibility": "只读解析 Hermes projects.db 中的当前未归档项目主目录，提供「hermes跟随」开关的持久化；读取失败、项目归档或路径失效时回退固定目录，绝不写入项目库或固定根。",
+      "l0_refs": [
+        "l0-hermes-project-follow",
+        "l0-navigate",
+        "l0-directory-menu-resume"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
       "id": "l1-codex-model-switch",
       "name": "Codex 模型切换与强制重启",
       "status": "candidate",
@@ -1071,6 +1100,7 @@
         "l1-status-bar",
         "l1-wechat-association",
         "l1-codex-project-sync",
+        "l1-hermes-project-follow",
         "l1-codex-model-switch",
         "l1-trackpad-shortcuts",
         "l1-keyboard-remapping",
@@ -1348,6 +1378,19 @@
       "selectors": [
         "CodexProjectService.swift",
         "CodexSyncSettingsStore.swift"
+      ]
+    },
+    {
+      "id": "l2-hermes-project-service",
+      "name": "Hermes 项目解析与跟随开关",
+      "status": "candidate",
+      "l1_refs": [
+        "l1-hermes-project-follow"
+      ],
+      "selectors": [
+        "HermesProjectService.swift",
+        "HermesFollowSettingsStore.swift",
+        "StatusItemController.swift"
       ]
     },
     {

@@ -1,0 +1,31 @@
+{
+  "id": "wp-070",
+  "title": "hermes跟随开关",
+  "baseline_commit": "0919833be266a3a2b3eb76992e2e36d4bc5a4c1b",
+  "goal": "左键配置在 codex跟随下方提供默认关闭的 hermes跟随；仅当前台是 Hermes 且能读到未归档项目主目录时临时改展示根。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-070.json",
+    "governance/architecture/task-envelopes/impl-070.json",
+    "governance/architecture/evidence/ev-*-070.json",
+    "mac_app/Sources/HermesFollowSettingsStore.swift",
+    "mac_app/Sources/HermesProjectService.swift",
+    "mac_app/Sources/DirectoryRootResolver.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "stop_conditions": [
+    "需要把 hermes跟随加入遥控、CLI 或键盘/触控板映射，或把跟随目录写回固定根时停止。"
+  ],
+  "acceptance_evidence": [
+    "unit：开关默认关闭；关闭或前台不是 Hermes 时用固定目录；打开且主目录有效时用该目录；归档、缺记录或路径失效时用固定目录。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-13-hermes-follow",
+    "scope": "Add a default-off hermes跟随 toggle that follows the active Hermes project like codex跟随."
+  }
+}

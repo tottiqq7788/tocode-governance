@@ -1,0 +1,10 @@
+{
+  "id": "ev-static-070",
+  "work_package_id": "wp-070",
+  "kind": "static",
+  "status": "passed",
+  "produced_at": "2026-10-13",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "python3 architecture/tools/audit_project.py --target . 返回 status passed，scope structure_and_references_only。l0-hermes-project-follow 已写明默认关闭的 hermes跟随。",
+  "commit": "pending-local-commit"
+}

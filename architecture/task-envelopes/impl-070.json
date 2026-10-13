@@ -1,0 +1,46 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-070",
+  "role": "implementation_owner",
+  "baseline_commit": "0919833be266a3a2b3eb76992e2e36d4bc5a4c1b",
+  "work_package_id": "wp-070",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-070.json",
+    "governance/architecture/task-envelopes/impl-070.json",
+    "governance/architecture/evidence/ev-*-070.json",
+    "mac_app/Sources/HermesFollowSettingsStore.swift",
+    "mac_app/Sources/HermesProjectService.swift",
+    "mac_app/Sources/DirectoryRootResolver.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-hermes-project-follow",
+    "l0-navigate",
+    "l0-directory-menu-resume"
+  ],
+  "must_preserve": [
+    "访达跟随、终端跟随与 codex跟随的触发条件、优先级和默认关闭不变。",
+    "跟随结果不写回固定根，也不进入遥控、CLI、键盘或触控板映射。",
+    "Hermes 项目库只读，不跟随会话后来改变的工作目录。"
+  ],
+  "must_reject": [
+    "hermes跟随缺省开启。",
+    "开关关闭或前台不是 com.nousresearch.hermes 时仍改左键目录。",
+    "把安装器 com.nousresearch.hermes.setup 当作 Hermes 前台。",
+    "把 hermes跟随加入 KeyboardMappingAction、CLI 或遥控白名单。"
+  ],
+  "required_evidence": [
+    "unit",
+    "static"
+  ],
+  "stop_conditions": [
+    "实现需要把 hermes跟随加入遥控、CLI 或键盘/触控板映射，或写回固定根时停止并重新准入。"
+  ],
+  "notes": "阶段：左键目录。角色：本机用户。业务对象：hermes跟随开关。不变量：只在 Hermes 前台读取未归档当前项目主目录。禁止结果：默认开启、写回项目库或固定根。"
+}
