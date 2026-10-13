@@ -6,5 +6,5 @@
   "produced_at": "2026-10-13",
   "command_or_source": "python3 architecture/tools/audit_project.py --target .",
   "result_summary": "治理结构与合同引用审计通过。l0-navigate 与 l0-directory-menu-resume 已写明根菜单终端项。",
-  "commit": "pending-local-commit"
+  "commit": "bef4d5e9d7401bc88b92022de0336df0f5be51c3"
 }
