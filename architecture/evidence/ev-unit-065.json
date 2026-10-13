@@ -1,0 +1,10 @@
+{
+  "id": "ev-unit-065",
+  "work_package_id": "wp-065",
+  "kind": "unit",
+  "status": "passed",
+  "produced_at": "2026-10-13",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。根菜单底部为历史、配置、终端、新增；子菜单没有终端；删除和访问模式仍显示终端；点击终端打开当前展示根且不写入历史；目录只作为 osascript 参数。",
+  "commit": "pending-local-commit"
+}

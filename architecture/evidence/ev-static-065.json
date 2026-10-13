@@ -1,0 +1,10 @@
+{
+  "id": "ev-static-065",
+  "work_package_id": "wp-065",
+  "kind": "static",
+  "status": "passed",
+  "produced_at": "2026-10-13",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理结构与合同引用审计通过。l0-navigate 与 l0-directory-menu-resume 已写明根菜单终端项。",
+  "commit": "pending-local-commit"
+}

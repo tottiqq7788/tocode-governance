@@ -1,0 +1,29 @@
+{
+  "id": "wp-065",
+  "title": "左键根菜单打开终端",
+  "baseline_commit": "78c83aec84e68b29500d5f9feceeaa7da46b8362",
+  "goal": "左键根目录菜单在配置与新增之间提供终端，用系统终端打开当前展示目录。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-065.json",
+    "governance/architecture/task-envelopes/impl-065.json",
+    "governance/architecture/evidence/ev-*-065.json",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/DirectoryTerminal.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "stop_conditions": [
+    "需要 Tocode 自己执行任意 shell，或把终端加入遥控、CLI、键盘映射时停止。"
+  ],
+  "acceptance_evidence": [
+    "unit：根菜单顺序含终端；子菜单没有终端；修饰键不改变终端项；路径不进入脚本正文。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-13-directory-terminal",
+    "scope": "Add a Terminal item to the left-click root directory menu."
+  }
+}

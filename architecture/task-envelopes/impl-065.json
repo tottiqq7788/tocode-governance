@@ -1,0 +1,40 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-065",
+  "role": "implementation_owner",
+  "baseline_commit": "78c83aec84e68b29500d5f9feceeaa7da46b8362",
+  "work_package_id": "wp-065",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-065.json",
+    "governance/architecture/task-envelopes/impl-065.json",
+    "governance/architecture/evidence/ev-*-065.json",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/DirectoryTerminal.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-navigate",
+    "l0-directory-menu-resume"
+  ],
+  "must_preserve": [
+    "子文件夹菜单底部仍只有新增、清空或访问。",
+    "历史、配置、复制、删除和访问的既有语义。",
+    "遥控、CLI 与键盘映射白名单不增加终端或 shell。"
+  ],
+  "must_reject": [
+    "Tocode 自己执行 cd 以外的命令，或把目录路径拼进 osascript 脚本正文。",
+    "点击终端写入历史，或在 Option、Command 下把终端改成删除或访问。"
+  ],
+  "required_evidence": [
+    "unit"
+  ],
+  "stop_conditions": [
+    "实现需要让 Tocode 执行任意 shell，或把该入口放到子菜单、遥控或映射时停止并重新准入。"
+  ],
+  "notes": "阶段：目录浏览。角色：本机用户。业务对象：当前展示根。不变量：只启动系统终端并进入该目录。禁止结果：任意 shell、改历史、改子菜单底部。"
+}
