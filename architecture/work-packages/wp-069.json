@@ -1,0 +1,30 @@
+{
+  "id": "wp-069",
+  "title": "终端跟随开关",
+  "baseline_commit": "b1e76c7c4dfe2e4aaf960159b68002cb9abb7212",
+  "goal": "左键配置在访达跟随下方、codex跟随上方提供默认关闭的终端跟随；只有打开后，前台已记录的终端窗口才临时改展示根。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-069.json",
+    "governance/architecture/task-envelopes/impl-069.json",
+    "governance/architecture/evidence/ev-*-069.json",
+    "mac_app/Sources/TerminalFollowSettingsStore.swift",
+    "mac_app/Sources/DirectoryRootResolver.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "stop_conditions": [
+    "需要把终端跟随加入遥控、CLI 或键盘/触控板映射，或把跟随目录写回固定根时停止。"
+  ],
+  "acceptance_evidence": [
+    "unit：开关默认关闭；关闭时即使窗口对上仍用固定目录；打开且窗口对上时用启动目录；访达与 Codex 前台不受影响。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-13-terminal-follow-toggle",
+    "scope": "Add a default-off 终端跟随 toggle between 访达跟随 and codex跟随."
+  }
+}

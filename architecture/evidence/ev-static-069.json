@@ -1,0 +1,10 @@
+{
+  "id": "ev-static-069",
+  "work_package_id": "wp-069",
+  "kind": "static",
+  "status": "passed",
+  "produced_at": "2026-10-13",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "python3 architecture/tools/audit_project.py --target . 返回 status passed，scope structure_and_references_only。l0-navigate 与 l0-directory-menu-resume 已写明默认关闭的终端跟随。",
+  "commit": "pending-local-commit"
+}

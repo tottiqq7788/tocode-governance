@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-069",
+  "role": "implementation_owner",
+  "baseline_commit": "b1e76c7c4dfe2e4aaf960159b68002cb9abb7212",
+  "work_package_id": "wp-069",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-069.json",
+    "governance/architecture/task-envelopes/impl-069.json",
+    "governance/architecture/evidence/ev-*-069.json",
+    "mac_app/Sources/TerminalFollowSettingsStore.swift",
+    "mac_app/Sources/DirectoryRootResolver.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-navigate",
+    "l0-directory-menu-resume"
+  ],
+  "must_preserve": [
+    "根菜单「终端」仍新开窗口并记录启动目录，开关关闭时也记录。",
+    "访达跟随与 codex跟随的触发条件、优先级和默认关闭不变。",
+    "跟随结果不写回固定根，也不进入遥控、CLI、键盘或触控板映射。"
+  ],
+  "must_reject": [
+    "终端跟随缺省开启。",
+    "开关关闭时前台已记录窗口仍改左键目录。",
+    "把终端跟随加入 KeyboardMappingAction、CLI 或遥控白名单。"
+  ],
+  "required_evidence": [
+    "unit",
+    "static"
+  ],
+  "stop_conditions": [
+    "实现需要把终端跟随加入遥控、CLI 或键盘/触控板映射，或写回固定根时停止并重新准入。"
+  ],
+  "notes": "阶段：左键目录。角色：本机用户。业务对象：终端跟随开关。不变量：打开终端与是否跟随分开。禁止结果：默认开启、关闭后仍跟随。"
+}
