@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-072",
+  "work_package_id": "wp-072",
+  "commit": "14f9c4927b61d5cdb15d9d687b1aa85ab3d597fb",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1520 条通过、0 失败。覆盖：250 毫秒内单独松开补发空格；满 250 毫秒不补发；搭配其他键不补发且事件带 totti；已按 ⌘ 时不武装；自动重复不算搭配；合成空格不重入；totti+V 命中后只产出 ⌃7；未命中的 V 放行；含 totti 的键盘目标和触控板快捷键拒绝保存；旧映射 JSON 仍能读入；导出不含空格修饰键且导入不改该开关；权限或钩子失败时开关回关；黑屏时放行。",
+  "limitations": [
+    "补发空格使用测试桩，没有向系统真正 post 按键。"
+  ]
+}

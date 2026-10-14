@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-072",
+  "work_package_id": "wp-072",
+  "commit": "14f9c4927b61d5cdb15d9d687b1aa85ab3d597fb",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未执行真机菜单与物理键盘验证。",
+  "result_summary": "未在交互会话中打开右键「输入 → 改键 → 空格修饰键」，也未用物理键盘验证点按空格、长按 totti+V，以及键盘/触控板弹窗监听。",
+  "limitations": [
+    "菜单栏和录入弹窗需要交互式应用会话。",
+    "全局空格拦截和 totti 组合需要辅助功能权限与物理键盘。",
+    "状态机、钩子失败和映射命中由单元测试覆盖，不能代替真机输入。"
+  ]
+}

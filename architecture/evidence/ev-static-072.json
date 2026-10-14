@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-072",
+  "work_package_id": "wp-072",
+  "commit": "613bfa70752e290a7bd7bf1cb91447be690cd3f8",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target . ; swiftc -typecheck mac app sources ; swiftc -typecheck CLI sources",
+  "result_summary": "治理审计 status passed，scope structure_and_references_only。Mac 应用源码与 CLI 源码 typecheck 通过。l0-space-totti-modifier 已写入，菜单、键盘映射、触控板、说明书、配置域和可分享配置文案已同步。",
+  "limitations": [
+    "未执行 codesign 与完整 app 打包。"
+  ]
+}
