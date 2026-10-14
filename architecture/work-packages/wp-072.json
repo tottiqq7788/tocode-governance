@@ -1,0 +1,42 @@
+{
+  "id": "wp-072",
+  "title": "空格变内部修饰键 totti",
+  "baseline_commit": "5d29d28559ab41d958faf6beefb22a51419f8467",
+  "goal": "右键「输入 → 改键 → 空格修饰键」开启后，快速点按仍输出空格，按住空格成为不占用 fn 的内部修饰键 totti，并可被键盘映射当作源快捷键。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-072.json",
+    "governance/architecture/task-envelopes/impl-072.json",
+    "governance/architecture/evidence/ev-*-072.json",
+    "mac_app/Sources/SpaceModifierEngine.swift",
+    "mac_app/Sources/SpaceModifierService.swift",
+    "mac_app/Sources/AppDelegate.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/GlobalShortcutService.swift",
+    "mac_app/Sources/KeyboardShortcutRemapService.swift",
+    "mac_app/Sources/KeyboardShortcutMapping.swift",
+    "mac_app/Sources/ShortcutRecorderPrompt.swift",
+    "mac_app/Sources/TrackpadShortcut.swift",
+    "mac_app/Sources/TrackpadShortcutService.swift",
+    "mac_app/Sources/TocodePreferences.swift",
+    "mac_app/Sources/TocodePortableSettings.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "stop_conditions": [
+    "实现需要把空格改写成 fn 或其他系统修饰键标志时停止。",
+    "实现需要记录或外传非映射所需的按键历史时停止。",
+    "实现需要把空格修饰键开关加入遥控白名单或 .tocode 可分享配置时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：250 毫秒内单独松开补发空格；超时松开不补发；搭配其他键不补发且该键带 totti；已按系统修饰键时不武装；totti+V 命中后只产出目标；未命中放行；合成空格不重入；含 totti 的目标拒绝保存；旧映射 JSON 仍能读入。",
+    "runtime_e2e：真机菜单、点按空格与 totti 组合键；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-14-space-totti-modifier",
+    "scope": "输入菜单新增改键夹与空格修饰键。快速点按仍是空格，按住是内部 totti，不占用 fn。已按 ⌘/⌃/⌥/⇧ 时不抢空格。单独点按窗口为 250 毫秒。监听可识别 totti+其他键，例如 totti+V 映射为 control+7。"
+  }
+}

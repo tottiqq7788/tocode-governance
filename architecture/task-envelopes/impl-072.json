@@ -1,0 +1,63 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-072",
+  "role": "implementation_owner",
+  "baseline_commit": "5d29d28559ab41d958faf6beefb22a51419f8467",
+  "work_package_id": "wp-072",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-072.json",
+    "governance/architecture/task-envelopes/impl-072.json",
+    "governance/architecture/evidence/ev-*-072.json",
+    "mac_app/Sources/SpaceModifierEngine.swift",
+    "mac_app/Sources/SpaceModifierService.swift",
+    "mac_app/Sources/AppDelegate.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/GlobalShortcutService.swift",
+    "mac_app/Sources/KeyboardShortcutRemapService.swift",
+    "mac_app/Sources/KeyboardShortcutMapping.swift",
+    "mac_app/Sources/ShortcutRecorderPrompt.swift",
+    "mac_app/Sources/TrackpadShortcut.swift",
+    "mac_app/Sources/TrackpadShortcutService.swift",
+    "mac_app/Sources/TocodePreferences.swift",
+    "mac_app/Sources/TocodePortableSettings.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-space-totti-modifier",
+    "l0-action-menu",
+    "l0-keyboard-remapping",
+    "l0-trackpad-shortcuts",
+    "l0-user-manual",
+    "l0-settings-domain",
+    "l0-settings-portable-transfer"
+  ],
+  "must_preserve": [
+    "关闭时空格与既有快捷键、键盘映射、滚轮、触控板语义不变。",
+    "totti 不写入 fn 或其他 CGEventFlags。",
+    "已经按着 ⌘、⌃、⌥ 或 ⇧ 时，空格原样放行。",
+    "合成空格与合成目标快捷键仍带既有内部标记，不得重新进入映射。",
+    "空格修饰键开关不进入 .tocode，也不进入遥控白名单。",
+    "临时黑屏时按键仍能解除黑屏。"
+  ],
+  "must_reject": [
+    "把空格映射成 fn 或其他系统修饰键。",
+    "长按空格时先输出一个空格再变成修饰键。",
+    "把含 totti 的组合键保存为键盘或触控板的发出目标。",
+    "记录按键历史，或把该开关加入遥控与可分享配置。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要把空格改写成 fn 或其他系统修饰键标志时停止。",
+    "实现需要记录或外传非映射所需的按键历史时停止。",
+    "实现需要把空格修饰键开关加入遥控白名单或 .tocode 可分享配置时停止并重新准入。"
+  ],
+  "notes": "阶段：右键输入。角色：本机用户。业务对象：空格修饰键 totti。不变量：250 毫秒内单独松开才补发空格；按住立即是内部 totti，搭配其他键或超时松开都不先出空格。禁止结果：占用 fn、抢走 Spotlight 等已有系统修饰键组合、或把 totti 注入成系统修饰键。GlobalShortcutService 与键盘映射钩子只增加安装后回调，用来把空格钩子重新放到队首，不改它们的状态机。"
+}
