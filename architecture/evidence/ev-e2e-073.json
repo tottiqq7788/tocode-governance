@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-073",
+  "work_package_id": "wp-073",
+  "commit": "46d2c62e3382a369c50b8d9791d5cf8e8ec1b3ed",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "已用 bash scripts/build.sh 打包并重启 build/Tocode.app，未在本会话观察物理按键。",
+  "result_summary": "新构建已启动，但没有在交互会话里按住 totti+L，确认右箭头是否持续移动、松开后是否停止。",
+  "limitations": [
+    "持续按键需要辅助功能权限和物理键盘。",
+    "状态机与服务生命周期由单元测试覆盖，不能代替真机按住。"
+  ]
+}

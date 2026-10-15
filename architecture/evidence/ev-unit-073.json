@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-073",
+  "work_package_id": "wp-073",
+  "commit": "46d2c62e3382a369c50b8d9791d5cf8e8ec1b3ed",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1521 条通过、0 失败。覆盖：快捷键目标首次 keyDown 按下目标，自动重复继续按住，keyUp 抬起；按住 totti+V 继续按住 ⌃7，松开时抬起；功能规则、打开网址和桌面切换的自动重复仍不重复执行。",
+  "limitations": [
+    "目标键按下、重复和抬起使用测试桩，没有向系统真正 post 按键。"
+  ]
+}

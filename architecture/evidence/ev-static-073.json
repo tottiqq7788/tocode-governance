@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-073",
+  "work_package_id": "wp-073",
+  "commit": "f04a4fd5d65a56543373853887f50582a985c1ab",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed，scope structure_and_references_only。l0-keyboard-remapping 已改为：快捷键目标跟随源键按下、自动重复和松开；功能、打开网址和桌面切换仍只在首次 keyDown 执行一次。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用，也不验证按键合成。"
+  ]
+}
