@@ -1,0 +1,71 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-074",
+  "role": "implementation_owner",
+  "baseline_commit": "c59fb8af1aba4a2fec3505d1b9c8f9e1269b2458",
+  "work_package_id": "wp-074",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-074.json",
+    "governance/architecture/task-envelopes/impl-074.json",
+    "governance/architecture/evidence/ev-*-074.json",
+    "mac_app/Sources/ModelAutomation.swift",
+    "mac_app/Sources/ModelAutomationPrompt.swift",
+    "mac_app/Sources/ModelAutomationRunner.swift",
+    "mac_app/Sources/ModelRelayService.swift",
+    "mac_app/Sources/ModelRelayUpstreamClient.swift",
+    "mac_app/Sources/KeyboardShortcutMapping.swift",
+    "mac_app/Sources/KeyboardShortcutMappingPrompt.swift",
+    "mac_app/Sources/KeyboardShortcutRemapService.swift",
+    "mac_app/Sources/KeyboardEventSynthesizer.swift",
+    "mac_app/Sources/TrackpadShortcutService.swift",
+    "mac_app/Sources/ShortcutRecorderPrompt.swift",
+    "mac_app/Sources/MacTimerPrompt.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/AppDelegate.swift",
+    "mac_app/Sources/TocodePreferences.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/Tests/ModelRelayTests.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-model-automation",
+    "l0-action-menu",
+    "l0-local-model-relay-menu",
+    "l0-keyboard-remapping",
+    "l0-trackpad-shortcuts",
+    "l0-mac-timer",
+    "l0-settings-domain",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "快捷键目标的按住跟随不变。",
+    "功能、打开网址和桌面切换仍只执行一次。",
+    "厂家、端口、密钥和上游 Key 不进入映射功能表，也不进入 .tocode。",
+    "旧键盘映射、触控板绑定和定时器 JSON 无需迁移即可读入。",
+    "合成 ⌘C 与 ⌘V 带既有内部标记，不得重新进入映射或武装 totti。",
+    "自动化不进入遥控白名单或 CLI。"
+  ],
+  "must_reject": [
+    "空名称、重名、空提示词，或在没有可用模型时保存。",
+    "没有读到选中文字时调用模型或改写剪贴板。",
+    "模型失败或正文为空时粘贴。",
+    "按住自动化目标时重复执行。",
+    "把提示词或模型结果写入日志、通知或 .tocode。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要把提示词、模型结果或上游密钥写入日志、通知或 .tocode 时停止。",
+    "实现需要把自动化加入遥控白名单或 CLI 时停止并重新准入。",
+    "实现需要让自动化在按住时重复执行时停止。",
+    "实现需要把厂家、端口或密钥本身做成映射功能时停止。"
+  ],
+  "notes": "阶段：模型菜单与三种触发。角色：本机用户。业务对象：模型自动化。不变量：提示词是系统提示，选中文字是用户输入，只粘贴助手正文。禁止结果：记录正文、抢占前台、按住重复执行，或把自动化定义放进可分享配置和遥控。"
+}
