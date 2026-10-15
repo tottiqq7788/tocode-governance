@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-074",
+  "work_package_id": "wp-074",
+  "commit": "db85613852437f707ef10f4729228e1af9d0348e",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1559 条通过、0 失败。覆盖：名称与提示词校验、不可用模型拒绝新增、编辑可保留原模型名、自动化目标编解码、首次 keyDown 执行一次且自动重复与松开不再执行、选中文字缺失不调用模型、成功时写入正文并粘贴一次、执行中再次触发只提示、导出只带走自动化 ID 且导入不删除已保存自动化。",
+  "limitations": [
+    "上游 HTTP、合成 Cmd+C / Cmd+V 和系统通知使用测试桩，没有访问真实模型。"
+  ]
+}
