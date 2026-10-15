@@ -1,0 +1,32 @@
+{
+  "id": "wp-073",
+  "title": "键盘快捷键映射按住跟随",
+  "baseline_commit": "bb382daaccb00921cbf26639326c46af6376ba58",
+  "goal": "键盘映射的目标是快捷键时，按住源键等于按住目标键；目标是功能、打开网址或桌面切换时仍只触发一次。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-073.json",
+    "governance/architecture/task-envelopes/impl-073.json",
+    "mac_app/Sources/KeyboardShortcutMapping.swift",
+    "mac_app/Sources/KeyboardShortcutRemapService.swift",
+    "mac_app/Sources/TrackpadShortcutService.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "实现需要让功能、打开网址或桌面切换在按住时重复执行时停止。",
+    "实现需要把 totti 改写成 fn 或其他系统修饰键标志时停止。",
+    "实现需要改动空格修饰键的点按与武装规则时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：快捷键目标的首次 keyDown 按下目标，自动重复继续按住，keyUp 抬起；功能、打开网址与桌面切换的自动重复仍不重复执行。",
+    "runtime_e2e：按住 totti+L 时右箭头持续移动；若未执行则登记为 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-15-keyboard-shortcut-hold",
+    "scope": "键盘夹里把 totti+L 映射成右箭头后，按住 totti 和 L 应等同于持续按下右箭头。点按已经成功，长按目前只触发一次。"
+  }
+}

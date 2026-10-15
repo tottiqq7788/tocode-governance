@@ -1,0 +1,46 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-073",
+  "role": "implementation_owner",
+  "baseline_commit": "bb382daaccb00921cbf26639326c46af6376ba58",
+  "work_package_id": "wp-073",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-073.json",
+    "governance/architecture/task-envelopes/impl-073.json",
+    "mac_app/Sources/KeyboardShortcutMapping.swift",
+    "mac_app/Sources/KeyboardShortcutRemapService.swift",
+    "mac_app/Sources/TrackpadShortcutService.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-keyboard-remapping",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "功能、打开网址和桌面切换仍只在首次 keyDown 执行一次，自动重复不重复执行。",
+    "触控板快捷键与定时器仍按一次完整点按发送目标。",
+    "合成事件仍带既有内部标记，不得重新进入映射或武装 totti。",
+    "totti 不写入 fn 或其他 CGEventFlags。",
+    "空格修饰键的点按窗口、武装和放行规则不变。"
+  ],
+  "must_reject": [
+    "按住映射到功能、打开网址或桌面切换的源键时重复执行。",
+    "把 totti 改写成系统修饰键。",
+    "黑屏、录入或监听停止后让目标键一直按着。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要让功能、打开网址或桌面切换在按住时重复执行时停止。",
+    "实现需要把 totti 改写成 fn 或其他系统修饰键标志时停止。",
+    "实现需要改动空格修饰键的点按与武装规则时停止并重新准入。"
+  ],
+  "notes": "阶段：键盘映射命中之后。角色：本机用户。业务对象：键盘映射的快捷键目标。不变量：源键按下、自动重复和松开分别对应目标键的按下、重复和松开。禁止结果：功能类目标被按住重复触发，或目标键在源键已经松开后仍然按着。"
+}
