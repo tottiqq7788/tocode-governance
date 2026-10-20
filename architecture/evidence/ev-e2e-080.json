@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-080",
+  "work_package_id": "wp-080",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未点开 totti 加左键菜单。",
+  "result_summary": "没有在真机上确认全屏空间没有箭头、普通桌面仍可展开窗口。",
+  "limitations": [
+    "需要新构建并重启后，按住 totti 再左键点图标，看全屏空间是否没有向右箭头、普通桌面是否仍能展开。"
+  ]
+}

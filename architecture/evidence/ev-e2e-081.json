@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-081",
+  "work_package_id": "wp-081",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未点开 totti 加左键菜单。",
+  "result_summary": "没有在真机上确认桌面 1 的夹里不再出现已撤出显示的微信窗口。",
+  "limitations": [
+    "需要新构建并重启后，按住 totti 再左键点图标，看桌面 1 是否还列出微信。"
+  ]
+}

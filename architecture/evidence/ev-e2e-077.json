@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-077",
+  "work_package_id": "wp-077",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未按住 totti 左键点菜单栏图标，也没有切换本机桌面。",
+  "result_summary": "没有在真机上打开新的桌面菜单，因此没有确认弹出速度、调度中心名称、点击桌面夹和窗口列表。",
+  "limitations": [
+    "需要新构建并重启后，在空格修饰键开启时按住 totti 再左键点图标。",
+    "把窗口带到前台需要辅助功能权限。读取其他桌面和切换空间依赖 SkyLight 私有接口，系统更新后可能失效。",
+    "菜单名称、窗口分组和“未切换则不前置”由单元测试覆盖，不能代替真机点击。"
+  ]
+}

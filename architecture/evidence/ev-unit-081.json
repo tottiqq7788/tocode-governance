@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-081",
+  "work_package_id": "wp-081",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。已撤出显示的窗口不列入；仍在显示的窗口保留。",
+  "limitations": [
+    "单元测试用标记模拟撤出显示，没有查询本机窗口。"
+  ]
+}

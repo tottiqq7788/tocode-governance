@@ -1,0 +1,48 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-077",
+  "role": "implementation_owner",
+  "baseline_commit": "0a5d90420b87b33229cd9cc7eee3604c4687bf54",
+  "work_package_id": "wp-077",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-077.json",
+    "governance/architecture/task-envelopes/impl-077.json",
+    "governance/architecture/evidence/ev-*-077.json",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/DesktopWindowMenu.swift",
+    "mac_app/Sources/DesktopWindowCatalog.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-desktop-window-switch"
+  ],
+  "must_preserve": [
+    "未按住 totti 时左键仍打开目录树。",
+    "右键仍打开功能菜单。",
+    "跟随和固定根不被这次菜单改写。",
+    "totti 的空格点按、250 毫秒补发和按键标记规则不变。",
+    "普通桌面仍按调度中心顺序称为桌面 1、桌面 2。"
+  ],
+  "must_reject": [
+    "用 shell 或 AppleScript 切换窗口。",
+    "把桌面列表写入偏好、遥控或 .tocode。",
+    "空格修饰键关闭时把普通空格当成 totti。",
+    "空间没有切到目标时前置或激活窗口。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实现需要用 shell 或 AppleScript 切换窗口时停止。",
+    "实现需要把桌面列表写入偏好、遥控白名单或 .tocode 时停止。",
+    "实现需要改变 totti 的空格点按、250 毫秒补发或按键标记规则时停止。",
+    "实现需要把空格修饰键关闭时的普通空格当成 totti 时停止。"
+  ],
+  "notes": "阶段：桌面窗口菜单的名称、列表和切换。角色：当前 macOS 登录用户。业务对象：各个显示器上的桌面与窗口。不变量：未按住 totti 时左键仍是目录树，右键仍是功能菜单。禁止结果：shell 切窗口，把桌面列表持久化，或在空间未切换时把窗口拽到当前桌面。L1：l1-desktop-window-switch。L2：l2-desktop-window-switch。"
+}

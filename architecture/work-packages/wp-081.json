@@ -1,0 +1,32 @@
+{
+  "id": "wp-081",
+  "title": "隐藏已撤出显示的窗口",
+  "baseline_commit": "0a5d90420b87b33229cd9cc7eee3604c4687bf54",
+  "goal": "系统标成已撤出显示的窗口不出现在桌面夹里。仍在显示的窗口继续列出。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-081.json",
+    "governance/architecture/task-envelopes/impl-081.json",
+    "governance/architecture/evidence/ev-*-081.json",
+    "mac_app/Sources/DesktopWindowMenu.swift",
+    "mac_app/Sources/DesktopWindowCatalog.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "实现需要用 shell 或 AppleScript 切换窗口时停止。",
+    "实现需要把桌面列表写入偏好、遥控白名单或 .tocode 时停止。",
+    "实现需要改变 totti 的空格点按、250 毫秒补发或按键标记规则时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：已撤出显示的窗口不列入；仍在显示的窗口保留。",
+    "runtime_e2e：未在真机点开菜单则登记限制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-20-hide-ordered-out-windows",
+    "scope": "标成已撤出显示的窗口在 tocode 菜单里隐藏。"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-079",
+  "work_package_id": "wp-079",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未点选其他桌面的窗口，也没有发送桌面滑动。",
+  "result_summary": "没有在真机上确认已经进入目标桌面。",
+  "limitations": [
+    "需要新构建并重启后，按住 totti 再点另一个桌面的窗口，然后打开调度中心核对所在桌面。",
+    "滑动依赖辅助功能权限。系统更新后私有事件字段可能失效。"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-081",
+  "work_package_id": "wp-081",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed。l0-desktop-window-switch 改为已撤出显示的窗口不列入。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用。"
+  ]
+}

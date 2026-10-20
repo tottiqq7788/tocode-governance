@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-078",
+  "work_package_id": "wp-078",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。完全透明的窗口不出现在桌面窗口列表里；有标题的普通窗口仍按原顺序留下。说明书要求桌面夹带向右箭头。",
+  "limitations": [
+    "用测试数据验证过滤，没有读取本机窗口。",
+    "夹箭头由菜单行绘制，单元测试不渲染菜单。"
+  ]
+}

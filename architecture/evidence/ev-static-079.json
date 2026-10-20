@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-079",
+  "work_package_id": "wp-079",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed。l0-desktop-window-switch 改为沿调度中心顺序逐格滑动，并在空间编号未变成目标时不把窗口显示到当前桌面。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用。"
+  ]
+}

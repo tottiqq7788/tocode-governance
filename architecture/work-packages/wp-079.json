@@ -1,0 +1,32 @@
+{
+  "id": "wp-079",
+  "title": "桌面切换必须落到目标空间",
+  "baseline_commit": "0a5d90420b87b33229cd9cc7eee3604c4687bf54",
+  "goal": "点桌面或窗口时真正进入调度中心里的那个空间；没有进入时，不把那个窗口显示到当前桌面。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-079.json",
+    "governance/architecture/task-envelopes/impl-079.json",
+    "governance/architecture/evidence/ev-*-079.json",
+    "mac_app/Sources/DesktopWindowMenu.swift",
+    "mac_app/Sources/DesktopWindowCatalog.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "实现需要用 shell 或 AppleScript 切换窗口时停止。",
+    "实现需要把桌面列表写入偏好、遥控白名单或 .tocode 时停止。",
+    "实现需要改变 totti 的空格点按、250 毫秒补发或按键标记规则时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：从当前空间到目标空间的步数和方向与调度中心顺序一致；已经在目标空间时不再移动。",
+    "runtime_e2e：未在真机点选窗口则登记限制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-20-desktop-switch-actually",
+    "scope": "选择其他桌面的窗口时必须进入该桌面。不能只把窗口临时显示在当前桌面，打开调度中心后又回到原位。"
+  }
+}

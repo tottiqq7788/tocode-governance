@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-080",
+  "work_package_id": "wp-080",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。全屏空间标题为应用名且窗口列表为空；普通桌面仍列出窗口。",
+  "limitations": [
+    "菜单行是否画出箭头由界面代码决定，单元测试只核对全屏空间的窗口列表为空。"
+  ]
+}

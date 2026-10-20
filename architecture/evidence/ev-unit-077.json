@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-077",
+  "work_package_id": "wp-077",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1610 条通过、0 失败。覆盖：全屏夹标题为应用名；没有 Windows 键时仍能按空间填入窗口；点击桌面夹只切空间；点窗口先切空间再前置；空间没切过去时不前置窗口；全屏空间先激活应用，普通桌面直接切空间。",
+  "limitations": [
+    "桌面结构、窗口事实和切换步骤使用测试数据，没有调用 SkyLight，也没有切换本机桌面。"
+  ]
+}

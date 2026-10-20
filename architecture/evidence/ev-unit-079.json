@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-079",
+  "work_package_id": "wp-079",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。从空间 72 到 62 是向后两格，从 62 到 3 是向前一格，已经在目标空间时步数为空。空间没切过去时不前置窗口。",
+  "limitations": [
+    "只验证步数和方向，没有向本机发送滑动，也没有切换桌面。"
+  ]
+}

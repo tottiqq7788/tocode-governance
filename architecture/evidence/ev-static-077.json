@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-077",
+  "work_package_id": "wp-077",
+  "commit": "83f7289ab904ee12cfcd257e15f123007458e052",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed，scope structure_and_references_only。已修改 l0-desktop-window-switch：点击桌面夹切换，全屏夹用应用名，切换未核对成功时不前置窗口。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用，也不读取真实桌面。"
+  ]
+}
