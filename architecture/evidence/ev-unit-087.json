@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-087",
+  "work_package_id": "wp-087",
+  "commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app bash scripts/test.sh",
+  "result_summary": "Mac ALL TESTS PASSED。只补缺失或空的 API_SERVER_ENABLED 与 API_SERVER_KEY，保留已有非空值，文件权限 0600；连续失败 3 次后不再重启；退出时调用 gateway stop，不包含 serve。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "单元测试用假进程，不启动真实网关。"
+  ]
+}

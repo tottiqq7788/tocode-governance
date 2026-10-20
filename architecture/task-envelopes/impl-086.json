@@ -1,0 +1,45 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-086",
+  "role": "implementation_owner",
+  "baseline_commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "work_package_id": "wp-086",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-086.json",
+    "governance/architecture/task-envelopes/impl-086.json",
+    "governance/architecture/evidence/ev-*-086.json",
+    "AGENTS.md",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "l0_impact": "add_new_and_modify_existing",
+  "l0_rule_ids": [
+    "l0-android-remote-control",
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "固定按钮白名单不变，中转不保存动作或结果正文。",
+    "没装 Hermes 时应用菜单不置灰，绑定和旧按钮仍可用。",
+    "一部手机切换已关联的 Mac，会话和目录跟着这台 Mac。"
+  ],
+  "must_reject": [
+    "经旧遥控通道发送自由文字。",
+    "手机指定工作目录。",
+    "目录结果包含文件内容，或跟着符号链接跑出项目文件夹。",
+    "把 Hermes 密钥交给手机或中转。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "把聊天或目录放进遥控白名单时停止。",
+    "中转保存聊天正文、目录或 Hermes 密钥时停止。",
+    "手机指定工作目录，或写入 Hermes 项目库时停止。",
+    "打开、修改项目文件内容时停止。"
+  ],
+  "notes": "阶段：手机对话。角色：安卓用户、指定 Mac、中转。业务对象：手机会话、固定工作目录、只读目录。不变量：旧按钮含义不变，正文不落盘。禁止结果：没装 Hermes 仍能聊天，或把多台 Mac 的会话混在一起。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}

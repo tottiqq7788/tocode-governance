@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-087",
+  "work_package_id": "wp-087",
+  "commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "启动 mac_app/build/Tocode.app，curl http://127.0.0.1:8642/health，手机 app.tocode.android 查看状态，再对 Tocode 发送 SIGTERM。",
+  "result_summary": "开关打开后 /health 返回 status ok。手机显示「Hermes 已就绪」和「服务运行中」。对 Tocode 发 SIGTERM 后约 11 秒 8642 不再监听，网关进程退出。桌面端 Hermes 与 127.0.0.1:51636 的 hermes serve 仍在。随后把 tocode.hermesGatewayEnabled 写回 false 并重新打开 Tocode，8642 保持关闭，手机显示「Hermes 没开」。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有从手机发出一条 Hermes 对话。",
+    "验证结束后开关是关闭的，避免测试留下的网关和微信继续运行。"
+  ]
+}

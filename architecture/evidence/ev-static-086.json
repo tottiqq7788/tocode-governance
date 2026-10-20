@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-086",
+  "work_package_id": "wp-086",
+  "commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计 status passed。新增 l0-phone-hermes-chat，并把遥控菜单改名为应用、绑定应用。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。"
+  ]
+}

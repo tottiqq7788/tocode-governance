@@ -1,0 +1,40 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-087",
+  "role": "implementation_owner",
+  "baseline_commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "work_package_id": "wp-087",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-087.json",
+    "governance/architecture/task-envelopes/impl-087.json",
+    "governance/architecture/evidence/ev-*-087.json",
+    "mac_app/"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-hermes-gateway-link"
+  ],
+  "must_preserve": [
+    "只补 .env 里缺失或为空的 API_SERVER_ENABLED 与 API_SERVER_KEY，不改已有非空值。",
+    "API Server 密钥不进入日志、菜单、手机或中转。",
+    "停止时用 hermes gateway stop，不碰桌面端 hermes serve，不改 config.yaml。"
+  ],
+  "must_reject": [
+    "没装 Hermes 时仍启动网关。",
+    "关闭开关或退出 Tocode 后留下网关进程。",
+    "连续失败后仍无限重启。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改写 .env 里已有的非空配置时停止。",
+    "把 API_SERVER_KEY 写入日志、菜单、手机或中转时停止。",
+    "结束桌面端 hermes serve，或修改 config.yaml 时停止。",
+    "关闭开关或退出 Tocode 后仍残留网关进程时停止。"
+  ],
+  "notes": "阶段：网关生命周期。角色：Mac 用户。业务对象：Hermes 网关进程、.env 中的 API_SERVER_ENABLED 与 API_SERVER_KEY。不变量：只补缺失项，密钥留在本机。禁止结果：残留网关进程，或误停 hermes serve。L1：l1-hermes-gateway-link。L2：l2-hermes-gateway-link。"
+}

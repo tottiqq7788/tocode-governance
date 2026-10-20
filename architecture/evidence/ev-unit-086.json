@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-086",
+  "work_package_id": "wp-086",
+  "commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app bash scripts/test.sh；relay python3 -m unittest discover -s tests；android ./gradlew :app:testDebugUnitTest --offline",
+  "result_summary": "Mac ALL TESTS PASSED。没装 Hermes 时不能聊天，目录不跑出文件夹且不含文件内容，旧按钮仍拒绝 shell。Relay 2 项通过：带路径的请求被拒绝，聊天和目录正文不写入路由文件。Android 单测通过：没装 Hermes 时聊天入口关闭，固定按钮仍是 11 个。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有连上真的 Hermes 接口。"
+  ]
+}

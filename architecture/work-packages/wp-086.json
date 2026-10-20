@@ -1,0 +1,44 @@
+{
+  "id": "wp-086",
+  "title": "手机 Hermes 对话",
+  "baseline_commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "goal": "右键「遥控」改为「应用」。旧按钮保留。手机按当前 Mac 的会话跟本机 Hermes 对话，并只读查看这台 Mac 配置的文件夹。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-086.json",
+    "governance/architecture/task-envelopes/impl-086.json",
+    "governance/architecture/evidence/ev-*-086.json",
+    "AGENTS.md",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/RemoteControlService.swift",
+    "mac_app/Sources/RemoteControlPage.swift",
+    "mac_app/Sources/PhoneHermesPathStore.swift",
+    "mac_app/Sources/PhoneHermesApp.swift",
+    "mac_app/Sources/PhoneHermesLiveRuntime.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh",
+    "mac_app/README.md",
+    "relay/server.py",
+    "relay/tests/test_route.py",
+    "relay/AGENTS.md",
+    "android_app/app/src/main/java/app/tocode/android/ChatApp.kt",
+    "android_app/app/src/main/java/app/tocode/android/PhoneHermesGate.kt",
+    "android_app/app/src/test/java/app/tocode/android/LinkDirectoryTest.kt"
+  ],
+  "stop_conditions": [
+    "把聊天或目录放进遥控白名单时停止。",
+    "中转保存聊天正文、目录或 Hermes 密钥时停止。",
+    "手机指定工作目录，或写入 Hermes 项目库时停止。",
+    "打开、修改项目文件内容时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：没装 Hermes 时不能聊天；目录不跑出文件夹、不含文件内容；旧按钮白名单不变；中转不落盘。",
+    "runtime_e2e：未在真机配对后对 Hermes 发一条消息则登记限制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-20-phone-hermes-chat",
+    "scope": "遥控改名为应用；没装 Hermes 不置灰、只禁聊天；每台 Mac 一个文件夹，会话随 Mac 切换。"
+  }
+}

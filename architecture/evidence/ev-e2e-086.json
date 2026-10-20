@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-086",
+  "work_package_id": "wp-086",
+  "commit": "3ed7a2a6b948b392887fa613b523e44d39104c76",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未在真机配对后从手机对 Hermes 发一条消息，也未打开目录页。",
+  "result_summary": "未做运行态端到端。单元测试覆盖没装 Hermes 时禁聊天、目录不越界，以及中转不落盘。",
+  "limitations": [
+    "没有在正在运行的 Hermes 和已配对的手机上走通一条会话。",
+    "这次改动还没提交。"
+  ]
+}
