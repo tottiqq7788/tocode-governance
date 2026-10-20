@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-083",
+  "work_package_id": "wp-083",
+  "commit": "081d797efe0092543a2b000b494659eeed4ed1e2",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。带关闭标记的当前会话所在项目优先于 active_id。",
+  "limitations": [
+    "用临时项目库和会话标题模拟，没有读取本机 Hermes 窗口。"
+  ]
+}

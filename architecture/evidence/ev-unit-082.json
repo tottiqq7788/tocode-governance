@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-082",
+  "work_package_id": "wp-082",
+  "commit": "081d797efe0092543a2b000b494659eeed4ed1e2",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。没有旧路由时跟随当前会话所属档案的项目，而不是 default 的 active_id。已有旧路由时仍用该档案。会话对不上时仍读 default。",
+  "limitations": [
+    "用临时项目库和会话库模拟，没有读取本机 Hermes 数据。"
+  ]
+}

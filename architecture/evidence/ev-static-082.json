@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-082",
+  "work_package_id": "wp-082",
+  "commit": "081d797efe0092543a2b000b494659eeed4ed1e2",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed。l0-hermes-project-follow 改为旧路由缺失时用当前打开会话所属档案。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用。"
+  ]
+}

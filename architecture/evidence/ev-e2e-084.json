@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-084",
+  "work_package_id": "wp-084",
+  "commit": "081d797efe0092543a2b000b494659eeed4ed1e2",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未在真机切到 default 档案后点开左键菜单",
+  "result_summary": "未做运行态端到端。单元测试覆盖旧路由停在具名档案、可见会话只属于 default 时跟随 default 项目。",
+  "limitations": [
+    "没有在正在运行的 Hermes 里切到 default 档案后核对左键目录。"
+  ]
+}

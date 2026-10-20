@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-084",
+  "work_package_id": "wp-084",
+  "commit": "081d797efe0092543a2b000b494659eeed4ed1e2",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed。l0-hermes-project-follow 改为：当前会话标题只属于一个档案时跟随那个档案，不被另一份档案的旧路由挡住。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用。"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-084",
+  "work_package_id": "wp-084",
+  "commit": "081d797efe0092543a2b000b494659eeed4ed1e2",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。旧路由停在 liubei 时，只属于 default 的当前会话跟随 default 项目 root，不停在 liubei 的地球online。",
+  "limitations": [
+    "用临时项目库和会话标题模拟，没有读取本机 Hermes 窗口。"
+  ]
+}

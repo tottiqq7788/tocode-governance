@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-082",
+  "work_package_id": "wp-082",
+  "commit": "081d797efe0092543a2b000b494659eeed4ed1e2",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未在 Hermes 为前台时点开左键菜单。",
+  "result_summary": "没有在真机上确认左键菜单展示 Eonline，而不是 study/root。",
+  "limitations": [
+    "需要新构建并重启后，让 Hermes 处于前台再左键点图标。"
+  ]
+}
