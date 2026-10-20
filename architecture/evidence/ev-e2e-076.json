@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-076",
+  "work_package_id": "wp-076",
+  "commit": "0a5d90420b87b33229cd9cc7eee3604c4687bf54",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "bash scripts/build.sh 后 open build/Tocode.app；未按住 totti 左键点图标。",
+  "result_summary": "新构建已启动为 build/Tocode.app。没有按住 totti 点菜单栏图标，因此没有确认真实桌面列表、空间切换和窗口前置。",
+  "limitations": [
+    "新构建已启动。真机点击仍需要空格修饰键处于开启。",
+    "把窗口带到前台需要辅助功能权限。读取其他桌面依赖 SkyLight 私有接口，系统更新后可能失效。",
+    "菜单分组、过滤和点击顺序由单元测试覆盖，不能代替真机点击。"
+  ]
+}

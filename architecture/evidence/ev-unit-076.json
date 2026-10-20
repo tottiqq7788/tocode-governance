@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-076",
+  "work_package_id": "wp-076",
+  "commit": "0a5d90420b87b33229cd9cc7eee3604c4687bf54",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1598 条通过、0 失败。覆盖：按住空格后 isTottiHeld 为真、松开后为假；左键加 totti 进入窗口菜单，普通左键进入目录树，右键始终是功能菜单；单显示器根上就是桌面，多显示器先分组；全屏空间单独命名；系统窗口被滤掉；最小化窗口保留；点窗口先切空间再前置，点「切换到此桌面」只切空间。",
+  "limitations": [
+    "桌面结构、窗口事实和切换步骤使用测试数据，没有调用 SkyLight，也没有切换本机桌面。"
+  ]
+}

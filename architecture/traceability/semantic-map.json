@@ -16,7 +16,7 @@
       "id": "l0-navigate",
       "name": "左键浏览目录",
       "status": "approved",
-      "statement": "左键单击菜单栏图标时，弹出目录树并显示当前展示根下的第一层文件与文件夹（可递归展开）。展示根默认是已保存的固定目录；仅当弹出瞬间前台为访达且「访达跟随」开启、且访达恰好选中一项时，临时用该选中目录（文件用其父文件夹）；仅当前台为 Codex（com.openai.codex）且「codex跟随」开启、且能解析到有效本地项目根时，临时用该项目根；仅当前台为 Hermes（com.nousresearch.hermes）且「hermes跟随」开启、且能解析到未归档当前项目的有效主目录时，临时用该主目录；仅当前台为系统「终端」（com.apple.Terminal）且「终端跟随」开启、最前面的窗口是本次运行中由「终端」打开、其启动时的标签仍在该窗口内、且当时记录的目录仍存在时，临时用该窗口启动时记录的目录；该开关关闭、窗口不在最前、记录对不上、原标签已不在、目录已失效，或其它前台与跟随未触发时，一律用固定目录。跟随结果不写回固定目录偏好。「配置」在「访达跟随」下方、「codex跟随」上方提供默认关闭的「终端跟随」，并在「codex跟随」下方提供默认关闭的「hermes跟随」；打开「终端」不受该开关影响。每个目录菜单底部固定提供「新增」；根层菜单在「新增」上方依次提供「历史」、「配置」与「终端」。「终端」只出现在根菜单，点击后用系统「终端」新开窗口，工作目录为当前展示根，并记下该窗口编号、新建标签的 tty 与当时目录（仅本次运行内存，窗口内之后改变工作目录不影响这条记录）；按住 Option 或 Command 时该项仍是「终端」，且不写入历史。Tocode 自身不执行 shell。菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
+      "statement": "左键单击菜单栏图标时，若空格修饰键开启且正在按住 totti，改为弹出桌面窗口菜单，不解析也不改写固定根；否则弹出目录树并显示当前展示根下的第一层文件与文件夹（可递归展开）。展示根默认是已保存的固定目录；仅当弹出瞬间前台为访达且「访达跟随」开启、且访达恰好选中一项时，临时用该选中目录（文件用其父文件夹）；仅当前台为 Codex（com.openai.codex）且「codex跟随」开启、且能解析到有效本地项目根时，临时用该项目根；仅当前台为 Hermes（com.nousresearch.hermes）且「hermes跟随」开启、且能解析到未归档当前项目的有效主目录时，临时用该主目录；仅当前台为系统「终端」（com.apple.Terminal）且「终端跟随」开启、最前面的窗口是本次运行中由「终端」打开、其启动时的标签仍在该窗口内、且当时记录的目录仍存在时，临时用该窗口启动时记录的目录；该开关关闭、窗口不在最前、记录对不上、原标签已不在、目录已失效，或其它前台与跟随未触发时，一律用固定目录。跟随结果不写回固定目录偏好。「配置」在「访达跟随」下方、「codex跟随」上方提供默认关闭的「终端跟随」，并在「codex跟随」下方提供默认关闭的「hermes跟随」；打开「终端」不受该开关影响。每个目录菜单底部固定提供「新增」；根层菜单在「新增」上方依次提供「历史」、「配置」与「终端」。「终端」只出现在根菜单，点击后用系统「终端」新开窗口，工作目录为当前展示根，并记下该窗口编号、新建标签的 tty 与当时目录（仅本次运行内存，窗口内之后改变工作目录不影响这条记录）；按住 Option 或 Command 时该项仍是「终端」，且不写入历史。Tocode 自身不执行 shell。菜单已打开时按住 Option 实时进入删除模式，按住 Command 实时进入访问模式，同时按下时 Option 优先；松开后恢复。",
       "source_refs": [
         "user-requirement:2026-09-03",
         "user-feedback:2026-09-03",
@@ -27,7 +27,8 @@
         "user-approved-plan:2026-10-13-directory-terminal",
         "user-approved-plan:2026-10-13-terminal-window-follow",
         "user-request:2026-10-13-terminal-follow-toggle",
-        "user-request:2026-10-13-hermes-follow"
+        "user-request:2026-10-13-hermes-follow",
+        "user-approved-plan:2026-10-20-desktop-window-switch"
       ]
     },
     {
@@ -442,6 +443,15 @@
       ]
     },
     {
+      "id": "l0-desktop-window-switch",
+      "name": "桌面窗口切换",
+      "status": "approved",
+      "statement": "空格修饰键开启且正在按住 totti 时，左键单击菜单栏图标弹出桌面窗口菜单，不解析、不改写固定根，也不进入遥控或 .tocode。右键仍是功能菜单。只有一个显示器时，根上直接是该显示器的桌面夹；多个显示器时先按显示器分组，名称用屏幕本地化名称，对不上时用「显示器」序号。每个显示器上的普通桌面按调度中心顺序称为「桌面 1」「桌面 2」。全屏应用空间单独成夹，标题用该窗口或应用名。系统专用空间不列出。当前桌面的夹显示勾选。悬停桌面夹后，第一项是「切换到此桌面」，其后按前到后列出窗口；没有窗口时该项仍可点，窗口区显示「（空）」。窗口标题优先用辅助功能标题，其次用窗口列表标题，都没有时用应用名。最小化窗口保留并标明最小化。程序坞、桌面壁纸、控制中心、通知中心和 Window Server 不列入。点「切换到此桌面」只切到该显示器上的那个空间。点窗口时先切空间，再把该窗口带到前台并激活其应用；没有辅助功能权限时空间仍切换，并提示无法把窗口带到前台。读取桌面失败时菜单只显示不可用的「无法读取桌面」，不崩溃，也不执行 shell。",
+      "source_refs": [
+        "user-approved-plan:2026-10-20-desktop-window-switch"
+      ]
+    },
+    {
       "id": "l0-anker-credential",
       "name": "四工具安克密钥统一设置",
       "status": "approved",
@@ -805,6 +815,24 @@
         "l0-action-menu",
         "l0-temporary-blackout",
         "l0-settings-domain"
+      ],
+      "owners": [
+        "architecture_owner"
+      ],
+      "reviewers": [
+        "implementation_owner",
+        "independent_reviewer"
+      ]
+    },
+    {
+      "id": "l1-desktop-window-switch",
+      "name": "桌面窗口菜单",
+      "status": "approved",
+      "responsibility": "在按住 totti 的左键点击时列出各显示器的普通桌面与全屏空间及其窗口，并按选择切换空间、前置窗口。读取失败时只提示，不改固定根。",
+      "l0_refs": [
+        "l0-desktop-window-switch",
+        "l0-navigate",
+        "l0-space-totti-modifier"
       ],
       "owners": [
         "architecture_owner"
@@ -1424,6 +1452,19 @@
         "SpaceModifierService.swift",
         "StatusItemController.swift",
         "AppDelegate.swift"
+      ]
+    },
+    {
+      "id": "l2-desktop-window-switch",
+      "name": "桌面窗口目录与切换",
+      "status": "approved",
+      "l1_refs": [
+        "l1-desktop-window-switch"
+      ],
+      "selectors": [
+        "DesktopWindowMenu.swift",
+        "DesktopWindowCatalog.swift",
+        "StatusItemController.swift"
       ]
     },
     {

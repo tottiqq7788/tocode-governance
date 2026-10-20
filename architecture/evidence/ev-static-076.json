@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-076",
+  "work_package_id": "wp-076",
+  "commit": "0a5d90420b87b33229cd9cc7eee3604c4687bf54",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed，scope structure_and_references_only。已修改 l0-navigate，并新增 l0-desktop-window-switch：按住 totti 的左键打开桌面窗口菜单。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用，也不读取真实桌面。"
+  ]
+}
