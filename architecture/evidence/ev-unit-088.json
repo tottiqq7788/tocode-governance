@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-088",
+  "work_package_id": "wp-088",
+  "commit": "0bc25be",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app bash scripts/test.sh；android ./gradlew :app:testDebugUnitTest",
+  "result_summary": "Mac ALL TESTS PASSED：会话名被占用时依次换成「新会话 2」，其他标题错误、鉴权错误和非 JSON 回复都不重试。安卓单测通过。",
+  "limitations": [
+    "安卓的连接复用没有单元测试，靠真机旋转验证。"
+  ]
+}

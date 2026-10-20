@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-088",
+  "role": "implementation_owner",
+  "baseline_commit": "0bc25be",
+  "work_package_id": "wp-088",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-088.json",
+    "governance/architecture/task-envelopes/impl-088.json",
+    "governance/architecture/evidence/ev-*-088.json",
+    "android_app/app/src/main/java/app/tocode/android/MainActivity.kt",
+    "mac_app/Sources/PhoneHermesLiveRuntime.swift",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "l0_impact": "no_l0_change",
+  "must_preserve": [
+    "每个关联在手机上只有一条到中转的连接。",
+    "新建会话只新增，不改名、不删除已有会话。",
+    "Hermes 密钥留在 Mac。"
+  ],
+  "must_reject": [
+    "界面重建后旧连接仍在重连。",
+    "会话名被占用时直接报失败。",
+    "把其他 Hermes 错误当成撞名去重试。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动超出连接复用和会话命名范围，或触碰 L0 语义时停止并重新准入。"
+  ],
+  "notes": "本轮为 wp-086 手机 Hermes 对话的缺陷修复，不新增或修改 L0。"
+}

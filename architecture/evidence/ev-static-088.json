@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-088",
+  "work_package_id": "wp-088",
+  "commit": "0bc25be",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计 status passed。本轮为 wp-086 的缺陷修复，l0_impact 为 no_l0_change。",
+  "limitations": [
+    "证据绑定的是修复前的治理提交；代码修复的提交号见各仓库本轮提交。"
+  ]
+}

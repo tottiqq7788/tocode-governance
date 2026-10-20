@@ -1,0 +1,29 @@
+{
+  "id": "wp-088",
+  "title": "手机连接不再互相挤掉，新会话不再撞名",
+  "baseline_commit": "0bc25be",
+  "goal": "修 wp-086 的两个缺陷：安卓界面重建后新旧两套连接用同一个关联互相挤掉，导致在线和离线来回跳；Hermes 不允许会话同名，手机第二次新建「新会话」就失败。",
+  "scope": [
+    "governance/architecture/work-packages/wp-088.json",
+    "governance/architecture/task-envelopes/impl-088.json",
+    "governance/architecture/evidence/ev-*-088.json",
+    "android_app/app/src/main/java/app/tocode/android/MainActivity.kt",
+    "mac_app/Sources/PhoneHermesLiveRuntime.swift",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "改动中转协议、白名单或关联生命周期时停止。",
+    "改写或删除 Hermes 已有会话时停止。",
+    "把 API_SERVER_KEY 交给手机或中转时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：会话名被占用时自动换成「新会话 2」这类名字，其他错误照常失败；安卓单测通过。",
+    "runtime_e2e：真机旋转屏幕后仍只保留一条到中转的连接；连续两次新建会话都成功。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-bug-report:2026-10-21-android-flapping",
+    "scope": "缺陷修复，不新增或修改 L0。"
+  }
+}

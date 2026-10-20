@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-088",
+  "work_package_id": "wp-088",
+  "commit": "0bc25be",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "真机 3B161700G6F00000 读取 /proc/net/tcp6 中应用到 totti.xin:443 的连接；旋转屏幕；在手机上连续两次新建会话。",
+  "result_summary": "修复前旋转一次屏幕后，手机每 2 秒换一条新连接，状态在在线和离线间来回跳。修复后旋转前后始终是同一条连接。已有「新会话」时，两次新建依次得到「新会话 2」「新会话 3」，进入对话页后仍为在线。测试会话已删除，原有会话保留。",
+  "limitations": [
+    "没有在新会话里发出一条消息。"
+  ]
+}
