@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-075",
+  "work_package_id": "wp-075",
+  "commit": "2e10dd799f38aff975c1a3933ded5bf2c91640b1",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，1570 条通过、0 失败。覆盖：现存保存值不改写；失效路径和未保存都写入注入家目录下的 Documents 且 load() 不再是旧路径；Documents 不存在时写入主目录；reset 写入同一现存默认目录；说明书写明失效根改写文稿且不再出现 /Users/admin/Documents。",
+  "limitations": [
+    "使用临时家目录和独立 UserDefaults suite，没有改本机 com.tocode.app 里的根目录偏好。"
+  ]
+}

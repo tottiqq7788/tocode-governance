@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-075",
+  "work_package_id": "wp-075",
+  "commit": "2e10dd799f38aff975c1a3933ded5bf2c91640b1",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 architecture/tools/audit_project.py --target .",
+  "result_summary": "治理审计 status passed，scope structure_and_references_only。已修改 l0-root 与 l0-reset-root：默认根改为当前用户 ~/Documents，失效路径就地覆盖；文稿目录不存在时改写为主目录。",
+  "limitations": [
+    "审计只检查结构与引用，不执行应用，也不验证偏好写入。"
+  ]
+}

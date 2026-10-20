@@ -5,10 +5,11 @@
       "id": "l0-root",
       "name": "根文件夹",
       "status": "approved",
-      "statement": "系统始终维护一个唯一的「根文件夹」路径作为目录浏览起点；首次启动时若无根文件夹则默认使用「/Users/admin/Documents」作为根文件夹（不弹选择器），之后可在菜单中修改或重置。",
+      "statement": "系统始终维护一个唯一的「根文件夹」路径作为目录浏览起点。首次启动时若无根文件夹，或已保存路径已不是现存目录，则把固定根改写为当前登录用户的文稿目录 ~/Documents 并写入偏好（不弹选择器）；文稿目录本身不存在时改写为该用户主目录，不创建文稿目录，也不保留失效路径。之后可在菜单中修改或重置。失效路径被覆盖后，即使原目录再次出现也不自动切回。",
       "source_refs": [
         "user-requirement:2026-09-03",
-        "user-requirement:2026-09-04"
+        "user-requirement:2026-09-04",
+        "user-approved-plan:2026-10-20-default-root-documents"
       ]
     },
     {
@@ -170,9 +171,10 @@
       "id": "l0-reset-root",
       "name": "重置初始目录",
       "status": "approved",
-      "statement": "左键「配置 → 重置初始目录」被选中时，将固定根文件夹设为默认目录「/Users/admin/Documents」，并弹出一条系统通知。无论跟随开关是否开启均可用，不置灰。",
+      "statement": "左键「配置 → 重置初始目录」被选中时，将固定根文件夹设为当前登录用户的现存默认目录（优先 ~/Documents，文稿目录不存在时为主目录），并弹出一条系统通知。无论跟随开关是否开启均可用，不置灰。",
       "source_refs": [
-        "user-requirement:2026-09-04"
+        "user-requirement:2026-09-04",
+        "user-approved-plan:2026-10-20-default-root-documents"
       ]
     },
     {
@@ -513,7 +515,7 @@
       "id": "l1-root-state",
       "name": "根文件夹状态",
       "status": "candidate",
-      "responsibility": "维护根文件夹路径的持久化存储、读取与修改（首次默认、菜单修改、剪贴板设置、重置为默认目录）。",
+      "responsibility": "维护根文件夹路径的持久化存储、读取与修改（首次默认、菜单修改、剪贴板设置、重置为默认目录，以及已保存路径失效时就地改写为当前用户文稿或主目录）。",
       "l0_refs": [
         "l0-root",
         "l0-set-root-clipboard",

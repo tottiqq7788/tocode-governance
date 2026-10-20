@@ -1,0 +1,34 @@
+{
+  "id": "wp-075",
+  "title": "固定根改为当前用户文稿",
+  "baseline_commit": "db85613852437f707ef10f4729228e1af9d0348e",
+  "goal": "把固定根的默认位置从写死的 /Users/admin/Documents 改为当前登录用户的 ~/Documents。已保存路径一旦不是现存目录，立刻用现存默认目录覆盖偏好，不再保留失效路径。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-075.json",
+    "governance/architecture/task-envelopes/impl-075.json",
+    "governance/architecture/evidence/ev-*-075.json",
+    "mac_app/Sources/RootPathStore.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/TocodeCommandExecutor.swift",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "实现需要把跟随目录写回固定根时停止。",
+    "实现需要创建文稿目录或保留失效路径时停止。",
+    "实现需要把默认根做成菜单可配置的其他位置，或继续写死某个用户名时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：现存保存值不改写；失效路径和未保存都写入注入家目录下的 Documents；Documents 不存在时写入主目录；reset 写入同一现存默认目录。",
+    "runtime_e2e：本机说明下次解析应把已删除的 html-report 覆盖为 /Users/totti/Documents。未点选菜单栏则写明限制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-20-default-root-documents",
+    "scope": "固定根默认改为当前用户 ~/Documents。已保存路径不存在时直接覆盖，不保留失效路径，即使该目录以后恢复也不自动切回。文稿目录本身不存在时改写为主目录。"
+  }
+}

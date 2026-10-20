@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-075",
+  "work_package_id": "wp-075",
+  "commit": "2e10dd799f38aff975c1a3933ded5bf2c91640b1",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "ls /Users/totti/Documents /Users/totti/Desktop/html-report；未重建或点选正在运行的菜单栏应用。",
+  "result_summary": "本机 /Users/totti/Documents 存在，已保存的 /Users/totti/Desktop/html-report 不存在。新构建下次解析固定根时应覆盖为 /Users/totti/Documents。本次没有点开左键菜单，也没有改写正在运行的应用偏好。",
+  "limitations": [
+    "正在运行的 Tocode 仍是旧构建，不会在本次会话里改掉菜单根目录。",
+    "失效路径覆盖由单元测试覆盖，不能代替点开左键菜单。"
+  ]
+}
