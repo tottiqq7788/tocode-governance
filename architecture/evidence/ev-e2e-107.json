@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-107",
+  "work_package_id": "wp-107",
+  "commit": "8995bb9b1767d3071df390ef95046a494a8be0f9",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "adb devices 没有列出 3B161700G6F00000，未能打开「新会话 2」。",
+  "result_summary": "没有做运行态验收。中转已部署，健康检查、首页和 zhouhuo 都是 200。Mac 已重新编译并启动，桌面 Hermes 仍在。手机没连上，页数是否变成 14/14 还要在设备上确认。没有向这个会话再发对话。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "运行态验收被跳过，不能用单元测试代替。"
+  ]
+}

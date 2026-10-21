@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-107",
+  "role": "implementation_owner",
+  "baseline_commit": "8995bb9b1767d3071df390ef95046a494a8be0f9",
+  "work_package_id": "wp-107",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-107.json",
+    "governance/architecture/task-envelopes/impl-107.json",
+    "governance/architecture/evidence/ev-*-107.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "一次提问和它后面的过程回复、结束回复仍是一页。",
+    "进入会话停在最后一页。正在看较早的一页时，新回复不把页面拉走。",
+    "结束回复单独显示，过程短句仍收成一块。",
+    "不另发一条 Hermes 对话去补历史。",
+    "中转不保存聊天正文。密钥留在 Mac。"
+  ],
+  "must_reject": [
+    "只取最新 200 条并整表替换。",
+    "把工具结果发给手机。",
+    "截断单条正文。",
+    "messages 以外的请求携带 cursor。",
+    "older:0 或不是 tail、older 加数字的游标。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：当前项目里已经建立的 Hermes 会话记录。不变量：手机按消息编号留下已拿到的可见消息，tail 只补更新的，older 只补更早的；工具结果不进入响应。禁止结果：整表替换、截断正文、为补历史再发对话。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}

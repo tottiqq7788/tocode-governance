@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-107",
+  "work_package_id": "wp-107",
+  "commit": "8995bb9b1767d3071df390ef95046a494a8be0f9",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest --offline；relay python3 -m unittest tests.test_route",
+  "result_summary": "Mac 全部测试通过。14 次提问和 150 条工具结果里，第一次 tail 只回最新一截且 more 为真，接着 older 补齐 14 次提问，响应里没有工具正文。安卓单测通过：按编号拼接后，停着的那一页不变。中转单测通过：messages 可以带 tail 或 older，其它请求带游标会被拒绝，游标不写入路由文件。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "单测用脚本分页，不连真的 Hermes。"
+  ]
+}

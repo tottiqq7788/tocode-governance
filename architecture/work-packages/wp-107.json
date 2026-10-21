@@ -1,0 +1,33 @@
+{
+  "id": "wp-107",
+  "title": "按消息编号增量拉取会话",
+  "baseline_commit": "8995bb9b1767d3071df390ef95046a494a8be0f9",
+  "goal": "手机留下已经拿到的会话记录，之后只向 Hermes 要更新的一截和还没拿到的更早一截，避免最新 200 条把更早的提问挤掉。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-107.json",
+    "governance/architecture/task-envelopes/impl-107.json",
+    "governance/architecture/evidence/ev-*-107.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "为了补齐旧消息再发一条 Hermes 对话时停止。",
+    "把工具结果或密钥交给手机时停止。",
+    "一次响应整表替换手机已经拿到的记录时停止。",
+    "截断单条正文时停止。",
+    "中转把游标或聊天正文写入路由文件时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：14 次提问和 150 条工具结果里，第一次 tail 只回最新一截且 more 为真；接着 older 能补齐 14 次提问，响应里没有工具正文。手机在前面补进旧消息时，停着的那一页不变。",
+    "runtime_e2e：不向「新会话 2」再发对话。补齐后页数等于提问次数，打开时停在最后一页。不摘录正文。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-message-incremental",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。读取会话按消息编号增量拼接，不再只取最新 200 条。"
+  }
+}
