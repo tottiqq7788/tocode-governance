@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-106",
+  "work_package_id": "wp-106",
+  "commit": "a338f12666e4a11f657a7a67b96302fb0c25e543",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "未在真机或模拟器上添加小组件，也未观察系统通知。",
+  "result_summary": "没有做运行态验收。三种尺寸的空态和有会话态、点一行进入对应会话、回复结束后通知能点进该会话，都还需要在设备上确认。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "运行态验收被跳过，不能用单元测试代替。"
+  ]
+}

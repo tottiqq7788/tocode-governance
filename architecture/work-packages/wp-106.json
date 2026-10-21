@@ -1,0 +1,31 @@
+{
+  "id": "wp-106",
+  "title": "进行中会话的小组件与完成通知",
+  "baseline_commit": "a338f12666e4a11f657a7a67b96302fb0c25e543",
+  "goal": "桌面用小、中、大三种小组件显示这部手机已经看到的正在回复的会话，点一条进入该会话。手机观察到某一轮结束时发一条通知。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-106.json",
+    "governance/architecture/task-envelopes/impl-106.json",
+    "governance/architecture/evidence/ev-*-106.json",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "小组件或通知带上回复正文、路径、档案名或 token 时停止。",
+    "小组件另开一条中转连接，或发出消息、按下遥控时停止。",
+    "索引里没有过的会话，或正在查看的会话，仍发出完成通知时停止。",
+    "Mac 离线时删掉进行中索引或补发通知时停止。",
+    "项目还没就绪就打开会话时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：进行中写入索引，结束后移除；正在查看的会话不通知；索引外的会话不通知；离线不删索引也不通知；项目就绪前不会进入打开会话这一步。",
+    "runtime_e2e：真机或模拟器上看三种尺寸、点进对应会话，以及回复结束后通知能点进该会话。这一步要在设备上确认。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-session-widgets",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。桌面小组件只展示当前已看到的进行中会话，点击进入该会话。观察到回复结束后给设备发通知。"
+  }
+}

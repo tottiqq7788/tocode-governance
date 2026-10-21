@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-106",
+  "work_package_id": "wp-106",
+  "commit": "a338f12666e4a11f657a7a67b96302fb0c25e543",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "./gradlew :app:testDebugUnitTest",
+  "result_summary": "安卓单元测试通过。进行中会话写入索引并在结束后移除；索引外的会话和离线都不通知；正在查看或正在打开的会话不通知；档案或项目未就绪时不会进入打开会话这一步。三种尺寸共用同一份索引。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "单测覆盖索引、通知判定、打开顺序和三种尺寸的取数，不覆盖 Glance 绘制和系统通知栏。"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-106",
+  "role": "implementation_owner",
+  "baseline_commit": "a338f12666e4a11f657a7a67b96302fb0c25e543",
+  "work_package_id": "wp-106",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-106.json",
+    "governance/architecture/task-envelopes/impl-106.json",
+    "governance/architecture/evidence/ev-*-106.json",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "会话仍只属于当前关联的 Mac、档案和项目。",
+    "中转不保存聊天正文，手机小组件和通知也不放正文。",
+    "进行中的一轮在 Mac 上继续，退出对话不取消。",
+    "Mac 离线立即失败且不排队。",
+    "遥控白名单和中转协议不变。"
+  ],
+  "must_reject": [
+    "小组件另开一条中转连接。",
+    "项目或档案还没就绪就打开会话。",
+    "索引里没有过的会话发出完成通知。",
+    "正在看这条会话时仍发完成通知。",
+    "Mac 离线时删掉进行中索引或补发通知。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：当前已打开项目里正在回复的会话。不变量：三种尺寸共用一份不含正文的本地索引；点一条才进入该会话，且档案和项目就绪后才打开；完成通知只来自已经记在索引里、并且手机观察到已经结束的会话。禁止结果：小组件发消息或按遥控、离线时清索引、看过的会话再通知一遍。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}
