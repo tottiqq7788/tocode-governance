@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-108",
+  "role": "implementation_owner",
+  "baseline_commit": "d5ca89ab8ab569c93e7c43c7478953fb270263f9",
+  "work_package_id": "wp-108",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-108.json",
+    "governance/architecture/task-envelopes/impl-108.json",
+    "governance/architecture/evidence/ev-*-108.json",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "点一条才进入该会话；项目还没就绪就不打开会话。",
+    "「已回复」通知的规则不变：正在看、索引里没有过、Mac 离线时不发。",
+    "小组件只读手机本地记录，不另开中转连接。",
+    "中转和 Mac 不变。"
+  ],
+  "must_reject": [
+    "小组件或刚刚回复里出现回复正文、路径、档案名或 token。",
+    "快捷入口直接发消息或按遥控。",
+    "刚刚回复超过三条或超过 24 小时仍显示。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：这部手机记下的进行中会话索引和刚刚回复记录。不变量：两份记录只在手机本地，只有编号、标题、Mac 名、项目名和时间；快捷入口只切页面。禁止结果：放正文、发消息、按遥控、另开连接。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}

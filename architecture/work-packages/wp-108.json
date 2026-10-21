@@ -1,0 +1,31 @@
+{
+  "id": "wp-108",
+  "title": "图标与小组件重设计",
+  "baseline_commit": "d5ca89ab8ab569c93e7c43c7478953fb270263f9",
+  "goal": "启动图标改成渐变底的「>_」自适应图标。三种小组件换成统一的松绿卡片，显示已回复时长和刚刚回复的会话，中和大带「新会话」「目录」「遥控」快捷入口。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-108.json",
+    "governance/architecture/task-envelopes/impl-108.json",
+    "governance/architecture/evidence/ev-*-108.json",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "小组件或「刚刚回复」记录带上回复正文、路径、档案名或 token 时停止。",
+    "小组件另开一条中转连接，或发出消息、按下遥控时停止。",
+    "快捷入口不经打开应用就执行动作时停止。",
+    "「刚刚回复」写入 Mac、中转或超过三条、超过 24 小时仍保留时停止。",
+    "需要改 Mac 或中转时停止并重新准入。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：刚刚回复最多三条、超过 24 小时丢弃、打开或重新开始回复后移除；三种视图的条数上限和补位；视图里没有路径和档案名。",
+    "runtime_e2e：真机上看新图标、三种尺寸的小组件，点一条进入对应会话，三个快捷入口打开对应页面。不发消息，不按遥控，不摘录正文。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-widget-redesign",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。小组件加上已回复时长、刚刚回复和只打开页面的快捷入口；启动图标重画。"
+  }
+}

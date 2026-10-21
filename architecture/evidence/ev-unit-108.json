@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-108",
+  "work_package_id": "wp-108",
+  "commit": "d5ca89ab8ab569c93e7c43c7478953fb270263f9",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd android_app && ./gradlew :app:testDebugUnitTest --offline",
+  "result_summary": "RunningSessionTest 9 项、LinkDirectoryTest 14 项全部通过。刚刚回复只留最近三条，超过 24 小时丢弃，打开或重新开始回复后移除。小的空闲时显示刚刚回复，中的最多两条并补位，大的最多五条进行中。视图里没有档案名和路径，快捷入口只接受四个页面名。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "单元测试不覆盖 Glance 渲染和桌面上的走秒。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-108",
+  "work_package_id": "wp-108",
+  "commit": "d5ca89ab8ab569c93e7c43c7478953fb270263f9",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 的小组件陈述改为：带时长的进行中会话、手机本地的刚刚回复（最多三条、24 小时），以及只打开页面的快捷入口。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}
