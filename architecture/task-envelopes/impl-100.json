@@ -1,0 +1,42 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-100",
+  "role": "implementation_owner",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "work_package_id": "wp-100",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-100.json",
+    "governance/architecture/task-envelopes/impl-100.json",
+    "governance/architecture/evidence/ev-*-100.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "目录抽屉仍然只读，不能在两个附件文件夹以外增删改。",
+    "手机不能提交落盘路径。",
+    "会话仍只属于当前 Mac 的当前项目，进行中的一轮退出对话也不取消。",
+    "过程回复展开时仍只把当前这一页往下顶开。",
+    "中转不保存聊天正文、目录、预览、档案名或 Hermes 密钥。"
+  ],
+  "must_reject": [
+    "上传头里携带路径。",
+    "写到「对话附件-图片」或「对话附件-文件」以外。",
+    "覆盖同名文件。",
+    "任一文件没落盘成功时仍把文字发给 Hermes。",
+    "把文件名、内容或路径写入路由文件。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-100",
+  "work_package_id": "wp-100",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "中转 server.py 已同步到 39.107.140.16 并重启，https://totti.xin/health 返回 ok。Tocode 重新构建后用 SIGTERM 关掉旧进程，等 8642 释放再打开。adb install 到 3B161700G6F00000。",
+  "result_summary": "已有会话进入后停在 7/7，向前是 6/7，再向后回到 7/7，最后一页的向后箭头不可点。还没有对话时两个箭头不可点，中间不显示页码。选中的文件名出现在按钮上方，发送前可以去掉。在「手机验收」只带附件发出后，Mac 上先出现 对话附件-文件/tocode-check.png，内容和手机选出的文件一致；手机上这条消息就是该相对路径，页码是 1/1。路由文件里没有这个文件名。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "真机走的是「附件」。图片按钮对应的文件夹由 Mac 单测覆盖，没有在手机上再选一次图片。",
+    "发出附件时 Hermes 还在回复，没有再发第二条。没有往地球 online 发消息。",
+    "桌面端 Hermes 仍在运行，没有锁定屏幕。"
+  ]
+}

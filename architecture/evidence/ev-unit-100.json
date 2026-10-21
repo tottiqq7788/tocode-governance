@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-100",
+  "work_package_id": "wp-100",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest :app:assembleDebug --offline；mac_app ./scripts/test.sh；relay python3 -m unittest tests.test_route",
+  "result_summary": "一次提问和它后面的过程、结束回复合为一页，进入时停在最后一页，翻到最后一页会继续跟着最新一次。文字后面另起行附上相对路径；带路径的文件名被拒绝。图片写入「对话附件-图片」，其它文件写入「对话附件-文件」，同名另起序号，符号链接不能写出项目，同名文件占住文件夹时不覆盖。中转拒绝上传头里的路径，只在内存把文件头和内容转给当前 Mac，路由文件里没有文件名和内容。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机单测不覆盖系统选择器，只覆盖分页和拼进 Hermes 的文字。"
+  ]
+}

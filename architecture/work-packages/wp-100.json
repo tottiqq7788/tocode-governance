@@ -1,0 +1,32 @@
+{
+  "id": "wp-100",
+  "title": "对话附件与按次翻页",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "goal": "手机在发送前选择图片和附件。Mac 只把它们新建在当前项目根目录的「对话附件-图片」和「对话附件-文件」里。全部落盘后，才把相对路径附在发给 Hermes 的文字后面。对话按一次提问加一次结束回复分页，进入时停在最后一页。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-100.json",
+    "governance/architecture/task-envelopes/impl-100.json",
+    "governance/architecture/evidence/ev-*-100.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "目录抽屉不再只读，或手机可以指定落盘路径时停止。",
+    "文件被写到这两个固定文件夹以外，或同名文件被覆盖时停止。",
+    "还有文件没落盘就把文字发给 Hermes 时停止。",
+    "中转把文件名、内容或路径写入路由文件时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：分页只切已有消息；路径附在文字后面；同名不覆盖且不写出项目；中转只在内存转发文件，并拒绝路径字段。",
+    "runtime_e2e：手机能按次翻页，选中的文件在发送前可以去掉，发出后能在当前项目的固定文件夹里看到。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-chat-attachments",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。目录抽屉仍然只读。手机只交文件名和种类。Mac 只在当前项目的两个固定文件夹里新建文件。中转只在内存转发。"
+  }
+}
