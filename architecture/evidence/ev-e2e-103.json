@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-103",
+  "work_package_id": "wp-103",
+  "commit": "d3fcf7fa3cf5e988dde96649f13af0f124cc1b08",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "adb install 到 3B161700G6F00000。在「手机验收」里再点「会话」打开一段还没建立的对话。",
+  "result_summary": "新会话标题是「新会话」。翻页显示 0/0，左右箭头都是灰色。没有发送消息。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有再打开已有会话核对 1/1。没有往地球 online 发消息。"
+  ]
+}

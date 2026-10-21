@@ -1,0 +1,28 @@
+{
+  "id": "wp-103",
+  "title": "新会话显示 0/0",
+  "baseline_commit": "d3fcf7fa3cf5e988dde96649f13af0f124cc1b08",
+  "goal": "还没有对话时，翻页显示 0/0，左右箭头不可点。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-103.json",
+    "governance/architecture/task-envelopes/impl-103.json",
+    "governance/architecture/evidence/ev-*-103.json",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "有对话时页码不再是当前次/总次数时停止。",
+    "0/0 时箭头变得可以翻页时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：没有对话时页码是 0/0，有对话时仍是当前次/总次数。",
+    "runtime_e2e：新会话的翻页显示 0/0，左右箭头不可点。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-empty-page-label",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。还没有对话时显示 0/0。"
+  }
+}

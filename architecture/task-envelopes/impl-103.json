@@ -1,0 +1,36 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-103",
+  "role": "implementation_owner",
+  "baseline_commit": "d3fcf7fa3cf5e988dde96649f13af0f124cc1b08",
+  "work_package_id": "wp-103",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-103.json",
+    "governance/architecture/task-envelopes/impl-103.json",
+    "governance/architecture/evidence/ev-*-103.json",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "有对话时页码仍是当前次/总次数。",
+    "还没有对话时左右箭头不可点。",
+    "进入已有会话仍停在最后一页。"
+  ],
+  "must_reject": [
+    "新会话不显示页码。",
+    "0/0 时可以翻到别的页。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：还没有对话的新会话。不变量：有对话时的页码和翻页不变。禁止结果：新会话空白页码，或 0/0 时箭头可点。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}

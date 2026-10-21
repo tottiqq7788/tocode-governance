@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-103",
+  "work_package_id": "wp-103",
+  "commit": "d3fcf7fa3cf5e988dde96649f13af0f124cc1b08",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest",
+  "result_summary": "没有对话时页码是 0/0。有 6 次、停在第 5 次时仍是 5/6。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "箭头是否可点由界面根据页数决定，单测只覆盖页码文字。"
+  ]
+}
