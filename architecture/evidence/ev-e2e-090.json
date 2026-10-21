@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-090",
+  "work_package_id": "wp-090",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "真机 3B161700G6F00000 装新包；先在旧版 Tocode 掉线时打开手机，再用 open 启动新版 Tocode，最后重启中转服务后在手机上点刷新，每步截图。",
+  "result_summary": "复现：凌晨中转重启后旧版 Tocode 进程还在，但中转对手机回「Mac 不在线」，手机一直停在「正在确认 Hermes」。新包下 Mac 掉线时手机显示「Mac 不在线」；启动新版 Tocode 后，手机不做任何操作就恢复到「Hermes 已就绪」并列出档案和项目。重启中转服务后，手机自己重连并重新询问状态，约 20 秒后截图仍是「Hermes 已就绪」；若 Mac 未重连，这次询问会显示「Mac 不在线」，说明 Mac 已自己重连。（当时补点的刷新坐标按截图比例算错，没有点中，不作为依据。）totti.xin 健康检查和 zhouhuo.totti.xin 都返回 200。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有验证 Mac 睡眠唤醒后的半开连接，心跳超时断开再重连这条路径只做了代码检查。"
+  ]
+}

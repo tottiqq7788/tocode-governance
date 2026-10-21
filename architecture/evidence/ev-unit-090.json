@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-090",
+  "work_package_id": "wp-090",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；mac_app/scripts/build.sh；android_app ./gradlew testDebugUnitTest assembleDebug",
+  "result_summary": "Mac 全部测试通过并打包成功；安卓单测通过并打出调试包。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有新增针对重连退避、心跳和手机状态重试的单测，这几处只有真机验证。"
+  ]
+}

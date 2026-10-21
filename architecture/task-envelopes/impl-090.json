@@ -1,0 +1,36 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-090",
+  "role": "implementation_owner",
+  "baseline_commit": "2e2f8f7",
+  "work_package_id": "wp-090",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-090.json",
+    "governance/architecture/task-envelopes/impl-090.json",
+    "governance/architecture/evidence/ev-*-090.json",
+    "mac_app/Sources/RemoteControlClient.swift",
+    "android_app/app/src/main/java/app/tocode/android/RemoteController.kt",
+    "android_app/app/src/main/java/app/tocode/android/ChatScreen.kt",
+    "android_app/app/src/main/java/app/tocode/android/Components.kt"
+  ],
+  "l0_impact": "no_l0_change",
+  "must_preserve": [
+    "Mac 只用自己的设备令牌连中转，每台 Mac 在中转只有一条连接。",
+    "主动断开（改中转地址）后不自动重连旧地址。",
+    "Hermes 密钥留在 Mac。"
+  ],
+  "must_reject": [
+    "Mac 连接断开后一直不重连。",
+    "Mac 不在线时手机无提示地停在「正在确认 Hermes」。",
+    "手机对同一台 Mac 同时排多个状态重试。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "改动超出连接恢复和状态提示范围，或触碰 L0 语义时停止并重新准入。"
+  ],
+  "notes": "本轮为 wp-086 手机 Hermes 对话与设备中转连接的缺陷修复，不新增或修改 L0。"
+}

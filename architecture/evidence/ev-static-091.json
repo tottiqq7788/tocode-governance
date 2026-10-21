@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-091",
+  "work_package_id": "wp-091",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance；rg 检查 mac_app/Sources 与 android_app/app/src 中「路径配置」「档案配置」",
+  "result_summary": "治理审计通过（只检查结构和引用）。两条 L0、L1 职责和 L2 选择器已改写：PhoneHermesPathStore.swift 换成 PhoneHermesHomeFolder.swift，新增 ToolsScreen.kt。源码里已没有「路径配置」「档案配置」，Mac 选择框 PhoneHermesFolderPicker 已删除。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "wp-089、wp-090 的改动同样未提交，与本轮改动在同一工作区。"
+  ]
+}

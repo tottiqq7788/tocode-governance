@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-089",
+  "work_package_id": "wp-089",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计 status passed。修改 l0-phone-hermes-chat 与 l0-hermes-gateway-link：手机按已有档案列出项目，并在项目下开会话；切档案不重启网关。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。"
+  ]
+}

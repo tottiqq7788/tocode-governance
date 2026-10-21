@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-090",
+  "work_package_id": "wp-090",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过（只检查结构和引用）。改动只落在 wp-090 声明的 Mac 中转客户端和安卓连接状态三个文件内，中转服务没有改。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "wp-089 的改动同样未提交，与本轮改动在同一工作区。"
+  ]
+}

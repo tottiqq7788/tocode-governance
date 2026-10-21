@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-091",
+  "work_package_id": "wp-091",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；mac_app/scripts/build.sh；relay python3 -m unittest discover -s tests；android_app ./gradlew testDebugUnitTest assembleDebug",
+  "result_summary": "Mac 全部测试通过：绝对路径、..、.、空段、跑出主目录的符号链接、文件、不存在的路径和含控制字符的路径都被拒绝；只列文件夹，隐藏项按开关显示或隐藏；不能往上走出主目录；按手机路径新建项目写入真实路径，同一文件夹第二次被拒绝；目录只列当前项目，没进项目时提示先进入项目。中转测试通过：拒绝绝对路径、点段、空段、控制字符、超长路径和聊天请求带路径，列文件夹请求转发路径且不写入路由文件。安卓单测通过并打出调试包。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "安卓端没有新增单测；文件夹浏览、顶栏切换只做了真机验证。"
+  ]
+}

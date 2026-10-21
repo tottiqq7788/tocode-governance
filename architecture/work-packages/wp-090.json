@@ -1,0 +1,30 @@
+{
+  "id": "wp-090",
+  "title": "Mac 掉线后自动重连，手机不再卡在「正在确认 Hermes」",
+  "baseline_commit": "2e2f8f7",
+  "goal": "修两个缺陷：Mac 到中转的连接断开（中转重启、网络抖动、睡眠后半开）后不会重连，只能重启 Tocode；手机问状态得到「Mac 不在线」或超时时不提示也不再问，一直停在「正在确认 Hermes」。",
+  "scope": [
+    "governance/architecture/work-packages/wp-090.json",
+    "governance/architecture/task-envelopes/impl-090.json",
+    "governance/architecture/evidence/ev-*-090.json",
+    "mac_app/Sources/RemoteControlClient.swift",
+    "android_app/app/src/main/java/app/tocode/android/RemoteController.kt",
+    "android_app/app/src/main/java/app/tocode/android/ChatScreen.kt",
+    "android_app/app/src/main/java/app/tocode/android/Components.kt"
+  ],
+  "stop_conditions": [
+    "改动中转协议、白名单或关联生命周期时停止。",
+    "改变档案、项目、会话或目录的业务语义时停止。",
+    "把 API_SERVER_KEY 交给手机或中转时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：Mac 与安卓单测通过。",
+    "runtime_e2e：重启中转后 Mac 自动重新上线；Mac 不在线时手机显示「Mac 不在线」，Mac 回来后自动恢复到 Hermes 就绪。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-bug-report:2026-10-21-phone-stuck-confirming-hermes",
+    "scope": "缺陷修复，不新增或修改 L0。"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-089",
+  "work_package_id": "wp-089",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "用已绑定手机的中转连接切到 liubei，列出项目，新建会话后删除；再新建项目。前后对比 127.0.0.1:8642 的监听进程。",
+  "result_summary": "切到 liubei 后看到该档案的项目。新建会话成功并已删除。新建项目「手机验收」成功，文件夹由 Mac 选择框选定。切档案和新建项目前后，8642 监听进程都是 6030，桌面端 Hermes 12973 与 hermes serve 13184 仍在。当前选择已回到 default。中转路由文件没有档案名、项目编号或会话标题。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机在验证时没有连上 adb，新的安卓包还没装到手机上。档案切换和新建走的是这部手机已有的中转关联。",
+    "重新打包并打开 Tocode 时网关进程换过一次。上面的 6030 是打开之后、切换档案之前的进程。"
+  ]
+}

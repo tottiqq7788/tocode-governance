@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-089",
+  "work_package_id": "wp-089",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；android_app ./gradlew :app:testDebugUnitTest；relay python3 -m unittest discover -s tests",
+  "result_summary": "Mac 全部测试通过：只列出现存档案，非法档案名不进路径，缺密钥只补缺失项，项目写入后能读回，会话记在所选项目下。安卓单测和中转单测通过。中转转发档案名与项目编号，不写入路由文件。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "安卓单元测试环境不能调用 org.json，档案和项目的 JSON 解析没有单独的安卓单测。"
+  ]
+}

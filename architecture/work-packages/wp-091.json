@@ -1,0 +1,31 @@
+{
+  "id": "wp-091",
+  "title": "手机顶栏切换档案与项目，目录跟着项目，新建项目在手机上选文件夹",
+  "baseline_commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "goal": "档案和项目切换放到手机顶栏（设备切换右侧、刷新左侧）；目录页显示当前项目的文件夹；去掉 Mac 菜单里的「档案配置」和「路径配置」；新建项目时手机从 Mac 用户主目录往下选文件夹，Mac 校验后写入；手机仍不能新建档案。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-091.json",
+    "governance/architecture/task-envelopes/impl-091.json",
+    "governance/architecture/evidence/ev-*-091.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "手机能看到或选中用户主目录以外的文件夹时停止。",
+    "手机能新建或删除档案时停止。",
+    "改 config.yaml、重启网关或碰桌面端 hermes serve 时停止。",
+    "把 API_SERVER_KEY 或文件内容交给手机或中转时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：越界、. 和 ..、跑出主目录的符号链接、文件、不存在的路径、重复文件夹都被拒绝；只列文件夹，隐藏项跟随访达设置；目录只列当前项目；中转拒绝绝对路径、点段、空段、超长路径和其他请求带路径，且不保存路径。",
+    "runtime_e2e：真机顶栏切换档案和项目后目录跟着变；从主目录往下选文件夹新建项目成功；Mac 菜单里不再有「档案配置」和「路径配置」。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-21-phone-header-project-folder",
+    "scope": "修改已有 L0：l0-phone-hermes-chat、l0-hermes-gateway-link。从 ~ 开始选文件夹；同时删掉「路径配置」；隐藏文件夹跟随 Tocode（访达显示隐藏文件设置）。"
+  }
+}

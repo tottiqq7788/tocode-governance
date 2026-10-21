@@ -1,0 +1,16 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-091",
+  "work_package_id": "wp-091",
+  "commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "部署中转并重启；用 open 启动新版 Tocode；真机 3B161700G6F00000 装新包，每步截图；用 sqlite immutable 只读核对 liubei 的 projects.db。",
+  "result_summary": "顶栏在设备切换右侧、刷新左侧显示档案与项目切换。面板里能切档案、选项目。选「手机验收」后目录页显示该项目的空文件夹（Mac 上核对确为空）；从顶栏切到 blacker 后目录页显示 chapters、CREATOR.md 等。访达开着显示隐藏文件，目录和文件夹浏览都显示了隐藏项。新建项目：文件夹浏览从 ~ 开始，逐层进入 ~/tocode-wp091/demo 并选中，名称默认取文件夹名，创建后 liubei 的 projects.db 写入 demo → /Users/totti/tocode-wp091/demo，手机自动进入该项目。全程 8642 监听进程保持 50552，桌面端 Hermes 与 hermes serve 13184 仍在。totti.xin 健康检查、首页和 zhouhuo.totti.xin 都返回 200。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "Mac 菜单里不再有「档案配置」「路径配置」只做了源码核对；尝试用合成右键打开状态栏菜单截图失败（当前终端没有发送鼠标事件的权限），没有运行态截图。",
+    "验收在用户的 liubei 档案里留下了项目 demo（~/tocode-wp091/demo），没有删除。",
+    "重复文件夹、越界路径在真机上没有再点一遍，只由单测覆盖。"
+  ]
+}

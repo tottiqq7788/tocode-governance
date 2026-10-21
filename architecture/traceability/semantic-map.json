@@ -343,18 +343,22 @@
       "id": "l0-phone-hermes-chat",
       "name": "手机 Hermes 对话",
       "status": "approved",
-      "statement": "右键「应用」在「绑定应用」下方提供「路径配置」，选择一个本机现存文件夹作为这台 Mac 的手机工作目录。路径写入 com.tocode.app，不进入 .tocode、遥控白名单或 CLI。一部手机沿用既有关联切换当前 Mac；每台 Mac 的会话列表和目录只属于该 Mac。手机可以新建会话并发送文字。Mac 把文字交给本机 Hermes 的会话接口，并附上已配置目录作为工作要求，但不能阻止 Hermes 离开该目录。手机不传路径。目录由 Mac 自己列出该文件夹里的名称，只读，不打开文件内容，不增删改，也不让 Hermes 去列目录。没装 Hermes 桌面端时菜单不置灰，这台 Mac 的手机聊天不可用并说明没有 Hermes；目录在已配置路径时仍可看。装了但 Hermes 没开时，发消息提示没开。没配路径时可以看会话但不能发消息，目录说明未配置。这些请求走单独通道，不进入遥控白名单。中转只在内存转发，不保存聊天正文、目录或 Hermes 密钥。密钥留在 Mac。Mac 离线立即失败且不排队。这些会话不接上电脑上正在看的 Hermes 对话，也不新建 Hermes 项目。",
+      "statement": "右键「应用」只保留「绑定应用」和「网关链接」，不再有「路径配置」和「档案配置」；旧的路径配置值不再读取。手机顶栏在设备切换右侧、刷新左侧提供档案与项目切换，只列出 default 和 ~/.hermes/profiles 下现存档案，所选档案写入 com.tocode.app，不进入 .tocode、遥控白名单或 CLI；手机不能新建档案。一部手机沿用既有关联切换当前 Mac；每台 Mac 的档案、项目和会话只属于该 Mac。选中档案后，手机列出该档案未归档的 Hermes 项目。新建项目时，手机从该 Mac 的用户主目录往下逐层浏览，只看到文件夹名，不看到文件，不能走出主目录；是否显示隐藏文件夹跟随访达的显示隐藏文件设置。手机只提交名称和相对主目录的路径，中转只允许列文件夹和新建项目两类请求携带路径，并拒绝绝对路径、点段和空段。Mac 以自己的解析为准：不含 . 或 ..，解析符号链接后仍在主目录内，真实存在且是文件夹，同一文件夹已属于该档案别的项目时拒绝，然后写入该档案的 projects.db。进入项目后才能列出会话、新建会话和发文字。Mac 把文字交给该档案的 Hermes 会话接口，default 无前缀，其他档案走 /p/<档案名>/，并附上该项目主目录作为工作要求，但不能阻止 Hermes 离开该目录。这些会话由 Tocode 记在所选项目下，不写入桌面端正在看的会话。目录页显示当前项目的主目录，由 Mac 只读列出名称，不打开文件内容，不增删改，也不让 Hermes 去列目录；没进入项目时提示先选项目。没装 Hermes 桌面端时档案、项目、目录和聊天不可用并说明没有 Hermes，遥控照常。装了但 Hermes 没开时，发消息提示没开。这些请求走单独通道，不进入遥控白名单。中转只在内存转发，不保存聊天正文、目录、路径、档案名或 Hermes 密钥。密钥留在 Mac。Mac 离线立即失败且不排队。",
       "source_refs": [
-        "user-approved-plan:2026-10-20-phone-hermes-chat"
+        "user-approved-plan:2026-10-20-phone-hermes-chat",
+        "user-approved-plan:2026-10-21-phone-hermes-profile-project",
+        "user-approved-plan:2026-10-21-phone-header-project-folder"
       ]
     },
     {
       "id": "l0-hermes-gateway-link",
       "name": "Hermes 网关链接",
       "status": "approved",
-      "statement": "右键「应用」在「路径配置」下方提供「网关链接」。图标表示网关是否真正在运行，不表示偏好是否勾选。偏好写入 com.tocode.app 的 tocode.hermesGatewayEnabled，不进入 .tocode、CLI 或遥控。没装 Hermes 桌面端时该项置灰且不启动。打开或 Tocode 启动时偏好为开，则先只补 ~/.hermes/.env 里缺失的 API_SERVER_ENABLED=true 和 API_SERVER_KEY；已有非空值不改不删，注释行不算已有值。补写使用原子替换且权限为 0600。密钥不进入日志、菜单、手机或中转。然后以前台子进程执行 hermes gateway run --replace。API Server 仍按 Hermes 默认只听 127.0.0.1，不改 config.yaml。--replace 会替换已经在跑的网关。关闭开关或 Tocode 退出时，先结束自己的子进程，再执行 hermes gateway stop，从而也停掉别处启动的网关；不得结束桌面端 hermes serve。子进程意外退出且偏好仍为开时，5 秒后重启，连续 3 次未恢复则停止重启并把图标标成失败。已配置的平台（含微信）随网关启停。",
+      "statement": "右键「应用」在「绑定应用」下方提供「网关链接」。图标表示网关是否真正在运行，不表示偏好是否勾选。偏好写入 com.tocode.app 的 tocode.hermesGatewayEnabled，不进入 .tocode、CLI 或遥控。没装 Hermes 桌面端时该项置灰且不启动。打开或 Tocode 启动时偏好为开，则先只补 ~/.hermes/.env 里缺失的 API_SERVER_ENABLED=true 和 API_SERVER_KEY；已有非空值不改不删，注释行不算已有值。补写使用原子替换且权限为 0600。密钥不进入日志、菜单、手机或中转。然后以前台子进程执行 hermes gateway run --replace。API Server 仍按 Hermes 默认只听 127.0.0.1，不改 config.yaml。--replace 会替换已经在跑的网关。关闭开关或 Tocode 退出时，先结束自己的子进程，再执行 hermes gateway stop，从而也停掉别处启动的网关；不得结束桌面端 hermes serve。子进程意外退出且偏好仍为开时，5 秒后重启，连续 3 次未恢复则停止重启并把图标标成失败。已配置的平台（含微信）随网关启停。手机切换具名档案时，只按同样规则补该档案 .env 里缺失的这两项，不重启网关，也不改 default 的已有密钥。",
       "source_refs": [
-        "user-approved-plan:2026-10-20-hermes-gateway-link"
+        "user-approved-plan:2026-10-20-hermes-gateway-link",
+        "user-approved-plan:2026-10-21-phone-hermes-profile-project",
+        "user-approved-plan:2026-10-21-phone-header-project-folder"
       ]
     },
     {
@@ -1214,7 +1218,7 @@
       "id": "l1-phone-hermes-chat",
       "name": "手机 Hermes 对话与目录",
       "status": "approved",
-      "responsibility": "按当前关联的 Mac 列出手机会话、转发一条文字，并由 Mac 只读列出已配置文件夹的名称。没装 Hermes 时拒绝聊天。不把路径、密钥或文件内容交给手机，也不写入 Hermes 项目库。",
+      "responsibility": "按当前关联的 Mac 和所选档案列出项目与手机会话、转发一条文字，并由 Mac 只读列出当前项目文件夹的名称。新建项目时只在用户主目录内列出子文件夹，校验手机提交的相对路径后写入该档案的项目库。没装 Hermes 时拒绝聊天、目录和建项目。不把绝对路径、密钥或文件内容交给手机。",
       "l0_refs": [
         "l0-phone-hermes-chat",
         "l0-android-remote-control"
@@ -1231,7 +1235,7 @@
       "id": "l1-hermes-gateway-link",
       "name": "Hermes 网关启停",
       "status": "approved",
-      "responsibility": "按本机偏好启动或停止 Hermes 网关，只补齐缺失的 API Server 配置，并在 Tocode 退出时停掉网关。不停桌面端 hermes serve，不把密钥交给手机或中转。",
+      "responsibility": "按本机偏好启动或停止 Hermes 网关，只补齐缺失的 API Server 配置，并在 Tocode 退出时停掉网关。切换具名档案时只补该档案缺失的配置，不重启网关。不停桌面端 hermes serve，不把密钥交给手机或中转。",
       "l0_refs": [
         "l0-hermes-gateway-link"
       ],
@@ -1756,14 +1760,21 @@
         "l1-phone-hermes-chat"
       ],
       "selectors": [
-        "PhoneHermesPathStore.swift",
+        "PhoneHermesHomeFolder.swift",
+        "PhoneHermesProfileStore.swift",
+        "PhoneHermesSessionIndex.swift",
+        "HermesProfileCatalog.swift",
+        "HermesProfileProjects.swift",
         "PhoneHermesApp.swift",
         "PhoneHermesLiveRuntime.swift",
         "RemoteControlService.swift",
         "StatusItemController.swift",
         "server.py",
         "ChatApp.kt",
-        "PhoneHermesGate.kt"
+        "ChatScreen.kt",
+        "RemoteController.kt",
+        "PhoneHermesGate.kt",
+        "ToolsScreen.kt"
       ]
     },
     {

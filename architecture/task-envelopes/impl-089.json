@@ -1,0 +1,45 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-089",
+  "role": "implementation_owner",
+  "baseline_commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "work_package_id": "wp-089",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-089.json",
+    "governance/architecture/task-envelopes/impl-089.json",
+    "governance/architecture/evidence/ev-*-089.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat",
+    "l0-hermes-gateway-link"
+  ],
+  "must_preserve": [
+    "只列出已有档案，不新建、不删除档案。",
+    "新建项目的文件夹只能由 Mac 选择框选定。",
+    "密钥留在对应档案的 .env，不进日志、菜单、手机或中转。",
+    "不改 config.yaml，不重启网关，不碰桌面端 hermes serve。"
+  ],
+  "must_reject": [
+    "切档案后停掉微信或网关。",
+    "用一个档案的密钥访问另一个档案。",
+    "写入桌面端正在看的那条会话。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "新建或删除 Hermes 档案时停止。",
+    "手机上传任意路径，或绕过 Mac 选择框写入项目目录时停止。",
+    "把 API_SERVER_KEY 写入日志、菜单、手机或中转时停止。",
+    "切换档案时重启网关、改 config.yaml，或结束桌面端 hermes serve 时停止。",
+    "用一个档案的密钥访问另一个档案，或写入桌面端正在看的会话时停止。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：已有 Hermes 档案、该档案的项目、项目下的手机会话。不变量：只列已有档案，文件夹由 Mac 选择，密钥留在本机，不重启网关。禁止结果：停网关、串用密钥、写入桌面端当前会话。L1：l1-phone-hermes-chat、l1-hermes-gateway-link。L2：l2-phone-hermes-chat、l2-hermes-gateway-link。"
+}

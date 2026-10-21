@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-091",
+  "role": "implementation_owner",
+  "baseline_commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "work_package_id": "wp-091",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-091.json",
+    "governance/architecture/task-envelopes/impl-091.json",
+    "governance/architecture/evidence/ev-*-091.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat",
+    "l0-hermes-gateway-link"
+  ],
+  "must_preserve": [
+    "只列出已有档案，手机不能新建或删除档案。",
+    "同一文件夹不能属于同一档案的两个项目。",
+    "目录只读，不打开文件内容，不增删改。",
+    "密钥留在对应档案的 .env，不进日志、菜单、手机或中转。",
+    "不改 config.yaml，不重启网关，不碰桌面端 hermes serve。"
+  ],
+  "must_reject": [
+    "手机看到或选中用户主目录以外的文件夹。",
+    "把文件当成项目文件夹。",
+    "聊天、会话等请求携带路径。",
+    "目录显示的不是当前项目的文件夹。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出两条 L0 的声明范围时停止并重新准入。"
+  ],
+  "notes": "取代 wp-089 中「文件夹只能由 Mac 选择框选定、手机不传路径」的约束。"
+}

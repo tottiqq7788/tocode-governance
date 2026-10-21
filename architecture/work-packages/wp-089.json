@@ -1,0 +1,32 @@
+{
+  "id": "wp-089",
+  "title": "手机上的档案、项目、会话",
+  "baseline_commit": "2e2f8f7ea054e53d86774fded47ad9b483d7b7ee",
+  "goal": "手机在已有 Hermes 档案之间切换，列出并新建该档案的项目，再在项目下新建会话。网关仍是现在这一个，不因切换档案而重启。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-089.json",
+    "governance/architecture/task-envelopes/impl-089.json",
+    "governance/architecture/evidence/ev-*-089.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "新建或删除 Hermes 档案时停止。",
+    "手机上传任意路径，或绕过 Mac 选择框写入项目目录时停止。",
+    "把 API_SERVER_KEY 写入日志、菜单、手机或中转时停止。",
+    "切换档案时重启网关、改 config.yaml，或结束桌面端 hermes serve 时停止。",
+    "用一个档案的密钥访问另一个档案，或写入桌面端正在看的会话时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：只列出现存档案；非法档案名不拼进路径；缺密钥只补缺失项；项目写入后能读回；会话记在所选项目下。",
+    "runtime_e2e：切到已有具名档案后看到该档案的项目；新建项目和会话成功；8642 网关进程不被重启，桌面端 Hermes 仍在。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-21-phone-hermes-profile-project",
+    "scope": "修改 l0-phone-hermes-chat 与 l0-hermes-gateway-link。手机按档案、项目、会话三层使用已有 Hermes，切档案不重启网关。"
+  }
+}
