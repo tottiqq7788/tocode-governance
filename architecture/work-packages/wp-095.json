@@ -1,0 +1,29 @@
+{
+  "id": "wp-095",
+  "title": "结束回复留在最新一页，过程回复写完后收起",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "goal": "手机读会话时拿到最新一页，结束回复不再被最旧的 80 条截掉。工具还没结束时的短句收成一块：这一轮还在写时展开，写完后收起，点开可以再看。结束回复单独显示。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-095.json",
+    "governance/architecture/task-envelopes/impl-095.json",
+    "governance/architecture/evidence/ev-*-095.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "把结束回复收进过程块时停止。",
+    "为了补齐旧消息再发一条 Hermes 对话时停止。",
+    "把 API_SERVER_KEY 交给手机或中转时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：没有文字的工具回合不交给手机；过程回复标成 interim，结束回复不标。手机把连续过程短句收成一块，结束回复单独留下。",
+    "runtime_e2e：真机打开「新会话 2」，最后一条是结束报告，过程短句收成一块。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-final-reply-and-collapsed-process",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。最新一页保留结束回复；过程回复写完后收起。"
+  }
+}

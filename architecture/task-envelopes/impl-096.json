@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-096",
+  "role": "implementation_owner",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "work_package_id": "wp-096",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-096.json",
+    "governance/architecture/task-envelopes/impl-096.json",
+    "governance/architecture/evidence/ev-*-096.json",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "删除会话仍要确认，并且只删当前项目记下的会话。",
+    "目录和预览仍是只读，不让 Hermes 去列目录。",
+    "退出预览回到打开它之前的页面。",
+    "密钥留在 Mac。"
+  ],
+  "must_reject": [
+    "会话页继续把删除或刷新放在右上角。",
+    "从会话打开预览后，返回落到别的页面。",
+    "主页顶栏继续放刷新按钮。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "过程回复的收起样式对齐标题加箭头，写完后仍默认收起。"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-096",
+  "work_package_id": "wp-096",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "adb install app-debug.apk。安装时 adb devices 为空。",
+  "result_summary": "调试包装好了，手机在安装前从 USB 断开，会话管理、目录抽屉和预览返回没有在真机上看到。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "3B161700G6F00000 未连接，新界面未在手机上确认。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-095",
+  "work_package_id": "wp-095",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "adb install 后在 3B161700G6F00000 打开 liubei / 地球online / 新会话 2，点开再收起过程块。",
+  "result_summary": "新会话 2 的最后一条是结束报告，单独成气泡。这一轮的过程短句收成「过程回复 · 14 条」。点开能看到这些短句，再点收起。会话列表仍是「轻点继续对话」。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有再发一条 Hermes 消息，避免继续改这个项目里的文件。"
+  ]
+}

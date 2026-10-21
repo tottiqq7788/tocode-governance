@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-095",
+  "role": "implementation_owner",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "work_package_id": "wp-095",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-095.json",
+    "governance/architecture/task-envelopes/impl-095.json",
+    "governance/architecture/evidence/ev-*-095.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "没有文字的工具回合不显示成回复。",
+    "结束回复单独显示，不收进过程块。",
+    "密钥留在 Mac。",
+    "不向地球 online 再发一条 Hermes 对话。"
+  ],
+  "must_reject": [
+    "只取最旧的一页，把结束回复截掉。",
+    "一轮写完后过程短句仍然逐条占满对话。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "Hermes 用 finish_reason=tool_calls 表示过程，stop 表示这一轮的结束回复。手机取最新 200 条。"
+}

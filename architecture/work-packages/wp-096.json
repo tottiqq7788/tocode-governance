@@ -1,0 +1,28 @@
+{
+  "id": "wp-096",
+  "title": "会话顶栏改为目录抽屉和会话管理",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "goal": "会话页去掉删除和刷新。点标题打开「会话管理」，可改标题，确认后可删除。右上角拉开与「目录」相同的只读项目目录，点文件预览，退出预览回到打开前的页面。回复靠左且不带头像。主页顶栏去掉刷新。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-096.json",
+    "governance/architecture/task-envelopes/impl-096.json",
+    "governance/architecture/evidence/ev-*-096.json",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "退出文件预览后离开了打开预览之前的页面时停止。",
+    "删掉还没确认的会话时停止。",
+    "把 API_SERVER_KEY 交给手机或中转时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：既有手机单测仍通过。这次没有新增可单测的业务分支。",
+    "runtime_e2e：真机会话页没有删除和刷新，有项目目录；点标题是会话管理；预览返回后对话和目录抽屉还在；主页没有刷新。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-chat-chrome-directory-drawer",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。会话管理、目录抽屉、预览返回原页面、回复不带头像、去掉刷新按钮。"
+  }
+}

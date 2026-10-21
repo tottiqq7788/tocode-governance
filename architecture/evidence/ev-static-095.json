@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-095",
+  "work_package_id": "wp-095",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：读取会话取最新一页，结束回复留在这一页；过程短句收成一块，写完后收起，结束回复单独显示。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。"
+  ]
+}

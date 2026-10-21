@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-095",
+  "work_package_id": "wp-095",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest",
+  "result_summary": "没有文字的工具回合不交给手机。过程回复标成 interim，结束回复不标。手机把连续过程短句收成一块，结束回复单独留下。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机单测不经过 JSONObject，因为本机单元测试里的 org.json 是空实现。"
+  ]
+}
