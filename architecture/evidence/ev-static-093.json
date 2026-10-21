@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-093",
+  "work_package_id": "wp-093",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：点文件可只读预览当前项目内的文本；Markdown 在手机渲染，其他文本按原文显示，二进制拒绝。中转不保存预览正文。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "wp-092 也还没提交，审计看到的是工作区里的两份改动。"
+  ]
+}

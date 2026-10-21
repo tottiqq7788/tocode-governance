@@ -1,0 +1,31 @@
+{
+  "id": "wp-093",
+  "title": "收起会话页重复信息，并只读预览项目里的文本文件",
+  "baseline_commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "goal": "会话列表不再重复项目名和会话数。Hermes 已就绪时，卡片只留服务状态和会话数。点目录里的文件进入全屏只读预览：文本按原文显示，Markdown 渲染，左上角退出。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-093.json",
+    "governance/architecture/task-envelopes/impl-093.json",
+    "governance/architecture/evidence/ev-*-093.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "预览走出当前项目目录时停止。",
+    "写入、改名或删除项目文件时停止。",
+    "把预览正文写入中转路由文件时停止。",
+    "让 Hermes 去读文件时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：预览只读打开项目内文本并标出 Markdown；拒绝越界、符号链接逃出、二进制和文件夹。中转转发预览路径且不保存路径。",
+    "runtime_e2e：真机会话页不再出现项目名加会话数那一行，就绪卡片只剩状态和会话数；点文本和 Markdown 进入全屏预览，左上角能退出。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-session-card-file-preview",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。目录从只列名称改为可只读预览当前项目内的文本文件。"
+  }
+}

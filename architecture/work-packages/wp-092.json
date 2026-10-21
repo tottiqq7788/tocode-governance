@@ -1,0 +1,30 @@
+{
+  "id": "wp-092",
+  "title": "会话先打开再建立，并可以改名和删除",
+  "baseline_commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "goal": "再次点已选中的「会话」直接进入空白对话，第一条消息发出时才建立 Hermes 会话；没改标题时不提交标题，回复后把 Hermes 生成的标题交回手机。点标题可以修改。确认后可以删除记在当前项目下的会话。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-092.json",
+    "governance/architecture/task-envelopes/impl-092.json",
+    "governance/architecture/evidence/ev-*-092.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "改、删没记在当前项目下的会话时停止。",
+    "写入桌面端正在看的别的会话时停止。",
+    "把 API_SERVER_KEY 交给手机或中转时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：不带标题建立会话；对话后交回生成的标题；改名和删除只作用于记在当前项目下的会话；中转转发删除和改名且不保存标题。",
+    "runtime_e2e：真机再次点「会话」进入空白对话；发出第一条消息后标题被 Hermes 改写；点标题能改名；确认后能删除。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-session-draft-delete-rename",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。会话在第一条消息时建立，可改名、可删除。"
+  }
+}

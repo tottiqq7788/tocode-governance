@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-093",
+  "work_package_id": "wp-093",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；relay 下 python3 -m unittest tests.test_route",
+  "result_summary": "Mac 单测读出 Markdown 并标成 markdown，文本按原文读出；拒绝越界、符号链接逃出、点段、二进制和文件夹。中转转发 preview 路径，路由文件里没有这条路径。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机端没有对应的单元测试，渲染和全屏页面由真机验证。"
+  ]
+}

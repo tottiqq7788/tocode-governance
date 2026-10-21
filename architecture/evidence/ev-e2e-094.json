@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-094",
+  "work_package_id": "wp-094",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "用 open 启动新版 Tocode；真机 3B161700G6F00000 装新包。打开 liubei 的地球 online，进入「新会话 2」。",
+  "result_summary": "11:36 发出的那条在 11:38 已经由 Hermes 写完。重新进入后，这段回复出现在对话里，输入栏可以继续发送。会话列表里这一条显示「轻点继续对话」，因为这一轮已经结束，没有误标成正在回复。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有再发一条新消息去拍「正在回复」，避免让 Hermes 继续改这个项目里的文件。进行中的标记由单测覆盖。",
+    "重启 Tocode 后手机先看到一次「Hermes 没开」，网关起来后再刷新就恢复了。"
+  ]
+}

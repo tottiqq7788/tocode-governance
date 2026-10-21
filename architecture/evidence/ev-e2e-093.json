@@ -1,0 +1,16 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-093",
+  "work_package_id": "wp-093",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "部署中转并重启；用 open 启动新版 Tocode；真机 3B161700G6F00000 装新包。打开 liubei 的 demo 看会话页，再到 blacker 预览 CREATOR.md 和 index.json，在地球 online 预览 .DS_Store。核对中转 routes.json 不含预览正文。",
+  "result_summary": "demo 的会话页没有项目名加会话数那一行。就绪卡片只剩「服务运行中」和「1 个会话」，会话「新会话 3」还在。blacker 的 CREATOR.md 全屏渲染出标题和列表，左上角返回回到目录。index.json 按原文显示，副标题是「文本」。.DS_Store 显示打不开，不展示内容。中转 routes.json 没有这些文件名和正文。totti.xin 健康检查、首页和 zhouhuo.totti.xin 都返回 200。结束后手机停在 demo 的空目录。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "demo 文件夹是空的，文本和 Markdown 预览是在 blacker 里做的。",
+    "没有在真机上再试逃出项目目录的路径，这一条由单测覆盖。",
+    "没有删除 liubei 里已有的会话和项目。"
+  ]
+}

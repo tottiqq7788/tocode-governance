@@ -1,0 +1,16 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-092",
+  "work_package_id": "wp-092",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "部署中转并重启；用 open 启动新版 Tocode；真机 3B161700G6F00000 装新包。在 liubei 的 demo 项目里再次点「会话」，发送 hello，改标题为 wp092，再确认删除。用 mode=ro 核对 liubei 的 state.db。",
+  "result_summary": "进入项目后，选中的「会话」图标带加号。再次点击直接进入标题为「新会话」的空白对话，此时没有删除按钮。发送 hello 后会话才建立，删除按钮出现，回复结束后标题变成 hello。点标题改成 wp092，state.db 里对应会话标题是 wp092。确认删除后回到列表，state.db 里已没有 wp092。totti.xin 健康检查和 zhouhuo.totti.xin 都返回 200。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "回复后交回的是 Hermes 当场写上的标题 hello。更晚生成的模型标题没有单独再等一次。",
+    "没在真机上再试删除一个不属于当前项目的会话，这一条由单测覆盖。",
+    "liubei 里原本就有的「新会话」「新会话 2」「新会话 3」没有删除。"
+  ]
+}

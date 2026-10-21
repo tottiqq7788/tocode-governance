@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-094",
+  "role": "implementation_owner",
+  "baseline_commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "work_package_id": "wp-094",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-094.json",
+    "governance/architecture/task-envelopes/impl-094.json",
+    "governance/architecture/evidence/ev-*-094.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "只把手机自己发起、还没结束的回合标成进行中。",
+    "退出页面不取消 Mac 上的 Hermes 回合。",
+    "密钥留在 Mac。",
+    "没有文字的工具回合不显示成回复。"
+  ],
+  "must_reject": [
+    "退出对话页就清掉等待状态。",
+    "会话列表看不出哪一段还在进行。",
+    "Mac 在三分钟时把仍在进行的回合说成无法接收。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "Mac 等待这一轮最多十分钟。手机在列表和再次进入时每三秒读一次进度。"
+}

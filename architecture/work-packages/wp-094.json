@@ -1,0 +1,29 @@
+{
+  "id": "wp-094",
+  "title": "进行中的会话在离开页面后仍然可见",
+  "baseline_commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "goal": "手机发出的一轮对话在 Mac 上继续。退出对话或回到会话列表都不取消等待。会话列表标出正在进行的会话。再次打开仍显示正在等待，并持续读入已经写好的文字，直到这一轮结束。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-094.json",
+    "governance/architecture/task-envelopes/impl-094.json",
+    "governance/architecture/evidence/ev-*-094.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "把没由手机发起的桌面会话标成进行中时停止。",
+    "取消 Mac 上仍在跑的 Hermes 回合时停止。",
+    "把 API_SERVER_KEY 交给手机或中转时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：对话进行中，会话列表和再次读取都标成进行中；结束后清除。没有文字的工具回合不交给手机。",
+    "runtime_e2e：真机发送后退出再进入，会话列表和对话页都显示正在回复；回复写好后出现在对话里。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-chat-run-survives-leaving",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。进行中的回合在离开页面后仍然可见。"
+  }
+}

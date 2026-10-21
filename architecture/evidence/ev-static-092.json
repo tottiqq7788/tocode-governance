@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-092",
+  "work_package_id": "wp-092",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：再次点「会话」只打开空白对话，第一条消息才建立会话；没改标题时不提交标题，回复后交回 Hermes 的标题；只改、只删记在当前项目下的会话。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。"
+  ]
+}

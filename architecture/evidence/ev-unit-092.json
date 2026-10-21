@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-092",
+  "work_package_id": "wp-092",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；relay python3 -m unittest discover -s tests；android_app ./gradlew testDebugUnitTest assembleDebug",
+  "result_summary": "Mac 测试通过：建立会话时标题为空；对话后把生成的标题放进回复；改名和删除只作用于记在当前项目下的会话，项目外的会话删不掉。中转测试通过：转发 session_delete 和 session_rename，标题不写入路由文件。安卓单测通过并打出调试包。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "安卓的空白对话、加号图标和确认弹窗没有单测，只做了真机验证。"
+  ]
+}

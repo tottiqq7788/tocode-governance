@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-094",
+  "work_package_id": "wp-094",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：手机发出的一轮在 Mac 上继续，退出页面不取消；会话列表标出正在进行的会话；再次打开仍显示等待，直到这一轮结束。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-094",
+  "work_package_id": "wp-094",
+  "commit": "69d9cadaf2330df9571e30a3e07d550b63ff39fe",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh",
+  "result_summary": "对话进行中，会话列表和再次读取都标成进行中；结束后清除。没有文字的工具回合不交给手机。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机端没有对应的单元测试，等待态和列表文案由真机查看。"
+  ]
+}
