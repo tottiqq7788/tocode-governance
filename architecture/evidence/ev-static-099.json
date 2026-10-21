@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-099",
+  "work_package_id": "wp-099",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。右键「输入」加入遥控夹。遥控白名单改为列出桌面窗口、切换、列出按钮和按下按钮。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}

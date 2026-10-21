@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-099",
+  "work_package_id": "wp-099",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest；mac_app ./scripts/test.sh；relay python3 -m unittest tests.test_route",
+  "result_summary": "空白名称、重名和含 totti 的目标不能保存。交给手机的名单不含网址。中转拒绝 status、blackout、blackout-dismiss、lock，按下时只转发按钮编号。Mac 上直接发送这些旧动作会被拒绝；按下已保存按钮才会执行。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "进会话定位没有单独的界面测试，靠实现改成直接跳到最后一条。"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-099",
+  "role": "implementation_owner",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "work_package_id": "wp-099",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-099.json",
+    "governance/architecture/task-envelopes/impl-099.json",
+    "governance/architecture/evidence/ev-*-099.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-android-remote-control"
+  ],
+  "must_preserve": [
+    "菜单栏左键仍只在按住 totti 时打开桌面窗口菜单。",
+    "点窗口仍先切空间，空间没到位不前置。",
+    "菜单栏再次点击临时黑屏不解除。",
+    "过程回复展开仍往下顶开下面的内容。",
+    "中转不保存动作、按钮列表、目录或结果。",
+    "不得经遥控执行自由文本、shell、改根目录、切换模型、退出或任意键入。"
+  ],
+  "must_reject": [
+    "含 totti 的目标快捷键仍能保存为遥控按钮。",
+    "按下按钮时夹带快捷键、网址或提示词。",
+    "旧的 status、blackout、blackout-dismiss、lock 动作仍被中转接受。",
+    "重名或空白名称仍能保存。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出这两条 L0 的声明范围时停止并重新准入。"
+  ]
+}

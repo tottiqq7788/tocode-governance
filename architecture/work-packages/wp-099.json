@@ -1,0 +1,31 @@
+{
+  "id": "wp-099",
+  "title": "进会话直接到底，遥控按钮可配置",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "goal": "进入会话时直接停在最新一条，不播放滚动。遥控页在结果卡片下分窗口和映射。四个固定按钮拿掉，按钮由 Mac「输入 → 遥控」配置，手机只提交按钮编号。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-099.json",
+    "governance/architecture/task-envelopes/impl-099.json",
+    "governance/architecture/evidence/ev-*-099.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "手机收到快捷键、网址或自动化提示词时停止。",
+    "设备状态、临时黑屏、取消黑屏、锁定屏幕仍能作为中转动作直接发送时停止。",
+    "遥控按钮进入 .tocode 导入导出时停止。",
+    "桌面或窗口的切换规则被改动时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：进会话定位不依赖动画接口；按钮名单不含目标；中转只转发按钮编号并拒绝旧动作。",
+    "runtime_e2e：真机遥控页能看到窗口和映射两个页签，四个固定按钮不再出现。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-remote-button-config",
+    "scope": "修改已有 L0：l0-android-remote-control、l0-action-menu。桌面窗口切换规则不变。进会话定位不改变会话归属。"
+  }
+}
