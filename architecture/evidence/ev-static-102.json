@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-102",
+  "work_package_id": "wp-102",
+  "commit": "c0fffe95a414a714aad3c352f7c4da022396a865",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：点目录左侧图标复制该条目的绝对路径；会话抽屉不关闭，并把「绝对路径」追加到消息框。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}

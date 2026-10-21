@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-102",
+  "role": "implementation_owner",
+  "baseline_commit": "c0fffe95a414a714aad3c352f7c4da022396a865",
+  "work_package_id": "wp-102",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-102.json",
+    "governance/architecture/task-envelopes/impl-102.json",
+    "governance/architecture/evidence/ev-*-102.json",
+    "android_app/",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "目录仍然只读，不能增删改。",
+    "点一行的文字仍然打开文件夹或预览。",
+    "密钥留在 Mac。",
+    "手机提交的路径仍然不能是绝对路径。"
+  ],
+  "must_reject": [
+    "点左侧图标后目录抽屉自动关闭。",
+    "引用走出当前项目。",
+    "目录页把路径写进某个消息框。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：当前项目里已列出的文件或文件夹。不变量：只读、路径留在项目内、密钥留在 Mac。禁止结果：抽屉被引用关掉、连续引用互相覆盖、给出项目外路径。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}

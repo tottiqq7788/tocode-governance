@@ -1,0 +1,31 @@
+{
+  "id": "wp-102",
+  "title": "项目目录左侧图标引用绝对路径",
+  "baseline_commit": "c0fffe95a414a714aad3c352f7c4da022396a865",
+  "goal": "点目录条目左侧图标，把该条目的绝对路径复制到手机剪贴板。从会话抽屉点时，抽屉不关闭，并在消息框末尾追加用「」包住的路径，可以连续引用。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-102.json",
+    "governance/architecture/task-envelopes/impl-102.json",
+    "governance/architecture/evidence/ev-*-102.json",
+    "android_app/",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "引用可以改文件，或给出项目以外的路径时停止。",
+    "点图标导致目录抽屉关闭，或把路径写进目录页的消息框时停止。",
+    "把 Hermes 密钥交给手机时停止。",
+    "再往地球online 发一条 Hermes 对话时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：绝对路径只由项目根和相对路径拼成；连续引用另起一行追加；Mac 交回项目根且条目仍是相对路径。",
+    "runtime_e2e：会话抽屉里点左侧图标后抽屉仍开着，消息框出现用「」包住的绝对路径。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-directory-cite",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。目录仍只读。手机只为引用拿到当前项目根目录。"
+  }
+}

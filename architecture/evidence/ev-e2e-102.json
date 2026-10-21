@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-102",
+  "work_package_id": "wp-102",
+  "commit": "c0fffe95a414a714aad3c352f7c4da022396a865",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "Tocode 重新构建后用 SIGTERM 关掉旧进程，等 8642 释放再打开。adb install 到 3B161700G6F00000。中转协议没变，没有重新部署。",
+  "result_summary": "在「手机验收」的会话抽屉里点「对话附件-文件」左侧图标后，抽屉仍停在原来这一层。消息框出现用「」包住的该文件夹绝对路径。再点进文件夹，点 tocode-check.png 的左侧图标，抽屉没有关掉，也没有打开预览；消息框另起一行追加了这个文件的绝对路径。验收后把消息框里的路径删掉，没有发送。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有从手机读回剪贴板原文。目录页只复制、不写消息框，这次没有单独再点一次目录页。",
+    "没有往地球 online 发消息。桌面端 Hermes 仍在运行。"
+  ]
+}

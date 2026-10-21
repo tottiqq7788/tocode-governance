@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-102",
+  "work_package_id": "wp-102",
+  "commit": "c0fffe95a414a714aad3c352f7c4da022396a865",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest；mac_app ./scripts/test.sh",
+  "result_summary": "手机单测确认绝对路径只由项目根和相对路径拼成，点段被拒绝，连续引用另起一行追加。Mac 单测确认目录页带回项目根目录，条目本身仍是相对路径。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "中转没有改协议，这次没有重跑中转单测。",
+    "剪贴板和抽屉是否保持打开没有单测。"
+  ]
+}
