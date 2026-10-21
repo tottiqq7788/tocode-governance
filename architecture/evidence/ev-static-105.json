@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-105",
+  "work_package_id": "wp-105",
+  "commit": "21f1f0c9b42087416fabf1a739c5bee5aabcd61a",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：选中图片或文件后先在 Mac 暂存，暂存不在项目里，也不写入两个附件文件夹。发送时才落盘。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-105",
+  "work_package_id": "wp-105",
+  "commit": "21f1f0c9b42087416fabf1a739c5bee5aabcd61a",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；relay python3 -m unittest tests.test_route；android LinkDirectoryTest",
+  "result_summary": "暂存写在项目外。关联或项目对不上时不落盘。发送才写入对话附件-图片，并删掉暂存。去掉附件会删暂存。符号链接不能把暂存带到外面。中转只转发暂存编号，路由文件里没有文件内容和路径。已落盘的不再上传，已暂存的只落盘。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机界面上的上传中状态没有单测。"
+  ]
+}

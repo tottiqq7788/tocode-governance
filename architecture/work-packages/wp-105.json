@@ -1,0 +1,32 @@
+{
+  "id": "wp-105",
+  "title": "选中附件后先暂存",
+  "baseline_commit": "21f1f0c9b42087416fabf1a739c5bee5aabcd61a",
+  "goal": "选中图片或文件后立刻传到 Mac 暂存。暂存不写入项目和两个附件文件夹。点发送时才落盘，因此不用再等整份文件上传。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-105.json",
+    "governance/architecture/task-envelopes/impl-105.json",
+    "governance/architecture/evidence/ev-*-105.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "暂存写进项目目录或两个附件文件夹时停止。",
+    "手机可以指定落盘路径，或暂存编号能把文件写到项目外时停止。",
+    "中转把文件内容写入路由文件时停止。",
+    "没全部落盘就发给 Hermes，或已经落进附件文件夹的文件被删掉时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：暂存不在项目里；发送才写入对应附件文件夹；编号对不上或项目对不上时不写；去掉附件后暂存消失。中转只转发暂存编号，不把内容和路径写入路由。",
+    "runtime_e2e：手机选中文件后，未发送前项目附件文件夹里没有这份文件。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-attachment-preupload",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。选中附件后先暂存，发送时才落入两个附件文件夹。"
+  }
+}

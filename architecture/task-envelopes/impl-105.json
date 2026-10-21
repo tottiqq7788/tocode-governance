@@ -1,0 +1,42 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-105",
+  "role": "implementation_owner",
+  "baseline_commit": "21f1f0c9b42087416fabf1a739c5bee5aabcd61a",
+  "work_package_id": "wp-105",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-105.json",
+    "governance/architecture/task-envelopes/impl-105.json",
+    "governance/architecture/evidence/ev-*-105.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "最终只在当前项目的「对话附件-图片」和「对话附件-文件」里新建，同名不覆盖，解析后仍在项目内。",
+    "手机只交文件名、大小和种类，不交落盘路径。",
+    "中转只在内存转发，不把文件内容写入路由。",
+    "任何一份没落盘成功就不发给 Hermes。已经落进附件文件夹的文件留着。",
+    "单个文件不超过 20MB。"
+  ],
+  "must_reject": [
+    "选中后就把文件写进项目或两个附件文件夹。",
+    "手机指定保存位置。",
+    "用暂存编号把文件写到项目外，或把另一台关联的暂存落进当前项目。",
+    "去掉未发送附件后仍留下暂存。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：尚未发送的图片或文件。不变量：暂存不在项目内，落盘位置仍只由 Mac 决定，中转不保存内容，密钥留在 Mac。禁止结果：未发送就出现在附件文件夹、发送时重传已暂存的文件、失败仍发给 Hermes。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}

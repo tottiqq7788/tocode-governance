@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-105",
+  "work_package_id": "wp-105",
+  "commit": "21f1f0c9b42087416fabf1a739c5bee5aabcd61a",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "手机在「手机验收」的新会话里选中 tocode-stage.txt，未点发送。",
+  "result_summary": "选中后芯片只显示文件名，说明已经传完。Mac 暂存目录里有这份文件，项目的两个附件文件夹没有它。去掉芯片后暂存消失，附件文件夹仍只有原来的文件。没有发送。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "用来验收的文件只有 12 字节，芯片上的「上传中」在截图前已经结束。大文件会先显示上传中。"
+  ]
+}
