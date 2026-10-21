@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-101",
+  "work_package_id": "wp-101",
+  "commit": "ee14f2a82070a816e1c514e5240ea91b61670d9b",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest；mac_app ./scripts/test.sh；relay python3 -m unittest tests.test_route",
+  "result_summary": "Mac 单测确认目录先给当前这一层的一页，下一页接着上次的位置，列完后不再截断，点进文件夹只列那一层，点段和文件被拒绝。手机单测确认后一页接在前一页后面，不丢掉已列出的名字。中转单测确认 tree 会转发路径和偏移，负数和点段被拒绝，路由文件不留下文件夹名。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "界面滚动没有单测。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-101",
+  "work_package_id": "wp-101",
+  "commit": "ee14f2a82070a816e1c514e5240ea91b61670d9b",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：项目目录按当前这一层分页，滚到后面继续列出，直到这一层结束。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}

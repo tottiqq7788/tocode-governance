@@ -1,0 +1,31 @@
+{
+  "id": "wp-101",
+  "title": "项目目录按层继续列出",
+  "baseline_commit": "ee14f2a82070a816e1c514e5240ea91b61670d9b",
+  "goal": "项目目录不再停在前 300 项。当前打开的这一层先给一页，滚到后面继续列出，直到这一层列完。点进文件夹再列那一层。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-101.json",
+    "governance/architecture/task-envelopes/impl-101.json",
+    "governance/architecture/evidence/ev-*-101.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "目录可以增删改，或列到项目文件夹以外时停止。",
+    "中转把目录、路径或偏移写进路由文件时停止。",
+    "再往地球online 发一条 Hermes 对话时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：目录按层分页，下一页接着上一次的位置；中转转发目录路径和偏移，并拒绝点段和负数。",
+    "runtime_e2e：手机上项目目录不再提示只显示了前 300 项，滚到后面还能继续看到这一层。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-directory-paging",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。目录按当前这一层分页，滚到后面继续列出。仍然只读。"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-101",
+  "work_package_id": "wp-101",
+  "commit": "ee14f2a82070a816e1c514e5240ea91b61670d9b",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "中转 server.py 已同步到 39.107.140.16 并重启，https://totti.xin/health 返回 ok。Tocode 重新构建后用 SIGTERM 关掉旧进程，等 8642 释放再打开。adb install 到 3B161700G6F00000。",
+  "result_summary": "在「手机验收」里临时放了一个 100 项的文件夹。手机打开后先显示「已列出 80 项」，没有「只显示了前 300 项」。滚到后面出现第 100 项，回到顶部后变成「100 项」。验收用的文件夹随后删掉。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有往地球 online 发消息。桌面端 Hermes 仍在运行，没有锁定屏幕。",
+    "现有项目单层都不到 80 项，所以用临时文件夹确认翻页，看完即删。"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-101",
+  "role": "implementation_owner",
+  "baseline_commit": "ee14f2a82070a816e1c514e5240ea91b61670d9b",
+  "work_package_id": "wp-101",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-101.json",
+    "governance/architecture/task-envelopes/impl-101.json",
+    "governance/architecture/evidence/ev-*-101.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "目录仍然只读，路径解析后必须留在当前项目内。",
+    "中转不保存目录、路径或偏移。",
+    "文件预览仍按已读字符继续读取。"
+  ],
+  "must_reject": [
+    "列到前 300 项后不能再看后面的。",
+    "一次把整棵目录树都塞进一页。",
+    "用绝对路径、点段或空段指定要列的文件夹。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：当前项目里打开的这一层目录。不变量：只读、路径留在项目内、中转不落盘。禁止结果：停在前 300 项、列出项目外的条目。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}
