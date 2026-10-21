@@ -1,0 +1,30 @@
+{
+  "id": "wp-097",
+  "title": "预览可滚动分页，回复里的路径可以点开",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "goal": "点进文件后可以滚动阅读。预览按页继续读取，不在中途截断。过程回复展开时往下长。回复里的项目文件路径加粗标蓝并打开预览，文件夹路径只标蓝并在目录里打开。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-097.json",
+    "governance/architecture/task-envelopes/impl-097.json",
+    "governance/architecture/evidence/ev-*-097.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "预览可以改文件时停止。",
+    "把 API_SERVER_KEY 交给手机或中转时停止。",
+    "再往地球online 发一条 Hermes 对话时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：路径匹配取最长项目条目；Mac 预览按字符分页；中转转发 offset 并拒绝非法值。",
+    "runtime_e2e：真机上文件预览可以滚动，过程回复展开往下长。长文件的后续页依赖中转和 Mac 已部署。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-preview-scroll-path-links",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。预览滚动与分页、过程回复向下展开、回复中的文件和文件夹路径。"
+  }
+}

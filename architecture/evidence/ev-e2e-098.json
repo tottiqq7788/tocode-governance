@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-098",
+  "work_package_id": "wp-098",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "中转已部署并重启。Tocode 用新构建重新打开。adb install 后在 3B161700G6F00000 打开遥控页。",
+  "result_summary": "遥控页是设备状态、临时黑屏、取消黑屏、锁定屏幕，下面列出桌面和窗口。点窗口后该桌面变成当前空间，窗口标成当前。取消黑屏的结果是「现在没有黑屏」。随后点回原来的全屏空间，结果是「已切换」。没有点锁定屏幕。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有实际锁上正在使用的 Mac。"
+  ]
+}

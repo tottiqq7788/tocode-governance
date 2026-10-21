@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-097",
+  "work_package_id": "wp-097",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest；mac_app ./scripts/test.sh；relay python3 -m unittest tests.test_route",
+  "result_summary": "手机单测确认回复里的路径取最长的项目条目，文件和文件夹分开。Mac 单测确认预览先给一页，下一页从上次位置继续。中转单测确认 preview 会转发 offset，负数被拒绝。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "界面滚动方向和预览外观没有单测。"
+  ]
+}

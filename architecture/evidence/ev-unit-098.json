@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-098",
+  "work_package_id": "wp-098",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest；mac_app ./scripts/test.sh；relay python3 -m unittest tests.test_route.py",
+  "result_summary": "手机按钮只剩设备状态、临时黑屏、取消黑屏、锁定屏幕。Mac 拒绝不在目录里的窗口，点桌面只切空间，当前窗口会标出来。中转拒绝滚轮，也拒绝在黑屏或锁屏上夹带切换目标，目录正文不落盘。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "锁屏的系统调用没有在单测里真的锁屏幕。"
+  ]
+}

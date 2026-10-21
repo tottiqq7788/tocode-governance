@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-097",
+  "work_package_id": "wp-097",
+  "commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "adb install -r app-debug.apk 后 am start。中转已部署，Tocode 已用新构建重新打开。",
+  "result_summary": "调试包已装到 3B161700G6F00000，但手机停在锁屏通知栏，没有解锁，所以文件预览滚动、分页和路径点击没有在真机上看到。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机锁屏，未输入密码，也未划开通知。预览滚动未在真机确认。"
+  ]
+}

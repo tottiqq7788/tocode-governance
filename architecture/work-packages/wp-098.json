@@ -1,0 +1,31 @@
+{
+  "id": "wp-098",
+  "title": "遥控页改为桌面和窗口",
+  "baseline_commit": "2fa4e85290b75436b96a956505e4905de4599fd3",
+  "goal": "手机遥控只留下设备状态、临时黑屏、取消黑屏和锁定屏幕。列出与按住 totti 点菜单栏图标相同的桌面和窗口，点一下按同样规则切换。滚轮、跟随和快捷键开关不再从手机拨。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-098.json",
+    "governance/architecture/task-envelopes/impl-098.json",
+    "governance/architecture/evidence/ev-*-098.json",
+    "android_app/",
+    "mac_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "手机可以拨回滚轮、跟随或快捷键开关时停止。",
+    "切换目标不在刚读到的目录里仍被执行时停止。",
+    "把屏幕内容、路径或密钥交给中转保存时停止。",
+    "菜单栏再次点击临时黑屏会解除时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：手机按钮只剩四项；中转拒绝旧动作和夹带的切换目标；Mac 只接受目录里仍在的空间和窗口。",
+    "runtime_e2e：真机遥控页能看到桌面和窗口。锁屏和取消黑屏只看结果文案，不实际锁上正在使用的 Mac。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-remote-desktops",
+    "scope": "修改已有 L0：l0-android-remote-control、l0-desktop-window-switch、l0-temporary-blackout。遥控白名单、同一份桌面窗口目录、手机取消黑屏。"
+  }
+}
