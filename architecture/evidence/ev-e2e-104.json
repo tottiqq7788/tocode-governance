@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-104",
+  "work_package_id": "wp-104",
+  "commit": "f257fb9808e695d7ee8aff9575fed776ca5b0e1f",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "重开 Tocode 后，adb install 到 3B161700G6F00000。在「手机验收」目录打开 对话附件-文件/tocode-check.png。",
+  "result_summary": "预览标题是 tocode-check.png，路径是 对话附件-文件/tocode-check.png。画面中间是一条 RGB（0, 128, 64）的绿色，没有出现打不开。没有发送消息。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "没有再看大图收成 JPEG 的真机效果。没有往地球 online 发消息。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-104",
+  "work_package_id": "wp-104",
+  "commit": "f257fb9808e695d7ee8aff9575fed776ca5b0e1f",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：png、jpeg、gif、webp、heic 可以只读预览，其它二进制仍不返回。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}

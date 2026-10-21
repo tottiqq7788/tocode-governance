@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-104",
+  "work_package_id": "wp-104",
+  "commit": "f257fb9808e695d7ee8aff9575fed776ca5b0e1f",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh",
+  "result_summary": "小 png 原样返回且不分页。扩展名是图片但文件头不是时拒绝。gif 收成 JPEG。放不进预览结果的 png 收成 JPEG。越界和非图片二进制仍拒绝。安卓 LinkDirectoryTest 通过。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "手机界面把 base64 画成图片没有单测。"
+  ]
+}

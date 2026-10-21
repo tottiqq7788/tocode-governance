@@ -1,0 +1,30 @@
+{
+  "id": "wp-104",
+  "title": "文件预览可以看图片",
+  "baseline_commit": "f257fb9808e695d7ee8aff9575fed776ca5b0e1f",
+  "goal": "点开项目里的 png、jpeg、gif、webp、heic 时，手机显示这张图。文本预览不变，其它二进制仍然打不开。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-104.json",
+    "governance/architecture/task-envelopes/impl-104.json",
+    "governance/architecture/evidence/ev-*-104.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "文本预览不再按页续读时停止。",
+    "图片可以改文件，或路径可以走出项目时停止。",
+    "其它二进制被当成正文返回时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：小 png 原样返回；越界仍拒绝；非图片二进制仍拒绝。",
+    "runtime_e2e：手机打开已有的 tocode-check.png，能看到绿色，而不是打不开。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-21-image-preview",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。图片可以只读预览，其它二进制仍不返回。"
+  }
+}

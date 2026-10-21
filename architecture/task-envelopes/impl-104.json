@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-104",
+  "role": "implementation_owner",
+  "baseline_commit": "f257fb9808e695d7ee8aff9575fed776ca5b0e1f",
+  "work_package_id": "wp-104",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-104.json",
+    "governance/architecture/task-envelopes/impl-104.json",
+    "governance/architecture/evidence/ev-*-104.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "文本仍按已读字符分页，Markdown 仍在手机排版。",
+    "路径解析后必须留在当前项目内。",
+    "预览只读，中转不保存预览正文，密钥留在 Mac。",
+    "其它二进制仍然拒绝。"
+  ],
+  "must_reject": [
+    "把图片当成文本拼页。",
+    "gif、webp、heic 或超过预览上限的图原样塞进结果。",
+    "越界、符号链接逃出项目、文件夹被当成图片返回。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：使用。角色：手机用户。业务对象：当前项目内的图片文件。不变量：只读、路径留在项目内、密钥留在 Mac、文本分页不变。禁止结果：其它二进制被返回、图片被当成文本翻页、大图撑破现有预览结果上限。L1：l1-phone-hermes-chat。L2：l2-phone-hermes-chat。"
+}
