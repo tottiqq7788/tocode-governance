@@ -1,0 +1,30 @@
+{
+  "id": "wp-112",
+  "title": "三端断连诊断日志",
+  "baseline_commit": "9112fe72df8c27145518f08992fcc187ba863efc",
+  "goal": "Mac、安卓、中转各自落本地 JSONL 诊断日志，聚焦关联通道生命周期与 mac_offline，便于对照时间线排查手机侧「Mac 断连」；安卓可导出诊断包，Mac 可打开诊断目录。",
+  "scope": [
+    "governance/architecture/work-packages/wp-112.json",
+    "governance/architecture/task-envelopes/impl-112.json",
+    "governance/architecture/evidence/ev-*-112.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "把 token、绑定密钥、聊天正文、附件字节或路径明文写入诊断日志时停止。",
+    "让中转把业务正文持久化进 routes.json 时停止。",
+    "经中转上传汇总诊断日志时停止。",
+    "改动重连策略或通道业务语义时停止并另开工作包。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：事件序列化过滤敏感字段；落地器可写；relay 关闭记 ws.close。",
+    "runtime_e2e：人工对照拔网线/杀进程时间线（可 skipped）。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-22-diag-disconnect-logs",
+    "scope": "不影响 L0；诊断为运维旁路。"
+  }
+}

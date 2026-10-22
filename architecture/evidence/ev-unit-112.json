@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-112",
+  "work_package_id": "wp-112",
+  "commit": "2386fdde4384de079917f58a535ef053e347ade3",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "./gradlew :app:testDebugUnitTest --tests app.tocode.android.DiagnosticLogTest; bash mac_app/scripts/test.sh; python3 -m unittest tests.test_route.DiagTests",
+  "result_summary": "Android DiagnosticLog sanitize 过滤敏感字段通过；Mac DiagnosticLog sanitize+落盘通过；relay DiagTests 覆盖敏感字段过滤与 ws.close 落盘。",
+  "limitations": [
+    "多仓实现 commit：android=2386fdde4384de079917f58a535ef053e347ade3 mac=be3f280dbd752eafde5317b4ea0b57cc983fac78 relay=7a65dcaac49a471de97c21a1ca065f540f7b70e8。",
+    "治理仓 commit 见本仓提交。"
+  ]
+}

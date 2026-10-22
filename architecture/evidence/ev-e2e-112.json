@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-112",
+  "work_package_id": "wp-112",
+  "commit": "2386fdde4384de079917f58a535ef053e347ade3",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "manual：拔网线 / 杀 Mac 进程 / 杀安卓进程后对照三端 JSONL 时间线（online vs mac_offline、ws.ping_fail、forward.mac_offline）",
+  "result_summary": "本工作包以单元与静态证据为主；真机断连时间线对照留给部署后人工验收。",
+  "limitations": [
+    "运行态 E2E 未在本机自动执行。",
+    "相关实现 commit：android=2386fdde4384de079917f58a535ef053e347ade3 mac=be3f280dbd752eafde5317b4ea0b57cc983fac78 relay=7a65dcaac49a471de97c21a1ca065f540f7b70e8。"
+  ]
+}
