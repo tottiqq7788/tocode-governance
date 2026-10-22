@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-110",
+  "work_package_id": "wp-110",
+  "commit": "9a8cd46a44c0d1bc2a183bb89c6b8c9b9d12aea4",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest; bash mac_app/scripts/test.sh; python3 -m unittest discover -s relay/tests",
+  "result_summary": "Android 9a8cd46、Mac 5b0ac7b、relay 0ae7f9c 单测通过；PREVIEW_RESULT_LIMIT=1500000。",
+  "limitations": [
+    "多仓实现 commit：android=9a8cd46a44c0d1bc2a183bb89c6b8c9b9d12aea4 mac=5b0ac7b19817901cdf8bddcc073af8ce821cc713 relay=0ae7f9c9d82f6bbef4594d433b07ac86759251f0。",
+    "治理仓 commit 见本仓提交。"
+  ]
+}

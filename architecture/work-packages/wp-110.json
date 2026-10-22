@@ -1,0 +1,31 @@
+{
+  "id": "wp-110",
+  "title": "聊天 Markdown 表格、内嵌图片与 PDF 预览",
+  "baseline_commit": "1f7991da367bc4fc8292af4a52c44ed6af9f25e7",
+  "goal": "新会话提示文案与目录抽屉动画；对话/预览渲染 Markdown 表格；项目内相对路径图片在回复中内嵌并可点进全屏；PDF 在预览通道上限内整份预览。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-110.json",
+    "governance/architecture/task-envelopes/impl-110.json",
+    "governance/architecture/evidence/ev-*-110.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "把 PDF 或图片正文写入中转路由文件时停止。",
+    "预览返回越出项目根的路径或任意二进制时停止。",
+    "截断半份 PDF 仍标为成功时停止。",
+    "实际影响超出声明的 L0 集合时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：markdown 表格解析；图片相对路径抽取；Mac PDF 魔数与过大拒绝；relay PREVIEW_RESULT_LIMIT。",
+    "runtime_e2e：新会话三提示；目录抽屉滑入；回复表格与内嵌图点开全屏；小 PDF 可翻页预览。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-22-chat-markdown-pdf",
+    "scope": "修改已有 L0：l0-phone-hermes-chat（连带 L1 l1-phone-hermes-chat）。提示文案与目录动画不影响 L0。"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-110",
+  "role": "implementation_owner",
+  "baseline_commit": "1f7991da367bc4fc8292af4a52c44ed6af9f25e7",
+  "work_package_id": "wp-110",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-110.json",
+    "governance/architecture/task-envelopes/impl-110.json",
+    "governance/architecture/evidence/ev-*-110.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "预览路径解析后仍在项目内。",
+    "中转不持久化预览正文。",
+    "遥控白名单与微信通道不变。",
+    "过大 PDF 明确失败，不截断半份。"
+  ],
+  "must_reject": [
+    "越出项目根的相对路径预览。",
+    "非 pdf/图片的其它二进制预览成功。",
+    "把预览正文写入 routes.json。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明的 L0 集合时停止并重新准入。"
+  ],
+  "notes": "阶段：手机对话呈现与文件预览。角色：安卓用户、Mac 上 Hermes 项目。业务对象：回复 Markdown、项目内图片路径、PDF 预览。不变量：只读预览；图片/PDF 走既有 preview 通道。禁止结果：任意二进制外泄、半份 PDF。L1：l1-phone-hermes-chat。L2：Android ChatScreen/FilePreview、Mac PhoneHermesDirectory、relay PREVIEW_RESULT_LIMIT。"
+}

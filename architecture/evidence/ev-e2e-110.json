@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-110",
+  "work_package_id": "wp-110",
+  "commit": "9a8cd46a44c0d1bc2a183bb89c6b8c9b9d12aea4",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "manual：新会话三提示、目录抽屉滑入、回复表格与内嵌图点开全屏、小 PDF 翻页预览",
+  "result_summary": "本工作包以单元与静态证据为主；真机/实机 E2E 留给部署后人工验收。",
+  "limitations": [
+    "运行态 E2E 未在本机自动执行。",
+    "相关实现 commit：android=9a8cd46a44c0d1bc2a183bb89c6b8c9b9d12aea4 mac=5b0ac7b19817901cdf8bddcc073af8ce821cc713 relay=0ae7f9c9d82f6bbef4594d433b07ac86759251f0。"
+  ]
+}
