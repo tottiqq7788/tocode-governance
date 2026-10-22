@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-109",
+  "work_package_id": "wp-109",
+  "commit": "23112fe227807eb01aa4724e6e13bd4b6eb28da8",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。已改写 l0-android-remote-control、l0-local-model-relay-menu、l0-local-openai-relay 及连带 L0；android-remote-control-v1 与 local-openai-relay-v1 合同同步。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}

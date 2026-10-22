@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-109",
+  "work_package_id": "wp-109",
+  "commit": "23112fe227807eb01aa4724e6e13bd4b6eb28da8",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "manual: Mac 设绑定密钥 → 绑定应用出码 → 手机输对/错密钥；模型密钥创建设备验证复制",
+  "result_summary": "实现已落地，真机/实机 E2E 尚未在本会话执行，标记为 skipped。",
+  "limitations": [
+    "缺少真机 Touch ID 与安卓扫码联调运行态证据。",
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。"
+  ]
+}

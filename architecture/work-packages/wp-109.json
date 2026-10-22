@@ -1,0 +1,35 @@
+{
+  "id": "wp-109",
+  "title": "绑定密钥与本地 Key 设备验证",
+  "baseline_commit": "23112fe227807eb01aa4724e6e13bd4b6eb28da8",
+  "goal": "Mac「应用」增加绑定密钥并作为安卓配对兑码前置；本地 tc_ Key 去掉查看密码，改为 Touch ID/设备密码解锁复制。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-109.json",
+    "governance/architecture/task-envelopes/impl-109.json",
+    "governance/architecture/evidence/ev-*-109.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "把绑定密钥或其它凭据塞进配对二维码时停止。",
+    "中转把绑定密钥明文或摘要写入 devices/links 持久化文件时停止。",
+    "本地 tc_ Key 明文写入 model-relay.json 或其它非 Keychain 文件时停止。",
+    "HTTP Bearer 鉴权为复制明文而去解密 Keychain 时停止。",
+    "校验失败仍落盘 Android link 或建立关联时停止。",
+    "实际影响超出声明的 L0 集合时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：本地 Key 记录形状与 digest 鉴权；relay 缺 digest/错 key/对 key；Android pairing payload 拒绝 credential。",
+    "runtime_e2e：Mac 设绑定密钥后才能出码；手机输对/错密钥；模型密钥创建无查看密码、设备验证后复制。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-22-binding-key-device-auth",
+    "scope": "修改已有 L0：l0-android-remote-control、l0-local-model-relay-menu、l0-local-openai-relay，并连带 l0-phone-hermes-chat、l0-hermes-gateway-link、l0-settings-portable-transfer、l0-user-manual。"
+  }
+}

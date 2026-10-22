@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-109",
+  "work_package_id": "wp-109",
+  "commit": "23112fe227807eb01aa4724e6e13bd4b6eb28da8",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd relay && python3 -m unittest tests.test_route; cd mac_app && ./scripts/test.sh",
+  "result_summary": "Relay BindingKeyTests：缺 digest 拒绝、create 禁止明文 binding_key、错 key 不建 link、对 key 成功且持久化不含密钥。Mac 全量测试通过：新本地 Key 无查看密码密文、旧密文可迁移、绑定密钥设置后门禁后可配对、二维码不含 binding。",
+  "limitations": [
+    "这次改动还没提交，证据没有绑定包含这些改动的不可变 commit。",
+    "未在本机跑 Android 仪器化测试；配对 payload 拒绝 credential 的既有单测未改。"
+  ]
+}

@@ -8,11 +8,18 @@
   "authority": {
     "pairing_qr": "tocode-app://pair?relay=<url>&code=<8 chars>",
     "pairing_ttl_seconds": 180,
-    "relay_persistence": "devices and links only; no command or result bodies",
-    "mac_association_file_mode": "0600"
+    "create_pairing_body": "{ binding_key_digest }",
+    "redeem_body": "{ android_id, android_name?, binding_key }",
+    "binding_key_digest_alg": "SHA-256",
+    "relay_persistence": "devices and links only; no command or result bodies; binding key plaintext never persisted",
+    "mac_association_file_mode": "0600",
+    "mac_binding_key_store": "Keychain userPresence for plaintext; SHA-256 digest in remote-control.json"
   },
   "invariants": [
     "One association binds one Android remote to one Mac. One Android may hold many associations, and one Mac may be linked from many Androids.",
+    "Mac must have a binding key before starting association. create_pairing requires a non-empty binding_key_digest; the digest is held only on the in-memory pairing until redeem or expiry.",
+    "redeem requires binding_key and succeeds only when SHA-256(binding_key) matches the pairing digest via constant-time comparison. Failed verification must not create a link.",
+    "Changing the Mac binding key does not revoke existing links; it only affects subsequent pairings.",
     "The relay forwards only the fixed action whitelist in memory and returns mac_offline immediately when that Mac socket is absent.",
     "accepted means the peer socket received the frame. result is the Mac execution outcome and is correlated by request_id.",
     "Deleting an association removes the route immediately and notifies the peer that is still connected.",
@@ -33,9 +40,11 @@
   ],
   "prohibited_results": [
     "Persisting a command, parameter, or result body in the relay route file.",
+    "Persisting binding key plaintext or digest on devices/links durable storage.",
     "Routing a command to a Mac that is not the association target.",
     "Keeping a deleted association usable.",
     "Reusing a pairing code or accepting an expired code.",
-    "Carrying a role, prompt, or credential inside the pairing QR."
+    "Creating a link when binding_key is missing or does not match the pairing digest.",
+    "Carrying a role, prompt, binding key, or other credential inside the pairing QR."
   ]
 }

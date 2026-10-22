@@ -1,0 +1,49 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-109",
+  "role": "implementation_owner",
+  "baseline_commit": "23112fe227807eb01aa4724e6e13bd4b6eb28da8",
+  "work_package_id": "wp-109",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-109.json",
+    "governance/architecture/task-envelopes/impl-109.json",
+    "governance/architecture/evidence/ev-*-109.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-android-remote-control",
+    "l0-local-model-relay-menu",
+    "l0-local-openai-relay",
+    "l0-phone-hermes-chat",
+    "l0-hermes-gateway-link",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "配对二维码只含 relay 与 8 位配对码。",
+    "本地 HTTP Bearer 鉴权只比 digest。",
+    "已有 Android↔Mac link 不因更换绑定密钥而自动失效。",
+    "微信绑定流程不变。"
+  ],
+  "must_reject": [
+    "QR 或 pairing 创建 body 携带绑定密钥明文。",
+    "中转持久化绑定密钥明文或 digest。",
+    "本地 Key 明文落盘到 JSON。",
+    "redeem 失败仍建立关联。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit",
+    "runtime_e2e"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明的 L0 集合时停止并重新准入。"
+  ],
+  "notes": "阶段：配对与密钥查看。角色：Mac 机主、安卓遥控器。业务对象：绑定密钥、本地 tc_ Key、配对码。不变量：QR 无凭据；兑码须匹配 digest；查看须设备验证。禁止结果：明文落盘到中转或 JSON、绕过设备验证复制。L1：遥控关联与本地中转菜单。L2：Mac StatusItem/RemoteControl、relay server、Android ScanScreen。"
+}
