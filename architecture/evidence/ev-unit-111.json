@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-111",
+  "work_package_id": "wp-111",
+  "commit": "a6d4bf278f75b6f706886516a0c4b9c6d98bd1aa",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest; bash mac_app/scripts/test.sh; python3 -m unittest tests.test_route",
+  "result_summary": "Android a6d4bf2、Mac d936563、relay a5518eb 单测通过；覆盖新 KeyboardMappingAction 分组、download 点段拒绝、markdownPieces 识别 mermaid、relay download 白名单。",
+  "limitations": [
+    "多仓实现 commit：android=a6d4bf278f75b6f706886516a0c4b9c6d98bd1aa mac=d936563a33171d69cfcfc0ceaacd4bc90947c22f relay=a5518eb1de767334ea71eeced7e21144444c573b。",
+    "治理仓 commit 见本仓提交。"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-111",
+  "role": "implementation_owner",
+  "baseline_commit": "461d7ede0b71d8882b328f3c3d65b4016215f95a",
+  "work_package_id": "wp-111",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-111.json",
+    "governance/architecture/task-envelopes/impl-111.json",
+    "governance/architecture/evidence/ev-*-111.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-keyboard-remapping",
+    "l0-trackpad-shortcuts",
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "映射合成事件不二次进入重映射。",
+    "下载路径解析后仍在项目内。",
+    "中转不持久化下载正文。",
+    "手机最终落盘为解压后的正常文件结构。"
+  ],
+  "must_reject": [
+    "越出项目根的下载路径。",
+    "把下载正文写入 routes.json。",
+    "把传输 zip 当作最终用户可见产物留下。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": ["实际影响超出声明的 L0 集合时停止并重新准入。"],
+  "notes": "阶段：输入映射、手机目录下载、Markdown Mermaid。L2：KeyboardShortcutMapping、PhoneHermes download、relay、Android FilesTab/MermaidView。"
+}

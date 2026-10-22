@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-111",
+  "work_package_id": "wp-111",
+  "commit": "a6d4bf278f75b6f706886516a0c4b9c6d98bd1aa",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。已改写 l0-keyboard-remapping、l0-trackpad-shortcuts、l0-phone-hermes-chat，并新增 wp-111 / impl-111。",
+  "limitations": [
+    "静态审计针对治理文件；代码实现 commit 见 ev-unit-111。",
+    "审计只检查结构和引用，不检查运行结果。"
+  ]
+}

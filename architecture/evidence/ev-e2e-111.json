@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-111",
+  "work_package_id": "wp-111",
+  "commit": "a6d4bf278f75b6f706886516a0c4b9c6d98bd1aa",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "manual：映射触发调度中心/取消黑屏；目录长按多选下载落盘 Download/tocode/yyMMdd；回复 Mermaid 全屏平移缩放",
+  "result_summary": "本工作包以单元与静态证据为主；真机/实机 E2E 留给部署后人工验收。",
+  "limitations": [
+    "运行态 E2E 未在本机自动执行。",
+    "相关实现 commit：android=a6d4bf278f75b6f706886516a0c4b9c6d98bd1aa mac=d936563a33171d69cfcfc0ceaacd4bc90947c22f relay=a5518eb1de767334ea71eeced7e21144444c573b。"
+  ]
+}

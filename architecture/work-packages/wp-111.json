@@ -1,0 +1,31 @@
+{
+  "id": "wp-111",
+  "title": "映射功能扩展、目录多选下载与 Mermaid",
+  "baseline_commit": "461d7ede0b71d8882b328f3c3d65b4016215f95a",
+  "goal": "键盘/触控板映射增加调度中心等系统项与取消黑屏等工具项；项目目录长按多选下载到手机 Download/tocode/日期目录；Markdown/回复渲染 Mermaid 并可全屏画布查看。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-111.json",
+    "governance/architecture/task-envelopes/impl-111.json",
+    "governance/architecture/evidence/ev-*-111.json",
+    "mac_app/",
+    "relay/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "下载把文件正文写入中转路由文件时停止。",
+    "下载允许越出项目根的路径时停止。",
+    "手机最终落盘留下未解压的传输 zip 给用户时停止。",
+    "实际影响超出声明的 L0 集合时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：新 KeyboardMappingAction 分组；download 路径拒绝点段；markdownPieces 识别 mermaid。",
+    "runtime_e2e：映射触发调度中心；多选下载落盘；回复 Mermaid 可全屏。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-22-mapping-download-mermaid",
+    "scope": "修改已有 L0：l0-keyboard-remapping、l0-trackpad-shortcuts、l0-phone-hermes-chat。"
+  }
+}
