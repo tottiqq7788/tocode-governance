@@ -25,7 +25,7 @@
   },
   "invariants": [
     "Only bookmarks and bookmark folders sync. History, passwords, cookies, extensions, open tabs, separators, and Firefox tags/keywords are out of scope.",
-    "Canonical URL identity: scheme and host lowercased, default ports stripped, trailing slash on path removed; query and fragment kept as-is.",
+    "Canonical URL identity: scheme and host lowercased, default ports stripped, trailing slash on path removed; query and fragment participate after percent-decoding (e.g. %2F and / are the same identity). Host Swift and extension JS canonicalize must agree.",
     "One canonical URL yields one ledger bookmark entry across all browsers and Macs in the sync domain.",
     "Layout authority: after merge or CLI mutation, connected browsers must match ledger folder path, title, and siblingIndex (create, move, reorder, tombstone remove).",
     "Toolbar, other, and mobile roots keep that root for all nested folders: path identity is kind plus segments; a folder under toolbar does not merge with a same-named folder under other or mobile.",
@@ -48,6 +48,8 @@
     "CLI may create empty folder records, delete empty folders, prune empty shells, and reorder or rename/move folder paths. Folder deletes leave folder tombstones so browser ingest and remote merge cannot revive them; connected browsers receive remove_folder. Deleting a folder that still contains bookmarks is forbidden; toolbar/other/mobile roots themselves cannot be deleted.",
     "CLI add/update upserts folder records for the target path and its ancestors so empty folders remain authoritative after the last bookmark moves out (cleanup is explicit prune/delete).",
     "CLI bookmark apply --file plan.json [--dry-run] applies an ordered list of add|update|delete bookmark ops against the ledger; dry-run does not persist.",
+    "CLI bookmark add (and apply add) is upsert by canonical URL: if the URL already exists, the entry is merged/updated and the receipt must expose created=false (merged=true); true create sets created=true.",
+    "Folder path normalize may remap other|named paths whose first segment is a toolbar alias into toolbar + remaining segments (e.g. other/书签工具栏/官网 → toolbar/官网), but must not collapse a lone other/<toolbarAlias> shell into the bare toolbar root (that shell must remain addressable for delete).",
     "Formal ledger stays on bookmark-ledger.json and the existing formal remote room. A separate 7-day backup pack lives under Application Support bookmark-backups/ and in an isolated backup remote room; daily job full-overwrites today's slot and drops slots older than today-6 days.",
     "Backup room_id = SHA-256 hex of (remote_key UTF-8 || \"\\ntocode-bookmark-backup-pack-v1\"); verifier = HMAC-SHA256(key=remote_key, msg=\"tocode-bookmark-backup-pack-v1\") as hex; same AES-256-GCM cipher as formal. Backup never participates in browser reconcile.",
     "Restore replaces the formal ledger wholesale from a chosen day slot, then reconciles connected browsers and force-pushes the formal room without merging the restored snapshot into a stale remote formal copy."
@@ -88,6 +90,9 @@
     "Stamping knownLayout from ledger intent after Index out of bounds or without measured folder|index|title matching intent.",
     "Reporting unconditional 已对齐 when purge failed/skipped or poisoned URLs remain.",
     "Letting a local folder tombstone permanently block a newer remote folder recreate (or the reverse asymmetry).",
-    "Marking a browser offline in 拓展安装 checkmarks while another live Native bridge still holds the same browser:profile key."
+    "Marking a browser offline in 拓展安装 checkmarks while another live Native bridge still holds the same browser:profile key.",
+    "Treating percent-encoded and decoded query/fragment forms of the same URL as different ledger identities between host and extension.",
+    "Normalizing other/<toolbarAlias> (single segment) into the undeletable toolbar root.",
+    "CLI add/apply reporting ok without distinguishing create vs merge for an existing canonical URL."
   ]
 }

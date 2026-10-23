@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-131",
+  "work_package_id": "wp-131",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 L0 已澄清 URL 百分号解码同一身份、other 空壳可删、add upsert 回执。"
+}

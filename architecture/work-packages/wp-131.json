@@ -1,0 +1,26 @@
+{
+  "id": "wp-131",
+  "title": "书签 URL 规范化对齐与 other 空壳可删",
+  "baseline_commit": "331b5cf40a1cb8141c10e55b1677496cd98f9954",
+  "goal": "扩展与主机 canonicalize 对 query/fragment 百分号解码一致；other/<toolbarAlias> 空壳可寻址删除；add/apply 回执区分 created/merged。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-131.json",
+    "governance/architecture/task-envelopes/impl-131.json",
+    "governance/architecture/evidence/ev-*-131.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实际把账本批量改成浏览器百分号形态或破坏 other/书签工具栏/子路径收编时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：百分号同一身份、空壳可删、add created/merged 单测通过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-24-bookmark-url-canon-other-shell",
+    "scope": "修改 l0-bookmark-sync：URL 身份对齐、空壳寻址、add 回执。"
+  }
+}

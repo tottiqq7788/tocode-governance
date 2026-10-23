@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-131",
+  "role": "implementation_owner",
+  "baseline_commit": "331b5cf40a1cb8141c10e55b1677496cd98f9954",
+  "work_package_id": "wp-131",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-131.json",
+    "governance/architecture/task-envelopes/impl-131.json",
+    "governance/architecture/evidence/ev-*-131.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "other/书签工具栏/子路径仍归一到 toolbar/子路径。",
+    "不以 update --new-url 批量改写账本百分号形态。"
+  ],
+  "must_reject": [
+    "主机与扩展对 %2F 与 / 判为不同 URL。",
+    "other/<toolbarAlias> 单段收成不可删根。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "JS canonicalize 解码 query/fragment；normalizeFolderPath 保留 other 纯别名空壳；add 回执 created/merged。"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-131",
+  "work_package_id": "wp-131",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "单测通过：fragment/query %2F 同一身份；other/书签栏类空壳可删；add created/merged。"
+}
