@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-125",
+  "work_package_id": "wp-125",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh && bash mac_app/scripts/build.sh",
+  "summary": "单元测试全部通过；Tocode.app 可编译。结构拆分后 BookmarkSyncService 约 536 行，备份/房间客户端独立，菜单与对账泵已抽出。"
+}

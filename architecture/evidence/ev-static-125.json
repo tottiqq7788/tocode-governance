@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-125",
+  "work_package_id": "wp-125",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；l2-bookmark-sync selectors 已与 Backup/RoomClient/MenuBuilder/Ledger 拆分对齐。"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-125",
+  "role": "implementation_owner",
+  "baseline_commit": "d99a121a979bafe531297435dacba41dfa67421a",
+  "work_package_id": "wp-125",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-125.json",
+    "governance/architecture/task-envelopes/impl-125.json",
+    "governance/architecture/evidence/ev-*-125.json",
+    "mac_app/"
+  ],
+  "l0_impact": "none",
+  "l0_rule_ids": [],
+  "must_preserve": [
+    "正式与备份房间派生、日备裁剪、还原整本覆盖与强制推正式房间语义不变。",
+    "书签菜单标题与层级不变；CLI bookmark backup 白名单不变。"
+  ],
+  "must_reject": [
+    "借结构拆分改动 L0 行为或 relay 协议。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0_impact none 时停止并重新准入。"
+  ],
+  "notes": "阶段 A→B→C→D：RoomClient/BackupService、MenuBuilder、Ledger/ReconcilePump、selectors 与 test.sh glob。"
+}
