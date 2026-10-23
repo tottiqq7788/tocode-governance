@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-128",
+  "work_package_id": "wp-128",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "单测通过：apply --dry-run 不落盘；apply 串行 update/add 写回。"
+}

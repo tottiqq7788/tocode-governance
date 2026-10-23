@@ -1,0 +1,26 @@
+{
+  "id": "wp-128",
+  "title": "书签 CLI：bookmark apply 批量",
+  "baseline_commit": "2713c5d943f892c925de130f30698cb5accfbe8e",
+  "goal": "tocode bookmark apply --file plan.json [--dry-run] 串行批处理增删改，输出逐条结果，便于分拣。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-128.json",
+    "governance/architecture/task-envelopes/impl-128.json",
+    "governance/architecture/evidence/ev-*-128.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实际引入任意 shell 执行或绕过账本权威写入时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：apply dry-run 与串行写回单测通过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-folder-crud",
+    "scope": "修改 l0-cli-control：bookmark apply。"
+  }
+}

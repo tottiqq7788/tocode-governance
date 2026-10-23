@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-127",
+  "role": "implementation_owner",
+  "baseline_commit": "2713c5d943f892c925de130f30698cb5accfbe8e",
+  "work_package_id": "wp-127",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-127.json",
+    "governance/architecture/task-envelopes/impl-127.json",
+    "governance/architecture/evidence/ev-*-127.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync",
+    "l0-cli-control"
+  ],
+  "must_preserve": [
+    "有书签的夹不得被 delete/prune 静默吞掉。",
+    "toolbar/other/mobile 三个根本身不可删除。",
+    "空标题占位 purge 语义不变。"
+  ],
+  "must_reject": [
+    "只删账本夹记录而不写夹墓碑、不下行删浏览器夹。",
+    "删夹导致书签丢失。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "阶段：夹权威写入。禁止结果：空夹无法创建或搬空后无法清理。"
+}

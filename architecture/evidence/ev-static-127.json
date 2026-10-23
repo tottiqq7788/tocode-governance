@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-127",
+  "work_package_id": "wp-127",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 L0 已声明夹 CRUD、夹墓碑与 remove_folder。"
+}

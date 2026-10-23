@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-128",
+  "work_package_id": "wp-128",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同已声明 bookmark apply。"
+}

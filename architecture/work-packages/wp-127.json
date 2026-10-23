@@ -1,0 +1,26 @@
+{
+  "id": "wp-127",
+  "title": "书签 CLI：空夹 CRUD、清理与夹排序",
+  "baseline_commit": "2713c5d943f892c925de130f30698cb5accfbe8e",
+  "goal": "CLI 可建空夹、删空夹/剪枝空壳、改夹序与路径；夹墓碑防止浏览器与远程回潮；add/update 写入夹记录。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-127.json",
+    "governance/architecture/task-envelopes/impl-127.json",
+    "governance/architecture/evidence/ev-*-127.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实际改动备份语义或改成「删夹吞书签」时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：夹 create/delete/prune/move 与墓碑不回潮单测通过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-folder-crud",
+    "scope": "修改 l0-cli-control 与 l0-bookmark-sync：夹 CRUD、夹墓碑、扩展 remove_folder。"
+  }
+}

@@ -41,6 +41,9 @@
     "CLI bookmark commands mutate the same ledger and may pull with the Keychain remote key; they never print the remote key plaintext.",
     "CLI --folder accepts rooted paths: toolbar|other|mobile (and Chinese aliases) alone or as a prefix before /segments (e.g. toolbar/work/a, 书签栏/工作). Explicit named: prefix yields kind=named. A path without a root prefix and without named: is kind=named. Invalid folder strings fail with non-zero exit; rooted prefixes must not silently become named.",
     "CLI bookmark folders [--json] is read-only and exports the ledger folder tree (kind, segments, siblingIndex, child counts, isEmpty) grouped by root.",
+    "CLI may create empty folder records, delete empty folders, prune empty shells, and reorder or rename/move folder paths. Folder deletes leave folder tombstones so browser ingest and remote merge cannot revive them; connected browsers receive remove_folder. Deleting a folder that still contains bookmarks is forbidden; toolbar/other/mobile roots themselves cannot be deleted.",
+    "CLI add/update upserts folder records for the target path and its ancestors so empty folders remain authoritative after the last bookmark moves out (cleanup is explicit prune/delete).",
+    "CLI bookmark apply --file plan.json [--dry-run] applies an ordered list of add|update|delete bookmark ops against the ledger; dry-run does not persist.",
     "Formal ledger stays on bookmark-ledger.json and the existing formal remote room. A separate 7-day backup pack lives under Application Support bookmark-backups/ and in an isolated backup remote room; daily job full-overwrites today's slot and drops slots older than today-6 days.",
     "Backup room_id = SHA-256 hex of (remote_key UTF-8 || \"\\ntocode-bookmark-backup-pack-v1\"); verifier = HMAC-SHA256(key=remote_key, msg=\"tocode-bookmark-backup-pack-v1\") as hex; same AES-256-GCM cipher as formal. Backup never participates in browser reconcile.",
     "Restore replaces the formal ledger wholesale from a chosen day slot, then reconciles connected browsers and force-pushes the formal room without merging the restored snapshot into a stale remote formal copy."
@@ -55,6 +58,12 @@
       "bookmark delete --url <url>",
       "bookmark pull",
       "bookmark folders [--json]",
+      "bookmark folder create <path> [--index <n>]",
+      "bookmark folder delete <path> [--recursive]",
+      "bookmark folder prune-empty [--under <path>]",
+      "bookmark folder move <path> --index <n>",
+      "bookmark folder move <path> --to <newPath> [--index <n>]",
+      "bookmark apply --file <plan.json> [--dry-run]",
       "bookmark backup status",
       "bookmark backup list",
       "bookmark backup now",
@@ -69,6 +78,8 @@
     "Accepting a PUT with wrong verifier or stale expected_revision.",
     "Printing remote key plaintext via tocode bookmark CLI.",
     "Leaving connected browsers with divergent folder placement or sibling order after a completed layout reconcile.",
-    "Writing backup pack ciphertext into the formal remote room or letting formal LWW overwrite backup slots."
+    "Writing backup pack ciphertext into the formal remote room or letting formal LWW overwrite backup slots.",
+    "Deleting a non-empty folder (bookmarks still under the path) via CLI folder delete/prune.",
+    "Removing a folder from the ledger without a folder tombstone and browser remove_folder writeback."
   ]
 }

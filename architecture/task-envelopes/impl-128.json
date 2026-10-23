@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-128",
+  "role": "implementation_owner",
+  "baseline_commit": "2713c5d943f892c925de130f30698cb5accfbe8e",
+  "work_package_id": "wp-128",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-128.json",
+    "governance/architecture/task-envelopes/impl-128.json",
+    "governance/architecture/evidence/ev-*-128.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-cli-control",
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "dry-run 不写账本。",
+    "单条失败时返回已成功条数，便于续跑。"
+  ],
+  "must_reject": [
+    "apply 执行任意非白名单动作。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "依赖 wp-127 夹能力已可用；本包只加批量书签 ops。"
+}
