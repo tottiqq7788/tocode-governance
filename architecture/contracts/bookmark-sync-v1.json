@@ -32,12 +32,25 @@
     "Remote key plaintext never leaves Mac Keychain except into encrypt/decrypt and verifier derivation in memory.",
     "Relay stores only opaque ciphertext and never learns URLs or the remote key.",
     "Writes carry expected_revision; stale revision is rejected and the client must pull, merge, and retry.",
-    "Bookmark rooms do not use device tokens and do not write remote-control routes."
+    "Bookmark rooms do not use device tokens and do not write remote-control routes.",
+    "CLI bookmark commands mutate the same ledger and may pull with the Keychain remote key; they never print the remote key plaintext."
   ],
+  "cli": {
+    "commands": [
+      "bookmark status",
+      "bookmark list",
+      "bookmark get <url>",
+      "bookmark add --url <url> [--title <title>] [--folder toolbar|other|mobile|<path>]",
+      "bookmark update --url <url> [--title <title>] [--folder ...] [--new-url <url>]",
+      "bookmark delete --url <url>",
+      "bookmark pull"
+    ]
+  },
   "prohibited_results": [
     "Persisting remote key plaintext, verifier, ciphertext, or URLs in routes.json or diagnostic logs.",
     "Deleting a ledger URL solely because a newly joined browser lacks it.",
     "Syncing passwords, cookies, history, extensions, or tabs through this channel.",
-    "Accepting a PUT with wrong verifier or stale expected_revision."
+    "Accepting a PUT with wrong verifier or stale expected_revision.",
+    "Printing remote key plaintext via tocode bookmark CLI."
   ]
 }

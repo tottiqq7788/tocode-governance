@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-118",
+  "work_package_id": "wp-118",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理结构审计通过；l0-cli-control 与 l0-bookmark-sync 已纳入 bookmark CLI。"
+}

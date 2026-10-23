@@ -1,0 +1,28 @@
+{
+  "id": "wp-118",
+  "title": "CLI 书签增删改查与远程拉取",
+  "baseline_commit": "d5f303754ee7aa25ed4cd808ccaaba5c83d36cff",
+  "goal": "tocode CLI 可对书签账本做 list/get/add/update/delete，并用本机已保存的远程同步密钥 pull 最新密文房间。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-118.json",
+    "governance/architecture/task-envelopes/impl-118.json",
+    "governance/architecture/evidence/ev-*-118.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "经 CLI 暴露远程密钥明文时停止。",
+    "经 CLI 执行任意 shell 时停止。",
+    "实际影响超出 l0-bookmark-sync 与 l0-cli-control 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：bookmark 命令解析与执行器增删改查、无密钥 pull 失败。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-23-bookmark-cli",
+    "scope": "修改 l0-bookmark-sync（允许 CLI）与 l0-cli-control（白名单增加 bookmark）。"
+  }
+}

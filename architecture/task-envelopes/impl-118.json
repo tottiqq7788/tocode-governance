@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-118",
+  "role": "implementation_owner",
+  "baseline_commit": "d5f303754ee7aa25ed4cd808ccaaba5c83d36cff",
+  "work_package_id": "wp-118",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-118.json",
+    "governance/architecture/task-envelopes/impl-118.json",
+    "governance/architecture/evidence/ev-*-118.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync",
+    "l0-cli-control"
+  ],
+  "must_preserve": [
+    "远程密钥明文不经 CLI 输出。",
+    "CLI 仍经本机 socket 转发，不执行任意 shell。",
+    "书签变更仍走本机账本并通知已连接扩展。"
+  ],
+  "must_reject": [
+    "tocode bookmark 打印钥匙串中的远程密钥。",
+    "无密钥时假装 pull 成功。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明的 L0 时停止并重新准入。"
+  ],
+  "notes": "阶段：CLI 书签治理入口。角色：本机 agent/用户。业务对象：书签账本。不变量：经 IPC、JSON 输出、密钥不外泄。禁止结果：CLI 泄露密钥。"
+}

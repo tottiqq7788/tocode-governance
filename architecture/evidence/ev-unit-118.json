@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-118",
+  "work_package_id": "wp-118",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "bookmark 命令解析、增删改查、无密钥 pull 失败与有密钥 pull 成功通过。"
+}

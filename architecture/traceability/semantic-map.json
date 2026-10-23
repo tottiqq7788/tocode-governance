@@ -291,14 +291,15 @@
       "id": "l0-cli-control",
       "name": "独立 CLI 命令控制",
       "status": "approved",
-      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。白名单包含 wechat send，以及 root clipboard、root open、finder copy：剪贴板设固定根、访达打开固定根、复制访达选中项绝对路径。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。 微信入站消息不再触发这些命令。 不再提供 codex model / model list / model set；Codex 模型切换由 Ancode 承担。",
+      "statement": "Tocode 提供一个独立可执行文件 tocode，通过本机 Unix domain socket（~/Library/Application Support/com.tocode.app/tocode.sock，权限 0600，仅本用户可用）把白名单命令转发给常驻 Tocode 进程执行并返回结果；应用初次启动后自动安装/刷新到 ~/.local/bin/tocode。命令名到动作的映射是显式枚举，不执行任意 shell。白名单包含 wechat send，以及 root clipboard、root open、finder copy：剪贴板设固定根、访达打开固定根、复制访达选中项绝对路径。白名单另含 bookmark status|list|get|add|update|delete|pull：读写本机书签账本，pull 用钥匙串中已保存的远程同步密钥拉取并合并密文房间；CLI 不得打印远程密钥明文；list/get 与变更结果以 JSON 文本返回。每条命令都有返回结果（help/commands 本地返回命令表，其余命令返回成功或错误文本）。CLI 成功退出码为 0，失败或未连接为非 0；Tocode 未运行时打印明确错误。 微信入站消息不再触发这些命令。 不再提供 codex model / model list / model set；Codex 模型切换由 Ancode 承担。",
       "source_refs": [
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-08",
         "user-approved-plan:2026-09-20-wechat-cli-send",
         "user-approved-plan:2026-09-30-cli-gap",
         "user-approved-plan:2026-10-12-android-remote",
-        "user-approved-plan:2026-10-23-ancode-split"
+        "user-approved-plan:2026-10-23-ancode-split",
+        "user-request:2026-10-23-bookmark-cli"
       ]
     },
     {
@@ -524,9 +525,10 @@
       "id": "l0-bookmark-sync",
       "name": "本机与远程书签同步",
       "status": "approved",
-      "statement": "右键「工具 → 书签同步」位于定时器下方、临时黑屏上方。夹内提供「远程同步」与「拓展安装」夹；拓展安装含 Chrome、Edge、Firefox 三项。只同步书签；不同步历史、密码、Cookie、扩展或打开的标签页。每个浏览器须手动加载扩展；菜单只登记 Native Messaging 主机、打开扩展目录并提示去扩展页加载一次，不能静默安装。Chrome 与 Edge 加载后可保留；正式版 Firefox 未签名扩展重启后消失，未连上时提示且不假装在同步。本机账本写入 Application Support 的 bookmark-ledger.json（0600）。同步身份是稳定编号，对外按规范化网址认同一条：http/https 协议与主机小写、去掉默认端口、去掉路径末尾斜杠，查询与片段原样保留。整本账同一规范化网址只留一条；多份并存时文件夹按书签栏、其他书签、移动设备书签、其余文件夹名择一，标题取较新修改时间。初次合并以及后装扩展、另一台 Mac 首次加入一律并集：独有网址保留并补写，不因某一边缺失而删除；加入完成前已删的网址会被后加入方加回。加入完成后新增、改标题、改网址、移动与删除跟进；删除留墓碑；改成已存在网址时旧网址进墓碑且已存在条保留原标题与文件夹。空文件夹、分隔线、Firefox 标签与关键字不同步。写回浏览器带批次号避免回环；连接时与定期全量对账。「远程同步」点开弹窗：可生成 32 字节 base64url 密钥或粘贴已有密钥（至少 32 字符、首尾无空白）；明文只进钥匙串（WhenUnlockedThisDeviceOnly），查看/编辑/删除须 Touch ID 或设备密码；保存后开启远程同步，再次点击可查看、编辑、关闭或删除。关闭后密钥仍在、本机浏览器同步继续；编辑密钥离开原房间并按新密钥再做初次合并；删除只清本机密钥并停远程同步，服务器房间与其它 Mac 书签保留。两台 Mac 用同一密钥即绑定。房间号为密钥 SHA-256；请求用 HMAC 校验值证明持有密钥；账本 AES-256-GCM 加密后经 https://totti.xin/v1/bookmark-rooms 读写；relay 另存 bookmark-rooms.json（0600），与 routes.json 分开，只含房间号、校验值、密文与修订号，不解密；写入带修订号，旧修订号拒绝；快照密文上限 4MB；操作超过 200 条压成新快照。不进入 .tocode、CLI、键盘/触控板映射或安卓遥控通道；不使用设备令牌。",
+      "statement": "右键「工具 → 书签同步」位于定时器下方、临时黑屏上方。夹内提供「远程同步」与「拓展安装」夹；拓展安装含 Chrome、Edge、Firefox 三项。只同步书签；不同步历史、密码、Cookie、扩展或打开的标签页。每个浏览器须手动加载扩展；菜单只登记 Native Messaging 主机、打开扩展目录并提示去扩展页加载一次，不能静默安装。Chrome 与 Edge 加载后可保留；正式版 Firefox 未签名扩展重启后消失，未连上时提示且不假装在同步。本机账本写入 Application Support 的 bookmark-ledger.json（0600）。同步身份是稳定编号，对外按规范化网址认同一条：http/https 协议与主机小写、去掉默认端口、去掉路径末尾斜杠，查询与片段原样保留。整本账同一规范化网址只留一条；多份并存时文件夹按书签栏、其他书签、移动设备书签、其余文件夹名择一，标题取较新修改时间。初次合并以及后装扩展、另一台 Mac 首次加入一律并集：独有网址保留并补写，不因某一边缺失而删除；加入完成前已删的网址会被后加入方加回。加入完成后新增、改标题、改网址、移动与删除跟进；删除留墓碑；改成已存在网址时旧网址进墓碑且已存在条保留原标题与文件夹。空文件夹、分隔线、Firefox 标签与关键字不同步。写回浏览器带批次号避免回环；连接时与定期全量对账。「远程同步」点开弹窗：可生成 32 字节 base64url 密钥或粘贴已有密钥（至少 32 字符、首尾无空白）；明文只进钥匙串（WhenUnlockedThisDeviceOnly），查看/编辑/删除须 Touch ID 或设备密码；保存后开启远程同步，再次点击可查看、编辑、关闭或删除。关闭后密钥仍在、本机浏览器同步继续；编辑密钥离开原房间并按新密钥再做初次合并；删除只清本机密钥并停远程同步，服务器房间与其它 Mac 书签保留。两台 Mac 用同一密钥即绑定。房间号为密钥 SHA-256；请求用 HMAC 校验值证明持有密钥；账本 AES-256-GCM 加密后经 https://totti.xin/v1/bookmark-rooms 读写；relay 另存 bookmark-rooms.json（0600），与 routes.json 分开，只含房间号、校验值、密文与修订号，不解密；写入带修订号，旧修订号拒绝；快照密文上限 4MB；操作超过 200 条压成新快照。不进入 .tocode、键盘/触控板映射或安卓遥控通道；不使用设备令牌。本机 CLI 白名单提供 bookmark status|list|get|add|update|delete|pull：变更写本机账本并通知已连接扩展，pull 使用已保存远程密钥拉取合并且不得输出密钥明文。",
       "source_refs": [
-        "user-approved-plan:2026-10-23-bookmark-sync"
+        "user-approved-plan:2026-10-23-bookmark-sync",
+        "user-request:2026-10-23-bookmark-cli"
       ]
     },
     {
