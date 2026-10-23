@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-135",
+  "work_package_id": "wp-135",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "单测通过：源码树含签名 xpi；profiles.ini 优先 Install 段。"
+}

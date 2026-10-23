@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-135",
+  "work_package_id": "wp-135",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；L0 已改为 Firefox 安装使用包内签名 XPI。"
+}

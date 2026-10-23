@@ -1,0 +1,26 @@
+{
+  "id": "wp-135",
+  "title": "Firefox 拓展安装改为包内签名 XPI",
+  "baseline_commit": "ed11d672630e4f0d55606a36c691aaf72f40b008",
+  "goal": "把已签名的 bookmark-sync@tocode.app.xpi 打进 Tocode.app；菜单「拓展安装 → Firefox」写入当前配置，不再临时载入。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-135.json",
+    "governance/architecture/task-envelopes/impl-135.json",
+    "governance/architecture/evidence/ev-*-135.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "把 AMO API 密钥写入仓库，或把 Chrome/Edge 改成静默安装时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：签名 xpi 可定位；profiles.ini 优先 Install 段。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-24-firefox-signed-xpi-install",
+    "scope": "修改 l0-bookmark-sync：Firefox 安装使用包内签名扩展。"
+  }
+}

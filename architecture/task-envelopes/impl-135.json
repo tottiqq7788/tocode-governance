@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-135",
+  "role": "implementation_owner",
+  "baseline_commit": "ed11d672630e4f0d55606a36c691aaf72f40b008",
+  "work_package_id": "wp-135",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-135.json",
+    "governance/architecture/task-envelopes/impl-135.json",
+    "governance/architecture/evidence/ev-*-135.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "Chrome/Edge 仍为开发者模式加载已解压，不能静默安装。",
+    "未检测到 Firefox 扩展在线时不假装已在同步。"
+  ],
+  "must_reject": [
+    "菜单 Firefox 项再引导 about:debugging 临时载入。",
+    "仓库写入 AMO API 密钥。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "build.sh 复制 bookmark-sync-firefox.xpi；install 写入当前 Firefox 配置。"
+}
