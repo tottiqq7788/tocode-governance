@@ -1,0 +1,26 @@
+{
+  "id": "wp-134",
+  "title": "夹墓碑策略收敛：mobile 别名与只读 tombstones CLI",
+  "baseline_commit": "70eee3b3f7c7d6074f5337da11291de2502bfec5",
+  "goal": "将「移动设备上的书签」纳入 mobile 根别名；提供 bookmark folder tombstones 只读统计；明确拒绝全局 confirmedAt 与默认 prune，依赖已有树缺席确认。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-134.json",
+    "governance/architecture/task-envelopes/impl-134.json",
+    "governance/architecture/evidence/ev-*-134.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实现全局 confirmedAt、默认 tombstones prune、或影响超出 l0-bookmark-sync / l0-cli-control 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：移动设备上的书签→mobile；tombstones CLI 解析与 JSON 字段单测通过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-24-folder-tombstone-strategy",
+    "scope": "修改 l0-bookmark-sync 与 l0-cli-control：mobile 别名、只读夹墓碑 list。"
+  }
+}

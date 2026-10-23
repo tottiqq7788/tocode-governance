@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-134",
+  "work_package_id": "wp-134",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "单测通过：移动设备上的书签→mobile；bookmark folder tombstones JSON 统计。"
+}

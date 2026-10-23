@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-134",
+  "role": "implementation_owner",
+  "baseline_commit": "70eee3b3f7c7d6074f5337da11291de2502bfec5",
+  "work_package_id": "wp-134",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-134.json",
+    "governance/architecture/task-envelopes/impl-134.json",
+    "governance/architecture/evidence/ev-*-134.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync",
+    "l0-cli-control"
+  ],
+  "must_preserve": [
+    "folderTombstones 仍为跨端 LWW / 防复活权威。",
+    "树缺席播种 confirmedFolderRemovals 行为不变。"
+  ],
+  "must_reject": [
+    "bookmark folder tombstones 写 prune 或清空墓碑。",
+    "给夹墓碑加全局 confirmedAt 并据此跳过仍存在路径的 remove_folder。",
+    "移动设备上的书签摄入为 named。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "isMobileTitle/mapRoot 增加移动设备上的书签；CLI tombstones 只读；无 prune。"
+}

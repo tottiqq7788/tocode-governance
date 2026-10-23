@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-134",
+  "work_package_id": "wp-134",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 L0 已写入 mobile 别名、只读 tombstones CLI，并禁止全局 confirmedAt / 默认 prune。"
+}

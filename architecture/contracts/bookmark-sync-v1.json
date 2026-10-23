@@ -45,6 +45,8 @@
     "CLI bookmark commands mutate the same ledger and may pull with the Keychain remote key; they never print the remote key plaintext.",
     "CLI --folder accepts rooted paths: toolbar|other|mobile (and Chinese aliases) alone or as a prefix before /segments (e.g. toolbar/work/a, 书签栏/工作). Explicit named: prefix yields kind=named. A path without a root prefix and without named: is kind=named. Invalid folder strings fail with non-zero exit; rooted prefixes must not silently become named.",
     "CLI bookmark folders [--json] is read-only and exports the ledger folder tree (kind, segments, siblingIndex, child counts, isEmpty) grouped by root.",
+    "CLI bookmark folder tombstones [--json] is read-only and reports folderTombstones count, by-kind counts, overlap with live folders, and item summaries; it must not prune or clear folder tombstones. Inert folder tombstones remain for LWW/anti-revive; per-browser satisfaction uses tree-absence seeding of confirmedFolderRemovals, not a global confirmedAt on the stone.",
+    "Chinese mobile root title 移动设备上的书签 is a mobile-root alias (host mapRoot and extension isMobileTitle); it must not be ingested as named.",
     "CLI may create empty folder records, delete empty folders, prune empty shells, and reorder or rename/move folder paths. Folder deletes leave folder tombstones so browser ingest and remote merge cannot revive them; connected browsers receive remove_folder. Deleting a folder that still contains bookmarks is forbidden; toolbar/other/mobile roots themselves cannot be deleted.",
     "CLI add/update upserts folder records for the target path and its ancestors so empty folders remain authoritative after the last bookmark moves out (cleanup is explicit prune/delete).",
     "CLI bookmark apply --file plan.json [--dry-run] applies an ordered list of add|update|delete bookmark ops against the ledger; dry-run does not persist.",
@@ -70,6 +72,7 @@
       "bookmark folder prune-empty [--under <path>]",
       "bookmark folder move <path> --index <n>",
       "bookmark folder move <path> --to <newPath> [--index <n>]",
+      "bookmark folder tombstones [--json]",
       "bookmark apply --file <plan.json> [--dry-run]",
       "bookmark backup status",
       "bookmark backup list",
@@ -96,6 +99,9 @@
     "Replaying remove_folder for every ledger folder tombstone after each tree when the path is already absent from that browser's folder layout.",
     "Normalizing other/<toolbarAlias> (single segment) into the undeletable toolbar root.",
     "CLI add/apply reporting ok without distinguishing create vs merge for an existing canonical URL.",
-    "Treating Firefox Bookmarks Menu as non-other (e.g. named) or reporting remove_folder missing=true for an other path that still exists under any other-alias root."
+    "Treating Firefox Bookmarks Menu as non-other (e.g. named) or reporting remove_folder missing=true for an other path that still exists under any other-alias root.",
+    "Treating 移动设备上的书签 as named instead of mobile.",
+    "Pruning or clearing ledger folderTombstones via CLI without an approved work package that explicitly authorizes destructive prune.",
+    "Persisting a global confirmedAt on folder tombstones that skips remove_folder for browsers that still have the path."
   ]
 }
