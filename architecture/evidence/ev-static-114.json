@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-114",
+  "work_package_id": "wp-114",
+  "commit": "78119db97133d7fe43e5e76bc4e35544fbbc994f",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：同一会话进行中或刚结束后的相同文字不再向 Hermes 再开一回合；连续相同提问并成一页；翻页停在结束回复。",
+  "limitations": [
+    "安卓实现与单测绑定 commit 3a6f1931d036c2f38ab5786c2f1611281892ecc1。",
+    "单测用脚本分页与脚本 runtime，不连真的 Hermes。"
+  ]
+}

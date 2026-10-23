@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-114",
+  "role": "implementation_owner",
+  "baseline_commit": "7e068bbbceee8bec97bbbde2342075b205330ad4",
+  "work_package_id": "wp-114",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-114.json",
+    "governance/architecture/task-envelopes/impl-114.json",
+    "governance/architecture/evidence/ev-*-114.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "一次提问和它后面的过程回复、结束回复仍是一页。",
+    "进入会话停在最后一页。正在看较早的一页时，新回复不把页面拉走。",
+    "工具结果不发给手机。",
+    "密钥留在 Mac。",
+    "隔开再发的不同文字仍可送出。"
+  ],
+  "must_reject": [
+    "同一会话已有一轮 chat 在跑时再向 Hermes 开一回合。",
+    "上一轮刚结束的极短时间内，相同文字再向 Hermes 开一回合。",
+    "翻到一页时停在提问顶部、把结束回复顶出屏幕。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：修复页数膨胀。角色：手机用户与 Mac 转发。业务对象：会话页与 Hermes 回合。不变量：一问一答一页。禁止结果：并行或瞬时重复开回合、翻页看不见结束回复。"
+}

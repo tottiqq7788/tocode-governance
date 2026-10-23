@@ -1,0 +1,58 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-113",
+  "role": "implementation_owner",
+  "baseline_commit": "7e068bbbceee8bec97bbbde2342075b205330ad4",
+  "work_package_id": "wp-113",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/codex-model-switch-v1.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-113.json",
+    "governance/architecture/task-envelopes/impl-113.json",
+    "governance/architecture/evidence/ev-*-113.json",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/AppDelegate.swift",
+    "mac_app/Sources/ExtendedSettingsStore.swift",
+    "mac_app/Sources/CodexModelSwitchService.swift",
+    "mac_app/Sources/CodexApplicationRestarter.swift",
+    "mac_app/Sources/TocodeCommand.swift",
+    "mac_app/Sources/TocodeCommandExecutor.swift",
+    "mac_app/Sources/TocodePreferences.swift",
+    "mac_app/Sources/UserManual.swift",
+    "mac_app/README.md",
+    "mac_app/scripts/test.sh",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/Tests/ModelRelayTests.swift",
+    "mac_app/Tests/TocodeCommandTestSupport.swift"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-codex-model-switch",
+    "l0-extended-settings",
+    "l0-anker-credential",
+    "l0-cli-control",
+    "l0-local-openai-relay",
+    "l0-settings-portable",
+    "l0-settings-domain",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "顶层「模型」本地中转站语义不变。",
+    "不删除已保存安克密钥数据。",
+    "AnkerCredentialService 可暂留但不从菜单调用。"
+  ],
+  "must_reject": [
+    "右键仍出现 AK 或拓展设置。",
+    "CLI 仍提供 codex model / list / set。"
+  ],
+  "required_evidence": [
+    "unit",
+    "static"
+  ],
+  "stop_conditions": [
+    "实现需要在 Tocode 保留模型切换入口或删除密钥数据时停止并重新准入。"
+  ],
+  "notes": "阶段：拆分收尾。角色：本机用户。业务对象：右键菜单与 CLI。不变量：模型切换迁出 Ancode。禁止结果：删密钥、把切换塞回中转「模型」。"
+}

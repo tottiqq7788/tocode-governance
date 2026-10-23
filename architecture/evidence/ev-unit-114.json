@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-114",
+  "work_package_id": "wp-114",
+  "commit": "78119db97133d7fe43e5e76bc4e35544fbbc994f",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest --offline",
+  "result_summary": "Mac 全部测试通过：会话正在跑时第二次 chat 回「这轮对话还在进行」且不记入 Hermes；刚结束后相同文字被拒绝，不同文字仍可发，窗口过后相同文字可再发。安卓单测通过：一问一答仍是一页；连续三遍相同提问只占一页并保留多段过程与结束回复，另一句另开一页。",
+  "limitations": [
+    "安卓实现与单测绑定 commit 3a6f1931d036c2f38ab5786c2f1611281892ecc1。",
+    "单测用脚本分页与脚本 runtime，不连真的 Hermes。"
+  ]
+}

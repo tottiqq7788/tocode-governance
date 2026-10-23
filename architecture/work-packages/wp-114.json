@@ -1,0 +1,29 @@
+{
+  "id": "wp-114",
+  "title": "同一提问不再撑开多页",
+  "baseline_commit": "7e068bbbceee8bec97bbbde2342075b205330ad4",
+  "goal": "同一会话进行中或刚结束后的相同文字不再向 Hermes 再开一回合；手机把连续相同提问并成一页，翻页时停在结束回复。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-114.json",
+    "governance/architecture/task-envelopes/impl-114.json",
+    "governance/architecture/evidence/ev-*-114.json",
+    "mac_app/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "为了压页数再发一条 Hermes 对话时停止。",
+    "把工具结果或密钥交给手机时停止。",
+    "隔开再发的不同文字被误拦时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：会话正在跑时第二次 chat 不会再打到 Hermes；刚结束后相同文字被拒绝、不同文字仍可发。手机连续相同提问只占一页，一问一答仍是一页。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-chat-page-inflate",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。进行中与刚结束的相同提问不再开新回合；连续相同提问并成一页；翻页停在结束回复。"
+  }
+}

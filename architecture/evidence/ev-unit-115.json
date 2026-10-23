@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-115",
+  "work_package_id": "wp-115",
+  "commit": "78119db97133d7fe43e5e76bc4e35544fbbc994f",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app/scripts/test.sh；relay python3 -m unittest tests.test_route.AppChannelTests；android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest --offline",
+  "result_summary": "Mac 全部测试通过：写回 model.default/provider 不碰密钥，换厂家去掉 base_url，非法名拒绝，models/model_select 清单不含密钥且拒绝清单外模型。中转放行 models/model_select，非法厂家名与多余字段拒绝。安卓单测通过：只保留有模型名的厂家条目。",
+  "limitations": [
+    "安卓 commit 3a6f1931d036c2f38ab5786c2f1611281892ecc1；中转 commit 972211a58bb9ca3a8907a277f6af1aa33202c441。",
+    "单测用脚本 runtime，不连真的 Hermes；安卓未做 Compose 布局截图断言。"
+  ]
+}

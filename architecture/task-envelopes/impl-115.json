@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-115",
+  "role": "implementation_owner",
+  "baseline_commit": "7e068bbbceee8bec97bbbde2342075b205330ad4",
+  "work_package_id": "wp-115",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-115.json",
+    "governance/architecture/task-envelopes/impl-115.json",
+    "governance/architecture/evidence/ev-*-115.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "密钥留在 Mac，不进手机或中转。",
+    "只改当前所选档案的默认模型。",
+    "已有会话模型不回溯。",
+    "手机不能新建档案。"
+  ],
+  "must_reject": [
+    "模型清单或写回结果带上密钥。",
+    "在档案抽屉里再套一层 bottom sheet。",
+    "中转接受 models/model_select 以外的自由字段。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-phone-hermes-chat 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：档案抽屉交互。角色：手机用户与 Mac 转发。业务对象：档案默认模型与新建项目按钮。不变量：写配置只在 Mac。禁止结果：密钥外泄、嵌套 sheet。"
+}

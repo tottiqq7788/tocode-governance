@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-115",
+  "work_package_id": "wp-115",
+  "commit": "78119db97133d7fe43e5e76bc4e35544fbbc994f",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：档案抽屉左侧可切换当前档案默认模型（选项来自 Hermes，Mac 写 config.yaml）；新建项目按钮缩窄居右；不嵌套第二层 bottom sheet。",
+  "limitations": [
+    "安卓 commit 3a6f1931d036c2f38ab5786c2f1611281892ecc1；中转 commit 972211a58bb9ca3a8907a277f6af1aa33202c441。"
+  ]
+}

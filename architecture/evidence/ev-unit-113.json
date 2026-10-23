@@ -1,0 +1,10 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "ev-unit-113",
+  "work_package_id": "wp-113",
+  "kind": "unit",
+  "status": "passed",
+  "command_or_source": "bash mac_app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。AK/拓展设置/codex model CLI 已拆除；说明书指向 Ancode；相关单测改写后全绿。",
+  "commit": "78119db97133d7fe43e5e76bc4e35544fbbc994f"
+}

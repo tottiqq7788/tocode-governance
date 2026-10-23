@@ -1,0 +1,30 @@
+{
+  "id": "wp-115",
+  "title": "档案抽屉缩窄新建并切换模型",
+  "baseline_commit": "7e068bbbceee8bec97bbbde2342075b205330ad4",
+  "goal": "档案与项目抽屉里「新建项目」缩窄居右；左侧显示并切换当前档案默认模型，选项来自 Hermes，写入该档案配置，只影响之后新建的会话。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-115.json",
+    "governance/architecture/task-envelopes/impl-115.json",
+    "governance/architecture/evidence/ev-*-115.json",
+    "mac_app/",
+    "android_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "把 API 密钥交给手机或写入中转时停止。",
+    "改写其它档案或会话正文时停止。",
+    "嵌套第二层 bottom sheet 时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：Mac 写回 model.default/provider 不碰密钥，非法名拒绝；列表只含 provider 与模型名。中转放行 models/model_select。安卓能解析选项列表。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-profile-drawer-model",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。抽屉可切换档案默认模型；新建按钮缩窄居右。"
+  }
+}

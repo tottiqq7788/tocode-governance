@@ -1,7 +1,7 @@
 {
   "schema_version": "architecture-contract:v0.1",
   "contract_id": "codex-model-switch-v1",
-  "status": "approved",
+  "status": "retired",
   "l0_refs": [
     "l0-codex-model-switch",
     "l0-action-menu"
@@ -34,5 +34,6 @@
     "Allowing image, vision, tag, or explicitly /responses-incompatible models to be selected.",
     "Calling terminate(), issuing Command-Q, waiting for Codex to acknowledge exit, or using a graceful-exit timeout branch.",
     "Killing or relaunching Codex after any configuration validation, write, verification, or rollback failure."
-  ]
+  ],
+  "notes": "Capability moved to Ancode; Tocode no longer implements this contract."
 }

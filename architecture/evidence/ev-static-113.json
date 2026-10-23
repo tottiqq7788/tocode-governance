@@ -1,0 +1,10 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "ev-static-113",
+  "work_package_id": "wp-113",
+  "kind": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过（structure_and_references_only）。",
+  "commit": "78119db97133d7fe43e5e76bc4e35544fbbc994f"
+}
