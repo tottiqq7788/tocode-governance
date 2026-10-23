@@ -1,0 +1,28 @@
+{
+  "id": "wp-123",
+  "title": "书签栏左右顺序对齐（siblingIndex 写回）",
+  "baseline_commit": "9dc372bbc1f7900b115eeea2bf6d9ae66d55e096",
+  "goal": "同级 siblingIndex 合并后唯一连续；文件夹对账识别错位并搬移；清掉挡顺序的空标题非账本夹，使已连接浏览器书签栏左右顺序与账本一致。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-123.json",
+    "governance/architecture/task-envelopes/impl-123.json",
+    "governance/architecture/evidence/ev-*-123.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "文件夹仍只按路径存在性对账、忽略 siblingIndex 时停止。",
+    "实际影响超出 l0-bookmark-sync 声明范围时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：抢号规范化与错位对账断言通过；应用可编译。",
+    "运行态：三边书签栏第一层有序与账本一致（无空标题占位夹）。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-toolbar-order-align",
+    "scope": "修改 l0-bookmark-sync：同级顺序权威写回与空标题占位夹清理。"
+  }
+}

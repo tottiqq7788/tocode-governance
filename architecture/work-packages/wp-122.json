@@ -1,0 +1,27 @@
+{
+  "id": "wp-122",
+  "title": "书签栏按同一路径对齐（根下子夹保留根）",
+  "baseline_commit": "9dc372bbc1f7900b115eeea2bf6d9ae66d55e096",
+  "goal": "整树解析时书签栏、其他书签、移动设备书签的子夹保留该根并追加路径段，使同名夹只有同根才合并；合并后三边书签栏按账本路径写回，不再把书签栏子夹收成 named。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-122.json",
+    "governance/architecture/task-envelopes/impl-122.json",
+    "governance/architecture/evidence/ev-*-122.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "再次把书签栏子夹收成 named、与其他书签同名夹合并时停止。",
+    "实际影响超出 l0-bookmark-sync 声明范围时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：同名夹不同根路径不同；A/B/C/Y 留在书签栏、较新 D 离开书签栏；应用可编译。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-toolbar-path-align",
+    "scope": "修改 l0-bookmark-sync：三个根的子路径保留该根，不与另一根的同名夹合并。"
+  }
+}

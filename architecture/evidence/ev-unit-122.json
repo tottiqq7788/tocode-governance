@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-122",
+  "work_package_id": "wp-122",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "Mac 单元测试全部通过；含书签栏/其他书签同名夹不同路径、A/B/C/Y 并集与较新 D 离开书签栏、Firefox「书签工具栏」别名归一、named 同段让位于 rooted。运行态三边书签栏第一层名称已对齐。"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-122",
+  "work_package_id": "wp-122",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 l0-bookmark-sync 已写入三个根子路径保留该根的语义。"
+}

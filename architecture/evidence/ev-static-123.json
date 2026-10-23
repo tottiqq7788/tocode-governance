@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-123",
+  "work_package_id": "wp-123",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 l0-bookmark-sync 已写入同级 siblingIndex 唯一连续与空标题占位夹清理语义。"
+}

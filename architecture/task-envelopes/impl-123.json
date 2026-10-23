@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-123",
+  "role": "implementation_owner",
+  "baseline_commit": "9dc372bbc1f7900b115eeea2bf6d9ae66d55e096",
+  "work_package_id": "wp-123",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-123.json",
+    "governance/architecture/task-envelopes/impl-123.json",
+    "governance/architecture/evidence/ev-*-123.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "规范化 URL 仍是书签身份；具名夹与 URL 并集阶段缺席不删。",
+    "纯 LWW 后对同级下标做唯一连续规范化，不得用 kind 优先级覆盖较新 updatedAt。"
+  ],
+  "must_reject": [
+    "文件夹仅按路径存在性判定已对齐。",
+    "删除有标题且不在清理范围内的本地独有夹。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-bookmark-sync 时停止并重新准入。"
+  ],
+  "notes": "阶段：左右顺序。业务对象：siblingIndex 与文件夹对账指纹。禁止结果：三边书签栏第一层长期乱序。"
+}

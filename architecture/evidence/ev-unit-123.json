@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-123",
+  "work_package_id": "wp-123",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "Mac 单元测试全部通过；含同级抢号后 siblingIndex 唯一连续与较新夹优先。运行态 Chrome/Edge/Firefox 书签栏有意义第一层左右顺序已与账本一致（Firefox 末尾仍可能残留分隔线，待扩展热加载 purge 后清除）。"
+}

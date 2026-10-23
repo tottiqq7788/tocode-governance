@@ -1,0 +1,36 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-122",
+  "role": "implementation_owner",
+  "baseline_commit": "9dc372bbc1f7900b115eeea2bf6d9ae66d55e096",
+  "work_package_id": "wp-122",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-122.json",
+    "governance/architecture/task-envelopes/impl-122.json",
+    "governance/architecture/evidence/ev-*-122.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "规范化 URL 仍是书签身份；并集阶段缺席不删。",
+    "纯 LWW：同根路径冲突仍取较新 updatedAt。",
+    "删除留墓碑；远程密钥明文不进日志与 CLI 输出。"
+  ],
+  "must_reject": [
+    "书签栏子夹与其他书签同名夹共用同一路径键。",
+    "用文件夹 kind 优先级覆盖较新 updatedAt（根迁移除外：named 与同段 rooted 并存时路径取 rooted）。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-bookmark-sync 时停止并重新准入。"
+  ],
+  "notes": "阶段：书签栏路径对齐。角色：本机用户。业务对象：BookmarkFolderPath 根与 segments。不变量：toolbar/other/mobile 子夹保留该根。禁止结果：各浏览器书签栏第一层长期分叉。"
+}
