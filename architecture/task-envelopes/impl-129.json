@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-129",
+  "role": "implementation_owner",
+  "baseline_commit": "88d42a3ae13f8dd8dde36344cb25ffc2fe4e399b",
+  "work_package_id": "wp-129",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-129.json",
+    "governance/architecture/task-envelopes/impl-129.json",
+    "governance/architecture/evidence/ev-*-129.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "删夹候选不依赖 known；删夹与 ensure 分批。",
+    "本地 create  bump 过墓碑时间；recursive 删夹前疏散。",
+    "relay 与备份房间隔离语义不变。"
+  ],
+  "must_reject": [
+    "Index out of bounds 写入 knownLayout。",
+    "purge 失败仍宣称无条件已对齐。",
+    "本地墓碑永久挡较新远端 recreate。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "S1→S4 同包落地；不改菜单书签 UI。"
+}

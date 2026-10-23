@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-129",
+  "work_package_id": "wp-129",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 l0-bookmark-sync 已写入可信对齐、对称墓碑 LWW、毒化禁止写入 known、删夹熔断与 tree 世代。"
+}

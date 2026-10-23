@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-129",
+  "work_package_id": "wp-129",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "Mac 单元测试全部通过；含远程 recreate LWW、URL 墓碑 LWW、canonicalize bump updatedAt、可信对齐/毒化门闩、删夹熔断阈值。"
+}

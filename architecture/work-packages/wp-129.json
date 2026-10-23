@@ -1,0 +1,27 @@
+{
+  "id": "wp-129",
+  "title": "书签同步稳定性：可信对齐 / 熔断 / 墓碑 LWW / 扩展连接",
+  "baseline_commit": "88d42a3ae13f8dd8dde36344cb25ffc2fe4e399b",
+  "goal": "消灭假对齐；删夹与 tree 竞态熔断；夹/URL 墓碑对称 LWW；扩展 alarm 重连与根别名对齐。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-129.json",
+    "governance/architecture/task-envelopes/impl-129.json",
+    "governance/architecture/evidence/ev-*-129.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实际改动 relay 房间隔离或备份语义时停止并重新准入。",
+    "实际影响超出 l0-bookmark-sync 声明范围时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：假对齐门闩、删夹熔断阈值、远程 recreate LWW、canonicalize bump 单测通过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-sync-stability",
+    "scope": "修改 l0-bookmark-sync：可信对齐、熔断、对称墓碑 LWW、扩展连接稳态。"
+  }
+}

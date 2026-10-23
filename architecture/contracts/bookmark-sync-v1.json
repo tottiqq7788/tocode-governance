@@ -34,6 +34,9 @@
     "Within each parent, siblingIndex values for direct child bookmarks and folders are unique and contiguous (0..n-1) after merge; connected browsers must match that left-to-right order. Empty-titled folders and separators under toolbar/other/mobile that are not in the ledger may be removed so indices can align.",
     "Initial merge and late join are union on URLs: unique URLs are kept; absence on one side never deletes.",
     "After a browser or Mac has joined, deletes leave tombstones so old copies cannot revive them.",
+    "Tombstone vs create/recreate is symmetric LWW: a folder or URL entry with updatedAt >= tombstone.deletedAt drops the tombstone and keeps the record (local create and remote recreate treated alike).",
+    "Layout reconcile may report 已对齐 only when known fingerprints come from measured browser apply_result matching ledger intent (or an equivalent measured tree snapshot), purge of empty-title placeholders succeeded (or is explicitly degraded), and poisoned/unrecoverable URLs are empty. Index out of bounds must poison the URL and must not write ledger-intent fingerprints into knownLayout.",
+    "Repeated remove_folder failures for the same pathKey circuit-break after a fixed limit; a new browser tree bumps reconcileGeneration so in-flight batches cannot write back.",
     "Remote key plaintext never leaves Mac Keychain except into encrypt/decrypt and verifier derivation in memory.",
     "Relay stores only opaque ciphertext and never learns URLs or the remote key.",
     "Writes carry expected_revision; stale revision is rejected and the client must pull, merge, and retry.",
@@ -80,6 +83,9 @@
     "Leaving connected browsers with divergent folder placement or sibling order after a completed layout reconcile.",
     "Writing backup pack ciphertext into the formal remote room or letting formal LWW overwrite backup slots.",
     "Deleting a non-empty folder (bookmarks still under the path) via CLI folder delete/prune.",
-    "Removing a folder from the ledger without a folder tombstone and browser remove_folder writeback."
+    "Removing a folder from the ledger without a folder tombstone and browser remove_folder writeback.",
+    "Stamping knownLayout from ledger intent after Index out of bounds or without measured folder|index|title matching intent.",
+    "Reporting unconditional 已对齐 when purge failed/skipped or poisoned URLs remain.",
+    "Letting a local folder tombstone permanently block a newer remote folder recreate (or the reverse asymmetry)."
   ]
 }
