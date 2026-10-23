@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-133",
+  "role": "implementation_owner",
+  "baseline_commit": "0ed5abf47243398114f70cfc24e3d2c70f7ccfc2",
+  "work_package_id": "wp-133",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-133.json",
+    "governance/architecture/task-envelopes/impl-133.json",
+    "governance/architecture/evidence/ev-*-133.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "账本 kind 仍仅 toolbar/other/mobile/named。",
+    "禁止裸 includes(\"other\") 匹配。"
+  ],
+  "must_reject": [
+    "书签菜单下存在的 other 路径被假 missing 确认。",
+    "仅匹配 children[1] 回退而不识别书签菜单。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "isOtherTitle/mapRoot 增加书签菜单；findFolderNode 遍历全部 other 别名根；resolveRootBase 新建优先其他书签。"
+}

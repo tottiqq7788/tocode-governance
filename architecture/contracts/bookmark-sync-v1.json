@@ -50,6 +50,7 @@
     "CLI bookmark apply --file plan.json [--dry-run] applies an ordered list of add|update|delete bookmark ops against the ledger; dry-run does not persist.",
     "CLI bookmark add (and apply add) is upsert by canonical URL: if the URL already exists, the entry is merged/updated and the receipt must expose created=false (merged=true); true create sets created=true.",
     "Folder path normalize may remap other|named paths whose first segment is a toolbar alias into toolbar + remaining segments (e.g. other/书签工具栏/官网 → toolbar/官网), but must not collapse a lone other/<toolbarAlias> shell into the bare toolbar root (that shell must remain addressable for delete).",
+    "Firefox Bookmarks Menu (书签菜单 / bookmarks menu) is an other-root alias alongside Other Bookmarks; host mapRoot and extension isOtherTitle must agree. Locating/removing an other path must search all other-alias roots (not only the first match or children[1] fallback). New writes under other prefer Other Bookmarks when both roots exist.",
     "Formal ledger stays on bookmark-ledger.json and the existing formal remote room. A separate 7-day backup pack lives under Application Support bookmark-backups/ and in an isolated backup remote room; daily job full-overwrites today's slot and drops slots older than today-6 days.",
     "Backup room_id = SHA-256 hex of (remote_key UTF-8 || \"\\ntocode-bookmark-backup-pack-v1\"); verifier = HMAC-SHA256(key=remote_key, msg=\"tocode-bookmark-backup-pack-v1\") as hex; same AES-256-GCM cipher as formal. Backup never participates in browser reconcile.",
     "Restore replaces the formal ledger wholesale from a chosen day slot, then reconciles connected browsers and force-pushes the formal room without merging the restored snapshot into a stale remote formal copy."
@@ -94,6 +95,7 @@
     "Treating percent-encoded and decoded query/fragment forms of the same URL as different ledger identities between host and extension (including uppercase vs lowercase percent hex, or Unicode vs uppercase-percent forms of the same code points).",
     "Replaying remove_folder for every ledger folder tombstone after each tree when the path is already absent from that browser's folder layout.",
     "Normalizing other/<toolbarAlias> (single segment) into the undeletable toolbar root.",
-    "CLI add/apply reporting ok without distinguishing create vs merge for an existing canonical URL."
+    "CLI add/apply reporting ok without distinguishing create vs merge for an existing canonical URL.",
+    "Treating Firefox Bookmarks Menu as non-other (e.g. named) or reporting remove_folder missing=true for an other path that still exists under any other-alias root."
   ]
 }

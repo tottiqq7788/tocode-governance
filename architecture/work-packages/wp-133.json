@@ -1,0 +1,26 @@
+{
+  "id": "wp-133",
+  "title": "Firefox 书签菜单 other 别名与多根查找",
+  "baseline_commit": "0ed5abf47243398114f70cfc24e3d2c70f7ccfc2",
+  "goal": "将 Firefox「书签菜单 / Bookmarks Menu」纳入 other 根别名（主机与扩展一致）；other 路径定位/删除遍历全部 other 别名根，避免假 missing；新建 other 落点优先「其他书签」。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-133.json",
+    "governance/architecture/task-envelopes/impl-133.json",
+    "governance/architecture/evidence/ev-*-133.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "新增独立 menu 根 kind、或破坏 toolbar/other/mobile 三分、或影响超出 l0-bookmark-sync 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：书签菜单 / Bookmarks Menu 摄入为 other；Mozilla Firefox 空夹 pathKey 为 other|…。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-24-firefox-other-menu-alias",
+    "scope": "修改 l0-bookmark-sync：Firefox 书签菜单 other 别名与多根查找。"
+  }
+}
