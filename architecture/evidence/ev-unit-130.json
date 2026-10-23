@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-130",
+  "work_package_id": "wp-130",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "单测通过：同 key 断一条仍 online、全断才 offline、菜单浏览器前缀匹配。"
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-130",
+  "role": "implementation_owner",
+  "baseline_commit": "b831a659b2098a2e8713d137673532d88b5e34f4",
+  "work_package_id": "wp-130",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-130.json",
+    "governance/architecture/task-envelopes/impl-130.json",
+    "governance/architecture/evidence/ev-*-130.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "勾选语义为当前在线，非历史 joined。",
+    "不做 1 小时菜单定时器。"
+  ],
+  "must_reject": [
+    "同 key 仍有活 bridge 时 markBrowserDisconnected。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "connectedBrowserKeys 以 NativeBridge 活连接现扫为准。"
+}

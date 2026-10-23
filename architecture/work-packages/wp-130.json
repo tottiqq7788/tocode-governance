@@ -1,0 +1,26 @@
+{
+  "id": "wp-130",
+  "title": "拓展安装勾选：活连接权威与同 key 不断误伤",
+  "baseline_commit": "b831a659b2098a2e8713d137673532d88b5e34f4",
+  "goal": "拓展安装三项勾选反映当前 Native 活连接；同 browser:profile 多 bridge 断一条不标离线；打开子菜单时刷新勾选。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-130.json",
+    "governance/architecture/task-envelopes/impl-130.json",
+    "governance/architecture/evidence/ev-*-130.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实际用 joinedBrowserKeys 或小时轮询假装在线时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：同 key 断一条仍 online、全断才 offline 单测通过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-extension-online-checkmark",
+    "scope": "修改 l0-bookmark-sync：拓展安装勾选 = Native 活连接。"
+  }
+}

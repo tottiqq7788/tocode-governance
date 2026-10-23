@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-130",
+  "work_package_id": "wp-130",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 L0 已声明拓展安装勾选=Native 活连接、同 key 断一条不误伤。"
+}
