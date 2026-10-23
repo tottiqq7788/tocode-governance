@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-124",
+  "work_package_id": "wp-124",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "Mac 单元测试通过；含 pack 同日覆盖、7 日裁剪、还原整本替换、备份房间与正式隔离、CLI backup parse/list/restore；应用 build.sh 可编译。"
+}

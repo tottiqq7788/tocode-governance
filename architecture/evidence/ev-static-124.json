@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-124",
+  "work_package_id": "wp-124",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；wp-124 合同与语义地图声明正式账本与七日备份包隔离、备份房间派生与 bookmark backup CLI。"
+}

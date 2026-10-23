@@ -1,0 +1,27 @@
+{
+  "id": "wp-124",
+  "title": "书签正式账本与近七日备份包",
+  "baseline_commit": "3b5ddcbf320151a04669e41bc076a9964dc2e8a9",
+  "goal": "正式账本与现有远程房间不变；另建本机+独立远程备份包（最多 7 个日历日槽、同日全量覆盖）；每日自动日备；CLI/菜单可 list/now/restore，还原整本覆盖正式并写回浏览器。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-124.json",
+    "governance/architecture/task-envelopes/impl-124.json",
+    "governance/architecture/evidence/ev-*-124.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "备份与正式共用同一远程房间、或日备 LWW 写入正式房间时停止。",
+    "实际影响超出 l0-bookmark-sync 与 l0-cli-control 声明范围时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：pack 同日覆盖、7 日裁剪与还原整本替换断言通过；应用可编译。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-7day-backup",
+    "scope": "修改 l0-bookmark-sync 与 l0-cli-control：七日备份包与还原命令。"
+  }
+}

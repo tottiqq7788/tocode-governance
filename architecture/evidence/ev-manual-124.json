@@ -1,0 +1,9 @@
+{
+  "id": "ev-manual-124",
+  "work_package_id": "wp-124",
+  "kind": "manual",
+  "status": "skipped",
+  "commit": "working-tree",
+  "command": "tocode bookmark backup now && tocode bookmark backup list",
+  "summary": "常驻 Tocode 仍为 wp-124 前二进制，CLI 返回「未知命令：bookmark backup」。需安装 build/Tocode.app 并重启后再抽查日备与 list；单测已覆盖 list/restore 语义。"
+}

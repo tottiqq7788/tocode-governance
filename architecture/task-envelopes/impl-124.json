@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-124",
+  "role": "implementation_owner",
+  "baseline_commit": "3b5ddcbf320151a04669e41bc076a9964dc2e8a9",
+  "work_package_id": "wp-124",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-124.json",
+    "governance/architecture/task-envelopes/impl-124.json",
+    "governance/architecture/evidence/ev-*-124.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync",
+    "l0-cli-control",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "正式远程房间与扩展对账语义不变。",
+    "备份房间与正式房间隔离；远程密钥明文不进日志与 CLI 输出。"
+  ],
+  "must_reject": [
+    "把备份包写进正式房间或用 LWW 把正式坏账本盖掉备份槽。",
+    "还原时与正式远程做并集会污染还原结果。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "阶段：七日备份。业务对象：BackupPack 日槽。禁止结果：无法从近七日备份整本还原正式账本。"
+}

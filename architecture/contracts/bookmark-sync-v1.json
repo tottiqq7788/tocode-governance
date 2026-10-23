@@ -38,7 +38,10 @@
     "Relay stores only opaque ciphertext and never learns URLs or the remote key.",
     "Writes carry expected_revision; stale revision is rejected and the client must pull, merge, and retry.",
     "Bookmark rooms do not use device tokens and do not write remote-control routes.",
-    "CLI bookmark commands mutate the same ledger and may pull with the Keychain remote key; they never print the remote key plaintext."
+    "CLI bookmark commands mutate the same ledger and may pull with the Keychain remote key; they never print the remote key plaintext.",
+    "Formal ledger stays on bookmark-ledger.json and the existing formal remote room. A separate 7-day backup pack lives under Application Support bookmark-backups/ and in an isolated backup remote room; daily job full-overwrites today's slot and drops slots older than today-6 days.",
+    "Backup room_id = SHA-256 hex of (remote_key UTF-8 || \"\\ntocode-bookmark-backup-pack-v1\"); verifier = HMAC-SHA256(key=remote_key, msg=\"tocode-bookmark-backup-pack-v1\") as hex; same AES-256-GCM cipher as formal. Backup never participates in browser reconcile.",
+    "Restore replaces the formal ledger wholesale from a chosen day slot, then reconciles connected browsers and force-pushes the formal room without merging the restored snapshot into a stale remote formal copy."
   ],
   "cli": {
     "commands": [
@@ -48,7 +51,11 @@
       "bookmark add --url <url> [--title <title>] [--folder toolbar|other|mobile|<path>] [--index <n>]",
       "bookmark update --url <url> [--title <title>] [--folder ...] [--index <n>] [--new-url <url>]",
       "bookmark delete --url <url>",
-      "bookmark pull"
+      "bookmark pull",
+      "bookmark backup status",
+      "bookmark backup list",
+      "bookmark backup now",
+      "bookmark backup restore [--day YYYY-MM-DD]"
     ]
   },
   "prohibited_results": [
@@ -57,6 +64,7 @@
     "Syncing passwords, cookies, history, extensions, or tabs through this channel.",
     "Accepting a PUT with wrong verifier or stale expected_revision.",
     "Printing remote key plaintext via tocode bookmark CLI.",
-    "Leaving connected browsers with divergent folder placement or sibling order after a completed layout reconcile."
+    "Leaving connected browsers with divergent folder placement or sibling order after a completed layout reconcile.",
+    "Writing backup pack ciphertext into the formal remote room or letting formal LWW overwrite backup slots."
   ]
 }
