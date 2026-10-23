@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-116",
+  "work_package_id": "wp-116",
+  "kind": "static",
+  "status": "passed",
+  "commit": "a7c8d0f9c52304f4a40545f4e120c3f6172f3d15",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理结构与 L0/L1/L2 引用审计通过；含 l0-bookmark-sync、bookmark-sync-v1 合同与 wp-116。"
+}

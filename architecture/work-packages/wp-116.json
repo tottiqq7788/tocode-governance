@@ -1,0 +1,30 @@
+{
+  "id": "wp-116",
+  "title": "本机与远程书签同步",
+  "baseline_commit": "b16b7d3de4df459e064fc6b1785c9b22e0e4ea7a",
+  "goal": "右键工具增加书签同步：本机 Chrome/Edge/Firefox 经扩展并入按网址去重的账本；同一超长密钥经 relay 密文房间绑定多台 Mac。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-116.json",
+    "governance/architecture/task-envelopes/impl-116.json",
+    "governance/architecture/evidence/ev-*-116.json",
+    "mac_app/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "同步历史、密码、Cookie、扩展或标签页时停止。",
+    "把密钥明文、校验值或网址写入 relay 诊断日志或 routes.json 时停止。",
+    "把书签房间写入遥控路由或设备令牌时停止。",
+    "实际影响超出声明的 L0 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：网址规范化、按网址去重、初次并集不删独有项、加入后墓碑、后加入加回旧删除、加密往返、房间校验失败、旧修订号拒绝、routes.json 无密文。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-sync",
+    "scope": "新增 L0：l0-bookmark-sync；修改 l0-action-menu。relay 仅为书签房间另存密文账本。"
+  }
+}

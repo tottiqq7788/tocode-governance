@@ -1,0 +1,12 @@
+{
+  "id": "ev-unit-116",
+  "work_package_id": "wp-116",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "a7c8d0f9c52304f4a40545f4e120c3f6172f3d15",
+  "commands": [
+    "bash mac_app/scripts/test.sh",
+    "python3 -m unittest tests.test_route.BookmarkRoomTests -v"
+  ],
+  "summary": "Mac：网址规范化、按网址去重、并集、墓碑、后加入加回、加密往返通过。relay：书签房间 PUT/GET、校验失败、旧修订冲突、routes.json 不含密文通过。"
+}

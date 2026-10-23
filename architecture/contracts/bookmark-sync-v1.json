@@ -1,0 +1,43 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "bookmark-sync-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-bookmark-sync"
+  ],
+  "authority": {
+    "menu_path": "右键 → 工具 → 书签同步",
+    "ledger_path": "~/Library/Application Support/com.tocode.app/bookmark-ledger.json",
+    "ledger_mode": "0600",
+    "remote_key_store": "Keychain WhenUnlockedThisDeviceOnly; service com.tocode.app.bookmark-sync.remote-key",
+    "device_auth_for": "view, edit, delete remote key",
+    "relay_base": "https://totti.xin",
+    "relay_paths": {
+      "get": "GET /v1/bookmark-rooms/{room_id}",
+      "put": "PUT /v1/bookmark-rooms/{room_id}"
+    },
+    "room_id": "SHA-256 hex of remote key UTF-8 bytes",
+    "verifier": "HMAC-SHA256(key=remote_key, msg=\"tocode-bookmark-room-v1\") as hex",
+    "cipher": "AES-256-GCM; key = SHA-256(remote_key UTF-8); payload base64 ciphertext+tag with 12-byte nonce prefix",
+    "relay_persistence": "bookmark-rooms.json only; rooms hold room_id, verifier, ciphertext, revision; never routes.json",
+    "snapshot_ciphertext_max_bytes": 4194304,
+    "ops_compact_after": 200
+  },
+  "invariants": [
+    "Only bookmarks sync. History, passwords, cookies, extensions, and open tabs are out of scope.",
+    "Canonical URL identity: scheme and host lowercased, default ports stripped, trailing slash on path removed; query and fragment kept as-is.",
+    "One canonical URL yields one ledger entry across all browsers and Macs in the sync domain.",
+    "Initial merge and late join are union: unique URLs are kept; absence on one side never deletes.",
+    "After a browser or Mac has joined, deletes leave tombstones so old copies cannot revive them.",
+    "Remote key plaintext never leaves Mac Keychain except into encrypt/decrypt and verifier derivation in memory.",
+    "Relay stores only opaque ciphertext and never learns URLs or the remote key.",
+    "Writes carry expected_revision; stale revision is rejected and the client must pull, merge, and retry.",
+    "Bookmark rooms do not use device tokens and do not write remote-control routes."
+  ],
+  "prohibited_results": [
+    "Persisting remote key plaintext, verifier, ciphertext, or URLs in routes.json or diagnostic logs.",
+    "Deleting a ledger URL solely because a newly joined browser lacks it.",
+    "Syncing passwords, cookies, history, extensions, or tabs through this channel.",
+    "Accepting a PUT with wrong verifier or stale expected_revision."
+  ]
+}

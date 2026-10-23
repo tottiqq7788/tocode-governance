@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-117",
+  "work_package_id": "wp-117",
+  "commit": "333d8ce789e741682822024949ed3ca5d5b74198",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest --offline",
+  "result_summary": "安卓单测通过：openModelDrawer 从档案抽屉切到模型抽屉；dismissModelDrawer 回到档案抽屉；两者不同时为 Projects。",
+  "limitations": [
+    "未做 Compose 截图断言。"
+  ]
+}

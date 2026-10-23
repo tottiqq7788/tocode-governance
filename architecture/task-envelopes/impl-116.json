@@ -1,0 +1,40 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-116",
+  "role": "implementation_owner",
+  "baseline_commit": "b16b7d3de4df459e064fc6b1785c9b22e0e4ea7a",
+  "work_package_id": "wp-116",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-116.json",
+    "governance/architecture/task-envelopes/impl-116.json",
+    "governance/architecture/evidence/ev-*-116.json",
+    "mac_app/",
+    "relay/"
+  ],
+  "l0_impact": "add_new",
+  "l0_rule_ids": [
+    "l0-bookmark-sync",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "安卓遥控通道仍只在内存转发，routes.json 只含设备和关联。",
+    "手机绑定密钥与书签远程密钥分开存放。",
+    "初次合并与后加入按并集，不因某一边缺失而删除。",
+    "同一规范化网址整本账只留一条。"
+  ],
+  "must_reject": [
+    "同步密码、Cookie、历史或扩展。",
+    "relay 持久化密钥明文或未加密网址。",
+    "把书签房间混入遥控设备令牌。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-bookmark-sync 与 l0-action-menu 的声明范围时停止并重新准入。"
+  ],
+  "notes": "阶段：新增书签同步。角色：本机用户与持同一密钥的其它 Mac。业务对象：书签账本与密文房间。不变量：按网址去重、并集初次合并、删除留墓碑、relay 只存密文。禁止结果：明文落盘服务器、同步凭据类数据。"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "wp-117",
+  "title": "档案模型改为独立上拉抽屉",
+  "baseline_commit": "3a6f1931d036c2f38ab5786c2f1611281892ecc1",
+  "goal": "点档案抽屉左侧模型时先关掉档案抽屉，再上拉独立模型抽屉；不叠两层 bottom sheet；选中或关闭后可回到档案抽屉。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-117.json",
+    "governance/architecture/task-envelopes/impl-117.json",
+    "governance/architecture/evidence/ev-*-117.json",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "在档案抽屉上再叠一层模型 bottom sheet 时停止。",
+    "改写 Mac 写配置或中转白名单语义时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：安卓交互状态可区分档案抽屉与模型抽屉，不在同一 sheet 内展开列表。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-request:2026-10-23-model-separate-sheet",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。模型选择改为顺序上拉独立抽屉。"
+  }
+}

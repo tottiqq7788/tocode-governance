@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-117",
+  "role": "implementation_owner",
+  "baseline_commit": "3a6f1931d036c2f38ab5786c2f1611281892ecc1",
+  "work_package_id": "wp-117",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-117.json",
+    "governance/architecture/task-envelopes/impl-117.json",
+    "governance/architecture/evidence/ev-*-117.json",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "密钥留在 Mac。",
+    "选项仍来自 Hermes，写回仍只改当前档案默认模型。",
+    "不叠两层 bottom sheet。"
+  ],
+  "must_reject": [
+    "ModalBottomSheet 套 ModalBottomSheet。",
+    "把模型列表继续挤在档案抽屉底部展开。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "在档案抽屉上再叠一层模型 bottom sheet 时停止。",
+    "改写 Mac 写配置或中转白名单语义时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "notes": "阶段：档案抽屉交互。关掉档案抽屉后再开模型抽屉；关闭模型抽屉回到档案抽屉。"
+}
