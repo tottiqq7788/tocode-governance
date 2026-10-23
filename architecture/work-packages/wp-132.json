@@ -1,0 +1,26 @@
+{
+  "id": "wp-132",
+  "title": "夹墓碑树缺席确认与 URL 百分号形态对齐",
+  "baseline_commit": "2f4c938d073ae10648ceb5bbe2c741f3c34c5dc0",
+  "goal": "tree 后对浏览器已缺席的 folderTombstones 播种 confirmedFolderRemovals，避免数百次 remove_folder 重放；扩展 canonicalize 在解码后按 Swift URLComponents.string 输出大写百分号，消除中文 URL 假重复。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-132.json",
+    "governance/architecture/task-envelopes/impl-132.json",
+    "governance/architecture/evidence/ev-*-132.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实际 prune 账本 folderTombstones、或破坏 %2F≡/ 身份、或影响超出 l0-bookmark-sync 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：中文三形态同一身份且为大写百分号；树缺席播种 confirmed 单测通过。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-24-bookmark-tombstone-seed-url-align",
+    "scope": "修改 l0-bookmark-sync：夹墓碑树缺席确认、URL 百分号输出形态对齐。"
+  }
+}

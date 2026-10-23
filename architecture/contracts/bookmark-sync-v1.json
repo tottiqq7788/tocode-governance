@@ -25,7 +25,7 @@
   },
   "invariants": [
     "Only bookmarks and bookmark folders sync. History, passwords, cookies, extensions, open tabs, separators, and Firefox tags/keywords are out of scope.",
-    "Canonical URL identity: scheme and host lowercased, default ports stripped, trailing slash on path removed; query and fragment participate after percent-decoding (e.g. %2F and / are the same identity). Host Swift and extension JS canonicalize must agree.",
+    "Canonical URL identity: scheme and host lowercased, default ports stripped, trailing slash on path removed; query and fragment are percent-decoded for equivalence (%2F vs /, hex case) then re-encoded like URLComponents.string (non-ASCII as uppercase percent, e.g. %E7%9F%AD). Host Swift and extension JS canonicalize must agree on that string form.",
     "One canonical URL yields one ledger bookmark entry across all browsers and Macs in the sync domain.",
     "Layout authority: after merge or CLI mutation, connected browsers must match ledger folder path, title, and siblingIndex (create, move, reorder, tombstone remove).",
     "Toolbar, other, and mobile roots keep that root for all nested folders: path identity is kind plus segments; a folder under toolbar does not merge with a same-named folder under other or mobile.",
@@ -36,7 +36,7 @@
     "After a browser or Mac has joined, deletes leave tombstones so old copies cannot revive them.",
     "Tombstone vs create/recreate is symmetric LWW: a folder or URL entry with updatedAt >= tombstone.deletedAt drops the tombstone and keeps the record (local create and remote recreate treated alike).",
     "Layout reconcile may report 已对齐 only when known fingerprints come from measured browser apply_result matching ledger intent (or an equivalent measured tree snapshot), purge of empty-title placeholders succeeded (or is explicitly degraded), and poisoned/unrecoverable URLs are empty. Index out of bounds must poison the URL and must not write ledger-intent fingerprints into knownLayout.",
-    "Repeated remove_folder failures for the same pathKey circuit-break after a fixed limit; a new browser tree bumps reconcileGeneration so in-flight batches cannot write back.",
+    "Repeated remove_folder failures for the same pathKey circuit-break after a fixed limit; a new browser tree bumps reconcileGeneration so in-flight batches cannot write back. On each tree, folder tombstones whose pathKey is absent from the browser folder layout are treated as already satisfied for that bridge (seed confirmedFolderRemovals) without clearing ledger folderTombstones; only paths still present in the tree are queued for remove_folder. Folder-removal timeout pause does not require an empty confirmed set.",
     "拓展安装 menu checkmarks reflect current Native live connections (browser:profile after hello), not historical joinedBrowserKeys. Multiple bridges for the same key: disconnecting one must not mark the browser offline while another remains.",
     "Remote key plaintext never leaves Mac Keychain except into encrypt/decrypt and verifier derivation in memory.",
     "Relay stores only opaque ciphertext and never learns URLs or the remote key.",
@@ -91,7 +91,8 @@
     "Reporting unconditional 已对齐 when purge failed/skipped or poisoned URLs remain.",
     "Letting a local folder tombstone permanently block a newer remote folder recreate (or the reverse asymmetry).",
     "Marking a browser offline in 拓展安装 checkmarks while another live Native bridge still holds the same browser:profile key.",
-    "Treating percent-encoded and decoded query/fragment forms of the same URL as different ledger identities between host and extension.",
+    "Treating percent-encoded and decoded query/fragment forms of the same URL as different ledger identities between host and extension (including uppercase vs lowercase percent hex, or Unicode vs uppercase-percent forms of the same code points).",
+    "Replaying remove_folder for every ledger folder tombstone after each tree when the path is already absent from that browser's folder layout.",
     "Normalizing other/<toolbarAlias> (single segment) into the undeletable toolbar root.",
     "CLI add/apply reporting ok without distinguishing create vs merge for an existing canonical URL."
   ]

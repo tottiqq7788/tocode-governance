@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-132",
+  "work_package_id": "wp-132",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "单测通过：中文 %e7/%E7/裸字同一身份且为大写百分号；树缺席墓碑播种 confirmed。"
+}

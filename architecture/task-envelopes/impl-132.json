@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-132",
+  "role": "implementation_owner",
+  "baseline_commit": "2f4c938d073ae10648ceb5bbe2c741f3c34c5dc0",
+  "work_package_id": "wp-132",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-132.json",
+    "governance/architecture/task-envelopes/impl-132.json",
+    "governance/architecture/evidence/ev-*-132.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "账本 folderTombstones 不因单端树缺席而批量 prune。",
+    "%2F 与 / 仍为同一 URL 身份。"
+  ],
+  "must_reject": [
+    "tree 后对已缺席墓碑路径继续批量 remove_folder。",
+    "扩展输出裸 Unicode 中文而主机输出大写百分号导致假重复。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "树缺席播种 confirmedFolderRemovals；删夹超时暂停不依赖 confirmed 为空；JS encodeLikeSwiftURLComponents。"
+}

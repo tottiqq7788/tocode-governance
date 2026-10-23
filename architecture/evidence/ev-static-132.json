@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-132",
+  "work_package_id": "wp-132",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 l0-bookmark-sync 已写入树缺席确认夹墓碑、URL 大写百分号形态对齐。"
+}
