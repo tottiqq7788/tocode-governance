@@ -1,0 +1,27 @@
+{
+  "id": "wp-119",
+  "title": "弹窗大气输入框与拓展安装自动打开扩展页",
+  "baseline_commit": "9db319c7dd4afc6ac1207384de4a1355443d97c0",
+  "goal": "统一密钥类弹窗输入框为键盘名称同款大气样式；拓展安装自动用对应浏览器打开扩展页并缩短步骤。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-119.json",
+    "governance/architecture/task-envelopes/impl-119.json",
+    "governance/architecture/evidence/ev-*-119.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "静默安装浏览器扩展时停止。",
+    "经弹窗打印或导出远程密钥明文以外的新外泄面时停止。",
+    "实际影响超出 l0-bookmark-sync 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：应用可编译；openExtensionPage 对未安装浏览器返回 false。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-prompt-fields-extension-open",
+    "scope": "修改 l0-bookmark-sync 安装引导；弹窗输入框观感统一。"
+  }
+}

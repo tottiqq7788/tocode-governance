@@ -1,0 +1,27 @@
+{
+  "id": "wp-121",
+  "title": "书签布局权威同步（LWW + 夹内顺序）",
+  "baseline_commit": "9db319c7dd4afc6ac1207384de4a1355443d97c0",
+  "goal": "将书签同步从按 URL 并集补缺升级为账本布局权威：同 URL 冲突按 updatedAt LWW；夹内 siblingIndex 与空文件夹同步；合并或 CLI 变更后已连接浏览器一比一对齐文件夹与左右顺序。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-121.json",
+    "governance/architecture/task-envelopes/impl-121.json",
+    "governance/architecture/evidence/ev-*-121.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "恢复 kind 优先级择优或只补缺失 URL、不对已有 URL 纠偏布局时停止。",
+    "实际影响超出 l0-bookmark-sync 与 l0-cli-control 声明范围时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：LWW、siblingIndex 合并与持久化兼容、布局对账 diff 断言通过；应用可编译。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-layout-authority",
+    "scope": "修改 l0-bookmark-sync：布局权威、LWW、夹内顺序与空文件夹同步；CLI 增加 --index。"
+  }
+}

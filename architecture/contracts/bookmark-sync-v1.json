@@ -24,10 +24,13 @@
     "ops_compact_after": 200
   },
   "invariants": [
-    "Only bookmarks sync. History, passwords, cookies, extensions, and open tabs are out of scope.",
+    "Only bookmarks and bookmark folders sync. History, passwords, cookies, extensions, open tabs, separators, and Firefox tags/keywords are out of scope.",
     "Canonical URL identity: scheme and host lowercased, default ports stripped, trailing slash on path removed; query and fragment kept as-is.",
-    "One canonical URL yields one ledger entry across all browsers and Macs in the sync domain.",
-    "Initial merge and late join are union: unique URLs are kept; absence on one side never deletes.",
+    "One canonical URL yields one ledger bookmark entry across all browsers and Macs in the sync domain.",
+    "Layout authority: after merge or CLI mutation, connected browsers must match ledger folder path, title, and siblingIndex (create, move, reorder, tombstone remove).",
+    "Conflict resolution is last-write-wins on updatedAt for title, folder path, and siblingIndex (no folder-kind priority).",
+    "Empty folders are stored as path-keyed folder records with siblingIndex and are written back.",
+    "Initial merge and late join are union on URLs: unique URLs are kept; absence on one side never deletes.",
     "After a browser or Mac has joined, deletes leave tombstones so old copies cannot revive them.",
     "Remote key plaintext never leaves Mac Keychain except into encrypt/decrypt and verifier derivation in memory.",
     "Relay stores only opaque ciphertext and never learns URLs or the remote key.",
@@ -40,8 +43,8 @@
       "bookmark status",
       "bookmark list",
       "bookmark get <url>",
-      "bookmark add --url <url> [--title <title>] [--folder toolbar|other|mobile|<path>]",
-      "bookmark update --url <url> [--title <title>] [--folder ...] [--new-url <url>]",
+      "bookmark add --url <url> [--title <title>] [--folder toolbar|other|mobile|<path>] [--index <n>]",
+      "bookmark update --url <url> [--title <title>] [--folder ...] [--index <n>] [--new-url <url>]",
       "bookmark delete --url <url>",
       "bookmark pull"
     ]
@@ -51,6 +54,7 @@
     "Deleting a ledger URL solely because a newly joined browser lacks it.",
     "Syncing passwords, cookies, history, extensions, or tabs through this channel.",
     "Accepting a PUT with wrong verifier or stale expected_revision.",
-    "Printing remote key plaintext via tocode bookmark CLI."
+    "Printing remote key plaintext via tocode bookmark CLI.",
+    "Leaving connected browsers with divergent folder placement or sibling order after a completed layout reconcile."
   ]
 }

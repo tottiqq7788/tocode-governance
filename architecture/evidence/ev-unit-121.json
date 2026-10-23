@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-121",
+  "work_package_id": "wp-121",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "Mac 单元测试全部通过；含 LWW、siblingIndex、旧账本缺省解码、siblingIndex 钳制语义与 CLI --index。"
+}

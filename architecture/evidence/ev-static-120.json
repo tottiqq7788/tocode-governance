@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-120",
+  "work_package_id": "wp-120",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；l0-bookmark-sync / l0-action-menu 已纳入同步日志入口与会话内活动日志语义。"
+}

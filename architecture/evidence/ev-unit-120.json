@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-120",
+  "work_package_id": "wp-120",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "./scripts/test.sh",
+  "summary": "ALL TESTS PASSED；含环形缓冲截断与密钥片段脱敏；应用已编译重启。"
+}

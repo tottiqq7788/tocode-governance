@@ -1,0 +1,35 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-120",
+  "role": "implementation_owner",
+  "baseline_commit": "9db319c7dd4afc6ac1207384de4a1355443d97c0",
+  "work_package_id": "wp-120",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-120.json",
+    "governance/architecture/task-envelopes/impl-120.json",
+    "governance/architecture/evidence/ev-*-120.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "远程密钥明文仍只进钥匙串，查看须设备验证。",
+    "同步行为语义（并集、墓碑、远程修订）不变。",
+    "不能静默安装浏览器扩展。"
+  ],
+  "must_reject": [
+    "在同步日志中展示远程密钥明文或整段密文。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-bookmark-sync 与 l0-action-menu 时停止并重新准入。"
+  ],
+  "notes": "阶段：可观测性。角色：本机用户。业务对象：书签同步活动日志。不变量：日志仅会话内存、不改账本权威。禁止结果：密钥外泄进日志窗口。"
+}

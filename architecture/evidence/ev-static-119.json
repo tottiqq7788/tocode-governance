@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-119",
+  "work_package_id": "wp-119",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；l0-bookmark-sync 安装引导改为自动打开浏览器扩展页。"
+}

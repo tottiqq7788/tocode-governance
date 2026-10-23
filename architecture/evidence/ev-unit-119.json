@@ -1,0 +1,9 @@
+{
+  "id": "ev-unit-119",
+  "work_package_id": "wp-119",
+  "kind": "unit",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "bash mac_app/scripts/test.sh",
+  "summary": "Mac 单元测试全部通过；含扩展页 URL/应用名断言与既有书签 CLI 测试。"
+}

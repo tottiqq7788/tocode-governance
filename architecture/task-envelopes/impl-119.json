@@ -1,0 +1,34 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-119",
+  "role": "implementation_owner",
+  "baseline_commit": "9db319c7dd4afc6ac1207384de4a1355443d97c0",
+  "work_package_id": "wp-119",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-119.json",
+    "governance/architecture/task-envelopes/impl-119.json",
+    "governance/architecture/evidence/ev-*-119.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync"
+  ],
+  "must_preserve": [
+    "不能静默安装浏览器扩展。",
+    "密钥明文仍只进钥匙串，查看须设备验证。",
+    "未装对应浏览器时安装流程不崩溃。"
+  ],
+  "must_reject": [
+    "不经用户在扩展页操作就宣称扩展已安装。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 l0-bookmark-sync 时停止并重新准入。"
+  ],
+  "notes": "阶段：安装引导减步与弹窗控件统一。角色：本机用户。业务对象：扩展安装引导与密钥录入。不变量：仍须手动加载已解压扩展。禁止结果：静默安装。"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "wp-120",
+  "title": "书签同步日志窗口",
+  "baseline_commit": "9db319c7dd4afc6ac1207384de4a1355443d97c0",
+  "goal": "在工具→书签同步中于远程同步上方提供「同步日志」；点击弹出可实时刷新的窗口，记录本机会话内全部书签同步行为，不展示远程密钥明文。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-120.json",
+    "governance/architecture/task-envelopes/impl-120.json",
+    "governance/architecture/evidence/ev-*-120.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "同步日志打印远程密钥明文或密文整段时停止。",
+    "实际影响超出 l0-bookmark-sync 与 l0-action-menu 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：日志环形缓冲截断与脱敏断言通过；应用可编译。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-requested:2026-10-23-bookmark-sync-log",
+    "scope": "修改 l0-bookmark-sync 与 l0-action-menu：新增同步日志入口与会话内活动日志。"
+  }
+}
