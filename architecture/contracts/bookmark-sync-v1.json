@@ -39,6 +39,8 @@
     "Writes carry expected_revision; stale revision is rejected and the client must pull, merge, and retry.",
     "Bookmark rooms do not use device tokens and do not write remote-control routes.",
     "CLI bookmark commands mutate the same ledger and may pull with the Keychain remote key; they never print the remote key plaintext.",
+    "CLI --folder accepts rooted paths: toolbar|other|mobile (and Chinese aliases) alone or as a prefix before /segments (e.g. toolbar/work/a, 书签栏/工作). Explicit named: prefix yields kind=named. A path without a root prefix and without named: is kind=named. Invalid folder strings fail with non-zero exit; rooted prefixes must not silently become named.",
+    "CLI bookmark folders [--json] is read-only and exports the ledger folder tree (kind, segments, siblingIndex, child counts, isEmpty) grouped by root.",
     "Formal ledger stays on bookmark-ledger.json and the existing formal remote room. A separate 7-day backup pack lives under Application Support bookmark-backups/ and in an isolated backup remote room; daily job full-overwrites today's slot and drops slots older than today-6 days.",
     "Backup room_id = SHA-256 hex of (remote_key UTF-8 || \"\\ntocode-bookmark-backup-pack-v1\"); verifier = HMAC-SHA256(key=remote_key, msg=\"tocode-bookmark-backup-pack-v1\") as hex; same AES-256-GCM cipher as formal. Backup never participates in browser reconcile.",
     "Restore replaces the formal ledger wholesale from a chosen day slot, then reconciles connected browsers and force-pushes the formal room without merging the restored snapshot into a stale remote formal copy."
@@ -48,10 +50,11 @@
       "bookmark status",
       "bookmark list",
       "bookmark get <url>",
-      "bookmark add --url <url> [--title <title>] [--folder toolbar|other|mobile|<path>] [--index <n>]",
+      "bookmark add --url <url> [--title <title>] [--folder toolbar|other|mobile|toolbar/<path>|other/<path>|mobile/<path>|named:<path>|<path>] [--index <n>]",
       "bookmark update --url <url> [--title <title>] [--folder ...] [--index <n>] [--new-url <url>]",
       "bookmark delete --url <url>",
       "bookmark pull",
+      "bookmark folders [--json]",
       "bookmark backup status",
       "bookmark backup list",
       "bookmark backup now",
@@ -59,6 +62,7 @@
     ]
   },
   "prohibited_results": [
+    "Silently parsing a rooted CLI folder prefix (toolbar/…, 书签栏/…, other/…, mobile/…) as kind=named.",
     "Persisting remote key plaintext, verifier, ciphertext, or URLs in routes.json or diagnostic logs.",
     "Deleting a ledger URL solely because a newly joined browser lacks it.",
     "Syncing passwords, cookies, history, extensions, or tabs through this channel.",

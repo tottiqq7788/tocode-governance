@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-126",
+  "role": "implementation_owner",
+  "baseline_commit": "ab4d2b8ccfe54e2779d176a17a039f19c2f4ef20",
+  "work_package_id": "wp-126",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-126.json",
+    "governance/architecture/task-envelopes/impl-126.json",
+    "governance/architecture/evidence/ev-*-126.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-bookmark-sync",
+    "l0-cli-control"
+  ],
+  "must_preserve": [
+    "显式 named: 前缀路径仍可用。",
+    "无根前缀的 a/b 仍解析为 named。",
+    "扩展 ensure_folder 与备份命令语义不变。"
+  ],
+  "must_reject": [
+    "把 toolbar/x 或 书签栏/x 静默解析为 named。",
+    "无法解析的 --folder 静默成功。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "阶段：CLI 路径与夹树只读。禁止结果：栏内具名夹无法用 CLI 表达。"
+}

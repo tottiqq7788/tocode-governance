@@ -1,0 +1,26 @@
+{
+  "id": "wp-126",
+  "title": "书签 CLI：根前缀路径与 folders 树",
+  "baseline_commit": "ab4d2b8ccfe54e2779d176a17a039f19c2f4ef20",
+  "goal": "CLI --folder 支持 toolbar|other|mobile 前缀路径并落到对应根；非法路径报错不静默 named；新增只读 bookmark folders 导出夹树。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/bookmark-sync-v1.json",
+    "governance/architecture/work-packages/wp-126.json",
+    "governance/architecture/task-envelopes/impl-126.json",
+    "governance/architecture/evidence/ev-*-126.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "实际改动备份语义或扩展 ensure_folder 算法超出 CLI 输入面时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：路径解析与 folders 命令单测通过；应用可编译。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-23-bookmark-cli-folder-path",
+    "scope": "修改 l0-cli-control 与 l0-bookmark-sync：根前缀路径、严格校验、folders。"
+  }
+}

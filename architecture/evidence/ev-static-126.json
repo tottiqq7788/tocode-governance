@@ -1,0 +1,9 @@
+{
+  "id": "ev-static-126",
+  "work_package_id": "wp-126",
+  "kind": "static",
+  "status": "passed",
+  "commit": "working-tree",
+  "command": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "summary": "治理审计通过；合同与 L0 已声明根前缀 --folder、严格校验与 bookmark folders。"
+}
