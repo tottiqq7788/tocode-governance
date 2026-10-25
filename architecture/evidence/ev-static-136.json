@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-136",
+  "work_package_id": "wp-136",
+  "commit": "9408f3d57a050933eeab961ce2d4f55beb9768e4",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：目录标题旁「下载文件」进入勾选，同一位置「全选」只覆盖当前已列出项，不再用长按进入多选。",
+  "limitations": [
+    "审计只检查结构和引用。"
+  ]
+}

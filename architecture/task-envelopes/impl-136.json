@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-136",
+  "role": "implementation_owner",
+  "baseline_commit": "333d8ce789e741682822024949ed3ca5d5b74198",
+  "work_package_id": "wp-136",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-136.json",
+    "governance/architecture/task-envelopes/impl-136.json",
+    "governance/architecture/evidence/ev-*-136.json",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "下载仍落到手机 Download/tocode/日期目录，传输可压缩，落盘为解压后的正常结构。",
+    "点文件夹名称仍进入该层。",
+    "点文件后仍全屏预览。"
+  ],
+  "must_reject": [
+    "再用长按进入多选。",
+    "全选自动请求或选中还没列出的下一页。",
+    "改写 Mac 下载或中转白名单。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "改写 Mac 下载、中转白名单或落盘目录时停止。",
+    "全选自动请求或选中还没列出的下一页时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "notes": "阶段：手机目录勾选。目录页与会话目录抽屉共用 FilesTab。进入勾选不预选；全选只并入或去掉当前已列出路径。"
+}

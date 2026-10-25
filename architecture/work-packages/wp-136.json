@@ -1,0 +1,27 @@
+{
+  "id": "wp-136",
+  "title": "目录下载改为按钮勾选",
+  "baseline_commit": "333d8ce789e741682822024949ed3ca5d5b74198",
+  "goal": "目录标题旁用「下载文件」进入勾选，同一位置变为只覆盖当前已列出项的「全选」；不再用长按进入多选。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-136.json",
+    "governance/architecture/task-envelopes/impl-136.json",
+    "governance/architecture/evidence/ev-*-136.json",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "改写 Mac 下载、中转白名单或落盘目录时停止。",
+    "全选自动请求或选中还没列出的下一页时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：空列表不变；部分选中后补全当前层；全选后再点只去掉当前层，其它层路径还在。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-26-directory-download-select",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。目录下载改为按钮进入勾选，全选只覆盖当前已列出项。"
+  }
+}

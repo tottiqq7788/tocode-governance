@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-136",
+  "work_package_id": "wp-136",
+  "commit": "9408f3d57a050933eeab961ce2d4f55beb9768e4",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest",
+  "result_summary": "LinkDirectoryTest 21 项通过，含 folderSelectAllTouchesOnlyTheListedLayer：空列表不变，部分选中后补全当前层，再点只去掉当前层并保留其它层路径。",
+  "limitations": [
+    "未在手机上点按：installDebug 时 adb 没有已连接设备。"
+  ]
+}
