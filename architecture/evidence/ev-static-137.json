@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-137",
+  "work_package_id": "wp-137",
+  "commit": "107d94722cd9b4278f761842f4907a82044ecb75",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：手机连接中途断开不算这一轮失败，重连后继续读，横幅不能盖住已经回来的回复。",
+  "limitations": [
+    "审计只检查结构和引用。"
+  ]
+}

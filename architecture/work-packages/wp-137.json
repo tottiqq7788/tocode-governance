@@ -1,0 +1,27 @@
+{
+  "id": "wp-137",
+  "title": "会话中断时继续等待回复",
+  "baseline_commit": "9408f3d57a050933eeab961ce2d4f55beb9768e4",
+  "goal": "手机连接中途断开时不把已交给 Mac 的这一轮标成失败；保持正在回复，重连后继续读，读到结果后清掉重连横幅。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-137.json",
+    "governance/architecture/task-envelopes/impl-137.json",
+    "governance/architecture/evidence/ev-*-137.json",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "改写中转协议或取消已交给 Mac 的这一轮时停止。",
+    "用断连失败文案盖住已经回来的回复时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：chat 等待在断连时保留；messages 不留下失败文案；成功读取清掉重连横幅；下载失败文案保留。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-26-chat-reconnect-keep-waiting",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。手机连接中断时继续等待 Mac 上的这一轮。"
+  }
+}

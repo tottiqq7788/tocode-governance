@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-137",
+  "work_package_id": "wp-137",
+  "commit": "107d94722cd9b4278f761842f4907a82044ecb75",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "android_app ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest",
+  "result_summary": "LinkDirectoryTest 通过，含 disconnectKeepsChatWaitAndClearsReconnectAfterMessages：chat 保留、messages 静默丢弃、成功读取清掉重连横幅、下载失败文案保留。",
+  "limitations": [
+    "未在手机上复现断连场景。"
+  ]
+}

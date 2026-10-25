@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-137",
+  "role": "implementation_owner",
+  "baseline_commit": "9408f3d57a050933eeab961ce2d4f55beb9768e4",
+  "work_package_id": "wp-137",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-137.json",
+    "governance/architecture/task-envelopes/impl-137.json",
+    "governance/architecture/evidence/ev-*-137.json",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "已交给 Mac 的这一轮不因手机断连而取消。",
+    "下载、预览、遥控在断连时仍按失败提示。",
+    "超过现有聊天超时仍可提示没有回应。"
+  ],
+  "must_reject": [
+    "断连时对进行中的 chat 写入「连接断开了」并清掉 inflight。",
+    "重连后仍用断连失败横幅盖住已经回来的回复。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "改写中转协议或取消已交给 Mac 的这一轮时停止。",
+    "用断连失败文案盖住已经回来的回复时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "notes": "阶段：手机会话等待。dropWaits 保留 chat；messages 只移除等待；重连横幅用提醒色。"
+}
