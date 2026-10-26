@@ -1,0 +1,27 @@
+{
+  "id": "wp-138",
+  "title": "手机会话补上 Hermes 工作目录",
+  "baseline_commit": "0f1ce1073e9e60ea8fd3b302adaf40c31fca1c7a",
+  "goal": "手机建立或列出该项目会话时，把还没有工作目录的 Hermes 会话写成当前项目主目录，桌面因此归入该项目而不是主页。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-138.json",
+    "governance/architecture/task-envelopes/impl-138.json",
+    "governance/architecture/evidence/ev-*-138.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "覆盖已有工作目录时停止。",
+    "改写中转协议或 Hermes REST 建会话字段时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：新建会话写入 cwd；已有 cwd 不覆盖；列出时补空行。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-26-phone-session-cwd-stamp",
+    "scope": "修改已有 L0：l0-phone-hermes-chat。手机会话补上 Hermes 工作目录。"
+  }
+}

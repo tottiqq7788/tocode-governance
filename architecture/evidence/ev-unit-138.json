@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-138",
+  "work_package_id": "wp-138",
+  "commit": "4cbabdb473494b5b510d52bb0098d36b7ed448ea",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "mac_app ./scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED，含 testPhoneHermesSessionStampsProjectCwd：新建空 cwd 写成项目主目录、已有 cwd 不覆盖、列出时补空行。",
+  "limitations": [
+    "未在 Hermes 桌面侧边栏点选验证。"
+  ]
+}

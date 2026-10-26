@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-138",
+  "work_package_id": "wp-138",
+  "commit": "4cbabdb473494b5b510d52bb0098d36b7ed448ea",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-phone-hermes-chat 改为：建立时以及列出该项目会话时，把 Hermes 会话的工作目录写成当前项目主目录，桌面因此归入该项目而不是主页；已有工作目录的会话不改。",
+  "limitations": [
+    "审计只检查结构和引用。"
+  ]
+}

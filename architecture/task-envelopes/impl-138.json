@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-138",
+  "role": "implementation_owner",
+  "baseline_commit": "0f1ce1073e9e60ea8fd3b302adaf40c31fca1c7a",
+  "work_package_id": "wp-138",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-138.json",
+    "governance/architecture/task-envelopes/impl-138.json",
+    "governance/architecture/evidence/ev-*-138.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "发给 Hermes 的 instructions 仍带项目工作目录提示。",
+    "Tocode 会话索引仍决定手机侧项目归属。",
+    "已有非空 cwd 的会话不被改写。"
+  ],
+  "must_reject": [
+    "建会话失败只因补写 cwd 失败。",
+    "用 session.workspace.move 改写进行中的桌面会话。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "覆盖已有工作目录时停止。",
+    "改写中转协议或 Hermes REST 建会话字段时停止。",
+    "实际影响超出 l0-phone-hermes-chat 时停止并重新准入。"
+  ],
+  "notes": "阶段：手机会话归属。session_create 与 sessions 对 cwd 为空的索引会话写项目主目录；写失败不挡建会话。"
+}
