@@ -1,0 +1,32 @@
+{
+  "id": "wp-139",
+  "title": "WebSocket 首包鉴权与网页 CSP/Mermaid 收紧",
+  "baseline_commit": "26b365f64a01a665efc77695e7f0bb34320167d1",
+  "goal": "出站长连接握手 URL 不再携带 token；身份在升级后首条文本帧校验。网页端收紧 CSP，Mermaid 不用 innerHTML。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/work-packages/wp-139.json",
+    "governance/architecture/task-envelopes/impl-139.json",
+    "governance/architecture/evidence/ev-*-139.json",
+    "relay/",
+    "mac_app/",
+    "android_app/",
+    "toweb/"
+  ],
+  "stop_conditions": [
+    "把 token 改放到 Sec-WebSocket-Protocol 或其它仍进握手头的位置时停止。",
+    "改变配对、兑码或绑定密钥语义时停止。",
+    "实际影响超出 l0-android-remote-control / l0-phone-hermes-chat 复用同一条 WS 时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过；合同与 L0 已写明首包鉴权。",
+    "unit：中转 auth 成功/失败/超时/鉴权前业务帧；过渡 query；删除兼容后 query 失败。",
+    "冒烟：Mac、安卓、toweb 连上仍得 ready；toweb CSP 与 Mermaid 无 innerHTML。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-26-ws-auth-and-xss",
+    "scope": "修改已有 L0：l0-android-remote-control（l0-phone-hermes-chat 复用同一条 WS）。握手 URL 不得带 token；首包 auth；toweb CSP/Mermaid。"
+  }
+}

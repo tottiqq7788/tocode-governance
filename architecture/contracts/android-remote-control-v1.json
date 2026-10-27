@@ -13,7 +13,10 @@
     "binding_key_digest_alg": "SHA-256",
     "relay_persistence": "devices and links only; no command or result bodies; binding key plaintext never persisted",
     "mac_association_file_mode": "0600",
-    "mac_binding_key_store": "Keychain userPresence for plaintext; SHA-256 digest in remote-control.json"
+    "mac_binding_key_store": "Keychain userPresence for plaintext; SHA-256 digest in remote-control.json",
+    "ws_path": "/v1/ws",
+    "ws_auth": "after Upgrade, first text frame { op: auth, token }; handshake URL must not carry token",
+    "ws_auth_timeout_seconds": 5
   },
   "invariants": [
     "One association binds one Android remote to one Mac. One Android may hold many associations, and one Mac may be linked from many Androids.",
@@ -23,7 +26,8 @@
     "The relay forwards only the fixed action whitelist in memory and returns mac_offline immediately when that Mac socket is absent.",
     "accepted means the peer socket received the frame. result is the Mac execution outcome and is correlated by request_id.",
     "Deleting an association removes the route immediately and notifies the peer that is still connected.",
-    "The remote channel cannot run shell, free text, root changes, model switching, quit, WeChat send, or key/text injection."
+    "The remote channel cannot run shell, free text, root changes, model switching, quit, WeChat send, or key/text injection.",
+    "WebSocket clients connect to /v1/ws without a token query. Identity is established only by the first text frame { op: auth, token } after Upgrade; device_token and link_token remain Bearer secrets. Auth must complete within 5 seconds; frames before auth are rejected."
   ],
   "actions": [
     "status",
@@ -45,6 +49,8 @@
     "Keeping a deleted association usable.",
     "Reusing a pairing code or accepting an expired code.",
     "Creating a link when binding_key is missing or does not match the pairing digest.",
-    "Carrying a role, prompt, binding key, or other credential inside the pairing QR."
+    "Carrying a role, prompt, binding key, or other credential inside the pairing QR.",
+    "Placing device_token or link_token in the WebSocket handshake URL or query string after cutover.",
+    "Forwarding app or remote frames before successful ws auth."
   ]
 }

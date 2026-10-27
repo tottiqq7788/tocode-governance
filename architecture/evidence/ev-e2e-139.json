@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-139",
+  "work_package_id": "wp-139",
+  "commit": "cd5e4122992496134566543d344c12b0fdb9424a",
+  "type": "e2e",
+  "status": "passed",
+  "command_or_source": "生产冒烟：rsync relay+toweb；nginx snippets/toweb.conf；curl CSP；WS 探针",
+  "result_summary": "中转已 WS_ALLOW_QUERY_TOKEN=False；?token= → 401；坏 auth/非 auth 首帧升级后无 ready。toweb CSP 含 style-src-attr。https://totti.xin/、zhouhuo、/health 均为 200。toweb dist 已同步。",
+  "limitations": [
+    "未用真实 device/link token 做成功 ready 冒烟（避免动生产会话）。",
+    "已安装的旧版 Mac/Android 在去掉 query 后会掉线，需装含首包 auth 的构建。"
+  ]
+}

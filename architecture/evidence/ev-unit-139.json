@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-139",
+  "work_package_id": "wp-139",
+  "commit": "cd5e4122992496134566543d344c12b0fdb9424a",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd relay && python3 -m unittest discover -s tests",
+  "result_summary": "13 tests OK，含 WsAuthTests：首包 auth 成功、坏帧/非 auth 关闭、过渡期 query 接受、WS_ALLOW_QUERY_TOKEN=False 后 query 401。",
+  "limitations": [
+    "Mac/Android 未跑原生单元测试；协议改动以中转测试与源码审查为主。"
+  ]
+}

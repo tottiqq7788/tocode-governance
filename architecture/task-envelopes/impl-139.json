@@ -1,0 +1,43 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-139",
+  "role": "implementation_owner",
+  "baseline_commit": "26b365f64a01a665efc77695e7f0bb34320167d1",
+  "work_package_id": "wp-139",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/work-packages/wp-139.json",
+    "governance/architecture/task-envelopes/impl-139.json",
+    "governance/architecture/evidence/ev-*-139.json",
+    "relay/",
+    "mac_app/",
+    "android_app/",
+    "toweb/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-android-remote-control",
+    "l0-phone-hermes-chat"
+  ],
+  "must_preserve": [
+    "配对码、兑码与绑定密钥语义不变。",
+    "鉴权成功后 ready、同侧替换、转发与遥控/Hermes 通道语义不变。",
+    "诊断日志不得写入 token、绑定密钥、聊天正文或路径明文。"
+  ],
+  "must_reject": [
+    "握手 URL 或查询串携带 token（收尾后）。",
+    "鉴权前转发业务帧或二进制。",
+    "Mermaid 经 innerHTML 注入 SVG。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "把 token 改放到 Sec-WebSocket-Protocol 或其它仍进握手头的位置时停止。",
+    "改变配对、兑码或绑定密钥语义时停止。",
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "部署已完成：双鉴权 → 三端源码首包 → WS_ALLOW_QUERY_TOKEN=False → nginx CSP。旧客户端需更新后才能连。"
+}

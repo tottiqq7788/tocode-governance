@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-139",
+  "work_package_id": "wp-139",
+  "commit": "cd5e4122992496134566543d344c12b0fdb9424a",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。合同 android-remote-control-v1 与 semantic-map L0 已写明：握手 URL 不得带 token，升级后首条文本帧 auth；toweb CSP 为 style-src 'self' + style-src-attr 'unsafe-inline'，Mermaid 经 Blob/img 无 innerHTML。",
+  "limitations": [
+    "审计只检查结构和引用。",
+    "commit 字段绑定中转实现 commit；治理文书同属 wp-139。"
+  ]
+}
