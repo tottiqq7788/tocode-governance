@@ -16,10 +16,13 @@
     "mac_binding_key_store": "Keychain userPresence for plaintext; SHA-256 digest in remote-control.json",
     "ws_path": "/v1/ws",
     "ws_auth": "after Upgrade, first text frame { op: auth, token }; handshake URL must not carry token",
-    "ws_auth_timeout_seconds": 5
+    "ws_auth_timeout_seconds": 5,
+    "remote_clients": "Android phone app and toweb browser; both redeem with android_id/android_name fields and use link_token",
+    "remote_command_op": "command",
+    "remote_result_op": "result"
   },
   "invariants": [
-    "One association binds one Android remote to one Mac. One Android may hold many associations, and one Mac may be linked from many Androids.",
+    "One association binds one redeem-side client (phone or web) to one Mac. One client may hold many associations, and one Mac may be linked from many clients.",
     "Mac must have a binding key before starting association. create_pairing requires a non-empty binding_key_digest; the digest is held only on the in-memory pairing until redeem or expiry.",
     "redeem requires binding_key and succeeds only when SHA-256(binding_key) matches the pairing digest via constant-time comparison. Failed verification must not create a link.",
     "Changing the Mac binding key does not revoke existing links; it only affects subsequent pairings.",
@@ -27,21 +30,16 @@
     "accepted means the peer socket received the frame. result is the Mac execution outcome and is correlated by request_id.",
     "Deleting an association removes the route immediately and notifies the peer that is still connected.",
     "The remote channel cannot run shell, free text, root changes, model switching, quit, WeChat send, or key/text injection.",
-    "WebSocket clients connect to /v1/ws without a token query. Identity is established only by the first text frame { op: auth, token } after Upgrade; device_token and link_token remain Bearer secrets. Auth must complete within 5 seconds; frames before auth are rejected."
+    "WebSocket clients connect to /v1/ws without a token query. Identity is established only by the first text frame { op: auth, token } after Upgrade; device_token and link_token remain Bearer secrets. Auth must complete within 5 seconds; frames before auth are rejected.",
+    "Phone and web remote pages share the same UI semantics: result card, windows section (desktops/desktop-switch), mapping section (remote-buttons/remote-press). Web does not open a separate protocol."
   ],
   "actions": [
-    "status",
-    "blackout",
-    "hidden",
-    "finder-follow",
-    "codex-follow",
-    "wheel-vertical",
-    "wheel-horizontal",
-    "finder-move",
-    "finder-cmdq",
-    "double-cmdq",
-    "login"
+    "desktops",
+    "remote-buttons",
+    "desktop-switch",
+    "remote-press"
   ],
+  "actions_note": "Legacy entries (status, blackout, hidden, finder-follow, codex-follow, wheel-*, finder-move, finder-cmdq, double-cmdq, login) are removed from the client whitelist; Mac may still ignore unknown actions. Do not restore them in phone or web UI.",
   "prohibited_results": [
     "Persisting a command, parameter, or result body in the relay route file.",
     "Persisting binding key plaintext or digest on devices/links durable storage.",
@@ -51,6 +49,7 @@
     "Creating a link when binding_key is missing or does not match the pairing digest.",
     "Carrying a role, prompt, binding key, or other credential inside the pairing QR.",
     "Placing device_token or link_token in the WebSocket handshake URL or query string after cutover.",
-    "Forwarding app or remote frames before successful ws auth."
+    "Forwarding app or remote frames before successful ws auth.",
+    "Web remote sending actions outside desktops, remote-buttons, desktop-switch, remote-press."
   ]
 }

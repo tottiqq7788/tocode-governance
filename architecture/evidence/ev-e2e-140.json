@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-140",
+  "work_package_id": "wp-140",
+  "commit": "950843c56fd945cc8c8f67fe7820ba8ecd0de7cb",
+  "type": "e2e",
+  "status": "passed",
+  "command_or_source": "npm run build && rsync dist → /srv/toweb；curl /toweb/ 与 /health；产物含 remote-press 文案",
+  "result_summary": "toweb 已部署；https://totti.xin/toweb/ 与 /health 正常；打包产物含遥控动作与空按钮文案。",
+  "limitations": [
+    "未在生产用真实 link 点按切桌面/按按钮（需已绑定会话的浏览器手工确认）。"
+  ]
+}

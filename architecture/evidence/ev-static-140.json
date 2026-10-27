@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-140",
+  "work_package_id": "wp-140",
+  "commit": "658aa4bb46708be03e77b6eb151ba01772e38818",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。l0-android-remote-control 改为手机与网页遥控端；合同动作白名单为 desktops、remote-buttons、desktop-switch、remote-press。",
+  "limitations": [
+    "审计只检查结构和引用。",
+    "治理文书改动尚未单独打 commit；commit 字段绑 baseline。"
+  ]
+}

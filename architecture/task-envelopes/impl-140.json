@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-140",
+  "role": "implementation_owner",
+  "baseline_commit": "658aa4bb46708be03e77b6eb151ba01772e38818",
+  "work_package_id": "wp-140",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/work-packages/wp-140.json",
+    "governance/architecture/task-envelopes/impl-140.json",
+    "governance/architecture/evidence/ev-*-140.json",
+    "toweb/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-android-remote-control"
+  ],
+  "must_preserve": [
+    "配对码、兑码与绑定密钥语义不变。",
+    "遥控白名单仍为 desktops、remote-buttons、desktop-switch、remote-press。",
+    "Hermes 会话与目录通道语义不变；没装 Hermes 时遥控仍可用。",
+    "诊断日志不得写入 token、绑定密钥、聊天正文或路径明文。"
+  ],
+  "must_reject": [
+    "网页另开非 command 遥控协议或扩大白名单。",
+    "恢复 status/blackout 等已废弃直发动作。",
+    "改变会话/目录业务语义。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "改中转或 Mac 协议时停止。",
+    "实际影响超出声明 L0 时停止并重新准入。"
+  ],
+  "notes": "toweb 静态资源已部署；无 nginx/CSP 变更。"
+}

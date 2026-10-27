@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-140",
+  "work_package_id": "wp-140",
+  "commit": "950843c56fd945cc8c8f67fe7820ba8ecd0de7cb",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd toweb && npm test",
+  "result_summary": "13 tests OK，含 remote：visibleRemoteButton 过滤、parseRemoteDisplays/parseRemoteButtons。",
+  "limitations": [
+    "未对 WebSocket deliver/result 做 mock 集成测；协议对齐依赖源码与安卓对照。"
+  ]
+}
