@@ -2,7 +2,7 @@
   "schema_version": "evidence:v0.1",
   "evidence_id": "EV-UNIT-141",
   "work_package_id": "wp-141",
-  "commit": "pending_toweb_android_initial",
+  "commit": "afed43a233201292eeef833fe9e2ab4d527d4cb9",
   "type": "unit",
   "status": "passed",
   "command_or_source": "cd toweb-android && ./gradlew :app:assembleDebug",
