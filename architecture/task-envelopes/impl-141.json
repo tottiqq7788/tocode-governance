@@ -1,0 +1,32 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-141",
+  "role": "implementation_owner",
+  "baseline_commit": "7577709d2b46e935f8279c52aa8e22e64758e226",
+  "work_package_id": "wp-141",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-141.json",
+    "governance/architecture/task-envelopes/impl-141.json",
+    "governance/architecture/evidence/ev-*-141.json",
+    "toweb-android/",
+    "AGENTS.md"
+  ],
+  "l0_impact": "none",
+  "l0_rule_ids": [],
+  "must_preserve": [
+    "配对、兑码、首包 WS auth、遥控白名单与 Hermes 通道语义均由线上 toweb 与既有后端承担，壳不扩展协议。",
+    "applicationId 为 app.tocode.toweb，不覆盖 app.tocode.android。"
+  ],
+  "must_reject": [
+    "JS Bridge 注入或修改业务 API。",
+    "内嵌旧版 dist 作为唯一入口（首版固定线上 URL）。"
+  ],
+  "required_evidence": [
+    "static",
+    "unit"
+  ],
+  "stop_conditions": [
+    "实际影响超出 wp-141 声明时停止并重新准入。"
+  ],
+  "notes": "TOWEB_URL=https://totti.xin/toweb/；WebView localStorage 独立，需重新绑定。"
+}

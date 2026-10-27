@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-141",
+  "work_package_id": "wp-141",
+  "commit": "pending_toweb_android_initial",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd toweb-android && ./gradlew :app:assembleDebug",
+  "result_summary": "BUILD SUCCESSFUL，产出 app-debug.apk（app.tocode.toweb）。壳无 L0 业务单测。",
+  "limitations": [
+    "依赖本机 Android SDK（local.properties，不入库）。"
+  ]
+}

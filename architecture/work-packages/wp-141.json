@@ -1,0 +1,28 @@
+{
+  "id": "wp-141",
+  "title": "toweb-android 网页壳 APK",
+  "baseline_commit": "7577709d2b46e935f8279c52aa8e22e64758e226",
+  "goal": "新建 toweb-android：WebView 打开 https://totti.xin/toweb/，包名 app.tocode.toweb，与原生安卓并存；不改变中转/Mac 协议。",
+  "scope": [
+    "governance/architecture/work-packages/wp-141.json",
+    "governance/architecture/task-envelopes/impl-141.json",
+    "governance/architecture/evidence/ev-*-141.json",
+    "toweb-android/",
+    "AGENTS.md"
+  ],
+  "stop_conditions": [
+    "壳内实现 JS Bridge 改变配对/WS/遥控协议时停止。",
+    "使用与 app.tocode.android 相同 applicationId 时停止。",
+    "内嵌 dist 离线包（首版不做）时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit/build：Gradle assembleDebug 成功。",
+    "manual：installDebug 真机可打开 toweb、扫码权限可用，与原生 App 可并存。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-28-toweb-android-shell",
+    "scope": "不影响 L0 协议；新增 toweb-android 分发壳。"
+  }
+}

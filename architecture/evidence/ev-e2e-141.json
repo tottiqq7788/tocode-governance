@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-141",
+  "work_package_id": "wp-141",
+  "commit": "pending_toweb_android_initial",
+  "type": "e2e",
+  "status": "partial",
+  "command_or_source": "adb push + pm install / gradlew installDebug",
+  "result_summary": "APK 已 push 至设备 /data/local/tmp；本机 adb 5037 冲突且 pm install 长时间无响应，未能确认 app.tocode.toweb 已安装。assembleDebug 已通过。",
+  "limitations": [
+    "需用户在手机确认安装或修复 adb 后执行：ANDROID_ADB_SERVER_PORT=5038 ./gradlew :app:installDebug",
+    "未在真机验证扫码与遥控。"
+  ]
+}

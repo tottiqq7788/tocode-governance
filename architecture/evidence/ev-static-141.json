@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-141",
+  "work_package_id": "wp-141",
+  "commit": "7577709d2b46e935f8279c52aa8e22e64758e226",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。wp-141 声明不影响 L0；semantic-map 补充壳 APK 分发 source_ref。",
+  "limitations": [
+    "根 AGENTS.md 不在 governance 仓内，需工作区单独留存。"
+  ]
+}
