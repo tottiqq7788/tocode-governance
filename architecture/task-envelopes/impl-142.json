@@ -1,0 +1,31 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-142",
+  "role": "implementation_owner",
+  "baseline_commit": "b84fab23b2f57e6c727eea7285fe0ce272be9d12",
+  "work_package_id": "wp-142",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-142.json",
+    "governance/architecture/task-envelopes/impl-142.json",
+    "governance/architecture/contracts/client-diagnostics-v1.json",
+    "governance/architecture/evidence/ev-*-142.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "toweb/",
+    "relay/"
+  ],
+  "l0_impact": "no_l0_change",
+  "must_preserve": [
+    "关联通道语义与重连策略不变。",
+    "中转仍不把业务正文写入 routes.json。",
+    "诊断日志不得含 token、绑定密钥、聊天正文、附件字节、路径明文。",
+    "WS 握手仍为 /v1/ws 且首包 auth，不在查询串带 token。"
+  ],
+  "must_reject": [
+    "把敏感字段写入 JSONL。",
+    "经中转上传诊断汇总。",
+    "借诊断旁路改变 mac_offline / online 业务判定。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": ["实际影响触及 L0 业务不变量时停止并重新准入。"],
+  "notes": "toweb localStorage 按日分片；事件名对齐安卓；relay 可选记录截断 UA。"
+}

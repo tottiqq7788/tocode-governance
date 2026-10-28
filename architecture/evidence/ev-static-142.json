@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-142",
+  "work_package_id": "wp-142",
+  "commit": "b84fab23b2f57e6c727eea7285fe0ce272be9d12",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。新增 client-diagnostics-v1 与 wp-142；semantic-map 增加 toweb-diag-logs source_ref；声明 no_l0_change。",
+  "limitations": [
+    "证据 commit 为工作包 baseline；合并后应以含实现的不可变 commit 覆盖。"
+  ]
+}

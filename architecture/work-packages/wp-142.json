@@ -1,0 +1,31 @@
+{
+  "id": "wp-142",
+  "title": "toweb 诊断埋点对齐",
+  "baseline_commit": "b84fab23b2f57e6c727eea7285fe0ce272be9d12",
+  "goal": "toweb 补齐与 Mac/安卓/中转（wp-112）同 schema 的本地 JSONL 诊断，页内可查看/导出，便于断连后用 link_id、request_id、ts 对照病因；可选在 relay ws.accept 记录截断 User-Agent。",
+  "scope": [
+    "governance/architecture/work-packages/wp-142.json",
+    "governance/architecture/task-envelopes/impl-142.json",
+    "governance/architecture/contracts/client-diagnostics-v1.json",
+    "governance/architecture/evidence/ev-*-142.json",
+    "governance/architecture/traceability/semantic-map.json",
+    "toweb/",
+    "relay/"
+  ],
+  "stop_conditions": [
+    "把 token、绑定密钥、聊天正文、附件字节或路径明文写入诊断日志时停止。",
+    "经中转上传汇总诊断日志时停止。",
+    "改动重连策略或通道业务语义时停止并另开工作包。",
+    "修改 WS auth 首包格式时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：toweb diagnosticLog sanitize；npm test；relay UA 截断单测（若改 relay）。",
+    "runtime_e2e：人工对照断连时间线（可 skipped）。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-28-toweb-diag-logs",
+    "scope": "不影响 L0；诊断为运维旁路；新增 side=web。"
+  }
+}

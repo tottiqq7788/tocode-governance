@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-142",
+  "work_package_id": "wp-142",
+  "commit": "b84fab23b2f57e6c727eea7285fe0ce272be9d12",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd toweb && npm test; cd relay && python3 -m unittest tests.test_route.DiagTests; cd toweb && npm run build",
+  "result_summary": "toweb diagnosticLog sanitize/client/event 4 测通过；protocol 13 测通过；relay DiagTests 含 ws.accept ua 截断；toweb build 成功。",
+  "limitations": [
+    "证据 commit 为 baseline；实现分属 toweb/relay 仓，合并后应回填各仓 commit。"
+  ]
+}

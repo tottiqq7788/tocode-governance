@@ -1,0 +1,33 @@
+{
+  "schema_version": "architecture-contract:v0.1",
+  "contract_id": "client-diagnostics-v1",
+  "status": "approved",
+  "l0_refs": [
+    "l0-android-remote-control"
+  ],
+  "authority": {
+    "purpose": "Local JSONL diagnostics for Mac, Android, toweb, and relay; correlating disconnect timelines without entering the business channel",
+    "sides": ["mac", "android", "web", "relay"],
+    "row_fields": "ts, side, event, corr?, link_id?, device_id?, request_id?, detail?",
+    "web_storage": "browser localStorage keys web-YYYYMMDD; in-memory ring for recent UI",
+    "mac_path": "~/Library/Application Support/com.tocode.app/diagnostics/mac-YYYYMMDD.jsonl",
+    "android_path": "app filesDir/diagnostics/android-YYYYMMDD.jsonl",
+    "relay_path": "diagnostics/relay-YYYYMMDD.jsonl or TOCODE_DIAG_DIR",
+    "retention_days": 7,
+    "max_file_bytes": 8388608,
+    "web_client_detail": "detail.client is browser or webview (UA contains TocodeToweb/); detail.browser is Edge/Chrome/Firefox/Safari/Browser"
+  },
+  "invariants": [
+    "Diagnostics are an ops side-channel only; they must not change reconnect, mac_offline, or online business semantics.",
+    "Rows never contain token, device_token, link_token, authorization, binding_key, binding_key_digest, chat text/content/body, path plaintext, attachment bytes, password, or secret.",
+    "Cross-client correlation uses link_id, request_id, corr, and UTC ts; relay may still label web sockets as side_peer=android.",
+    "Diagnostics are not uploaded through the relay; export is manual (copy/download/zip/Finder).",
+    "toweb (side=web) emits the same event names as Android for ws.*, state.online, state.mac_offline, drop_waits, app.*, command.*, and pair.* where applicable."
+  ],
+  "prohibited_results": [
+    "Writing secrets or message bodies into JSONL.",
+    "Uploading diagnostic aggregates through the relay without a separate approved work package.",
+    "Changing reconnect backoff or mac_offline determination via the diagnostics path.",
+    "Using diagnostics to persist command/result bodies in routes.json."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-142",
+  "work_package_id": "wp-142",
+  "commit": "b84fab23b2f57e6c727eea7285fe0ce272be9d12",
+  "type": "runtime_e2e",
+  "status": "skipped",
+  "command_or_source": "人工：toweb「通道诊断」导出 JSONL；对照 Mac diagnostics/mac-*.jsonl 与 relay diagnostics/relay-*.jsonl；场景：拔网线 / 杀 Mac 进程",
+  "result_summary": "未跑真机/生产对照；对照步骤已写入 toweb/README.md 断连速查。",
+  "limitations": [
+    "部署 toweb 与 relay 后需人工补跑；跳过不阻塞单元与静态证据。"
+  ]
+}

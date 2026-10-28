@@ -352,7 +352,8 @@
         "user-approved-plan:2026-10-22-diag-disconnect-logs",
         "user-approved-plan:2026-10-26-ws-auth-and-xss",
         "user-approved-plan:2026-10-28-toweb-remote-control",
-        "user-approved-plan:2026-10-28-toweb-android-shell"
+        "user-approved-plan:2026-10-28-toweb-android-shell",
+        "user-approved-plan:2026-10-28-toweb-diag-logs"
       ]
     },
     {
