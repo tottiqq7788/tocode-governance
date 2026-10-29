@@ -1,0 +1,11 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-145",
+  "work_package_id": "wp-145",
+  "commit": "relay 1453f5f7beb48d50b80caef540d2b39bdcb62a83; toweb 8b58b06070b164bda0045213bebff33002342adb; android 0a204a149484b19e73b222f15e97356a8008e9ba",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance；cd toweb && npx tsc -b",
+  "result_summary": "治理审计通过。声明影响 modify_existing，L0 为 l0-android-remote-control。实际改动在治理陈述与合同、relay 替换关闭帧、toweb 与 android 收到 4001 后停止定时重连。tsc 无错误。",
+  "limitations": []
+}

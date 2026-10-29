@@ -1,0 +1,37 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-145",
+  "role": "implementation_owner",
+  "baseline_commit": "b560ef456f6d79e571e2733e3ceb8f2aa1002142",
+  "work_package_id": "wp-145",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/work-packages/wp-145.json",
+    "governance/architecture/task-envelopes/impl-145.json",
+    "governance/architecture/evidence/ev-*-145.json",
+    "relay/",
+    "toweb/",
+    "android_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-android-remote-control"
+  ],
+  "must_preserve": [
+    "一条关联仍然只有一条兑码侧连接，后到的连接是赢家。",
+    "WS 握手仍为 /v1/ws 且首包 auth，不在查询串带 token。",
+    "普通断开的重连退避仍从 2 秒起、30 秒封顶。",
+    "Mac 离线判定与 Mac 出站心跳不变。",
+    "chat 请求在普通断线时仍保留等待。",
+    "诊断日志不得含 token、绑定密钥、聊天正文、附件字节、路径明文。"
+  ],
+  "must_reject": [
+    "同一条关联同时保留多条兑码侧连接并扇出。",
+    "收到 4001 后仍按定时器立刻重连抢回。",
+    "借这次修改改变配对、解绑或遥控白名单。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": ["实际影响超出 l0-android-remote-control 的连接替换语义时停止并重新准入。"],
+  "notes": "阶段：关联通道。角色：网页遥控端、手机遥控端、中转。业务对象：一条关联上的兑码侧 WebSocket。不变量：同时只留一条；新连接替换旧连接。禁止结果：旧端定时抢回导致在线/离线振荡。L1：遥控关联。L2：relay serve_socket、toweb RemoteController、android RemoteController。基线另见 relay fcfdee9、toweb b6ad8e3、android_app 112a462。"
+}

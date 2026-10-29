@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-145",
+  "work_package_id": "wp-145",
+  "commit": "relay 1453f5f7beb48d50b80caef540d2b39bdcb62a83; toweb 8b58b06070b164bda0045213bebff33002342adb; android 0a204a149484b19e73b222f15e97356a8008e9ba",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd relay && python3 -m unittest discover -s tests；cd toweb && npm test；cd android_app && ./gradlew :app:testDebugUnitTest --tests app.tocode.android.LinkDirectoryTest --offline",
+  "result_summary": "中转 14 项通过：第二条兑码侧连接让第一条收到关闭码 4001、原因 superseded，结果仍回到新连接。网页 33 项通过：4001 后 30 秒内不再连，页面重新可见时再连一次；握手中第二次 ensureConnected 不另开 socket；普通断开仍从 2 秒退避。安卓 LinkDirectoryTest 通过：4001 不安排重连，1006 与 0 仍安排；被替换时状态文案为「这条关联已在另一处打开」。",
+  "limitations": [
+    "中转套件有一条既有风格的未关闭 StreamWriter ResourceWarning，测试结果仍为 OK。"
+  ]
+}

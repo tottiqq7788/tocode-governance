@@ -1,0 +1,31 @@
+{
+  "id": "wp-145",
+  "title": "同一条关联停止在线离线互抢",
+  "baseline_commit": "b560ef456f6d79e571e2733e3ceb8f2aa1002142",
+  "goal": "同一条关联仍只保留一条兑码侧连接。新连接替换旧连接时先发关闭码 4001，被替换的网页或手机停止定时重连，避免两边互相挤掉造成在线/离线来回切换。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/android-remote-control-v1.json",
+    "governance/architecture/work-packages/wp-145.json",
+    "governance/architecture/task-envelopes/impl-145.json",
+    "governance/architecture/evidence/ev-*-145.json",
+    "relay/",
+    "toweb/",
+    "android_app/"
+  ],
+  "stop_conditions": [
+    "把一条关联改成多路同时在线时停止并重新准入。",
+    "改变 WebSocket 首包 auth、Mac 离线判定或重连退避起点时停止。",
+    "修改 Mac 出站心跳或 ping 失败处理时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：中转第二条连接让第一条收到 4001 且路由指向新连接；网页与安卓对 4001 不安排定时重试，普通断开仍退避。",
+    "runtime_e2e：同一条关联两个页面不再来回切换在线状态。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-29-link-socket-supersede",
+    "scope": "修改已有 L0：l0-android-remote-control。兑码侧新连接替换旧连接时发送关闭码 4001，旧端停止定时抢回。"
+  }
+}

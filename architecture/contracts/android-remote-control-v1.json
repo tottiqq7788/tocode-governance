@@ -31,6 +31,7 @@
     "Deleting an association removes the route immediately and notifies the peer that is still connected.",
     "The remote channel cannot run shell, free text, root changes, model switching, quit, WeChat send, or key/text injection.",
     "WebSocket clients connect to /v1/ws without a token query. Identity is established only by the first text frame { op: auth, token } after Upgrade; device_token and link_token remain Bearer secrets. Auth must complete within 5 seconds; frames before auth are rejected.",
+    "One redeem-side association keeps a single live WebSocket. A newer socket replaces the previous one only after a close frame with code 4001 and reason superseded. The replaced web or phone client must not automatically reconnect on a timer; it may connect again when the user returns to that page or reopens the app. This replacement does not change Mac offline determination.",
     "Phone and web remote pages share the same UI semantics: result card, windows section (desktops/desktop-switch), mapping section (remote-buttons/remote-press). Web does not open a separate protocol."
   ],
   "actions": [

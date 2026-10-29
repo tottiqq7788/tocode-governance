@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-145",
+  "work_package_id": "wp-145",
+  "commit": "relay 1453f5f7beb48d50b80caef540d2b39bdcb62a83; toweb 8b58b06070b164bda0045213bebff33002342adb; android 0a204a149484b19e73b222f15e97356a8008e9ba",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "relay DiagTests.test_second_socket_supersedes_the_first：本机回环上同一条关联先后打开两条 WebSocket，第一条读到 4001 superseded，第二条收到 ready 且 Mac 的 result 回到第二条。",
+  "result_summary": "两条兑码侧连接不再互抢：旧连接先收到明确关闭，路由留在后连接的那条上。网页侧由控制器单测覆盖「不定时重连、回到页面再连一次」。",
+  "limitations": [
+    "没有打开线上 toweb 的两个浏览器标签，也没有在真机上点按。那样会挤掉用户当前还连着的关联。"
+  ]
+}
