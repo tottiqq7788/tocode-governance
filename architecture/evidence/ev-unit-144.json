@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-144",
+  "work_package_id": "wp-144",
+  "commit": "157dce02568f54838ef69d3740770c49ab2e5b74",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd mac_app && bash scripts/build.sh && bash scripts/test.sh",
+  "result_summary": "build.sh 成功（仅既有 Swift 6 并发警告，无新增错误）；test.sh ALL TESTS PASSED，2165 条 PASS。新增用例：RemoteControlPingState 4 条（旧定时器 stale、旧 pong 不冒充新连接等）、packDownload 体积预检 4 条（超限单文件、目录累加、提前停止、超大文件夹复制前拒绝）、IPC 服务端真实 Unix socket 收发 200KB+ 请求 1 条、书签账本损坏留存 5 条。",
+  "limitations": [
+    "RemoteControlHTTPClient 的真实 URLSessionWebSocketTask 时序未做单测，仅以状态机单测加运行态日志佐证。"
+  ]
+}

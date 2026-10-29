@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-143",
+  "work_package_id": "wp-143",
+  "commit": "b6ad8e3bd2625463ff61f71d4d6240dbf36b79ad",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "cd toweb && npm test",
+  "result_summary": "4 个测试文件 30 条全部通过。新增 controller.test.ts（10 条，jsdom + FakeSocket）：ready 只发一次 status、重复离线信号不加倍退避、过期 sessions 回包丢弃、projects 超时退出加载态、离线时重新探测 status、无 request_id 的 command 结果被忽略、unlink 清空全部状态、link_revoked 移除链路、loadPhoneState 过滤坏链路、损坏 JSON 回到空状态；在基线 worktree（4f1c107）上跑当时的 9 条用例有 6 条失败，证明用例覆盖的是被修复的行为。新增 diagnosticStorage.test.ts（3 条）：按整行裁剪单日、单日封顶、总量超限时删最旧一天且不动 tocode-web-state。",
+  "limitations": [
+    "单测不覆盖真实浏览器 CSP 与摄像头权限。"
+  ]
+}

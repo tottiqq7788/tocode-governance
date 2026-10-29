@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-143",
+  "work_package_id": "wp-143",
+  "commit": "b6ad8e3bd2625463ff61f71d4d6240dbf36b79ad",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance；cd toweb && npx tsc -b && npm run lint && npm run build",
+  "result_summary": "治理审计通过；tsc 无错误；oxlint 4 条 set-state-in-effect 警告，与基线 4f1c107 条数相同；vite build 成功（仅既有 chunk 体积提示）。声明影响 no_l0_change，实际改动全部在 toweb/ 内：controller 链路销毁收口（disposeLink）、过期回包丢弃、status 12s 超时与离线 15s 再探测、localStorage 坏数据过滤、fetch 15s 超时、PDF/图片 blob 预览、诊断日志单日 1M/总量 3M 字符封顶、各页走查修复（新建项目表单、遥控重试、扫码、诊断复制、目录复制提示、表格横向滚动、Esc 关闭弹层、模型面板显示当前模型）。",
+  "limitations": [
+    "deploy/toweb.conf 新增 CSP frame-src/object-src blob:，需重新部署 nginx 才生效；未部署前线上 PDF 预览仍被 CSP 拦截。",
+    "client-diagnostics-v1 的 max_file_bytes=8MB、retention_days=7 按上限解读；网页端取更小值以满足其“诊断不得改变业务语义”不变量，合同未改。",
+    "离线 15s 再探测是新增的恢复路径，不改变 mac_offline 的判定规则。"
+  ]
+}

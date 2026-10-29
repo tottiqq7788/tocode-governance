@@ -1,0 +1,26 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-144",
+  "role": "implementation_owner",
+  "baseline_commit": "101edbd663da21befa56807854ac1de12123f338",
+  "work_package_id": "wp-144",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-144.json",
+    "governance/architecture/task-envelopes/impl-144.json",
+    "governance/architecture/evidence/ev-*-144.json",
+    "mac_app/"
+  ],
+  "l0_impact": "no_l0_change",
+  "must_preserve": [
+    "菜单、跟随、书签同步、模型中转、微信、遥控等既有业务语义不变。",
+    "遥控 WS 首包 auth 与退避策略不变。",
+    "ad-hoc 签名的固定 designated requirement 不变。"
+  ],
+  "must_reject": [
+    "以兼容分支掩盖语义冲突。",
+    "把审查发现的语义问题顺手改掉。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": ["实际影响触及 L0 业务不变量时停止并重新准入。"],
+  "notes": "mac_app 基线 commit e538837。"
+}

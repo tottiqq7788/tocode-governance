@@ -1,0 +1,27 @@
+{
+  "id": "wp-144",
+  "title": "mac_app 全量代码审查与稳定性修复",
+  "baseline_commit": "101edbd663da21befa56807854ac1de12123f338",
+  "goal": "按子系统对 mac_app 做全量代码审查，输出 P0/P1/P2 分级报告；本轮只修复 P0/P1 稳定性问题（崩溃点、卡死、泄漏、缺少退避），语义类问题仅记录。",
+  "scope": [
+    "governance/architecture/work-packages/wp-144.json",
+    "governance/architecture/task-envelopes/impl-144.json",
+    "governance/architecture/evidence/ev-*-144.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "修改遥控 WebSocket 首包、重连语义、权限或授权边界时停止。",
+    "修改菜单行为、跟随规则、书签合并、模型中转路由等业务语义时停止并另开工作包。",
+    "需要修改 relay/ 才能完成时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过；审查报告绑定审查 commit。",
+    "unit：bash scripts/build.sh 与 bash scripts/test.sh 通过。",
+    "runtime_e2e：启动 Tocode.app 做菜单冒烟（无崩溃、无卡死）。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-29-toweb-mac-review",
+    "scope": "不影响 L0；仅稳定性修复。"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-144",
+  "work_package_id": "wp-144",
+  "commit": "157dce02568f54838ef69d3740770c49ab2e5b74",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "结束旧 Tocode 进程后 open mac_app/build/Tocode.app；./build/tocode status、./build/tocode bookmark list 走 IPC；读取 ~/Library/Application Support/com.tocode.app/diagnostics/mac-20261029.jsonl",
+  "result_summary": "新进程正常启动；tocode status 返回各开关与“书签：727 条”；bookmark list 返回约 273KB 响应；Application Support 下未产生任何 .corrupt 留存文件（正常账本照常读取）。遥控长连接 06:53:22Z 建立后 4.5 分钟（约 10 轮保活）无 ws.ping_fail / ws.reconnect；对照修复前 10-27 ping_fail 430 次（unanswered 219）、10-28 352 次（unanswered 181）。网页端随后自动恢复在线。",
+  "limitations": [
+    "菜单栏图标属于 menu extra，Computer Use 无法操作，未逐项点击菜单；菜单冒烟以进程存活、IPC 命令与诊断日志代替。",
+    "保活修复的效果仅观察 4.5 分钟，需看满一天 mac-*.jsonl 的 unanswered 次数才能确认根因。"
+  ]
+}

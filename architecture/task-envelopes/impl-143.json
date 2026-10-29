@@ -1,0 +1,27 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-143",
+  "role": "implementation_owner",
+  "baseline_commit": "101edbd663da21befa56807854ac1de12123f338",
+  "work_package_id": "wp-143",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-143.json",
+    "governance/architecture/task-envelopes/impl-143.json",
+    "governance/architecture/evidence/ev-*-143.json",
+    "toweb/"
+  ],
+  "l0_impact": "no_l0_change",
+  "must_preserve": [
+    "WS 握手仍为 /v1/ws 且首包 auth，不在查询串带 token。",
+    "重连退避 2s 起、30s 封顶不变。",
+    "chat 请求断线时保留等待、messages 静默丢弃的既有语义不变。",
+    "诊断日志不得含 token、绑定密钥、聊天正文、附件字节、路径明文。"
+  ],
+  "must_reject": [
+    "借稳定性修复改变绑定、解绑或撤销的业务结果。",
+    "新增产品功能（如暗色模式）。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": ["实际影响触及 L0 业务不变量时停止并重新准入。"],
+  "notes": "toweb 基线 commit 4f1c107。"
+}

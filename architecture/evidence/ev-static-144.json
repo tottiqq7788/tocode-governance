@@ -1,0 +1,35 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-144",
+  "work_package_id": "wp-144",
+  "commit": "157dce02568f54838ef69d3740770c49ab2e5b74",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance；人工逐文件审查 mac_app/Sources（审查基线 e538837，8 个子系统；两个只读审查子代理产出后逐条复核）",
+  "result_summary": "治理审计通过。审查结论按复核后的级别记录如下；fixed 项全部在 157dce0。",
+  "findings": [
+    {"level": "P1", "status": "fixed", "where": "RemoteControlClient.keepAlive", "issue": "旧连接残留的 25s 保活定时器先把 pingAnswered 置 false 再判断是否当前连接，重连后会让健康的新连接被误判 unanswered 并断开。诊断日志 10-27/10-28 每天约 200 次 unanswered、约 400 次重连与之吻合。", "fix": "抽出 RemoteControlPingState 按连接身份记账，旧定时器返回 stale 不改状态。"},
+    {"level": "P1", "status": "fixed", "where": "RemoteControlClient.send/sendBytes", "issue": "无连接时静默成功，下载流程误以为已发出。", "fix": "无连接时抛 networkConnectionLost，调用方既有 catch 走失败回执。"},
+    {"level": "P1", "status": "fixed", "where": "HermesProjectService.elements / DesktopWindowCatalog.elements", "issue": "第三方应用 AX 属性非数组时 as! CFArray 崩溃；数组内非 AXUIElement 时 unsafeBitCast 误用。", "fix": "CFGetTypeID 校验数组与元素类型，不符返回空或跳过。"},
+    {"level": "P1", "status": "fixed", "where": "PhoneHermesDirectory.packDownload + RemoteControlService.replyDownload", "issue": "单文件先整读入内存再比 20MB；文件夹在 MainActor 上整目录复制再 zip，选中大目录会卡死菜单栏应用并大量占盘。", "fix": "按文件属性预检原始体积（上限 8×20MB，超限提前停止遍历），打包移到 Task.detached。"},
+    {"level": "P1", "status": "fixed", "where": "GlobalShortcutService.process", "issue": "事件钩子里每个按键都查询 Dock AX（单次最多约 50ms×数次），结果只在 ⌘Q 用到，拖慢输入并可能触发 tapDisabledByTimeout。", "fix": "仅 ⌘Q 时查询。"},
+    {"level": "P1", "status": "fixed", "where": "TocodeIPCServer.receive", "issue": "客户端按换行分帧，服务端却按单个数据块解码；超过 64KB 或分块到达的请求被判无效。", "fix": "按换行累积，单请求 1MB 上限。"},
+    {"level": "P1", "status": "fixed", "where": "BookmarkLedgerStore.load / BookmarkBackupStore.load", "issue": "文件存在但解析失败时静默返回空，下一次保存覆盖原文件，账本数据丢失。", "fix": "解析失败先改名留存为 *.corrupt-<ts>-<id>.json 再从空开始。"},
+    {"level": "P1", "status": "fixed", "where": "HermesGatewayService.stopManagedGateways", "issue": "主线程无超时 waitUntilExit 等 hermes gateway stop，命令卡住即应用无响应。", "fix": "最多等 stopWait(3s)，超时 terminate。"},
+    {"level": "P2", "status": "fixed", "where": "BookmarkSyncService.syncRemoteNow", "issue": "工作任务循环结束到 remoteSyncWork 清空之间进入的请求被吞。", "fix": "在任务内退出循环的同一步清空 remoteSyncWork。"},
+    {"level": "P2", "status": "fixed", "where": "BookmarkSyncService.refreshRemoteKeyCache", "issue": "钥匙串暂不可用被当作无密钥，菜单诱导用户重设密钥（会换到另一个同步房间）。", "fix": "出错保留上次缓存。"},
+    {"level": "P2", "status": "fixed", "where": "RemoteControlService.setBindingKey", "issue": "钥匙串已写、记录保存失败时摘要与密钥分裂。", "fix": "保存失败回滚摘要与钥匙串。"},
+    {"level": "P2", "status": "fixed", "where": "RemoteControlService project_file_inbound", "issue": "新文件头覆盖未收完的旧文件头，旧请求永远收不到回执。", "fix": "覆盖前给旧请求回失败。"},
+    {"level": "P2", "status": "recorded", "where": "AppDelegate → ModelRelayService.start", "issue": "启动时主线程最多等 5s 本地监听就绪；实际通常毫秒级。", "reason": "改为异步启动会牵动菜单状态展示，非本轮范围。"},
+    {"level": "P2", "status": "recorded", "where": "WeChatILinkClient.downloadMedia", "issue": "附件下载无字节上限，GB 级附件会占满内存。", "reason": "加上限会改变“超大附件是否归档”的业务语义，需另行准入。"},
+    {"level": "P2", "status": "recorded", "where": "WeChatArchiveService", "issue": "归档成功但状态保存失败时同一消息可能重复归档。", "reason": "仅磁盘写失败时出现，结果为重复而非丢失。"},
+    {"level": "P2", "status": "recorded", "where": "KeychainBindingKeyStore / WeChatCredentialStore / KeychainModelRelayLocalKeyStore", "issue": "部分钥匙串错误被当作“不存在”，表现为提示不准确；已核实不会触发覆盖写入。", "reason": "仅影响提示文案。"},
+    {"level": "P2", "status": "recorded", "where": "HermesGatewayService", "issue": "固定 5s 重启且连续 3 次失败即停，原计划所列“缺少退避”不成立。", "reason": "已有上限，无需修改。"},
+    {"level": "none", "status": "rejected", "where": "BookmarkNativeBridge send 跨队列", "issue": "子代理称 NWConnection.send 必须在其队列调用。", "reason": "Network.framework 的 NWConnection 方法线程安全，仅回调投递到指定队列；不成立。"},
+    {"level": "none", "status": "verified_safe", "where": "try! 正则字面量、first!（hasPrefix 后、系统目录 urls）、CFBoolean as!（TypeID 校验后）", "issue": "强制解包热点。", "reason": "运行时不会失败。"}
+  ],
+  "limitations": [
+    "StatusItemController、AppDelegate 仍无单元测试，菜单行为只做了运行态冒烟。",
+    "下载新增“原始体积超过 8×20MB 拒绝”是新的拒绝条件，只影响此前会卡死应用的超大选择；对外文案为“选中的内容太大，没法下载”。"
+  ]
+}

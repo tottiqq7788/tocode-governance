@@ -1,0 +1,17 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-143",
+  "work_package_id": "wp-143",
+  "commit": "b6ad8e3bd2625463ff61f71d4d6240dbf36b79ad",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "local_live：本机 vite dev（/toweb/）+ 本机 Tocode.app + 线上 relay totti.xin，用户亲自扫码绑定；Cursor 浏览器 390x800 移动视口与 1280x800 桌面视口逐页走查",
+  "result_summary": "走查页面：扫码/配对、设备头与 Mac 面板、通道诊断、会话列表、会话详情（只看历史）、档案与项目面板、模型面板、新建项目表单、目录（含面包屑与复制路径）、文件预览、遥控（窗口/映射）。桌面视口侧栏 320 + 工作区 960，无横向溢出。运行态恢复：Mac 端重启后网页约 65s 内自动回到“在线 · Hermes 就绪”，走的是新增的 status 再探测路径。",
+  "limitations": [
+    "未发送真实 Hermes 聊天消息（避免消耗用户额度、污染会话），发送链路只验证到输入框与按钮状态。",
+    "未按遥控按钮、未切桌面/窗口（会改变用户桌面），只验证列表加载、禁用态与重试。",
+    "扫码页会拍到用户本人，未截图摄像头画面。",
+    "未在 toweb-android WebView 壳内复测；未在线上部署版本复测（CSP 变更待部署）。",
+    "发现但未修：同一浏览器两个标签页共享 localStorage 链路，relay 每链路只留一条网页连接（server.py 新连接关闭旧连接），两页会约每 2s 互踢。修复需跨标签页选主并新增“已在其他标签页打开”状态，超出本工作包范围，需另行准入。dev 下 HMR 残留旧 controller 实例会复现同样现象，整页刷新后消失。"
+  ]
+}

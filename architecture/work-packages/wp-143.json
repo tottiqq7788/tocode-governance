@@ -1,0 +1,28 @@
+{
+  "id": "wp-143",
+  "title": "toweb 稳定性与界面优化",
+  "baseline_commit": "101edbd663da21befa56807854ac1de12123f338",
+  "goal": "修复 toweb 已确认的稳定性缺陷（解绑资源回收、过期响应守卫、超时退出加载态、下载按设备区分、空 request_id、坏本地存储）与界面层缺陷（提示不刷新、渲染副作用、图片 MIME、新建项目失败反馈），补 RemoteController 单测，并在手机/桌面视口逐页走查界面。",
+  "scope": [
+    "governance/architecture/work-packages/wp-143.json",
+    "governance/architecture/task-envelopes/impl-143.json",
+    "governance/architecture/evidence/ev-*-143.json",
+    "toweb/"
+  ],
+  "stop_conditions": [
+    "修改 WebSocket 首包 auth 格式或 /v1/ws 握手时停止。",
+    "改变重连退避语义、mac_offline/online 业务判定时停止并另开工作包。",
+    "改变权限、授权边界或绑定生命周期语义时停止。",
+    "需要修改 relay/ 或 mac_app/ 才能完成时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过；oxlint 通过。",
+    "unit：npm test（含新增 controller 单测）；npm run build。",
+    "runtime_e2e：本机 dev + 本机 Mac + 线上中转真实绑定，手机 390x844 与桌面 1280x800 逐页截图走查。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-10-29-toweb-mac-review",
+    "scope": "不影响 L0；仅稳定性修复与界面表现优化。"
+  }
+}
