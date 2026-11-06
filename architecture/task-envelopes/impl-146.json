@@ -1,0 +1,63 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-146",
+  "role": "implementation_owner",
+  "baseline_commit": "157dce02568f54838ef69d3740770c49ab2e5b74",
+  "work_package_id": "wp-146",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-146.json",
+    "governance/architecture/task-envelopes/impl-146.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-root",
+    "l0-navigate",
+    "l0-directory-menu-resume",
+    "l0-action-menu",
+    "l0-mac-timer",
+    "l0-dock-autohide-restrict",
+    "l0-set-root-clipboard",
+    "l0-reset-root",
+    "l0-finder-hidden-sync",
+    "l0-finder-selection-init",
+    "l0-shortcuts",
+    "l0-launch-at-login",
+    "l0-mouse-wheel-reverse",
+    "l0-codex-project-sync",
+    "l0-hermes-project-follow",
+    "l0-temporary-blackout",
+    "l0-android-remote-control",
+    "l0-phone-hermes-chat",
+    "l0-hermes-gateway-link",
+    "l0-local-model-relay-menu",
+    "l0-model-automation",
+    "l0-trackpad-shortcuts",
+    "l0-keyboard-remapping",
+    "l0-space-totti-modifier",
+    "l0-desktop-window-switch",
+    "l0-bookmark-sync",
+    "l0-anker-credential",
+    "l0-extended-settings",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "目录树的复制、Shift 多选、Option 删除、Command 访问、历史、终端和新增保持原语义。",
+    "桌面与窗口的切换规则不变，只改打开入口。",
+    "totti 仍是键盘内部修饰键，映射目标仍不能发出 totti。",
+    "偏好仍写入 com.tocode.app。",
+    "CLI、手机遥控和书签同步协议不改。",
+    "关闭设置窗口不退出进程。"
+  ],
+  "must_reject": [
+    "菜单栏菜单里出现退出、开关或配置编辑。",
+    "按住 totti 才打开窗口菜单。",
+    "书签菜单写入账本或触发同步。",
+    "红按钮关闭窗口时终止应用。"
+  ],
+  "required_evidence": ["static", "unit"],
+  "stop_conditions": ["实际影响超出菜单入口与设置窗口、并改到同步协议或 CLI 命令表时停止并重新准入。"],
+  "notes": "阶段：Mac 菜单栏入口。角色：本机用户。业务对象：两个状态项与设置窗口。不变量：展示菜单只执行，配置在窗口，退出只在窗口。L1：菜单栏图标与事件。L2：StatusItemController、SettingsWindowController、BookmarkMenuBuilder、AppDelegate、Info.plist。基线为 mac_app 157dce02。治理仓与 mac_app 分仓，本信封的 baseline_commit 取改动前的 mac_app HEAD。"
+}

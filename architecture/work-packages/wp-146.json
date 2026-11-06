@@ -1,0 +1,28 @@
+{
+  "id": "wp-146",
+  "title": "两个菜单栏图标与设置窗口",
+  "baseline_commit": "157dce02568f54838ef69d3740770c49ab2e5b74",
+  "goal": "菜单栏用两个图标展示路径、书签、窗口和一次性动作。配置与退出移到启动时打开的设置窗口。关闭窗口不退出。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-146.json",
+    "governance/architecture/task-envelopes/impl-146.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "把退出放回任一菜单栏菜单时停止。",
+    "恢复按住 totti 才打开窗口菜单时停止。",
+    "书签菜单改写账本或触发同步时停止。",
+    "改动 CLI 命令表、书签同步协议或遥控协议时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：四个点击去向与空书签菜单有测试；说明书不再要求按住 totti 打开窗口菜单。",
+    "runtime_e2e：本工作包不自动化点击真实菜单栏；需在本机打开应用确认两个图标、四个菜单和设置窗口。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-11-06-two-status-items",
+    "scope": "修改已有 L0：菜单入口从单一右键功能菜单改为两个图标的四个展示菜单，配置与退出进入设置窗口。"
+  }
+}
