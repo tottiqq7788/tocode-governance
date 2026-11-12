@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-148",
+  "work_package_id": "wp-148",
+  "commit": "d3015520c3085a0eec9f12f596e478548e99913c",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash mac_app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。带下级菜单的文件夹普通点击为执行并关闭，Shift 点击保持菜单，文件点击仍交给原动作，删除和访问模式仍执行。同一次点击的第二次投递被丢掉。",
+  "limitations": [
+    "单测不打开菜单栏，不能证明下级菜单不再闪没，也不能证明真机点击已经复制到剪贴板。",
+    "实现 commit 为 d3015520c3085a0eec9f12f596e478548e99913c，基线是 11ba9164902e60b0efdb1412dbec0e2af8d85fa8。"
+  ]
+}

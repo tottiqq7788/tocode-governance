@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-147",
+  "work_package_id": "wp-147",
+  "commit": "d3015520c3085a0eec9f12f596e478548e99913c",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。wp-147 / impl-147 声明 no_l0_change。未改 semantic-map，未改 client-diagnostics-v1。诊断只复用本地 JSONL，开关默认关闭。",
+  "limitations": [
+    "诊断和菜单栏左右键改动在同一个 mac_app commit 里，没有拆开。",
+    "同一次治理提交里的 semantic-map 左右键语句属于菜单栏配置，不是 wp-147 的诊断范围。审计不检查运行态日志。"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-147",
+  "role": "implementation_owner",
+  "baseline_commit": "11ba9164902e60b0efdb1412dbec0e2af8d85fa8",
+  "work_package_id": "wp-147",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-147.json",
+    "governance/architecture/task-envelopes/impl-147.json",
+    "governance/architecture/evidence/ev-*-147.json",
+    "mac_app/Sources/MenuTrackingProbe.swift",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/SettingsWindowController.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "l0_impact": "no_l0_change",
+  "must_preserve": [
+    "目录树的复制、Shift 多选、Option 删除、Command 访问、历史、终端和新增保持原语义。",
+    "书签菜单只打开网址，不写账本、不触发同步。",
+    "四个状态栏菜单仍用现有 popUp 弹出。",
+    "诊断开关默认关闭；关闭时不设置菜单 delegate、不挂定时器、不写诊断。",
+    "诊断不得含夹名、书签标题、网址、路径、token 或密钥。",
+    "client-diagnostics-v1 的不变量不改：本地 JSONL、不上传、不改变重连或在线判定。"
+  ],
+  "must_reject": [
+    "没有复现日志就改弹出方式或菜单内容。",
+    "把目录树改成 statusItem.menu 或 performClick。",
+    "在诊断里写入菜单标题或路径。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": [
+    "实际影响触及点击复制、书签打开或菜单语义时停止并重新准入。",
+    "修复需要改目录树弹出方式时停止并重新准入。"
+  ],
+  "notes": "阶段：菜单跟踪诊断。角色：本机用户。业务对象：状态栏菜单的展开和关闭时机。不变量：开关关闭时行为与现在相同。L1：菜单栏图标与事件。L2：MenuTrackingProbe、MenuBuilder、StatusItemController、SettingsWindowController。基线为 mac_app 11ba916。治理仓与 mac_app 分仓。本次不修改 semantic-map，因为不改变 L0。"
+}

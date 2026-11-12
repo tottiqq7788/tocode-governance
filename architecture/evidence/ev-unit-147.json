@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-147",
+  "work_package_id": "wp-147",
+  "commit": "d3015520c3085a0eec9f12f596e478548e99913c",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash mac_app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。新增检查：开关默认关闭时不记录、不设置 delegate；打开后顺序为 session_begin、will_highlight、will_open、did_close、session_end；记录不含夹名、网址和路径；目录树转发高亮时不重复填充。",
+  "limitations": [
+    "单测不打开菜单栏，不能证明子菜单不再闪没。",
+    "实现 commit 为 d3015520c3085a0eec9f12f596e478548e99913c，基线是 11ba9164902e60b0efdb1412dbec0e2af8d85fa8。"
+  ]
+}

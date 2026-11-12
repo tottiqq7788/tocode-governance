@@ -1,0 +1,30 @@
+{
+  "id": "wp-148",
+  "title": "状态栏菜单跟踪",
+  "baseline_commit": "11ba9164902e60b0efdb1412dbec0e2af8d85fa8",
+  "goal": "四个状态栏菜单改为状态栏菜单跟踪，避免应用不在前台时下级菜单被虚假的鼠标离开关掉。带下级菜单的文件夹点击仍执行复制、删除或访问。",
+  "scope": [
+    "governance/architecture/work-packages/wp-148.json",
+    "governance/architecture/task-envelopes/impl-148.json",
+    "governance/architecture/evidence/ev-*-148.json",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "stop_conditions": [
+    "点击文件夹不再复制路径、Shift 多选不再保持菜单、Option 删除或 Command 访问失效时停止。",
+    "书签条目不再打开网址，或书签菜单写入账本时停止。",
+    "用自定义行视图替换文件夹条目时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：带下级菜单的点击策略与重复投递丢弃有测试。",
+    "runtime_e2e：本机悬停路径夹和书签夹不再闪没，点击文件夹仍复制路径。未在本环境点菜单栏时登记为 skipped。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved:2026-11-10-status-item-menu-tracking",
+    "scope": "修改已有 L0 的实现路径：菜单仍悬停展开、点击复制。弹出方式从 menu.popUp 改为状态栏菜单跟踪。用户已确认可以改这条点击的投递方式。"
+  },
+  "notes": "mac_app 基线 11ba916。不改 l0-hover-expand 与 l0-copy-path 的语句。四个菜单改为状态栏菜单跟踪，并尝试丢掉打开后 80 毫秒内位移为 0 的 mouseExited。2026-11-11 的日志表明这次离开发生在菜单跟踪内部，本地监听收不到，过滤没有生效。2026-11-12 用户说暂时没有再复现，这不是通过。运行态证据保持 failed。诊断探针保持可用且默认关闭。"
+}

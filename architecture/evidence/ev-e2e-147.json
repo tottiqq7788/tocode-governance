@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-147",
+  "work_package_id": "wp-147",
+  "commit": "d3015520c3085a0eec9f12f596e478548e99913c",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "~/Library/Application Support/com.tocode.app/diagnostics/mac-20261110.jsonl 第 1368–1470 行，menu.session_begin 至 menu.session_end",
+  "result_summary": "2026-11-10 18:06:08–18:06:23 一次路径菜单会话。应用全程不在前台，无激活切换，无超过 100ms 的主线程卡顿。下级菜单打开约 40ms 后收到鼠标未移动的 mouseExited，高亮被清掉，菜单关闭；鼠标一直不动就不会再打开，直到下一次 mouseMoved。条目数变化发生在打开前约 200ms，不是关闭瞬间。本次没有书签菜单记录。按停止条件，未改弹出方式。",
+  "limitations": [
+    "只有路径菜单，没有书签菜单样本。",
+    "日志不含菜单标题，不能对应到具体哪个夹。",
+    "实现 commit 为 d3015520c3085a0eec9f12f596e478548e99913c。"
+  ]
+}

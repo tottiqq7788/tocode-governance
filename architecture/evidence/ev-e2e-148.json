@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-148",
+  "work_package_id": "wp-148",
+  "commit": "d3015520c3085a0eec9f12f596e478548e99913c",
+  "type": "runtime_e2e",
+  "status": "failed",
+  "command_or_source": "用户于 2026-11-10T13:11Z 悬停路径夹；日志 mac-20261110.jsonl 第 1612–1711 行，进程 corr 868ca100",
+  "result_summary": "换成状态栏菜单跟踪后，路径菜单的第二层夹仍然闪没。打开后 37–48 毫秒收到 mouseExited，鼠标坐标不变，高亮被清掉。这次没有书签菜单记录。最小菜单对照没有复现这次离开。",
+  "limitations": [
+    "2026-11-11 01:42Z 的路径菜单日志仍是同样的 mouseExited。本地监听收不到这次离开。2026-11-12 用户说暂时没有再复现，这不是通过。"
+  ]
+}

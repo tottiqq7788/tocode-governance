@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-148",
+  "work_package_id": "wp-148",
+  "commit": "d3015520c3085a0eec9f12f596e478548e99913c",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过。wp-148 声明修改已有 L0 的实现路径，不改悬停展开和点击复制的语句。四个状态栏菜单改为状态栏菜单跟踪。",
+  "limitations": [
+    "菜单跟踪和菜单栏左右键改动在同一个 mac_app commit d301552 里。基线是 11ba916。"
+  ]
+}

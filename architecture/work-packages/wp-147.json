@@ -1,0 +1,34 @@
+{
+  "id": "wp-147",
+  "title": "菜单跟踪诊断",
+  "baseline_commit": "11ba9164902e60b0efdb1412dbec0e2af8d85fa8",
+  "goal": "为书签夹和路径夹子菜单闪没增加默认关闭的菜单跟踪诊断。只记录展开和关闭的时机，不改菜单行为。有复现日志之前不改弹出方式。",
+  "scope": [
+    "governance/architecture/work-packages/wp-147.json",
+    "governance/architecture/task-envelopes/impl-147.json",
+    "governance/architecture/evidence/ev-*-147.json",
+    "mac_app/Sources/MenuTrackingProbe.swift",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Sources/SettingsWindowController.swift",
+    "mac_app/Tests/TestRunner.swift",
+    "mac_app/scripts/test.sh"
+  ],
+  "stop_conditions": [
+    "诊断记录夹名、书签标题、网址或路径时停止。",
+    "开关关闭时菜单跟踪行为发生变化时停止。",
+    "为修复闪没而改目录树弹出方式或点击复制时停止并重新准入。",
+    "修改 client-diagnostics-v1 的不变量时停止。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：探针序列正确，且记录不含标题和路径。",
+    "runtime_e2e：用户打开开关并复现闪没后的诊断日志。未拿到前登记为 skipped。有日志之前不改弹出方式。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-11-10-submenu-flash-probe",
+    "scope": "不影响 L0。复用本地 JSONL 诊断侧通道记录菜单跟踪，不改 client-diagnostics-v1 的不变量，不上传，不写入名称、网址或路径。"
+  },
+  "notes": "mac_app 基线 11ba916。治理仓基线 0997fe4。同一套诊断文件只增加 menu.* 事件。证据驱动的弹出方式修复不在本包实现范围内；若日志指向目录树弹出方式，另开工作包。"
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-148",
+  "role": "implementation_owner",
+  "baseline_commit": "11ba9164902e60b0efdb1412dbec0e2af8d85fa8",
+  "work_package_id": "wp-148",
+  "allowed_scope": [
+    "governance/architecture/work-packages/wp-148.json",
+    "governance/architecture/task-envelopes/impl-148.json",
+    "governance/architecture/evidence/ev-*-148.json",
+    "mac_app/Sources/MenuBuilder.swift",
+    "mac_app/Sources/StatusItemController.swift",
+    "mac_app/Tests/TestRunner.swift"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-hover-expand",
+    "l0-copy-path",
+    "l0-action-menu"
+  ],
+  "must_preserve": [
+    "悬停文件夹仍通过原生子菜单展开。",
+    "未按 Option、Command 时，点击文件或文件夹仍复制「路径」并关闭菜单。",
+    "Shift 多选仍按点击顺序拼接并保持菜单打开；Option 删除与 Command 访问优先于 Shift。",
+    "书签条目点击仍只打开网址，不写账本。",
+    "四个菜单的内容、左右键分配和设置入口不变。"
+  ],
+  "must_reject": [
+    "继续用 menu.popUp 打开状态栏菜单。",
+    "为了能点击文件夹而给每一行加自定义视图。",
+    "点击文件夹不再复制，或同一次点击复制两次。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": [
+    "状态栏跟踪无法同时保住悬停展开和点击复制时停止并重新准入。",
+    "改动触及书签同步、CLI 或遥控协议时停止。"
+  ],
+  "notes": "阶段：菜单跟踪。角色：本机用户。业务对象：状态栏菜单的展开与点击。不变量：悬停展开、点击复制、Shift 多选。L1：菜单栏图标与事件。L2：StatusItemController、MenuBuilder。可见语义不变，不改悬停展开和点击复制的语句。用户于 2026-11-10 确认可以改弹出方式。状态栏跟踪之后虚假 mouseExited 仍在。随后尝试丢掉打开后 80 毫秒内位移为 0 的离开，但该事件不进入本地监听，过滤没有生效。2026-11-12 暂时没有复现，不记为通过。"
+}
