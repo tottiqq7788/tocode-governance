@@ -1,7 +1,7 @@
 {
   "schema_version": "architecture-contract:v0.1",
   "contract_id": "local-openai-relay-v1",
-  "status": "approved",
+  "status": "retired",
   "l0_refs": [
     "l0-local-model-relay-menu",
     "l0-local-openai-relay",
@@ -31,6 +31,7 @@
     "local_key_access_control": "deviceOwnerAuthentication before Keychain read; Keychain WhenUnlockedThisDeviceOnly"
   },
   "invariants": [
+    "This contract is no longer implemented. Tocode does not listen, authenticate, forward, or record these routes. Saved Keychain items and Application Support files are left in place and are not read.",
     "The top-level 模型 menu is always visible and never changes Codex model-switch (owned by Ancode) or four-tool credential semantics.",
     "Under 模型 the submenu labels are exactly 状态, 端口, 厂家 and 密钥. Clicking 状态 opens a status panel showing the current Base URL, a provider-scoped call-count line chart (近六小时 / 近一周 / 近一个月) defaulting to the last-used provider, and a control that only opens today's call log file with the system application.",
     "The relay binds only IPv4 loopback 127.0.0.1. It never binds all interfaces, IPv6 wildcard, LAN or a network hostname. Port conflicts leave the relay stopped with an explicit status; no automatic port substitution occurs.",

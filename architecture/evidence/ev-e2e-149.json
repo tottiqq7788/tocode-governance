@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-149",
+  "work_package_id": "wp-149",
+  "commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "type": "runtime_e2e",
+  "status": "unavailable",
+  "command_or_source": "2026-11-12 11:38 重启 mac_app/build/Tocode.app，进程 93031。截取控制中心窗口 tocode.folder，并向该位置投递左键和右键。",
+  "result_summary": "菜单栏只剩一颗图标。圆环三段、段间有缝、中间是文件夹符号；底部为充电绿色，右上有音量进度，左上只有底轨。公开 IODisplayGetFloatParameter 在这台机器上返回不支持，左上留空符合约定。投递的左键没有打开菜单，右键后辅助功能标签仍是「左键文件，右键切换」。",
+  "limitations": [
+    "注入的鼠标事件没有送达状态栏按钮，所以左键和右键还没有在菜单栏上确认。需要本人点一次左键和右键。",
+    "重启后系统弹出钥匙串对话框，要访问 com.tocode.app.model-relay.upstream。没有代为允许或拒绝。",
+    "实现还在工作区。上面的 commit 是改动前的基线 862ec57。下级菜单闪退不在这次范围内，ev-e2e-148 仍是 failed。"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-149",
+  "work_package_id": "wp-149",
+  "commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash mac_app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。右键从文件切到窗口再回到文件，缺省和无法识别的类型都是文件。根菜单底部是历史、配置、终端、新增，子菜单没有配置。三段圆弧按比例填充，没有圆点；亮度读不到时该段不描进度。",
+  "limitations": [
+    "单测不打开菜单栏，不能证明真机左键弹出菜单或右键切换图标。",
+    "实现还在工作区。上面的 commit 是改动前的基线 862ec57。"
+  ]
+}

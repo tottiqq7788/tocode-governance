@@ -1,0 +1,14 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-UNIT-150",
+  "work_package_id": "wp-150",
+  "commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "type": "unit",
+  "status": "passed",
+  "command_or_source": "bash mac_app/scripts/test.sh",
+  "result_summary": "ALL TESTS PASSED。设置页是路径、输入、工具、连接、通用，没有「模型」。旧自动化目标从键盘、触控板、定时器、遥控和 .tocode 导入中丢掉，其余规则还在。说明书不再写本地 Base URL、127.0.0.1 或 27800，仍指向 Ancode。",
+  "limitations": [
+    "单测不启动监听，也不能证明重启后的进程没有弹出钥匙串对话框。",
+    "实现还在工作区。上面的 commit 是改动前的基线 862ec57。"
+  ]
+}

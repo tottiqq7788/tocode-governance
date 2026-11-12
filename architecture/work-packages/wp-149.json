@@ -1,0 +1,30 @@
+{
+  "id": "wp-149",
+  "title": "单图标三段圆环",
+  "baseline_commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "goal": "菜单栏只留一颗图标。圆环三段显示电量、亮度和音量，左键打开当前菜单，右键在文件、窗口、书签之间切换。文件根菜单恢复配置夹。菜单栏不再提供一次性动作。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-149.json",
+    "governance/architecture/task-envelopes/impl-149.json",
+    "governance/architecture/evidence/ev-*-149.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "把退出放回菜单栏菜单时停止。",
+    "书签菜单改写账本或触发同步时停止。",
+    "目录树点击不再复制、Shift 多选不再保持、Option 删除或 Command 访问失效时停止。",
+    "改动 CLI 命令表、书签同步协议或遥控协议时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：右键循环、根菜单底部和三段圆弧有测试。",
+    "runtime_e2e：本机菜单栏能看到圆环；左键和右键需在菜单栏点按确认。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-11-12-single-status-ring",
+    "scope": "修改已有 L0：两个可配置图标改为一个三段圆环图标；文件根菜单恢复配置夹；去掉菜单栏上的一次性动作。"
+  },
+  "notes": "mac_app 基线 862ec57。不改悬停展开、点击复制、窗口切换算法和书签只读。临时黑屏、锁定屏幕等仍从键盘、触控板、命令行和遥控触发。亮度读不到时该段只有底轨，不做 DDC。"
+}

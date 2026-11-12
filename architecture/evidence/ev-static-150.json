@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-150",
+  "work_package_id": "wp-150",
+  "commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过，范围只检查结构和 L0 引用。本地模型中转、OpenAI 监听和模型自动化改为不再提供，设置分页不再含「模型」。只为中转和自动化存在的 L2 已从语义地图去掉。local-openai-relay-v1 标为 retired。",
+  "limitations": [
+    "mac_app 和治理改动都还在工作区，没有提交。上面的 commit 是改动前的基线 862ec57，不是这次实现。工作区里还有未提交的圆环图标改动。"
+  ]
+}

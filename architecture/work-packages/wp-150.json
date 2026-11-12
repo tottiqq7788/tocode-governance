@@ -1,0 +1,31 @@
+{
+  "id": "wp-150",
+  "title": "拆除模型中转",
+  "baseline_commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "goal": "去掉本机 OpenAI 中转和依附它的模型自动化。设置窗口不再有「模型」页，启动不再监听。已存密钥和磁盘配置保留但不读取。",
+  "scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-150.json",
+    "governance/architecture/task-envelopes/impl-150.json",
+    "governance/architecture/evidence/ev-*-150.json",
+    "mac_app/"
+  ],
+  "stop_conditions": [
+    "删除钥匙串项或磁盘上的中转配置时停止。",
+    "改动手机或网页的 Hermes 选模型、设备动作中转或 Ancode 时停止。",
+    "旧自动化目标导致整份键盘、触控板、定时器或遥控配置解码失败时停止。",
+    "改动遥控协议字段时停止并重新准入。"
+  ],
+  "acceptance_evidence": [
+    "static：治理审计通过。",
+    "unit：设置页没有「模型」；旧自动化目标被丢掉且其它规则还在；说明书不再写本地 Base URL。",
+    "runtime_e2e：重启后的 Tocode 不监听 127.0.0.1:27800，启动不再索取中转钥匙串。"
+  ],
+  "status": "approved",
+  "approval": {
+    "source": "user-approved-plan:2026-11-12-remove-model-relay",
+    "scope": "修改已有 L0：本地模型中转和模型自动化改为不再提供；设置分页去掉「模型」；键盘、触控板、定时器和遥控读入时丢掉自动化目标。"
+  },
+  "notes": "mac_app 基线 862ec57。工作区里未提交的圆环图标改动保留，不混入本次提交。不删除钥匙串服务 com.tocode.app.model-relay.upstream、com.tocode.app.model-relay.local，也不删除 model-relay.json、调用日志和 tocode.modelAutomations。"
+}

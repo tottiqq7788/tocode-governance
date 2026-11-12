@@ -1,0 +1,13 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-STATIC-149",
+  "work_package_id": "wp-149",
+  "commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "type": "static",
+  "status": "passed",
+  "command_or_source": "python3 governance/architecture/tools/audit_project.py --target governance",
+  "result_summary": "治理审计通过，范围只检查结构和 L0 引用。semantic-map 已改成一颗三段圆环图标、文件根菜单底部为历史/配置/终端/新增，并去掉菜单栏上的一次性动作。",
+  "limitations": [
+    "mac_app 和治理改动都还在工作区，没有提交。上面的 commit 是改动前的基线 862ec57，不是这次实现。"
+  ]
+}

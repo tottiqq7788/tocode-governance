@@ -1,0 +1,54 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-149",
+  "role": "implementation_owner",
+  "baseline_commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "work_package_id": "wp-149",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/work-packages/wp-149.json",
+    "governance/architecture/task-envelopes/impl-149.json",
+    "governance/architecture/evidence/ev-*-149.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-root",
+    "l0-navigate",
+    "l0-directory-menu-resume",
+    "l0-action-menu",
+    "l0-mac-timer",
+    "l0-set-root-clipboard",
+    "l0-reset-root",
+    "l0-finder-selection-init",
+    "l0-codex-project-sync",
+    "l0-hermes-project-follow",
+    "l0-temporary-blackout",
+    "l0-android-remote-control",
+    "l0-desktop-window-switch",
+    "l0-bookmark-sync",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "悬停文件夹仍通过原生子菜单展开。",
+    "未按 Option、Command 时，点击文件或文件夹仍复制「路径」并关闭菜单。",
+    "Shift 多选仍按点击顺序拼接并保持菜单打开；Option 删除与 Command 访问优先于 Shift。",
+    "书签条目点击仍只打开网址，不写账本。",
+    "窗口菜单的桌面和窗口条目不变。",
+    "退出仍只在设置窗口「通用」的「说明」。",
+    "导入导出仍在设置窗口「通用」的「配置」，不进文件菜单。"
+  ],
+  "must_reject": [
+    "恢复两个菜单栏图标或设置里的左右键分配。",
+    "右键打开菜单，或左键切换类型。",
+    "把临时黑屏、锁定屏幕或正在运行的定时器放回菜单栏。",
+    "圆环底部再画状态圆点，或用圆环去调节音量和亮度。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": [
+    "目录树的复制、删除或访问失效时停止并重新准入。",
+    "改动 CLI 命令表、书签同步协议或遥控协议时停止。"
+  ],
+  "notes": "阶段：菜单栏入口。角色：本机用户。业务对象：唯一状态栏图标和文件根菜单。不变量：悬停展开、点击复制、窗口列表、书签只读。L1：菜单栏图标与事件。L2：StatusItemController、MenuBuilder、StatusRingIcon。用户于 2026-11-12 批准单图标三段圆环计划。"
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": "task-envelope:v0.1",
+  "task_id": "IMPL-150",
+  "role": "implementation_owner",
+  "baseline_commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "work_package_id": "wp-150",
+  "allowed_scope": [
+    "governance/architecture/traceability/semantic-map.json",
+    "governance/architecture/contracts/local-openai-relay-v1.json",
+    "governance/architecture/work-packages/wp-150.json",
+    "governance/architecture/task-envelopes/impl-150.json",
+    "governance/architecture/evidence/ev-*-150.json",
+    "mac_app/"
+  ],
+  "l0_impact": "modify_existing",
+  "l0_rule_ids": [
+    "l0-action-menu",
+    "l0-mac-timer",
+    "l0-local-model-relay-menu",
+    "l0-local-openai-relay",
+    "l0-model-automation",
+    "l0-trackpad-shortcuts",
+    "l0-keyboard-remapping",
+    "l0-settings-domain",
+    "l0-settings-portable-transfer",
+    "l0-user-manual"
+  ],
+  "must_preserve": [
+    "手机和网页的 Hermes 选模型不读中转密钥。",
+    "设备动作中转和设置「连接」里的绑定不动。",
+    "说明书里指向 Ancode 的 Codex 模型切换说明保留。",
+    "书签、微信、路径、窗口和遥控协议字段不变。",
+    "已保存的中转钥匙串和磁盘文件不删除。"
+  ],
+  "must_reject": [
+    "启动时创建 ModelRelayService 或监听 127.0.0.1。",
+    "设置窗口保留「模型」页，或留下厂家、密钥、自动化编辑。",
+    "因为一条旧的自动化目标而拒绝整份键盘、触控板、定时器、遥控或 .tocode 配置。",
+    "把模型自动化改写成另一条仍会调用上游的路径。"
+  ],
+  "required_evidence": ["static", "unit", "runtime_e2e"],
+  "stop_conditions": [
+    "需要删除钥匙串或磁盘上的中转配置时停止。",
+    "改动 Hermes 选模型、设备中转、Ancode 或遥控协议时停止并重新准入。"
+  ],
+  "notes": "阶段：设置与本机中转。角色：本机用户。业务对象：本地模型中转与模型自动化。不变量：入口消失后不再监听、不再执行；遗留密钥不删。L1：中转配置、中转菜单、自动化、OpenAI 转发改为不再实现。L2：只为中转和自动化存在的组件从语义地图去掉。用户于 2026-11-12 批准拆除模型中转计划。"
+}

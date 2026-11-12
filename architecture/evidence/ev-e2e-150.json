@@ -1,0 +1,15 @@
+{
+  "schema_version": "evidence:v0.1",
+  "evidence_id": "EV-E2E-150",
+  "work_package_id": "wp-150",
+  "commit": "862ec575c137d768120a8aeb937ba862e75167d4",
+  "type": "runtime_e2e",
+  "status": "passed",
+  "command_or_source": "2026-11-12 14:34 编译并重启 mac_app/build/Tocode.app，进程 18466。lsof 查看 127.0.0.1:27800；辅助功能读取设置窗口侧栏和 SecurityAgent 窗口文字。",
+  "result_summary": "新进程 18466 没有监听 127.0.0.1:27800。设置窗口侧栏是路径、输入、工具、连接、通用，没有「模型」。SecurityAgent 窗口要的是 com.tocode.app.bookmark-sync.remote-key，不是中转钥匙串。没有代为允许或拒绝。",
+  "limitations": [
+    "没有删除钥匙串里的中转密钥，也没有删除磁盘上的 model-relay.json。",
+    "书签远程密钥的钥匙串对话框是既有启动行为，不在这次拆除范围内。",
+    "实现还在工作区。上面的 commit 是改动前的基线 862ec57。下级菜单闪退不在这次范围内，ev-e2e-148 仍是 failed。"
+  ]
+}
